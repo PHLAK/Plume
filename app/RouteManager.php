@@ -1,0 +1,22 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App;
+
+use DI\Container;
+use Slim\App;
+
+class RouteManager
+{
+    /** @param App<Container> $app */
+    public function __construct(
+        private App $app
+    ) {}
+
+    public function __invoke(): void
+    {
+        $this->app->get('/', Controllers\IndexController::class);
+        $this->app->get('/post/{slug}', Controllers\PostController::class);
+    }
+}

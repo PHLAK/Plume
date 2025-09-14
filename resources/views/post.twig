@@ -1,0 +1,21 @@
+{% extends "layouts/app.twig" %}
+{% set title = post.title %}
+
+{% block content %}
+    <h1>{{ post.title }}</h1>
+
+    <div>{{ post.published }}</div>
+
+    <ul>
+        {% for tag in post.tags %}
+            <li>{{ tag }}</li>
+        {% endfor %}
+    </ul>
+
+    {% if post.featuredImage %}
+        <img src="{{ post.featuredImage.url }}">
+        <div>{{ post.featuredImage.caption }}</div>
+    {% endif %}
+
+    {{ post.body | raw }}
+{% endblock %}

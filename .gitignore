@@ -1,0 +1,5 @@
+/.cache/
+/posts/
+/node_modules/
+/vendor/
+/.env

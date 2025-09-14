@@ -1,0 +1,25 @@
+parameters:
+  level: max
+  paths: [app, config, tests]
+
+  tmpDir: .cache/phpstan
+
+  checkFunctionNameCase: true
+
+  exceptions:
+    implicitThrows: false
+
+    check:
+      missingCheckedExceptionInThrows: true
+      tooWideThrowType: true
+
+    uncheckedExceptionClasses:
+      - DI\DependencyException
+      - InvalidArgumentException
+      - Invoker\Exception\InvocationException
+      - RuntimeException
+      - Twig\Error\Error
+
+# includes:
+#   - phpstan-baseline.neon
+#   - phpstan-ignores.neon

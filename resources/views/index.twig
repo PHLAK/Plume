@@ -1,0 +1,32 @@
+{% extends "layouts/app.twig" %}
+{% set title = "Home" %}
+
+{% block content %}
+    <h2>Posts</h2>
+
+    <ul>
+        {% for slug, post in posts %}
+            <li>
+                <h3>
+                    <a href="post/{{ slug }}">{{ post.title }}</a>
+                </h3>
+
+                <div>{{ post.published }}</div>
+
+                <ul>
+                    {% for tag in post.tags %}
+                        <li>{{ tag }}</li>
+                    {% endfor %}
+                </ul>
+
+                {% if post.featuredImage %}
+                    <img src="{{ post.featuredImage.url }}" />
+                {% endif %}
+
+                <div>{{ post.excerpt | raw }}</div>
+
+                <a href="post/{{ slug }}">Read More</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
