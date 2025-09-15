@@ -2,9 +2,16 @@
 
 @plugin "@tailwindcss/typography";
 
+@font-face {
+    font-family: "Montserrat";
+    src: url("/fonts/Montserrat.ttf") format("truetype");
+}
+
 @theme {
     --color-bluesky: #0886FE;
     --color-github: #171515;
+
+    --font-sans: Montserrat;
 
     /*--font-merriweather: Merriweather;*/
     /*--font-mono: Source Code Pro;*/
