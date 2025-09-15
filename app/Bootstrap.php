@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Bootstrap\RouteManager;
 use DI\Bridge\Slim\Bridge;
 use DI\Container;
 use DI\ContainerBuilder;

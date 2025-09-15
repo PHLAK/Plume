@@ -14,7 +14,6 @@ class Config
         private Container $container
     ) {}
 
-    /** Get the value of a configuration variable. */
     public function get(string $key, mixed $default = null): mixed
     {
         try {
@@ -49,6 +48,32 @@ class Config
         }
 
         return $value;
+    }
+
+    /** @return array<mixed, mixed> */
+    public function boolean(string $key, mixed $default = null): bool
+    {
+        $value = $this->get($key, $default);
+
+        /** @var bool|null $filtered */
+        $filtered = filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+
+        if ($filtered === null) {
+            throw new UnexpectedValueException(sprintf('Configuration value for key [%s] must be an array, %s given.', $key, gettype($value)));
+        }
+
+        return $filtered;
+    }
+
+    public function integer(string $key, mixed $default = null): int
+    {
+        $value = $this->get($key, $default);
+
+        if (! is_numeric($value)) {
+            throw new UnexpectedValueException(sprintf('Configuration value for key [%s] must be an integer, %s given.', $key, gettype($value)));
+        }
+
+        return (int) $value;
     }
 
     public function string(string $key, mixed $default = null): string

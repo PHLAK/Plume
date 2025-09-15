@@ -74,8 +74,8 @@ return [
      */
     'memcached_config' => value(function (Memcached $memcached, Config $config): void {
         $memcached->addServer(
-            $config->get('memcached_host'),
-            $config->get('memcached_port')
+            $config->string('memcached_host'),
+            $config->integer('memcached_port')
         );
     }),
 
@@ -107,8 +107,8 @@ return [
      */
     'redis_config' => DI\value(function (Redis $redis, Config $config): void {
         $redis->pconnect(
-            $config->get('redis_host'),
-            $config->get('redis_port')
+            $config->string('redis_host'),
+            $config->integer('redis_port')
         );
     }),
 

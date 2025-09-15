@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
+use App\Decorators;
 use App\Factories;
 use App\Middlewares;
 use App\ViewFunctions;
 
 use function DI\factory;
+use function DI\get;
 use function DI\string;
 
 return [
@@ -52,7 +54,8 @@ return [
     // Container definitions
     // -------------------------------------------------------------------------
 
-    // Symfony\Contracts\Cache\CacheInterface::class => factory(Factories\CacheFactory::class),
+    App\Posts::class => get(Decorators\CachedPosts::class),
+    Symfony\Contracts\Cache\CacheInterface::class => factory(Factories\CacheFactory::class),
     // Symfony\Contracts\Translation\TranslatorInterface::class => factory(Factories\TranslationFactory::class),
     Slim\Views\Twig::class => factory(Factories\TwigFactory::class),
     // Whoops\RunInterface::class => create(Whoops\Run::class),

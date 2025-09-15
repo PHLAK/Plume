@@ -10,6 +10,7 @@
 # ----------------------------------------
 
 /.cache/
+/cache/
 /posts/
-/public/files/*
+/public/files/
 /.env

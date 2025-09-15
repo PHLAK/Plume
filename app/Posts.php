@@ -2,23 +2,21 @@
 
 declare(strict_types=1);
 
-namespace App\Actions;
+namespace App;
 
-use App\Config;
 use App\Data\Post;
 use App\Helpers\Str;
 use Carbon\CarbonInterface;
 use Illuminate\Support\Collection;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 
-class PostsCollection
+class Posts
 {
     public function __construct(
         private Config $config,
     ) {}
 
-    /** @return Collection<string, Post> */
-    public function __invoke(): Collection
+    public function all(): Collection
     {
         /** @var Collection<int, string> $paths */
         $paths = new Collection(glob($this->config->string('posts_path') . '/*.md') ?: []);
@@ -32,5 +30,14 @@ class PostsCollection
         )->sortByDesc(
             fn (Post $post): CarbonInterface => $post->published
         );
+    }
+
+    public function get(string $slug): Post
+    {
+        $postPath = sprintf('%s/%s.md', $this->config->string('posts_path'), $slug);
+
+        $document = YamlFrontMatter::parseFile($postPath);
+
+        return Post::fromDocument($document);
     }
 }

@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App;
+namespace App\Bootstrap;
 
+use App\Controllers;
 use DI\Container;
 use Slim\App;
 
