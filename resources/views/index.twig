@@ -26,4 +26,32 @@
             {% endif %}
         {% endfor %}
     </div>
+
+    {% if pagination %}
+        <div id="pagination" class="flex justify-between border-t-2 border-stone-800 py-6 mt-12">
+            <div>
+                <a href="/?page={{ pagination.previous }}" class="flex items-center gap-2 hover:underline {{ html_classes({
+                    'invisible': pagination.previous == null
+                }) }}">
+                    {{ include('icons/light/arrow-left.twig', { class: 'size-6' }) }}
+                    Previous Page
+                </a>
+            </div>
+
+            <div>
+                {% for page in pagination.pages %}
+                    <a href="/?page={{ page }}" class="rounded bg-stone-200 text-stone-800 px-3 py-1">{{ page }}</a>
+                {% endfor %}
+            </div>
+
+            <div>
+                <a href="/?page={{ pagination.next }}" class="flex items-center gap-2 hover:underline {{ html_classes({
+                    'invisible': pagination.next == null
+                }) }}">
+                    Next Page
+                    {{ include('icons/light/arrow-right.twig', { class: 'size-6' }) }}
+                </a>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

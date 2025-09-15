@@ -42,6 +42,20 @@ return [
     'meta_description' => env('META_DESCRIPTION', 'Yet another amazing blog, powered by PlumePHP.'),
 
     /**
+     * Post pagination.
+     *
+     * Default value: true.
+     */
+    'pagination' => env('PAGINATION', true),
+
+    /**
+     * The number of posts to display per page when pagination is enabled.
+     *
+     * Default value: 10
+     */
+    'posts_per_page' => env('POSTS_PER_PAGE', 10),
+
+    /**
      * Default date format. For additional info on date formatting see:
      * https://www.php.net/manual/en/function.date.php.
      *
