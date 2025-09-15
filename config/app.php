@@ -30,16 +30,16 @@ return [
      * The title of your blog. This will be displayed in the browser tab/title
      * bar along with the current path.
      *
-     * Default value: 'PlumePHP'
+     * Default value: 'Yet another amazing blog'
      */
-    'site_title' => env('SITE_TITLE', 'PlumePHP'),
+    'site_title' => env('SITE_TITLE', 'Yet another amazing blog'),
 
     /**
      * Meta tag description text.
      *
-     * Default value: 'Yet another blog, powered by PlumePHP.'.
+     * Default value: 'Yet another amazing blog, powered by PlumePHP.'.
      */
-    'meta_description' => env('META_DESCRIPTION', 'Yet another blog, powered by PlumePHP.'),
+    'meta_description' => env('META_DESCRIPTION', 'Yet another amazing blog, powered by PlumePHP.'),
 
     /**
      * Default date format. For additional info on date formatting see:

@@ -1,0 +1,35 @@
+services:
+
+  app:
+    build: .
+    image: phlak/plume:dev
+    depends_on: [memcached, valkey]
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    ports:
+      - ${APP_PORT:-80}:80
+    volumes:
+      - ./:/var/www/html
+      - ./.docker/php/config/php.ini:/usr/local/etc/php/php.ini
+      - ./.docker/apache2/config/000-default.conf:/etc/apache2/sites-available/000-default.conf
+    user: ${HOST_USER_ID:-1000}:${HOST_GROUP_ID:-1000}
+
+  memcached:
+    image: memcached:1.6
+    ports:
+      - ${MEMCACHED_PORT:-11211}:11211
+
+  valkey:
+    image: valkey/valkey:9.0
+    ports:
+      - ${VALKEY_PORT:-6379}:6379
+
+  npm:
+    build: .
+    image: phlak/plume:dev
+    command: npm run dev
+    ports:
+      - ${APP_PORT:-5173}:5173
+    volumes:
+      - ./:/var/www/html
+    user: ${HOST_USER_ID:-1000}:${HOST_GROUP_ID:-1000}

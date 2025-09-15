@@ -1,5 +1,15 @@
-/.cache/
-/posts/
+# ----------------------------------------
+# Application dependencies
+# ----------------------------------------
+
 /node_modules/
 /vendor/
+
+# ----------------------------------------
+# Application files and folders
+# ----------------------------------------
+
+/.cache/
+/posts/
+/public/files/*
 /.env

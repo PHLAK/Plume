@@ -4,7 +4,7 @@
 <meta name="description" content="{{ config('meta_description') }}">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="icon" href="images/favicon.svg">
+<link rel="icon" href="/images/favicon.svg">
 <link rel="dns-prefetch" href="//fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 
@@ -12,14 +12,18 @@
 
 {{ scripts() | raw }}
 
-<title>{{ title }} &bull; {{ config('site_title') }}</title>
+<title>{% if title %}{{ title }} &bull; {% endif %}{{ config('site_title') }}</title>
 
-<div class="{{ theme }}" x-data="application" x-effect="storeThemeCookie($store.theme)" :class="{ 'dark': $store.theme === 'dark' }">
-    <div class="flex flex-col min-h-screen font-sans dark:bg-slate-800">
-        {% include "components/header.twig" %}
+<div class="bg-stone-100 {{ theme }}" x-data="application" x-effect="storeThemeCookie($store.theme)" :class="{ 'dark': $store.theme === 'dark' }">
+    <div class="flex flex-col min-h-screen font-sans dark:bg-stone-800">
+        <div class="container space-y-12 max-w-4xl mx-auto px-4">
+            {% include "components/header.twig" %}
 
-        {% block content %}{% endblock %}
+            <div id="content">
+                {% block content %}{% endblock %}
+            </div>
 
-        {% include "components/footer.twig" %}
+            {% include "components/footer.twig" %}
+        </div>
     </div>
 </div>

@@ -23,8 +23,9 @@ final class Post
         public private(set) string $title,
         string $body,
         string|int $published,
+        public private(set) ?string $author = null,
         public private(set) array $tags = [],
-        public private(set) ?FeaturedImage $featuredImage = null,
+        public private(set) ?PostImage $image = null,
         public private(set) bool $draft = false,
     ) {
         $this->body = $this->body($body);
@@ -36,28 +37,30 @@ final class Post
     {
         $post = new self(
             title: $document->title,
-            body: $document->body(),
             published: $document->published,
+            author: $document->author,
             tags: $document->matter('tags', []),
             draft: (bool) $document->matter('draft', false),
+            body: $document->body(),
         );
 
-        if ((bool) $document->featured_image_url) {
-            $post->featuredImage(new FeaturedImage($document->featured_image_url, $document->featured_image_text));
+        if ((bool) $document->image_url) {
+            $post->image(new PostImage($document->image_url, $document->image_caption));
         }
 
         return $post;
     }
 
-    public function featuredImage(FeaturedImage $featuredImage): self
+    public function image(PostImage $image): self
     {
-        $this->featuredImage = $featuredImage;
+        $this->image = $image;
 
         return $this;
     }
 
     private function body(string $body): string
     {
+        // QUESTION: Do we need to remove <excerpt> tags? Can we remove this?
         return $this->parseMarkdown((string) preg_replace('/<\/?excerpt>/', '', $body));
     }
 

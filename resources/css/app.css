@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@plugin "@tailwindcss/typography";
+
+@theme {
+    --color-bluesky: #0886FE;
+    --color-github: #171515;
+
+    /*--font-merriweather: Merriweather;*/
+    /*--font-mono: Source Code Pro;*/
+    /*--font-sans: Work Sans;*/
+}
+
+
+html {
+    @apply bg-stone-100;
+}

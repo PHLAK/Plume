@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Bootstrap;
 use Dotenv\Dotenv;
 
+// Import the autoloader
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 // Initialize environment variable handler

@@ -6,7 +6,7 @@ namespace App\Data;
 
 use App\Traits\ParsesMarkdown;
 
-final readonly class FeaturedImage
+final readonly class PostImage
 {
     use ParsesMarkdown;
 
