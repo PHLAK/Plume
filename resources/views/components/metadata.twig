@@ -1,13 +1,13 @@
-<div class="flex justify-center items-center gap-4 text-stone-600 py-2">
+<div class="flex flex-col justify-center items-center gap-4 text-stone-600 py-2 md:flex-row">
     <div class="flex items-center gap-4">
-        <div title="{{ post.published.toDayDateTimeString }}" class="flex items-center gap-1">
-            {{ include('icons/light/calendar.twig', { class: 'size-6' }) }}
+        <div title="{{ post.published.toDayDateTimeString }}" class="flex items-center gap-1 text-sm md:text-base">
+            {{ include('icons/light/calendar.twig', { class: 'size-4 md:size-6' }) }}
             {{ post.published.format('F jS, Y') }}
         </div>
 
         {% if post.author %}
-            <div class="flex items-center gap-1">
-                {{ include('icons/light/user.twig', { class: 'size-6' }) }}
+            <div class="flex items-center gap-1 text-sm md:text-base">
+                {{ include('icons/light/user.twig', { class: 'size-4 md:size-6' }) }}
                 {{ post.author }}
             </div>
         {% endif %}

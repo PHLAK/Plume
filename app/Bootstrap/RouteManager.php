@@ -17,7 +17,7 @@ class RouteManager
 
     public function __invoke(): void
     {
-        $this->app->get('/', Controllers\IndexController::class);
+        $this->app->get('/[{page:[0-9]+}]', Controllers\IndexController::class);
         $this->app->get('/post/{slug}', Controllers\PostController::class);
     }
 }

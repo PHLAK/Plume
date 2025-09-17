@@ -1,23 +1,25 @@
-<footer class="flex flex-col justify-center items-center border-t-2 border-stone-800 px-4 py-8">
-    <p class="mb-4">
-        Powered by <a href="https://www.plume-php.com" class="underline hover:text-stone-700">PlumePHP</a>
-    </p>
+<footer class="container max-w-4xl border-t-2 border-stone-800 text-center mx-auto px-4 py-8">
+    <div class="flex flex-col justify-center items-center">
+        <p class="mb-4">
+            Powered by <a href="https://www.plume-php.com" class="underline hover:text-stone-700">PlumePHP</a>
+        </p>
 
-    <div class="flex">
-        <a href="https://github.com/PHLAK/PlumePHP" title="GitHub" class="text-stone-400 mx-2 transition hover:text-github hover:scale-125 dark:hover:text-white">
-            {{ include('icons/brands/github.twig', { class: 'size-8' }) }}
-        </a>
+        <div class="flex">
+            <a href="https://github.com/PHLAK/PlumePHP" title="GitHub" class="text-stone-400 mx-2 transition hover:text-github hover:scale-125 dark:hover:text-white">
+                {{ include('icons/brands/github.twig', { class: 'size-8' }) }}
+            </a>
 
-        <a href="https://bsky.app/profile/plume-php.com" title="Bluesky" class="text-stone-400 mx-2 transition hover:text-bluesky hover:scale-125">
-            {{ include('icons/brands/bluesky.twig', { class: 'size-8' }) }}
-        </a>
+            <a href="https://bsky.app/profile/plume-php.com" title="Bluesky" class="text-stone-400 mx-2 transition hover:text-bluesky hover:scale-125">
+                {{ include('icons/brands/bluesky.twig', { class: 'size-8' }) }}
+            </a>
 
-        <a href="https://github.com/PHLAK/PlumePHP/discussions" title="Discussions" class="text-stone-400 mx-2 transition hover:text-violet-600 hover:scale-125">
-            {{ include('icons/solid/comments.twig', { class: 'size-8' }) }}
-        </a>
+            <a href="https://github.com/PHLAK/PlumePHP/discussions" title="Discussions" class="text-stone-400 mx-2 transition hover:text-violet-600 hover:scale-125">
+                {{ include('icons/solid/comments.twig', { class: 'size-8' }) }}
+            </a>
 
-        <a href="https://github.com/sponsors/PHLAK" title="Sponsor" class="text-stone-400 mx-2 transition hover:text-pink-600 hover:scale-125">
-            {{ include('icons/solid/heart.twig', { class: 'size-8' }) }}
-        </a>
+            <a href="https://github.com/sponsors/PHLAK" title="Sponsor" class="text-stone-400 mx-2 transition hover:text-pink-600 hover:scale-125">
+                {{ include('icons/solid/heart.twig', { class: 'size-8' }) }}
+            </a>
+        </div>
     </div>
 </footer>

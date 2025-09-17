@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Config;
+use App\Data\Paginator;
 use App\Posts;
 use Illuminate\Support\Collection;
 use Psr\Http\Message\ResponseInterface;
@@ -20,29 +21,22 @@ class IndexController
         private Twig $view,
     ) {}
 
-    public function __invoke(Request $request, Response $response): ResponseInterface
+    public function __invoke(Request $request, Response $response, int $page = 1): ResponseInterface
     {
         $posts = $this->posts->all();
-        $page = max(1, (int) $request->getQueryParams()['page'] ?? 1);
-        $perPage = $this->config->integer('posts_per_page');
-        $pageCount = (int) ceil($posts->count() / $perPage);
+
+        $paginator = new Paginator($posts, $this->config->integer('posts_per_page'), $page);
+
+        if ($page > $paginator->pages) {
+            return $response->withHeader('Location', sprintf('/%d', $paginator->pages))->withStatus(302);
+        }
 
         return $this->view->render($response, 'index.twig', [
             'posts' => $posts->when(
                 $this->config->boolean('pagination'),
-                fn (Collection $posts): Collection => $posts->forPage($page, $perPage)
+                fn (Collection $posts): Collection => $posts->forPage($page, $paginator->perPage)
             ),
-            'pagination' => [ // TODO: Convert this to a data object
-                'current' => $page,
-                'previous' => ($previous = $page - 1) >= 1 ? $previous : null,
-                'next' => ($next = $page + 1) <= $pageCount ? $next : null,
-                'total_pages' => $pageCount,
-                // TODO: Show ellipsis (…) when we don't show the full page range
-                'pages' => range(
-                    max($page - 5, 1),
-                    min($page + 5, $pageCount)
-                ),
-            ],
+            'pagination' => $paginator,
         ]);
     }
 }
