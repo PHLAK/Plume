@@ -3,7 +3,7 @@
 {% block content %}
     <div id="posts" class="grow my-12">
         {% for slug, post in posts %}
-            <div id="post" class="space-y-6">
+            <div id="post" class="space-y-8">
                 <h2 class="text-2xl font-light text-center md:text-4xl">
                     <a href="post/{{ slug }}">{{ post.title }}</a>
                 </h2>
@@ -14,7 +14,7 @@
                     <img class="h-40 w-full object-cover" src="{{ post.image.url }}" />
                 {% endif %}
 
-                <article class="prose-lg max-w-none md:prose-xl">{{ post.excerpt | raw }}</article>
+                <article class="prose prose-lg max-w-none md:prose-xl">{{ post.excerpt | raw }}</article>
 
                 <a href="post/{{ slug }}" class="inline-block text-stone-600 underline">
                     Read More

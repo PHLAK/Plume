@@ -2,7 +2,7 @@
 {% set title = post.title %}
 
 {% block content %}
-    <div id="post" class="space-y-6 my-12">
+    <div id="post" class="space-y-8 my-12">
         <h1 class="text-2xl font-light text-center md:text-4xl">
             {{ post.title }}
         </h1>
@@ -19,7 +19,7 @@
             </div>
         {% endif %}
 
-        <article class="prose-lg max-w-none md:prose-xl">
+        <article class="prose prose-lg max-w-none md:prose-xl">
             {{ post.body | raw }}
         </article>
     </div>
