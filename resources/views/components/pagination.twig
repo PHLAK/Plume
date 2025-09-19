@@ -1,19 +1,19 @@
 <div id="pagination" class="flex justify-between border-t-2 border-stone-800 -mx-4 px-4 py-6">
     <div>
-        <a href="/{{ pagination.previous }}" class="flex items-center gap-2 whitespace-nowrap hover:underline {{ html_classes({
+        <a href="{{ url_for(route, { page: pagination.previous }) }}" class="flex items-center gap-2 whitespace-nowrap hover:underline {{ html_classes({
             'invisible': pagination.previous == null
         }) }}">
-            {{ include('icons/light/arrow-left-long.twig', { class: 'size-6' }) }}
+            {{ include('icons/light/arrow-left-long.svg', { class: 'size-6' }) }}
             Previous Page
         </a>
     </div>
 
     <div>
-        <a href="/{{ pagination.next }}" class="flex items-center gap-2 whitespace-nowrap hover:underline {{ html_classes({
+        <a href="{{ url_for(route, { page: pagination.next }) }}" class="flex items-center gap-2 whitespace-nowrap hover:underline {{ html_classes({
             'invisible': pagination.next == null
         }) }}">
             Next Page
-            {{ include('icons/light/arrow-right-long.twig', { class: 'size-6' }) }}
+            {{ include('icons/light/arrow-right-long.svg', { class: 'size-6' }) }}
         </a>
     </div>
 </div>

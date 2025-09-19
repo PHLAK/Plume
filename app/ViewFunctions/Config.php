@@ -14,14 +14,8 @@ class Config implements ViewFunction
         private AppConfig $config
     ) {}
 
-    /**
-     * Retrieve an item from the config.
-     *
-     * @param mixed $default
-     *
-     * @return mixed
-     */
-    public function __invoke(string $key, $default = null)
+    /** Retrieve an item from the config. */
+    public function __invoke(string $key, mixed $default = null): mixed
     {
         return $this->config->get($key, $default);
     }

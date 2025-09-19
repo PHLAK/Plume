@@ -8,14 +8,25 @@ use App\Data\Post;
 use App\Helpers\Str;
 use Carbon\CarbonInterface;
 use Illuminate\Support\Collection;
-use Spatie\YamlFrontMatter\YamlFrontMatter;
+use League\CommonMark\ConverterInterface;
 
 class Posts
 {
     public function __construct(
         private Config $config,
+        private ConverterInterface $converter,
     ) {}
 
+    public function get(string $slug): Data\Post
+    {
+        $postPath = sprintf('%s/%s.md', $this->config->string('posts_path'), $slug);
+
+        $content = $this->converter->convert(file_get_contents($postPath));
+
+        return Post::fromRenderedContent($content);
+    }
+
+    /** @return Collection<int, Post> */
     public function all(): Collection
     {
         /** @var Collection<int, string> $paths */
@@ -24,20 +35,20 @@ class Posts
         return $paths->mapWithKeys(function (string $path): array {
             ['slug' => $slug] = Str::match(sprintf('#^%s/(?<slug>.+).md$#', preg_quote($this->config->string('posts_path'), '#')), $path);
 
-            return [$slug => Post::fromDocument(YamlFrontMatter::parseFile($path))];
+            $content = $this->converter->convert(file_get_contents($path));
+
+            return [$slug => Data\Post::fromRenderedContent($content)];
         })->reject(
-            fn (Post $post): bool => $post->published->isFuture()
+            fn (Post $post): bool => $post->draft || $post->published->isFuture()
         )->sortByDesc(
             fn (Post $post): CarbonInterface => $post->published
         );
     }
 
-    public function get(string $slug): Post
+    public function withTag(string $tag): Collection
     {
-        $postPath = sprintf('%s/%s.md', $this->config->string('posts_path'), $slug);
-
-        $document = YamlFrontMatter::parseFile($postPath);
-
-        return Post::fromDocument($document);
+        return $this->all()->filter(
+            fn (Post $post): bool => in_array($tag, $post->tags)
+        );
     }
 }

@@ -12,16 +12,11 @@ final readonly class Paginator
 
     public function __construct(
         iterable $items,
-        public int $perPage,
-        public int $currentPage,
+        int $perPage,
+        int $currentPage,
     ) {
-        $this->pages = $this->pages($items);
+        $this->pages = (int) ceil(count($items) / $perPage);
         $this->previous = ($previous = $currentPage - 1) >= 1 ? $previous : null;
         $this->next = ($next = $currentPage + 1) <= $this->pages ? $next : null;
-    }
-
-    private function pages(iterable $items): int
-    {
-        return (int) ceil(count($items) / $this->perPage);
     }
 }

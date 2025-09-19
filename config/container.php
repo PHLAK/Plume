@@ -55,6 +55,7 @@ return [
     // -------------------------------------------------------------------------
 
     App\Posts::class => get(Decorators\CachedPosts::class),
+    League\CommonMark\ConverterInterface::class => factory(Factories\ConverterFactory::class),
     Symfony\Contracts\Cache\CacheInterface::class => factory(Factories\CacheFactory::class),
     // Symfony\Contracts\Translation\TranslatorInterface::class => factory(Factories\TranslationFactory::class),
     Slim\Views\Twig::class => factory(Factories\TwigFactory::class),

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Bootstrap\MiddlewareManager;
 use App\Bootstrap\RouteManager;
 use DI\Bridge\Slim\Bridge;
 use DI\Container;
@@ -18,16 +19,17 @@ class Bootstrap
         /** @var list<string> $configFiles */
         $configFiles = glob($configPath . '/*.php') ?: [];
 
-        $container = (new ContainerBuilder)->addDefinitions(...$configFiles);
+        $containerBuilder = (new ContainerBuilder)->useAttributes(true)->addDefinitions(...$configFiles);
 
         if (self::containerCompilationEnabled()) {
-            $container->enableCompilation($cachePath);
+            $containerBuilder->enableCompilation($cachePath);
         }
 
-        $container = $container->build();
+        $container = $containerBuilder->build();
 
         $app = Bridge::create($container);
-        // $container->call(MiddlewareManager::class);
+
+        $container->call(MiddlewareManager::class);
         // $container->call(ExceptionManager::class);
         $container->call(RouteManager::class);
 

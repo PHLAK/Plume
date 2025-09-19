@@ -1,0 +1,21 @@
+<rss version="2.0">
+    <channel>
+        <title>{{ title }}</title>
+        <description>{{ description }}</description>
+        <link>{{ full_url_for('posts') }}</link>
+        <generator>PlumePHP</generator>
+
+        {% for slug, post in posts %}
+        <item>
+            <title>{{ post.title }}</title>
+            <link>{{ full_url_for('post', { slug: slug }) }}</link>
+            <pubDate>{{ post.published_at | date("r") }}</pubDate>
+            {% if post.author.email %}
+                <author>{{ post.author.email }}</author>
+            {% endif %}
+            <guid isPermaLink="false">{{ slug }}</guid>
+            <description>{{ post.excerpt }}</description>
+        </item>
+        {% endfor %}
+    </channel>
+</rss>

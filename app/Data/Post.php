@@ -8,7 +8,7 @@ use App\Helpers\Str;
 use App\Traits\ParsesMarkdown;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
-use Spatie\YamlFrontMatter\Document;
+use League\CommonMark\Extension\FrontMatter\Output\RenderedContentWithFrontMatter;
 
 final class Post
 {
@@ -33,19 +33,21 @@ final class Post
         $this->published = Carbon::parse($published);
     }
 
-    public static function fromDocument(Document $document): self
+    public static function fromRenderedContent(RenderedContentWithFrontMatter $content): self
     {
+        $frontMatter = $content->getFrontMatter();
+
         $post = new self(
-            title: $document->title,
-            published: $document->published,
-            author: $document->author,
-            tags: $document->matter('tags', []),
-            draft: (bool) $document->matter('draft', false),
-            body: $document->body(),
+            title: $frontMatter['title'],
+            published: $frontMatter['published'],
+            author:  $frontMatter['author'] ?? null,
+            tags: $frontMatter['tags'] ?? [],
+            draft: (bool) ($frontMatter['draft'] ?? false),
+            body: $content->getContent(),
         );
 
-        if ((bool) $document->image_url) {
-            $post->image(new PostImage($document->image_url, $document->image_caption));
+        if ((bool) $frontMatter['image_url']) {
+            $post->image(new PostImage($frontMatter['image_url'], $frontMatter['image_caption'] ?? null));
         }
 
         return $post;
@@ -60,8 +62,7 @@ final class Post
 
     private function body(string $body): string
     {
-        // QUESTION: Do we need to remove <excerpt> tags? Can we remove this?
-        return $this->parseMarkdown((string) preg_replace('/<\/?excerpt>/', '', $body));
+        return $this->parseMarkdown($body);
     }
 
     private function excerpt(string $body): ?string

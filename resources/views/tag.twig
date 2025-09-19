@@ -29,7 +29,7 @@
         </div>
 
         {% if pagination.pages > 1 %}
-            {{ include('components/pagination.twig', {route: 'posts'}) }}
+            {{ include('components/pagination.twig', {route: 'tag'}) }}
         {% endif %}
     {% else %}
         <div class="grow flex h-full justify-center items-center">

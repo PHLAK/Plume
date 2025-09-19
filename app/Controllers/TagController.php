@@ -12,7 +12,7 @@ use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 use Slim\Views\Twig;
 
-class IndexController
+class TagController
 {
     #[Inject('pagination')]
     private bool $pagination;
@@ -25,9 +25,9 @@ class IndexController
         private Twig $view,
     ) {}
 
-    public function __invoke(Request $request, Response $response, int $page = 1): ResponseInterface
+    public function __invoke(Request $request, Response $response, string $tag, int $page = 1): ResponseInterface
     {
-        $posts = $this->posts->all();
+        $posts = $this->posts->withTag($tag);
         $paginator = $this->pagination ? new Paginator($posts, $this->postsPerPage, $page) : null;
 
         return $this->view->render($response, 'index.twig', [

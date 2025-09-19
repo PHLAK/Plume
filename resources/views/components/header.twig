@@ -1,11 +1,15 @@
 <header class="bg-stone-200">
     <div class="container max-w-4xl flex justify-between items-center mx-auto px-4 py-8">
-        <a href="/" class="flex items-center gap-2 text-stone-800 rounded-lg">
+        <a href="{{ url_for('posts') }}" class="flex items-center gap-2 text-stone-800 rounded-lg">
             <span class="text-xl font-light md:text-4xl">{{ config('site_title') }}</span>
         </a>
 
-        <div>
-            {{ include('icons/light/lightbulb.twig', { class: 'size-8' }) }}
+        <div class="flex justify-end items-center gap-2">
+            <a href="{{ url_for('feed') }}" class="inline-block">
+                {{ include('icons/light/rss.svg', { class: 'size-8' }) }}
+            </a>
+
+            {{ include('icons/light/lightbulb.svg', { class: 'size-8' }) }}
         </div>
     </div>
 </header>

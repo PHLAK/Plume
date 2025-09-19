@@ -50,7 +50,6 @@ class Config
         return $value;
     }
 
-    /** @return array<mixed, mixed> */
     public function boolean(string $key, mixed $default = null): bool
     {
         $value = $this->get($key, $default);
