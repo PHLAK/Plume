@@ -20,7 +20,7 @@
         {% endif %}
 
         <article class="prose prose-lg max-w-none md:prose-xl">
-            {{ post.body | raw }}
+            {{ markdown(post.body) | raw }}
         </article>
     </div>
 {% endblock %}

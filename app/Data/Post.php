@@ -14,21 +14,19 @@ final class Post
 {
     use ParsesMarkdown;
 
-    public readonly string $body;
     public readonly ?string $excerpt;
     public readonly CarbonInterface $published;
 
     /** @param string[] $tags */
     public function __construct(
-        public private(set) string $title,
-        string $body,
+        public string $title,
+        public string $body,
         string|int $published,
-        public private(set) ?string $author = null,
-        public private(set) array $tags = [],
-        public private(set) ?PostImage $image = null,
-        public private(set) bool $draft = false,
+        public ?string $author = null,
+        public array $tags = [],
+        public ?PostImage $image = null,
+        public bool $draft = false,
     ) {
-        $this->body = $this->body($body);
         $this->excerpt = $this->excerpt($body);
         $this->published = Carbon::parse($published);
     }
@@ -37,27 +35,19 @@ final class Post
     {
         $frontMatter = $content->getFrontMatter();
 
-        $post = new self(
+        $image = ($frontMatter['image_url'] ?? false)
+            ? new PostImage($frontMatter['image_url'], $frontMatter['image_caption'] ?? null)
+            : null;
+
+        return new self(
             title: $frontMatter['title'],
+            body: $content->getContent(),
             published: $frontMatter['published'],
             author:  $frontMatter['author'] ?? null,
             tags: $frontMatter['tags'] ?? [],
+            image: $image,
             draft: (bool) ($frontMatter['draft'] ?? false),
-            body: $content->getContent(),
         );
-
-        if ((bool) $frontMatter['image_url']) {
-            $post->image(new PostImage($frontMatter['image_url'], $frontMatter['image_caption'] ?? null));
-        }
-
-        return $post;
-    }
-
-    public function image(PostImage $image): self
-    {
-        $this->image = $image;
-
-        return $this;
     }
 
     private function body(string $body): string
@@ -74,7 +64,7 @@ final class Post
         /** @var ?string $excerpt */
         ['excerpt' => $excerpt] = Str::match('/<excerpt>(?<excerpt>.+)<\/excerpt>/s', $body);
 
-        return $excerpt ? $this->parseMarkdown($excerpt) : null;
+        return $excerpt ?? null;
     }
 
     private function hasExcerpt(string $body): bool

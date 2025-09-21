@@ -14,14 +14,12 @@
     </div>
 
     {% if post.tags %}
-        <div class="flex items-center gap-1">
-            <ul class="list-none flex items-center gap-1 text-xs">
-                {% for tag in post.tags %}
-                    <li class="block px-1.5 py-1 rounded bg-stone-600 text-white">
-                        {{ tag }}
-                    </li>
-                {% endfor %}
-            </ul>
+        <div class="flex items-center gap-1 text-xs">
+            {% for tag in post.tags %}
+                <a href="{{ url_for('tag', { tag: tag }) }}" class="block px-1.5 py-1 rounded bg-stone-600 text-white">
+                    {{ tag }}
+                </a>
+            {% endfor %}
         </div>
     {% endif %}
 </div>

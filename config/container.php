@@ -45,7 +45,7 @@ return [
     'view_functions' => [
         ViewFunctions\Config::class,
         ViewFunctions\Scripts::class,
-        // ViewFunctions\Markdown::class,
+        ViewFunctions\Markdown::class,
         // ViewFunctions\Translate::class,
         ViewFunctions\Vite::class,
     ],
