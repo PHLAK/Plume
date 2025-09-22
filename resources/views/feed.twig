@@ -14,7 +14,7 @@
                 <author>{{ post.author.email }}</author>
             {% endif %}
             <guid isPermaLink="false">{{ slug }}</guid>
-            <description>{{ markdown(post.excerpt) }}</description>
+            <description>{{ post.excerpt }}</description>
         </item>
         {% endfor %}
     </channel>

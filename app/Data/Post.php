@@ -15,20 +15,18 @@ final class Post
     use ParsesMarkdown;
 
     public readonly ?string $excerpt;
-    public readonly CarbonInterface $published;
 
     /** @param string[] $tags */
     public function __construct(
         public string $title,
         public string $body,
-        string|int $published,
+        public CarbonInterface $published,
         public ?string $author = null,
         public array $tags = [],
         public ?PostImage $image = null,
         public bool $draft = false,
     ) {
         $this->excerpt = $this->excerpt($body);
-        $this->published = Carbon::parse($published);
     }
 
     public static function fromRenderedContent(RenderedContentWithFrontMatter $content): self
@@ -42,7 +40,7 @@ final class Post
         return new self(
             title: $frontMatter['title'],
             body: $content->getContent(),
-            published: $frontMatter['published'],
+            published: Carbon::parse($frontMatter['published']),
             author:  $frontMatter['author'] ?? null,
             tags: $frontMatter['tags'] ?? [],
             image: $image,
@@ -50,18 +48,12 @@ final class Post
         );
     }
 
-    private function body(string $body): string
-    {
-        return $this->parseMarkdown($body);
-    }
-
     private function excerpt(string $body): ?string
     {
         if (! $this->hasExcerpt($body)) {
-            return $this->body($body);
+            return $this->body;
         }
 
-        /** @var ?string $excerpt */
         ['excerpt' => $excerpt] = Str::match('/<excerpt>(?<excerpt>.+)<\/excerpt>/s', $body);
 
         return $excerpt ?? null;

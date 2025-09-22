@@ -27,11 +27,10 @@ class IndexController
 
     public function __invoke(Request $request, Response $response, int $page = 1): ResponseInterface
     {
-        $posts = $this->posts->all();
-        $paginator = $this->pagination ? new Paginator($posts, $this->postsPerPage, $page) : null;
+        $paginator = $this->pagination ? new Paginator($posts = $this->posts->all(), $this->postsPerPage, $page) : null;
 
         return $this->view->render($response, 'index.twig', [
-            'posts' => $posts,
+            'posts' => $posts->forPage($page, $this->postsPerPage),
             'pagination' => $paginator,
         ]);
     }

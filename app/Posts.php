@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App;
 
 use App\Data\Post;
+use App\Exceptions\PostNotFoundException;
 use App\Helpers\Str;
 use Carbon\CarbonInterface;
 use Illuminate\Support\Collection;
@@ -21,9 +22,15 @@ class Posts
     {
         $postPath = sprintf('%s/%s.md', $this->config->string('posts_path'), $slug);
 
-        $content = $this->converter->convert(file_get_contents($postPath));
+        if (! is_readable($postPath)) {
+            throw new PostNotFoundException;
+        }
 
-        return Post::fromRenderedContent($content);
+        if (($contents = file_get_contents($postPath)) === false) {
+            throw new PostNotFoundException;
+        }
+
+        return Post::fromRenderedContent($this->converter->convert($contents));
     }
 
     /** @return Collection<int, Post> */
