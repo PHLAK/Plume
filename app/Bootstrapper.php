@@ -11,10 +11,9 @@ use DI\Container;
 use DI\ContainerBuilder;
 use Slim\App;
 
-class Bootstrap
+class Bootstrapper
 {
-    /** @return App<Container> */
-    public static function createApplication(string $configPath, string $cachePath): App
+    public static function createContainer(string $configPath, string $cachePath): Container
     {
         /** @var list<string> $configFiles */
         $configFiles = glob($configPath . '/*.php') ?: [];
@@ -25,8 +24,12 @@ class Bootstrap
             $containerBuilder->enableCompilation($cachePath);
         }
 
-        $container = $containerBuilder->build();
+        return $containerBuilder->build();
+    }
 
+    /** @return App<Container> */
+    public static function createApp(Container $container): App
+    {
         $app = Bridge::create($container);
 
         $container->call(MiddlewareManager::class);
