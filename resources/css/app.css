@@ -7,11 +7,17 @@
     src: url("/fonts/Montserrat.ttf") format("truetype");
 }
 
+@font-face {
+    font-family: "Rokkitt";
+    src: url("/fonts/Rokkitt.ttf") format("truetype");
+}
+
 @theme {
     --color-bluesky: #0886FE;
     --color-github: #171515;
 
     --font-sans: Montserrat;
+    --font-serif: Rokkitt;
 
     /*--font-merriweather: Merriweather;*/
     /*--font-mono: Source Code Pro;*/

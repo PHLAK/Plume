@@ -2,16 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\Bootstrap;
 
-use App\Bootstrapper;
+use App\Bootstrap\Builder;
 use DI\Container;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use Slim\App;
+use Tests\TestCase;
 
-#[CoversClass(Bootstrapper::class)]
-class BootstrapperTest extends TestCase
+#[CoversClass(Builder::class)]
+class BuilderTest extends TestCase
 {
     /** Path to the compiled container. */
     private const COMPILED_CONTAINER_PATH = 'cache/CompiledContainer.php';
@@ -38,7 +39,7 @@ class BootstrapperTest extends TestCase
     #[Test]
     public function it_can_create_the_container(): void
     {
-        $container = Bootstrapper::createContainer(
+        $container = Builder::createContainer(
             $this->filePath('config'),
             $this->filePath('cache'),
         );
@@ -51,7 +52,7 @@ class BootstrapperTest extends TestCase
     {
         putenv('COMPILE_CONTAINER=');
 
-        $container = Bootstrapper::createContainer(
+        $container = Builder::createContainer(
             $this->filePath('config'),
             $this->filePath('cache')
         );
@@ -65,7 +66,7 @@ class BootstrapperTest extends TestCase
     {
         putenv('COMPILE_CONTAINER=false');
 
-        $container = Bootstrapper::createContainer(
+        $container = Builder::createContainer(
             $this->filePath('config'),
             $this->filePath('cache')
         );
@@ -79,7 +80,7 @@ class BootstrapperTest extends TestCase
     {
         putenv('APP_DEBUG=true');
 
-        $container = Bootstrapper::createContainer(
+        $container = Builder::createContainer(
             $this->filePath('config'),
             $this->filePath('cache')
         );
@@ -91,7 +92,7 @@ class BootstrapperTest extends TestCase
     #[Test]
     public function it_can_create_the_application_from_the_container(): void
     {
-        $app = Bootstrapper::createApp($this->container);
+        $app = Builder::createApp($this->container);
 
         $this->assertInstanceOf(App::class, $app);
         $this->assertSame($this->container, $app->getContainer());

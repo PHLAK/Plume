@@ -12,7 +12,7 @@ use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 use Slim\Views\Twig;
 
-class IndexController
+class PostsController
 {
     #[Inject('pagination')]
     private bool $pagination;
@@ -29,7 +29,7 @@ class IndexController
     {
         $paginator = $this->pagination ? new Paginator($posts = $this->posts->all(), $this->postsPerPage, $page) : null;
 
-        return $this->view->render($response, 'index.twig', [
+        return $this->view->render($response, 'posts.twig', [
             'posts' => $posts->forPage($page, $this->postsPerPage),
             'pagination' => $paginator,
         ]);

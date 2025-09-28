@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App;
+namespace App\Bootstrap;
 
-use App\Bootstrap\MiddlewareManager;
-use App\Bootstrap\RouteManager;
+use App\Managers;
 use DI\Bridge\Slim\Bridge;
 use DI\Container;
 use DI\ContainerBuilder;
 use Slim\App;
 
-class Bootstrapper
+class Builder
 {
     public static function createContainer(string $configPath, string $cachePath): Container
     {
@@ -32,9 +31,9 @@ class Bootstrapper
     {
         $app = Bridge::create($container);
 
-        $container->call(MiddlewareManager::class);
-        // $container->call(ExceptionManager::class);
-        $container->call(RouteManager::class);
+        $container->call(Managers\MiddlewareManager::class);
+        // $container->call(Managers\ExceptionManager::class);
+        $container->call(Managers\RouteManager::class);
 
         return $app;
     }

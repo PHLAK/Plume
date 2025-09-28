@@ -30,7 +30,7 @@ class TagController
         $posts = $this->posts->withTag($tag);
         $paginator = $this->pagination ? new Paginator($posts, $this->postsPerPage, $page) : null;
 
-        return $this->view->render($response, 'index.twig', [
+        return $this->view->render($response, 'posts.twig', [
             'posts' => $posts,
             'pagination' => $paginator,
         ]);

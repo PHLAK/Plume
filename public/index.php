@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Bootstrapper;
+use App\Bootstrap\Builder;
 use Dotenv\Dotenv;
 
 // Import the autoloader
@@ -12,13 +12,13 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 Dotenv::createUnsafeImmutable(dirname(__DIR__))->safeLoad();
 
 // Create the DI container
-$container = Bootstrapper::createContainer(
+$container = Builder::createContainer(
     dirname(__DIR__) . '/config',
     dirname(__DIR__) . '/cache'
 );
 
 // Create the application
-$app = Bootstrapper::createApp($container);
+$app = Builder::createApp($container);
 
 // Engage!
 $app->run();

@@ -33,17 +33,13 @@ final class Post
     {
         $frontMatter = $content->getFrontMatter();
 
-        $image = ($frontMatter['image_url'] ?? false)
-            ? new PostImage($frontMatter['image_url'], $frontMatter['image_caption'] ?? null)
-            : null;
-
         return new self(
             title: $frontMatter['title'],
             body: $content->getContent(),
             published: Carbon::parse($frontMatter['published']),
             author:  $frontMatter['author'] ?? null,
             tags: $frontMatter['tags'] ?? [],
-            image: $image,
+            image: ($frontMatter['image'] ?? false) ? new PostImage(...$frontMatter['image']) : null,
             draft: (bool) ($frontMatter['draft'] ?? false),
         );
     }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Bootstrap;
+namespace App\Managers;
 
 use DI\Attribute\Inject;
 use DI\Container;

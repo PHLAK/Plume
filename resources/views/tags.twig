@@ -1,0 +1,14 @@
+{% extends "layouts/app.twig" %}
+
+{% block content %}
+    <div id="tags" class="grow my-12">
+        <div class="flex flex-wrap gap-4">
+            {% for tag, count in tags %}
+                <a href="{{ full_url_for('tag', { tag: tag }) }}" id="tags" class="flex items-center divide-x-1 divide-stone-400 rounded bg-stone-600 text-stone-100 px-1 py-2">
+                    <div class="px-3">{{ tag }}</div>
+                    <div class="px-3">{{ count }}</div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
