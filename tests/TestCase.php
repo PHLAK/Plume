@@ -43,8 +43,14 @@ class TestCase extends BaseTestCase
     }
 
     /** Get the file path to a test file. */
-    protected function filePath(string $filePath): string
+    protected function filePath(string $path): string
     {
-        return sprintf('%s/%s', self::TEST_FILES_PATH, $filePath);
+        return sprintf('%s/%s', self::TEST_FILES_PATH, $path);
+    }
+
+    /** Get the contents of a test file. */
+    protected function fileContents(string $path): string
+    {
+        return file_get_contents($this->filePath($path));
     }
 }
