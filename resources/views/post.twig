@@ -14,14 +14,14 @@
                 <img src="{{ post.image.url }}">
 
                 {% if post.image.caption %}
-                    <div class="prose text-center max-w-none my-2">
+                    <div class="prose prose-stone text-center max-w-none my-2">
                         {{ markdown(post.image.caption) | raw }}
                     </div>
                 {% endif %}
             </div>
         {% endif %}
 
-        <article class="prose prose-lg max-w-none md:prose-xl">
+        <article class="prose prose-stone prose-lg max-w-none md:prose-xl">
             {{ post.body | raw }}
         </article>
     </div>

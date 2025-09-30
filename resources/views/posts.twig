@@ -15,7 +15,7 @@
                         <img class="h-40 w-full object-cover" src="{{ post.image.url }}" />
                     {% endif %}
 
-                    <article class="prose prose-lg max-w-none md:prose-xl">{{ post.excerpt | raw }}</article>
+                    <article class="prose prose-stone prose-lg max-w-none md:prose-xl">{{ post.excerpt | raw }}</article>
 
                     <a href="{{ url_for('post', { slug: slug }) }}" class="inline-block text-stone-600 underline">
                         Read More
