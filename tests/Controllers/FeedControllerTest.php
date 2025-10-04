@@ -36,9 +36,9 @@ class FeedControllerTest extends TestCase
             $testResponse->withStatus(StatusCodeInterface::STATUS_OK)
         );
 
-        $controller = $this->container->get(FeedController::class);
-
-        $response = $controller($testResponse);
+        $response = $this->container->call(FeedController::class, [
+            'response' => $testResponse,
+        ]);
 
         $this->assertInstanceOf(ResponseInterface::class, $response);
         $this->assertSame(200, $response->getStatusCode());

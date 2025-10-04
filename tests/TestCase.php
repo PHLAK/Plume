@@ -26,6 +26,8 @@ class TestCase extends BaseTestCase
     {
         parent::setUp();
 
+        putenv('COMPILE_CONTAINER=false');
+
         Dotenv::createUnsafeImmutable(__DIR__)->safeLoad();
 
         $this->container = Builder::createContainer(
