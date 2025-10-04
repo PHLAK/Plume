@@ -1,0 +1,70 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Decorators;
+
+use App\Data\Post;
+use App\Decorators\CachedPosts;
+use Carbon\Carbon;
+use Illuminate\Support\Collection;
+use League\CommonMark\ConverterInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
+
+#[CoversClass(CachedPosts::class)]
+class CachedPostsTest extends TestCase
+{
+    private CachedPosts $cachedPosts;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->cachedPosts = new CachedPosts($this->config, $this->container->get(ConverterInterface::class), $this->cache);
+    }
+
+    #[Test]
+    public function it_caches_a_single_post_by_slug(): void
+    {
+        $post = $this->cachedPosts->get('test-post-1');
+
+        $expected = new Post(
+            title: 'Test Post; Please Ignore',
+            published: Carbon::parse('1986-05-20 12:34:56'),
+            author: 'Arthur Dent',
+            tags: ['Foo', 'Bar', 'Test'],
+            body: "<p><excerpt>Lorem ipsum dolor sit amet</excerpt>, consectetur adipiscing elit.</p>\n"
+        );
+
+        $this->assertEquals($expected, $post);
+        $this->assertEquals($expected, $this->cache->get('post|test-post-1', fn () => null));
+    }
+
+    #[Test]
+    public function it_caches_a_collection_of_all_posts(): void
+    {
+        $posts = $this->cachedPosts->all();
+
+        $expected = new Collection([
+            'test-post-2' => new Post(
+                title: 'Another Test Post',
+                published: Carbon::parse('1986-07-06 12:34:56'),
+                author: 'Ford Prefect',
+                tags: ['Test', 'Baz'],
+                body: "<p>I'm a post with tags!</p>\n"
+            ),
+            'test-post-1' => new Post(
+                title: 'Test Post; Please Ignore',
+                published: Carbon::parse('1986-05-20 12:34:56'),
+                author: 'Arthur Dent',
+                tags: ['Foo', 'Bar', 'Test'],
+                body: "<p><excerpt>Lorem ipsum dolor sit amet</excerpt>, consectetur adipiscing elit.</p>\n"
+            ),
+        ]);
+
+        $this->assertEquals($expected, $posts);
+        $this->assertEquals($expected, $this->cache->get('all-posts', fn () => null));
+    }
+}

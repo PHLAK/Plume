@@ -7,7 +7,6 @@ namespace App\Controllers;
 use App\Posts;
 use DI\Attribute\Inject;
 use Psr\Http\Message\ResponseInterface;
-use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 use Slim\Views\Twig;
 
@@ -24,7 +23,7 @@ class FeedController
         private Twig $view,
     ) {}
 
-    public function __invoke(Request $request, Response $response): ResponseInterface
+    public function __invoke(Response $response): ResponseInterface
     {
         return $this->view->render($response, 'feed.twig', [
             'title' => $this->title,

@@ -7,7 +7,6 @@ namespace App\Controllers;
 use App\Exceptions\PostNotFoundException;
 use App\Posts;
 use Psr\Http\Message\ResponseInterface;
-use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 use Slim\Views\Twig;
 
@@ -18,7 +17,7 @@ class PostController
         private Twig $view,
     ) {}
 
-    public function __invoke(Request $request, Response $response, string $slug): ResponseInterface
+    public function __invoke(Response $response, string $slug): ResponseInterface
     {
         try {
             $post = $this->posts->get($slug);

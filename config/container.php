@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Decorators;
 use App\Factories;
+use App\Managers;
 use App\Middlewares;
 use App\ViewFunctions;
 
@@ -28,6 +29,16 @@ return [
     'views_path' => string('{resources_path}/views'),
 
     // -------------------------------------------------------------------------
+    // Application managers
+    // -------------------------------------------------------------------------
+
+    'managers' => [
+        Managers\MiddlewareManager::class,
+        // Managers\ExceptionManager::class,
+        Managers\RouteManager::class,
+    ],
+
+    // -------------------------------------------------------------------------
     // Application middlewares
     // -------------------------------------------------------------------------
 
@@ -36,6 +47,9 @@ return [
         // Middlewares\PruneCacheMiddleware::class,
         // Middlewares\CacheControlMiddleware::class,
         // Middlewares\RegisterGlobalsMiddleware::class,
+        function (Slim\App $app, Slim\Views\Twig $twig): Slim\Views\TwigMiddleware {
+            return Slim\Views\TwigMiddleware::create($app, $twig);
+        },
     ],
 
     // -------------------------------------------------------------------------
@@ -55,6 +69,7 @@ return [
     // -------------------------------------------------------------------------
 
     App\Posts::class => get(Decorators\CachedPosts::class),
+    App\Tags::class => get(Decorators\CachedTags::class),
     League\CommonMark\ConverterInterface::class => factory(Factories\ConverterFactory::class),
     Symfony\Contracts\Cache\CacheInterface::class => factory(Factories\CacheFactory::class),
     // Symfony\Contracts\Translation\TranslatorInterface::class => factory(Factories\TranslationFactory::class),

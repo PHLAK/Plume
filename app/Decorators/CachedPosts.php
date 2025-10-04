@@ -14,9 +14,9 @@ use Symfony\Contracts\Cache\CacheInterface;
 class CachedPosts extends Posts
 {
     public function __construct(
-        private CacheInterface $cache,
         private Config $config,
         private ConverterInterface $converter,
+        private CacheInterface $cache,
     ) {
         parent::__construct($config, $converter);
     }

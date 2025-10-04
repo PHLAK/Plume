@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Bootstrap;
 
-use App\Managers;
 use DI\Bridge\Slim\Bridge;
 use DI\Container;
 use DI\ContainerBuilder;
@@ -31,9 +30,9 @@ class Builder
     {
         $app = Bridge::create($container);
 
-        $container->call(Managers\MiddlewareManager::class);
-        // $container->call(Managers\ExceptionManager::class);
-        $container->call(Managers\RouteManager::class);
+        foreach ($container->get('managers') as $manager) {
+            $container->call($manager);
+        }
 
         return $app;
     }

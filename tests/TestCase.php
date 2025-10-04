@@ -8,6 +8,7 @@ use App\Bootstrap\Builder;
 use App\Config;
 use DI\Container;
 use Dotenv\Dotenv;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Contracts\Cache\CacheInterface;
@@ -29,17 +30,15 @@ class TestCase extends BaseTestCase
 
         $this->container = Builder::createContainer(
             dirname(__DIR__) . '/config',
-            dirname(__DIR__) . '/cache'
+            $this->filePath('cache')
         );
 
-        // $this->config = $this->container->get(Config::class);
-        // $this->cache = new ArrayAdapter((int) $this->config->get('cache_lifetime'));
+        $this->config = $this->container->get(Config::class);
+        $this->cache = new ArrayAdapter;
 
-        // $this->container->set('base_path', self::TEST_FILES_PATH);
-        // $this->container->set('cache_path', $this->filePath('cache'));
         $this->container->set('posts_path', $this->filePath('posts'));
 
-        // Builder::createApp($this->container);
+        Builder::createApp($this->container);
     }
 
     /** Get the file path to a test file. */
@@ -52,5 +51,21 @@ class TestCase extends BaseTestCase
     protected function fileContents(string $path): string
     {
         return file_get_contents($this->filePath($path));
+    }
+
+    /**
+     * @template TClass of object
+     *
+     * @param class-string<TClass> $className
+     *
+     * @return TClass&MockObject
+     */
+    protected function mock(string $className): mixed
+    {
+        $mock = $this->createMock($className);
+
+        $this->container->set($className, $mock);
+
+        return $mock;
     }
 }

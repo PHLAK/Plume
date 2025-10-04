@@ -8,7 +8,6 @@ use App\Data\Paginator;
 use App\Posts;
 use DI\Attribute\Inject;
 use Psr\Http\Message\ResponseInterface;
-use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 use Slim\Views\Twig;
 
@@ -25,7 +24,7 @@ class PostsController
         private Twig $view,
     ) {}
 
-    public function __invoke(Request $request, Response $response, int $page = 1): ResponseInterface
+    public function __invoke(Response $response, int $page = 1): ResponseInterface
     {
         $paginator = $this->pagination ? new Paginator($posts = $this->posts->all(), $this->postsPerPage, $page) : null;
 

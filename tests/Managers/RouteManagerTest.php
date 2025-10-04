@@ -6,7 +6,6 @@ namespace Tests\Managers;
 
 use App\Controllers;
 use App\Managers\RouteManager;
-use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -17,35 +16,31 @@ use Tests\TestCase;
 #[CoversClass(RouteManager::class)]
 class RouteManagerTest extends TestCase
 {
+    private const array ROUTES = [
+        ['posts', '/[{page:[0-9]+}]', Controllers\PostsController::class],
+        ['post', '/post/{slug}', Controllers\PostController::class],
+        ['tags', '/tags', Controllers\TagsController::class],
+        ['tag', '/tag/{tag}[/{page:[0-9]+}]', Controllers\TagController::class],
+        ['feed', '/feed', Controllers\FeedController::class],
+    ];
+
     #[Test]
-    public function it_registers_the_application_routes(): void
+    public function it_registers_the_application_routes_redux(): void
     {
         /** @var App&MockObject $app */
         $app = $this->createMock(App::class);
 
-        $postsRoute = $this->createMock(RouteInterface::class);
-        $postsRoute->expects($this->once())->method('setName')->with('posts');
+        $app->expects($matcher = $this->atLeast(1))->method('get')->willReturnCallback(
+            function (string $pattern, string $controller) use ($matcher): RouteInterface {
+                [$expectedName, $expectedPattern, $expectedController] = self::ROUTES[$matcher->numberOfInvocations() - 1];
 
-        $postRoute = $this->createMock(RouteInterface::class);
-        $postRoute->expects($this->once())->method('setName')->with('post');
+                $this->assertSame($expectedPattern, $pattern);
+                $this->assertSame($expectedController, $controller);
 
-        $tagsRoute = $this->createMock(RouteInterface::class);
-        $tagsRoute->expects($this->once())->method('setName')->with('tags');
+                $routeMock = $this->createMock(RouteInterface::class);
+                $routeMock->expects($this->once())->method('setName')->with($expectedName)->willReturnSelf();
 
-        $tagRoute = $this->createMock(RouteInterface::class);
-        $tagRoute->expects($this->once())->method('setName')->with('tag');
-
-        $feedRoute = $this->createMock(RouteInterface::class);
-        $feedRoute->expects($this->once())->method('setName')->with('feed');
-
-        $app->expects($this->exactly(5))->method('get')->willReturnCallback(
-            fn (string $path, string $controller): RouteInterface&MockObject => match ([$path, $controller]) {
-                ['/[{page:[0-9]+}]', Controllers\PostsController::class] => $postsRoute,
-                ['/post/{slug}', Controllers\PostController::class] => $postRoute,
-                ['/tags', Controllers\TagsController::class] => $tagsRoute,
-                ['/tag/{tag}[/{page:[0-9]+}]', Controllers\TagController::class] => $tagRoute,
-                ['/feed', Controllers\FeedController::class] => $feedRoute,
-                default => throw new InvalidArgumentException(sprintf('Unexpected route [%s, %s]', $path, $controller)),
+                return $routeMock;
             }
         );
 

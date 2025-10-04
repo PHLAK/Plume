@@ -6,7 +6,6 @@ namespace App\Controllers;
 
 use App\Tags;
 use Psr\Http\Message\ResponseInterface;
-use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 use Slim\Views\Twig;
 
@@ -17,7 +16,7 @@ class TagsController
         private Twig $view,
     ) {}
 
-    public function __invoke(Request $request, Response $response): ResponseInterface
+    public function __invoke(Response $response): ResponseInterface
     {
         $tags = $this->tags->withCount();
 

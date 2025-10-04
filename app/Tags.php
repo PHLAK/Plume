@@ -6,7 +6,7 @@ namespace App;
 
 use Illuminate\Support\Collection;
 
-class Tags // TODO: Cache this with a decorator
+class Tags
 {
     public function __construct(
         private Posts $posts

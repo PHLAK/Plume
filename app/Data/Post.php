@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace App\Data;
 
 use App\Helpers\Str;
-use App\Traits\ParsesMarkdown;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
 use League\CommonMark\Extension\FrontMatter\Output\RenderedContentWithFrontMatter;
 
 final class Post
 {
-    use ParsesMarkdown;
-
     public readonly ?string $excerpt;
 
     /** @param string[] $tags */

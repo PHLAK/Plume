@@ -6,11 +6,8 @@ namespace App\Factories;
 
 use App\Config;
 use App\ViewFunctions\ViewFunction;
-use DI\Attribute\Inject;
 use Invoker\CallableResolver;
-use Slim\App;
 use Slim\Views\Twig;
-use Slim\Views\TwigMiddleware;
 use Twig\Extension\CoreExtension;
 use Twig\Extra\Html\HtmlExtension;
 use Twig\Loader\FilesystemLoader;
@@ -18,13 +15,9 @@ use Twig\TwigFunction;
 
 class TwigFactory
 {
-    #[Inject('view_cache')]
-    private string|false $viewCache;
-
     public function __construct(
-        private App $app,
         private Config $config,
-        private CallableResolver $callableResolver
+        private CallableResolver $callableResolver,
     ) {}
 
     public function __invoke(): Twig
@@ -49,8 +42,6 @@ class TwigFactory
                 new TwigFunction($function->name, $function)
             );
         }
-
-        $this->app->add(TwigMiddleware::create($this->app, $twig));
 
         return $twig;
     }

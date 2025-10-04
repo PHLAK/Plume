@@ -14,3 +14,9 @@
 /posts/
 /public/files/
 /.env
+
+# ----------------------------------------
+# Test files and folders
+# ----------------------------------------
+
+/tests/_files/cache/
