@@ -8,6 +8,7 @@ use App\Managers;
 use App\Middlewares;
 use App\ViewFunctions;
 
+use function DI\create;
 use function DI\factory;
 use function DI\get;
 use function DI\string;
@@ -43,7 +44,7 @@ return [
     // -------------------------------------------------------------------------
 
     'middlewares' => [
-        // Middlewares\WhoopsMiddleware::class,
+        Middlewares\WhoopsMiddleware::class,
         // Middlewares\PruneCacheMiddleware::class,
         // Middlewares\CacheControlMiddleware::class,
         // Middlewares\RegisterGlobalsMiddleware::class,
@@ -74,5 +75,5 @@ return [
     Symfony\Contracts\Cache\CacheInterface::class => factory(Factories\CacheFactory::class),
     // Symfony\Contracts\Translation\TranslatorInterface::class => factory(Factories\TranslationFactory::class),
     Slim\Views\Twig::class => factory(Factories\TwigFactory::class),
-    // Whoops\RunInterface::class => create(Whoops\Run::class),
+    Whoops\RunInterface::class => create(Whoops\Run::class),
 ];
