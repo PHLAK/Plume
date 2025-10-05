@@ -1,13 +1,13 @@
 <header class="">
     <div class="container max-w-4xl text-center mx-auto px-4 py-8">
         <a href="{{ url_for('posts') }}" class="inline-block text-stone-800">
-            <span class="font-serif font-extralight text-4xl md:text-6xl">{{ config('site_title') }}</span>
+            <span class="font-serif font-extralight text-4xl md:text-6xl dark:text-stone-200">{{ config('site_title') }}</span>
         </a>
     </div>
 </header>
 
 <div class="flex justify-between items-center ">
-    <div class="container max-w-4xl flex justify-between items-center  border-double border-stone-800 border-t-4 border-b-4 mx-auto px-4 py-2">
+    <div class="container max-w-4xl flex justify-between items-center border-double border-stone-800 border-t-4 border-b-4 mx-auto px-4 py-2 dark:border-stone-200 dark:text-stone-200">
         <div class="flex items-center gap-2">
             <a href="{{ full_url_for('posts') }}" class="hover:underline">Posts</a>
             <div class="bold text-xl">&bull;</div>
@@ -17,11 +17,11 @@
         </div>
 
         <div class="flex justify-end items-center gap-2">
-            <a href="{{ url_for('feed') }}" class="flex justify-center items-center rounded p-1 hover:bg-stone-200">
+            <a href="{{ url_for('feed') }}" class="flex justify-center items-center rounded p-1 hover:bg-stone-200 dark:text-stone-200 dark:hover:bg-stone-700">
                 {{ include('icons/light/rss.svg', { class: 'size-6' }) }}
             </a>
 
-            <div class="flex justify-center items-center rounded cursor-pointer p-1 hover:bg-stone-200">
+            <div class="flex justify-center items-center rounded cursor-pointer p-1 hover:bg-stone-200 dark:text-stone-200 dark:hover:bg-stone-700">
                 {{ include('icons/light/lightbulb.svg', { class: 'size-6' }) }}
             </div>
         </div>

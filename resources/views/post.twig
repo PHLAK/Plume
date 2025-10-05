@@ -3,7 +3,7 @@
 
 {% block content %}
     <div id="post" class="space-y-8 my-12">
-        <h1 class="text-2xl font-light text-center md:text-4xl">
+        <h1 class="text-2xl font-light text-center md:text-4xl dark:text-stone-200">
             {{ post.title }}
         </h1>
 
@@ -14,14 +14,14 @@
                 <img src="{{ post.image.url }}">
 
                 {% if post.image.caption %}
-                    <div class="prose prose-stone text-center max-w-none my-2">
+                    <div class="prose prose-stone text-center max-w-none my-2 dark:prose-invert">
                         {{ markdown(post.image.caption) | raw }}
                     </div>
                 {% endif %}
             </div>
         {% endif %}
 
-        <article class="prose prose-stone prose-lg max-w-none md:prose-xl">
+        <article class="prose prose-stone prose-lg max-w-none md:prose-xl dark:prose-invert">
             {{ post.body | raw }}
         </article>
     </div>

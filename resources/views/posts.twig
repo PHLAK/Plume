@@ -5,7 +5,7 @@
         <div id="posts" class="grow my-12">
             {% for slug, post in posts %}
                 <div id="post" class="space-y-8">
-                    <h2 class="text-2xl font-light text-center md:text-4xl">
+                    <h2 class="text-2xl font-light text-center md:text-4xl dark:text-stone-200">
                         <a href="{{ url_for('post', { slug: slug }) }}">{{ post.title }}</a>
                     </h2>
 
@@ -15,15 +15,15 @@
                         <img class="h-40 w-full object-cover" src="{{ post.image.url }}" />
                     {% endif %}
 
-                    <article class="prose prose-stone prose-lg max-w-none md:prose-xl">{{ post.excerpt | raw }}</article>
+                    <article class="prose prose-stone prose-lg max-w-none md:prose-xl dark:prose-invert">{{ post.excerpt | raw }}</article>
 
-                    <a href="{{ url_for('post', { slug: slug }) }}" class="inline-block text-stone-600 underline">
+                    <a href="{{ url_for('post', { slug: slug }) }}" class="inline-block text-stone-600 underline dark:text-stone-400">
                         Read More
                     </a>
                 </div>
 
                 {% if loop.last == false  %}
-                    <hr class="border-t-4 border-stone-200 w-64 mx-auto my-12">
+                    <hr class="border-t-4 border-stone-200 w-64 mx-auto my-12 dark:border-stone-600">
                 {% endif %}
             {% endfor %}
         </div>

@@ -1,23 +1,23 @@
-<footer class="container max-w-4xl border-t-2 border-stone-800 text-center mx-auto px-4 py-8">
+<footer class="container max-w-4xl border-t-2 border-stone-800 text-center mx-auto px-4 py-8 dark:border-stone-200">
     <div class="flex flex-col justify-center items-center">
-        <p class="mb-4">
-            Powered by <a href="https://www.plume-php.com" class="underline hover:text-stone-700">PlumePHP</a>
+        <p class="mb-4 text-stone-800 dark:text-stone-200">
+            Powered by <a href="https://www.plume-php.com" class="underline hover:text-stone-700 dark:hover:text-stone-300">PlumePHP</a>
         </p>
 
         <div class="flex">
-            <a href="https://github.com/PHLAK/PlumePHP" title="GitHub" class="text-stone-400 mx-2 transition hover:text-github hover:scale-125 dark:hover:text-white">
+            <a href="https://github.com/PHLAK/PlumePHP" title="GitHub" class="text-stone-400 mx-2 transition hover:text-github hover:scale-125 dark:hover:text-white dark:text-stone-600">
                 {{ include('icons/brands/github.svg', { class: 'size-8' }) }}
             </a>
 
-            <a href="https://bsky.app/profile/plume-php.com" title="Bluesky" class="text-stone-400 mx-2 transition hover:text-bluesky hover:scale-125">
+            <a href="https://bsky.app/profile/plume-php.com" title="Bluesky" class="text-stone-400 mx-2 transition hover:text-bluesky hover:scale-125 dark:text-stone-600">
                 {{ include('icons/brands/bluesky.svg', { class: 'size-8' }) }}
             </a>
 
-            <a href="https://github.com/PHLAK/PlumePHP/discussions" title="Discussions" class="text-stone-400 mx-2 transition hover:text-violet-600 hover:scale-125">
+            <a href="https://github.com/PHLAK/PlumePHP/discussions" title="Discussions" class="text-stone-400 mx-2 transition hover:text-violet-600 hover:scale-125 dark:text-stone-600">
                 {{ include('icons/solid/comments.svg', { class: 'size-8' }) }}
             </a>
 
-            <a href="https://github.com/sponsors/PHLAK" title="Sponsor" class="text-stone-400 mx-2 transition hover:text-pink-600 hover:scale-125">
+            <a href="https://github.com/sponsors/PHLAK" title="Sponsor" class="text-stone-400 mx-2 transition hover:text-pink-600 hover:scale-125 dark:text-stone-600">
                 {{ include('icons/solid/heart.svg', { class: 'size-8' }) }}
             </a>
         </div>
