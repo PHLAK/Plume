@@ -13,3 +13,6 @@ rebuild: # Rebuild and pull new images and recreate containers
 	@docker compose build --pull
 	@docker compose pull --ignore-buildable
 	@docker compose up -d --force-recreate
+
+coverage: # Generate an HTML coverage report
+	@phpunit --coverage-html .coverage
