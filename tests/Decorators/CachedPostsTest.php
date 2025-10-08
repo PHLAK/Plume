@@ -67,4 +67,23 @@ class CachedPostsTest extends TestCase
         $this->assertEquals($expected, $posts);
         $this->assertEquals($expected, $this->cache->get('all-posts', fn () => null));
     }
+
+    #[Test]
+    public function it_caches_a_collection_of_posts_with_a_tag(): void
+    {
+        $posts = $this->cachedPosts->withTag('Foo');
+
+        $expected = new Collection([
+            'test-post-1' => new Post(
+                title: 'Test Post; Please Ignore',
+                published: Carbon::parse('1986-05-20 12:34:56'),
+                author: 'Arthur Dent',
+                tags: ['Foo', 'Bar', 'Test'],
+                body: "<p><excerpt>Lorem ipsum dolor sit amet</excerpt>, consectetur adipiscing elit.</p>\n"
+            ),
+        ]);
+
+        $this->assertEquals($expected, $posts);
+        $this->assertEquals($expected, $this->cache->get('tag|Foo', fn () => null));
+    }
 }

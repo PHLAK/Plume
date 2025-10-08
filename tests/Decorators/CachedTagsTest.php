@@ -14,7 +14,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use Tests\TestCase;
 
-#[CoversClass(CachedTagsTest::class)]
+#[CoversClass(CachedTags::class)]
 class CachedTagsTest extends TestCase
 {
     private Posts&MockObject $posts;

@@ -58,7 +58,7 @@ class Config
         $filtered = filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
 
         if ($filtered === null) {
-            throw new UnexpectedValueException(sprintf('Configuration value for key [%s] must be an array, %s given.', $key, gettype($value)));
+            throw new UnexpectedValueException(sprintf('Configuration value for key [%s] must be a boolean, %s given.', $key, gettype($value)));
         }
 
         return $filtered;
@@ -79,10 +79,10 @@ class Config
     {
         $value = $this->get($key, $default);
 
-        if (! is_string($value)) {
+        if (! is_string($value) && ! is_integer($value)) {
             throw new UnexpectedValueException(sprintf('Configuration value for key [%s] must be a string, %s given.', $key, gettype($value)));
         }
 
-        return $value;
+        return (string) $value;
     }
 }
