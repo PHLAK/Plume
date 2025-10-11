@@ -40,7 +40,7 @@ class Posts
         $paths = new Collection(glob($this->config->string('posts_path') . '/*.md') ?: []);
 
         return $paths->mapWithKeys(function (string $path): array {
-            ['slug' => $slug] = Str::match(sprintf('#^%s/(?<slug>.+).md$#', preg_quote($this->config->string('posts_path'), '#')), $path);
+            [$slug] = Str::extract(sprintf('#^%s/(?<slug>.+).md$#', preg_quote($this->config->string('posts_path'), '#')), $path);
 
             $content = $this->converter->convert(file_get_contents($path));
 
