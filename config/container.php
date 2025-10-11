@@ -29,6 +29,8 @@ return [
     'assets_path' => string('{build_path}/assets'),
     'manifest_path' => string('{build_path}/manifest.json'),
     'views_path' => string('{resources_path}/views'),
+    'customizations_path' => string('{base_path}/customizations'),
+    'scripts_file' => string('{customizations_path}/scripts'),
 
     // -------------------------------------------------------------------------
     // Application managers

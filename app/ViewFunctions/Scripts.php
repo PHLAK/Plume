@@ -17,7 +17,7 @@ class Scripts implements ViewFunction
     /** Get the contents of the custom scripts file. */
     public function __invoke(): string
     {
-        $scriptsFile = $this->config->string('base_path') . '/custom-scripts';
+        $scriptsFile = $this->config->string('scripts_file');
 
         if (! is_file($scriptsFile)) {
             return '';
