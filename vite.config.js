@@ -5,8 +5,8 @@ export default defineConfig(() => {
     return {
         build: {
             outDir: 'public/build',
-            // assetsDir: 'app/assets',
-            // manifest: 'app/assets/manifest.json',
+            copyPublicDir: false,
+            manifest: 'manifest.json',
             rollupOptions: {
                 input: [
                     'resources/css/app.css',

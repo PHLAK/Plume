@@ -15,8 +15,7 @@ class ViteTest extends TestCase
     #[Test]
     public function it_can_get_tags_for_a_list_of_assets_when_in_dev_mode(): void
     {
-        $this->container->set('asset_path', $this->filePath('.'));
-        $this->container->set('manifest_path', $this->filePath('manifest.json'));
+        $this->container->set('manifest_path', $this->filePath('public/build/non-existent.json'));
 
         $vite = $this->container->get(Vite::class);
 
@@ -32,16 +31,15 @@ class ViteTest extends TestCase
     #[Test]
     public function it_can_get_tags_for_a_list_of_assets_when_in_build_mode(): void
     {
-        $this->container->set('assets_path', $this->filePath('app/assets'));
-        $this->container->set('manifest_path', $this->filePath('app/assets/manifest.json'));
+        $this->container->set('manifest_path', $this->filePath('public/build/manifest.json'));
 
         $vite = $this->container->get(Vite::class);
 
         $tags = $vite(['resources/js/app.js', 'resources/css/app.css']);
 
         $this->assertSame(<<<HTML
-        <script type="module" src="app/assets/app-DwN9UvfZ.js"></script>
-        <link rel="stylesheet" href="app/assets/app-DcdLJcW2.css">
+        <script type="module" src="/build/assets/app-l0sNRNKZ.js"></script>
+        <link rel="stylesheet" href="/build/assets/app-DcS355RW.css">
         HTML, $tags);
     }
 }

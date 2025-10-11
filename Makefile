@@ -13,7 +13,7 @@ coverage: # Generate an HTML coverage report
 	@phpunit --coverage-html .coverage
 
 clear-build: # Clear the compiled build assets
-	@rm --recursive --force --verbose public/build
+	@rm --recursive --force --verbose public/build/*
 
 clear-cache: # Clear the application cache
 	@rm --recursive --force --verbose cache/*

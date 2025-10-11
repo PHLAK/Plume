@@ -25,8 +25,9 @@ return [
     'resources_path' => string('{base_path}/resources'),
     'posts_path' => string('{base_path}/posts'),
     'public_path' => string('{base_path}/public'),
-    'assets_path' => string('{public_path}/assets'),
-    'manifest_path' => string('{assets_path}/manifest.json'),
+    'build_path' => string('{public_path}/build'),
+    'assets_path' => string('{build_path}/assets'),
+    'manifest_path' => string('{build_path}/manifest.json'),
     'views_path' => string('{resources_path}/views'),
 
     // -------------------------------------------------------------------------

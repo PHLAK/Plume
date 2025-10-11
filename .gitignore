@@ -12,6 +12,7 @@
 /.cache/
 /cache/
 /posts/
+/public/build/
 /public/files/
 /.env
 
