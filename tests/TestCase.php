@@ -39,8 +39,6 @@ class TestCase extends BaseTestCase
         $this->cache = new ArrayAdapter;
 
         $this->container->set('posts_path', $this->filePath('posts'));
-
-        Builder::createApp($this->container);
     }
 
     /** Get the file path to a test file. */

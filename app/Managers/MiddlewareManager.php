@@ -7,7 +7,6 @@ namespace App\Managers;
 use DI\Attribute\Inject;
 use DI\Container;
 use Slim\App;
-use Slim\Views\Twig;
 
 class MiddlewareManager
 {
@@ -17,7 +16,6 @@ class MiddlewareManager
     /** @param App<Container> $app */
     public function __construct(
         private App $app,
-        private Twig $twig,
     ) {}
 
     /** Register application middlewares. */
