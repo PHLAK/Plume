@@ -13,6 +13,7 @@
 /cache/
 /customizations/
 /posts/
+/pages/
 /public/build/
 /public/files/
 /.env

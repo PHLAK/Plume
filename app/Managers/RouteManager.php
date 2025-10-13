@@ -22,5 +22,6 @@ class RouteManager
         $this->app->get('/tags', Controllers\TagsController::class)->setName('tags');
         $this->app->get('/tag/{tag}[/{page:[0-9]+}]', Controllers\TagController::class)->setName('tag');
         $this->app->get('/feed', Controllers\FeedController::class)->setName('feed');
+        $this->app->get('/pages/{slug}', Controllers\PageController::class)->setName('page');
     }
 }

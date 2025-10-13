@@ -1,0 +1,25 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\ViewFunctions;
+
+use App\Data\Page;
+use App\Pages as PagesRepository;
+use Illuminate\Support\Collection;
+
+class Pages implements ViewFunction
+{
+    public string $name = 'pages';
+
+    public function __construct(
+        private PagesRepository $pages,
+    ) {}
+
+    public function __invoke(): Collection
+    {
+        return $this->pages->all()->mapWithKeys(
+            fn (Page $page, string $slug) => [$slug => $page->link]
+        );
+    }
+}
