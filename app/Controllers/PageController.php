@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Exceptions\PostNotFoundException;
+use App\Exceptions\PageNotFoundException;
 use App\Pages;
 use Psr\Http\Message\ResponseInterface;
 use Slim\Psr7\Response;
@@ -21,7 +21,7 @@ class PageController
     {
         try {
             $page = $this->pages->get($slug);
-        } catch (PostNotFoundException) {
+        } catch (PageNotFoundException) {
             return $this->view->render($response->withStatus(404), 'error.twig', [
                 'message' => 'Page not found',
             ]);

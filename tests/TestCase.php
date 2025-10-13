@@ -39,6 +39,7 @@ class TestCase extends BaseTestCase
         $this->cache = new ArrayAdapter;
 
         $this->container->set('posts_path', $this->filePath('posts'));
+        $this->container->set('pages_path', $this->filePath('pages'));
     }
 
     /** Get the file path to a test file. */

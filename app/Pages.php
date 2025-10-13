@@ -31,6 +31,7 @@ class Pages
         })->sortBy('weight');
     }
 
+    /** @throws PageNotFoundException */
     public function get(string $slug): Page
     {
         $pagePath = sprintf('%s/%s.md', $this->config->string('pages_path'), $slug);

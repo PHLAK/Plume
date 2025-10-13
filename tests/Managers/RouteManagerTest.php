@@ -22,6 +22,7 @@ class RouteManagerTest extends TestCase
         ['tags', '/tags', Controllers\TagsController::class],
         ['tag', '/tag/{tag}[/{page:[0-9]+}]', Controllers\TagController::class],
         ['feed', '/feed', Controllers\FeedController::class],
+        ['page', '/pages/{slug}', Controllers\PageController::class],
     ];
 
     #[Test]
