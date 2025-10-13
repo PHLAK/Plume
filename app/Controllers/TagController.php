@@ -27,6 +27,13 @@ class TagController
     public function __invoke(Response $response, string $tag, int $page = 1): ResponseInterface
     {
         $posts = $this->posts->withTag($tag);
+
+        if ($posts->isEmpty()) {
+            return $this->view->render($response->withStatus(404), 'error.twig', [
+                'message' => sprintf('No posts with tag "%s"', $tag),
+            ]);
+        }
+
         $paginator = $this->pagination ? new Paginator($posts, $this->postsPerPage, $page) : null;
 
         return $this->view->render($response, 'posts.twig', [

@@ -28,6 +28,12 @@ class PostsController
     {
         $paginator = $this->pagination ? new Paginator($posts = $this->posts->all(), $this->postsPerPage, $page) : null;
 
+        if ($posts->isEmpty()) {
+            return $this->view->render($response, 'error.twig', [
+                'message' => 'No posts found',
+            ]);
+        }
+
         return $this->view->render($response, 'posts.twig', [
             'posts' => $posts->forPage($page, $this->postsPerPage),
             'pagination' => $paginator,

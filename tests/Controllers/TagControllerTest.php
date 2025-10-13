@@ -47,7 +47,6 @@ class TagControllerTest extends TestCase
         $response = $this->container->call(TagController::class, [
             'response' => $testResponse,
             'tag' => 'Foo',
-            // 'page' => $page,
         ]);
 
         $this->assertInstanceOf(ResponseInterface::class, $response);

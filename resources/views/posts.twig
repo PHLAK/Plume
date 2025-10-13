@@ -1,45 +1,33 @@
 {% extends "layouts/app.twig" %}
 
 {% block content %}
-    {% if posts.notEmpty %}
-        <div id="posts" class="grow my-12">
-            {% for slug, post in posts %}
-                <div id="post" class="space-y-8">
-                    <h2 class="text-2xl font-light text-center md:text-4xl dark:text-stone-200">
-                        <a href="{{ url_for('post', { slug: slug }) }}">{{ post.title }}</a>
-                    </h2>
+    <div id="posts" class="grow my-12">
+        {% for slug, post in posts %}
+            <div id="post" class="space-y-8">
+                <h2 class="text-2xl font-light text-center md:text-4xl dark:text-stone-200">
+                    <a href="{{ url_for('post', { slug: slug }) }}">{{ post.title }}</a>
+                </h2>
 
-                    {% include "components/metadata.twig" %}
+                {% include "components/metadata.twig" %}
 
-                    {% if post.image %}
-                        <img class="h-40 w-full object-cover" src="{{ post.image.url }}" />
-                    {% endif %}
-
-                    <article class="prose prose-stone prose-lg max-w-none md:prose-xl dark:prose-invert">{{ post.excerpt | raw }}</article>
-
-                    <a href="{{ url_for('post', { slug: slug }) }}" class="inline-block text-stone-600 underline dark:text-stone-400">
-                        Read More
-                    </a>
-                </div>
-
-                {% if loop.last == false  %}
-                    <hr class="border-t-4 border-stone-200 w-64 mx-auto my-12 dark:border-stone-600">
+                {% if post.image %}
+                    <img class="h-40 w-full object-cover" src="{{ post.image.url }}" />
                 {% endif %}
-            {% endfor %}
-        </div>
 
-        {% if pagination.pages > 1 %}
-            {{ include('components/pagination.twig', {route: 'posts'}) }}
-        {% endif %}
-    {% else %}
-        <div class="grow flex h-full justify-center items-center">
-            <div class="w-full text-center space-y-4">
-                <h1 class="text-2xl font-light text-center">
-                    No posts found
-                </h1>
+                <article class="prose prose-stone prose-lg max-w-none md:prose-xl dark:prose-invert">{{ post.excerpt | raw }}</article>
 
-                <p>See the <a href="https://www.plume-php.com/quick-start" class="font-medium underline">quick start guide</a> to get started.</p>
+                <a href="{{ url_for('post', { slug: slug }) }}" class="inline-block text-stone-600 underline dark:text-stone-400">
+                    Read More
+                </a>
             </div>
-        </div>
+
+            {% if loop.last == false  %}
+                <hr class="border-t-4 border-stone-200 w-64 mx-auto my-12 dark:border-stone-600">
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    {% if pagination.pages > 1 %}
+        {{ include('components/pagination.twig', {route: 'posts'}) }}
     {% endif %}
 {% endblock %}

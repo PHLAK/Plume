@@ -20,6 +20,12 @@ class TagsController
     {
         $tags = $this->tags->withCount();
 
+        if ($tags->isEmpty()) {
+            return $this->view->render($response, 'error.twig', [
+                'message' => 'No tags found',
+            ]);
+        }
+
         return $this->view->render($response, 'tags.twig', [
             'tags' => $tags->sortKeys(),
         ]);
