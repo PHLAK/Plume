@@ -7,7 +7,6 @@ namespace App;
 use App\Data\Post;
 use App\Exceptions\PostNotFoundException;
 use App\Helpers\Str;
-use Carbon\CarbonInterface;
 use Illuminate\Support\Collection;
 use League\CommonMark\ConverterInterface;
 
@@ -47,9 +46,7 @@ class Posts
             return [$slug => Data\Post::fromRenderedContent($content)];
         })->reject(
             fn (Post $post): bool => $post->draft || $post->published->isFuture()
-        )->sortByDesc(
-            fn (Post $post): CarbonInterface => $post->published
-        );
+        )->sortByDesc('published');
     }
 
     public function withTag(string $tag): Collection
