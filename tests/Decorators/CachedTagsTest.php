@@ -42,6 +42,8 @@ class CachedTagsTest extends TestCase
         $tags = new CachedTags($this->posts, $this->cache)->withCount();
 
         $this->assertEquals(new Collection(['Bar' => 5, 'Baz' => 2, 'Foo' => 3]), $tags);
-        $this->assertEquals(new Collection(['Bar' => 5, 'Baz' => 2, 'Foo' => 3]), $this->cache->get('tags|with-count', fn () => null));
+        $this->assertEquals(new Collection(['Bar' => 5, 'Baz' => 2, 'Foo' => 3]), $this->cache->get('tags|with-count', function (): void {
+            $this->fail('Failed to fetch data from the cache.');
+        }));
     }
 }

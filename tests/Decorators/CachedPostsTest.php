@@ -39,7 +39,9 @@ class CachedPostsTest extends TestCase
         );
 
         $this->assertEquals($expected, $post);
-        $this->assertEquals($expected, $this->cache->get('post|test-post-1', fn () => null));
+        $this->assertEquals($expected, $this->cache->get('post|test-post-1', function (): void {
+            $this->fail('Failed to fetch data from the cache.');
+        }));
     }
 
     #[Test]
@@ -65,7 +67,9 @@ class CachedPostsTest extends TestCase
         ]);
 
         $this->assertEquals($expected, $posts);
-        $this->assertEquals($expected, $this->cache->get('all-posts', fn () => null));
+        $this->assertEquals($expected, $this->cache->get('all-posts', function (): void {
+            $this->fail('Failed to fetch data from the cache.');
+        }));
     }
 
     #[Test]
@@ -84,6 +88,8 @@ class CachedPostsTest extends TestCase
         ]);
 
         $this->assertEquals($expected, $posts);
-        $this->assertEquals($expected, $this->cache->get('tag|Foo', fn () => null));
+        $this->assertEquals($expected, $this->cache->get('tag|Foo', function (): void {
+            $this->fail('Failed to fetch data from the cache.');
+        }));
     }
 }
