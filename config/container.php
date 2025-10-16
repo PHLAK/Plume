@@ -75,6 +75,7 @@ return [
     // Container definitions
     // -------------------------------------------------------------------------
 
+    App\Pages::class => get(Decorators\CachedPages::class),
     App\Posts::class => get(Decorators\CachedPosts::class),
     App\Tags::class => get(Decorators\CachedTags::class),
     League\CommonMark\ConverterInterface::class => factory(Factories\ConverterFactory::class),

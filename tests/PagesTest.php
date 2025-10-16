@@ -27,9 +27,6 @@ class PagesTest extends TestCase
     {
         $pages = $this->pages->all();
 
-        // $this->assertCount(3, $pages);
-        // $this->assertContainsOnlyInstancesOf(Page::class, $pages);
-
         $this->assertEquals(new Collection([
             'about' => new Page(
                 title: 'About this Blog',
@@ -50,14 +47,6 @@ class PagesTest extends TestCase
                 body: "<p>I should apear last in the navigation bar.</p>\n"
             ),
         ]), $pages);
-
-        // /** @var Post $testPage */
-        // $testPage = $pages->get('test');
-
-        // $this->assertSame('Test Page; Please Ignore', $testPage->title);
-        // $this->assertSame('Test', $testPage->link);
-        // $this->assertSame(0, $testPage->weight);
-        // $this->assertSame("<p>I'm a test page, please ignore me.</p>\n", $testPage->body);
     }
 
     #[Test]
