@@ -40,4 +40,25 @@ class TagsControllerTest extends TestCase
         $this->assertInstanceOf(ResponseInterface::class, $response);
         $this->assertSame(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
     }
+
+    #[Test]
+    public function it_shows_an_error_page_when_no_tags_are_found(): void
+    {
+        $posts = $this->mock(Tags::class);
+        $posts->expects($this->once())->method('withCount')->willReturn(new Collection);
+
+        $testResponse = (new Response)->withStatus(StatusCodeInterface::STATUS_NOT_FOUND);
+
+        $twig = $this->mock(Twig::class);
+        $twig->expects($this->once())->method('render')->with($testResponse, 'error.twig', [
+            'message' => 'No tags found',
+        ])->willReturn($testResponse);
+
+        $response = $this->container->call(TagsController::class, [
+            'response' => $testResponse,
+        ]);
+
+        $this->assertInstanceOf(ResponseInterface::class, $response);
+        $this->assertSame(StatusCodeInterface::STATUS_NOT_FOUND, $response->getStatusCode());
+    }
 }
