@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Factories;
 
 use App\Config;
-use App\Exceptions\InvalidConfiguration;
+use DI\Attribute\Inject;
 use DI\Container;
 use Memcached;
 use Redis;
@@ -16,11 +16,15 @@ use Symfony\Component\Cache\Adapter\MemcachedAdapter;
 use Symfony\Component\Cache\Adapter\PhpFilesAdapter;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
 use Symfony\Contracts\Cache\CacheInterface;
+use UnexpectedValueException;
 
 class CacheFactory
 {
     private const NAMESPACE_EXTERNAL = 'plume_php';
     private const NAMESPACE_INTERNAL = 'app';
+
+    #[Inject('cache_driver')]
+    private string $cacheDriver;
 
     public function __construct(
         private Container $container,
@@ -29,7 +33,7 @@ class CacheFactory
 
     public function __invoke(): CacheInterface
     {
-        return match ($this->config->string('cache_driver')) {
+        return match ($this->cacheDriver) {
             'apcu' => $this->getApcuAdapter(),
             'array' => $this->getArrayAdapter(),
             'file' => $this->getFilesystemAdapter(),
@@ -37,7 +41,7 @@ class CacheFactory
             'php-file' => $this->getPhpFilesAdapter(),
             'redis' => $this->getRedisAdapter(),
             'valkey' => $this->getRedisAdapter(),
-            default => throw InvalidConfiguration::fromOption('cache_driver', $this->config->string('cache_driver'))
+            default => throw new UnexpectedValueException(sprintf('Invalid cache driver [%s]', $this->cacheDriver))
         };
     }
 

@@ -17,9 +17,11 @@ class TwigFactoryTest extends TestCase
     #[Test]
     public function it_returns_a_configured_twig_object(): void
     {
-        $callableResolver = $this->container->get(CallableResolver::class);
+        // $callableResolver = $this->container->get(CallableResolver::class);
 
-        $twig = (new TwigFactory($this->config, $callableResolver))();
+        // $twig = (new TwigFactory($this->config, $callableResolver))();
+
+        $twig = $this->container->call(TwigFactory::class);
 
         $this->assertInstanceOf(Twig::class, $twig);
     }

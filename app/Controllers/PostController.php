@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Exceptions\PostNotFoundException;
+use App\Exceptions\NotFoundException;
 use App\Posts;
 use Psr\Http\Message\ResponseInterface;
 use Slim\Psr7\Response;
@@ -21,7 +21,7 @@ class PostController
     {
         try {
             $post = $this->posts->get($slug);
-        } catch (PostNotFoundException) {
+        } catch (NotFoundException) {
             return $this->view->render($response->withStatus(404), 'error.twig', [
                 'message' => 'Post not found',
             ]);

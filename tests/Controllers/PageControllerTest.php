@@ -6,7 +6,7 @@ namespace Tests\Controllers;
 
 use App\Controllers\PageController;
 use App\Data\Page;
-use App\Exceptions\PageNotFoundException;
+use App\Exceptions\NotFoundException;
 use App\Pages;
 use Fig\Http\Message\StatusCodeInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -53,7 +53,7 @@ class PageControllerTest extends TestCase
     {
         $pages = $this->mock(Pages::class);
         $pages->expects($this->once())->method('get')->with('test-page')->willThrowException(
-            new PageNotFoundException
+            new NotFoundException
         );
 
         $testResponse = (new Response)->withStatus(StatusCodeInterface::STATUS_NOT_FOUND);

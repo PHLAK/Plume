@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App;
 
 use App\Data\Post;
-use App\Exceptions\PostNotFoundException;
+use App\Exceptions\NotFoundException;
 use App\Helpers\Str;
 use Illuminate\Support\Collection;
 use League\CommonMark\ConverterInterface;
@@ -22,11 +22,11 @@ class Posts
         $postPath = sprintf('%s/%s.md', $this->config->string('posts_path'), $slug);
 
         if (! is_readable($postPath)) {
-            throw new PostNotFoundException;
+            throw new NotFoundException;
         }
 
         if (($contents = file_get_contents($postPath)) === false) {
-            throw new PostNotFoundException;
+            throw new NotFoundException;
         }
 
         return Post::fromRenderedContent($this->converter->convert($contents));

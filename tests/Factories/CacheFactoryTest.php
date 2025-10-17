@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Factories;
 
-use App\Exceptions\InvalidConfiguration;
 use App\Factories\CacheFactory;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -12,6 +11,7 @@ use PHPUnit\Framework\Attributes\Test;
 use RedisException;
 use Symfony\Component\Cache\Adapter;
 use Tests\TestCase;
+use UnexpectedValueException;
 
 #[CoversClass(CacheFactory::class)]
 class CacheFactoryTest extends TestCase
@@ -40,7 +40,7 @@ class CacheFactoryTest extends TestCase
         $this->container->set('cache_driver', $config);
 
         try {
-            $cache = (new CacheFactory($this->container, $this->config))();
+            $cache = $this->container->call(CacheFactory::class);
         } catch (RedisException $exception) {
             $this->markTestSkipped(sprintf('Redis: %s', $exception->getMessage()));
         }
@@ -53,8 +53,9 @@ class CacheFactoryTest extends TestCase
     {
         $this->container->set('cache_driver', 'invalid');
 
-        $this->expectException(InvalidConfiguration::class);
+        $this->expectException(UnexpectedValueException::class);
+        $this->expectExceptionMessage('Invalid cache driver [invalid]');
 
-        (new CacheFactory($this->container, $this->config))();
+        $this->container->call(CacheFactory::class);
     }
 }

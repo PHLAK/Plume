@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App;
 
 use App\Data\Page;
-use App\Exceptions\PageNotFoundException;
+use App\Exceptions\NotFoundException;
 use App\Helpers\Str;
 use Illuminate\Support\Collection;
 use League\CommonMark\ConverterInterface;
@@ -31,17 +31,17 @@ class Pages
         })->sortBy('weight');
     }
 
-    /** @throws PageNotFoundException */
+    /** @throws NotFoundException */
     public function get(string $slug): Page
     {
         $pagePath = sprintf('%s/%s.md', $this->config->string('pages_path'), $slug);
 
         if (! is_readable($pagePath)) {
-            throw new PageNotFoundException;
+            throw new NotFoundException;
         }
 
         if (($contents = file_get_contents($pagePath)) === false) {
-            throw new PageNotFoundException;
+            throw new NotFoundException;
         }
 
         return Page::fromRenderedContent($this->converter->convert($contents));

@@ -6,7 +6,7 @@ namespace Tests\Controllers;
 
 use App\Controllers\PostController;
 use App\Data\Post;
-use App\Exceptions\PostNotFoundException;
+use App\Exceptions\NotFoundException;
 use App\Posts;
 use Carbon\Carbon;
 use Fig\Http\Message\StatusCodeInterface;
@@ -53,7 +53,7 @@ class PostControllerTest extends TestCase
     {
         $posts = $this->mock(Posts::class);
         $posts->expects($this->once())->method('get')->with('test-post')->willThrowException(
-            new PostNotFoundException
+            new NotFoundException
         );
 
         $testResponse = (new Response)->withStatus(StatusCodeInterface::STATUS_NOT_FOUND);
