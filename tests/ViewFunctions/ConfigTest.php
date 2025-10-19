@@ -17,16 +17,16 @@ class ConfigTest extends TestCase
     {
         $this->container->set('foo', 'Test value; please ignore');
 
-        $config = new Config($this->config);
+        $value = $this->container->call(Config::class, ['key' => 'foo']);
 
-        $this->assertEquals('Test value; please ignore', $config('foo'));
+        $this->assertEquals('Test value; please ignore', $value);
     }
 
     #[Test]
     public function it_returns_a_default_value(): void
     {
-        $config = new Config($this->config);
+        $value = $this->container->call(Config::class, ['key' => 'bar', 'default' => 'Default value']);
 
-        $this->assertEquals('Default value', $config('bar', 'Default value'));
+        $this->assertEquals('Default value', $value);
     }
 }

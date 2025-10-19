@@ -17,9 +17,7 @@ class ViteTest extends TestCase
     {
         $this->container->set('manifest_path', $this->filePath('public/build/non-existent.json'));
 
-        $vite = $this->container->get(Vite::class);
-
-        $tags = $vite(['resources/js/app.js', 'resources/css/app.css']);
+        $tags = $this->container->call(Vite::class, ['assets' => ['resources/js/app.js', 'resources/css/app.css']]);
 
         $this->assertSame(<<<HTML
         <script type="module" src="http://localhost:5173/@vite/client"></script>
@@ -33,9 +31,7 @@ class ViteTest extends TestCase
     {
         $this->container->set('manifest_path', $this->filePath('public/build/manifest.json'));
 
-        $vite = $this->container->get(Vite::class);
-
-        $tags = $vite(['resources/js/app.js', 'resources/css/app.css']);
+        $tags = $this->container->call(Vite::class, ['assets' => ['resources/js/app.js', 'resources/css/app.css']]);
 
         $this->assertSame(<<<HTML
         <script type="module" src="/build/assets/app-l0sNRNKZ.js"></script>

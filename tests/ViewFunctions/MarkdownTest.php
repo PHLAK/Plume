@@ -15,11 +15,8 @@ class MarkdownTest extends TestCase
     #[Test]
     public function it_can_parse_markdown_into_html(): void
     {
-        $markdown = $this->container->get(Markdown::class);
+        $markdown = $this->container->call(Markdown::class, ['markdown' => '**Test** `markdown`, ~~please~~ _ignore_']);
 
-        $this->assertEquals(
-            "<p><strong>Test</strong> <code>markdown</code>, <del>please</del> <em>ignore</em></p>\n",
-            $markdown('**Test** `markdown`, ~~please~~ _ignore_')
-        );
+        $this->assertEquals("<p><strong>Test</strong> <code>markdown</code>, <del>please</del> <em>ignore</em></p>\n", $markdown);
     }
 }
