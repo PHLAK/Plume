@@ -37,9 +37,9 @@ return [
     /**
      * Meta tag description text.
      *
-     * Default value: 'Yet another amazing blog, powered by PlumePHP.'.
+     * Default value: 'Yet another amazing blog, published with Plume.'.
      */
-    'meta_description' => env('META_DESCRIPTION', 'Yet another amazing blog, powered by PlumePHP.'),
+    'meta_description' => env('META_DESCRIPTION', 'Yet another amazing blog, published with Plume.'),
 
     /**
      * Post pagination.

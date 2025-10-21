@@ -26,7 +26,7 @@ class WhoopsMiddlewareTest extends TestCase
             'Test title; please ignore'
         );
         $pageHandler->expects($this->once())->method('setPageTitle')->with(
-            'Test title; please ignore • PlumePHP'
+            'Test title; please ignore • Plume'
         );
 
         $whoops = $this->createMock(RunInterface::class);
@@ -52,7 +52,7 @@ class WhoopsMiddlewareTest extends TestCase
             'Test title; please ignore'
         );
         $pageHandler->expects($this->once())->method('setPageTitle')->with(
-            'Test title; please ignore • PlumePHP'
+            'Test title; please ignore • Plume'
         );
 
         $jsonHandler = new JsonResponseHandler;

@@ -22,7 +22,7 @@ class WhoopsMiddleware
     public function __invoke(Request $request, RequestHandler $handler): ResponseInterface
     {
         $this->pageHandler->setPageTitle(
-            sprintf('%s • PlumePHP', $this->pageHandler->getPageTitle())
+            sprintf('%s • Plume', $this->pageHandler->getPageTitle())
         );
 
         $this->whoops->pushHandler($this->pageHandler);
