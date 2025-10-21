@@ -16,7 +16,7 @@
     {% if post.tags %}
         <div class="flex items-center gap-1 text-xs">
             {% for tag in post.tags %}
-                <a href="{{ full_url_for('tag', { tag: tag }) }}" class="block px-1.5 py-1 rounded bg-stone-600 text-stone-100">
+                <a href="{{ full_url_for('tag', { tag: tag }) }}" class="block px-1.5 py-1 rounded border border-stone-600 font-medium text-stone-600 hover:bg-stone-200">
                     {{ tag }}
                 </a>
             {% endfor %}
