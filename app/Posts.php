@@ -49,6 +49,13 @@ class Posts
         )->sortByDesc('published');
     }
 
+    public function byAuthor(string $author): Collection
+    {
+        return $this->all()->filter(
+            fn (Post $post): bool => $post->author === $author
+        );
+    }
+
     public function withTag(string $tag): Collection
     {
         return $this->all()->filter(

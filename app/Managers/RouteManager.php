@@ -19,6 +19,8 @@ class RouteManager
     {
         $this->app->get('/[{page:[0-9]+}]', Controllers\PostsController::class)->setName('posts');
         $this->app->get('/post/{slug}', Controllers\PostController::class)->setName('post');
+        $this->app->get('/authors', Controllers\AuthorsController::class)->setName('authors');
+        $this->app->get('/author/{author}[/{page:[0-9]+}]', Controllers\AuthorController::class)->setName('author');
         $this->app->get('/tags', Controllers\TagsController::class)->setName('tags');
         $this->app->get('/tag/{tag}[/{page:[0-9]+}]', Controllers\TagController::class)->setName('tag');
         $this->app->get('/feed', Controllers\FeedController::class)->setName('feed');

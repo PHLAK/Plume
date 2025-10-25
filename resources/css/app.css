@@ -6,12 +6,17 @@
 
 @font-face {
     font-family: "Montserrat";
-    src: url("/fonts/Montserrat.ttf") format("truetype");
+    src: url("/fonts/Montserrat.woff2") format("woff2");
 }
 
 @font-face {
     font-family: "Rokkitt";
-    src: url("/fonts/Rokkitt.ttf") format("truetype");
+    src: url("/fonts/Rokkitt.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Source Code Pro";
+    src: url("/fonts/SourceCodePro.woff2") format("woff2");
 }
 
 @theme {
@@ -20,9 +25,12 @@
 
     --font-sans: Montserrat;
     --font-serif: Rokkitt;
-    /*--font-mono: Source Code Pro;*/
+    --font-mono: Source Code Pro;
 }
 
+[v-cloak] {
+    @apply hidden;
+}
 
 html {
     @apply bg-stone-100;

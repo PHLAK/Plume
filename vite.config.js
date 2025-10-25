@@ -3,6 +3,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig(() => {
     return {
+        cacheDir: '.cache/vite',
         build: {
             outDir: 'public/build',
             copyPublicDir: false,
@@ -24,6 +25,11 @@ export default defineConfig(() => {
         plugins: [
             tailwindcss(),
         ],
-        cacheDir: '.cache/vite',
+        resolve: {
+            alias: {
+                '@': '/resources/js',
+                vue: 'vue/dist/vue.esm-bundler.js'
+            }
+        },
     }
 });

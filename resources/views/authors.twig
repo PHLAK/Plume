@@ -1,0 +1,19 @@
+{% extends "layouts/app.twig" %}
+
+{% block content %}
+    <div id="authors" class="grow space-y-8 my-12">
+        <h1 class="text-2xl font-light text-center md:text-4xl dark:text-stone-200">
+            Authors
+        </h1>
+
+        <div class="flex justify-center flex-wrap gap-4">
+            {% for author, count in authors %}
+                <a href="{{ full_url_for('author', { author: author }) }}" class="flex items-center gap-2 rounded border border-stone-600 font-medium text-stone-600 px-4 py-2 hover:bg-stone-200 hover:bg-stone-200  dark:border-stone-400 dark:text-stone-400 dark:hover:bg-stone-700">
+                    <div class="">{{ author }}</div>
+                    <div class="text-stone-400 dark:text-stone-600">×</div>
+                    <div class="font-mono"> {{ count }}</div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
