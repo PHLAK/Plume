@@ -28,10 +28,10 @@ Features
 --------
 
   - **Dockerized installation** allows you to be up and running quickly.
-  - **Markdown rendering** ...
-  - **Custom Pages** ...
+  - **Markdown rendering** for quick and easy publishing via flat files.
+  - **Custom pages** ...
   - **Light and dark themes** to suit your professional needs or personal style.
-  - **Global Search** helps your users locate the information they need quickly and efficiently.
+  - **Global search** helps your users locate the information they need effortlessly.
   - ???
 
 Requirements
