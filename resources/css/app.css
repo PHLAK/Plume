@@ -36,6 +36,10 @@ html {
     @apply bg-stone-100;
 }
 
+.prose code:before, .prose code:after {
+    content: none;
+}
+
 .prose .note {
     @apply relative rounded-lg border-2 border-stone-200 bg-stone-50 p-4 pl-12;
 }
