@@ -64,6 +64,14 @@ return [
     'date_format' => env('DATE_FORMAT', 'Y-m-d H:i:s'),
 
     /**
+     * The Shiki theme ID used for syntax highlighting in rendered code blocks.
+     * See https://shiki.style/themes for a list of themes to choose from.
+     *
+     * Default value: 'catppuccin-frappe'
+     */
+    'shiki_theme_id' => env('SHIKI_THEME_ID', 'catppuccin-frappe'),
+
+    /**
      * Timezone used for date formatting. For a list of supported timezones see:
      * https://www.php.net/manual/en/timezones.php.
      *
