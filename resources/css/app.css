@@ -28,7 +28,7 @@
     --font-mono: Source Code Pro;
 }
 
-[v-cloak] {
+[x-cloak] {
     @apply hidden;
 }
 
