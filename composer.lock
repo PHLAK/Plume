@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8805b302a06b188b3a989ec44db91801",
+    "content-hash": "4b95f506511e15b33a05421d4958f17b",
     "packages": [
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -1338,6 +1338,44 @@
                 }
             ],
             "time": "2025-08-21T11:53:16+00:00"
+        },
+        {
+            "name": "pomodocs/commonmark-alert",
+            "version": "v0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pomodocs/commonmark-alert.git",
+                "reference": "54fa7f2fd99980fea45a0fa5337542750bea93cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pomodocs/commonmark-alert/zipball/54fa7f2fd99980fea45a0fa5337542750bea93cc",
+                "reference": "54fa7f2fd99980fea45a0fa5337542750bea93cc",
+                "shasum": ""
+            },
+            "require": {
+                "league/commonmark": "^2.7",
+                "php": ">=8.3"
+            },
+            "require-dev": {
+                "pestphp/pest": "^4.1"
+            },
+            "type": "commonmark-extension",
+            "autoload": {
+                "psr-4": {
+                    "PomoDocs\\CommonMark\\Alert\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "CommonMark extension to support alerts in Github blockquote style",
+            "support": {
+                "issues": "https://github.com/pomodocs/commonmark-alert/issues",
+                "source": "https://github.com/pomodocs/commonmark-alert/tree/v0.6"
+            },
+            "time": "2025-10-04T13:32:29+00:00"
         },
         {
             "name": "psr/cache",

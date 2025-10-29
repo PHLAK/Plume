@@ -20,6 +20,7 @@
         "nesbot/carbon": "^3.10",
         "php-di/php-di": "^7.1",
         "php-di/slim-bridge": "^3.4",
+        "pomodocs/commonmark-alert": "^0.6.0",
         "slim/psr7": "^1.7",
         "slim/slim": "^4.15",
         "slim/twig-view": "^3.4",

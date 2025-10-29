@@ -11,21 +11,26 @@ use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\FrontMatter\FrontMatterExtension;
 use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
 use League\CommonMark\MarkdownConverter;
+use PomoDocs\CommonMark\Alert\AlertExtension;
 use Spatie\CommonMarkShikiHighlighter\HighlightCodeExtension;
 
 class ConverterFactory
 {
+    #[Inject('commonmark_config')]
+    private array $commonmarkConfig;
+
     #[Inject('shiki_theme_id')]
     private string $shikiThemeId;
 
     public function __invoke(): ConverterInterface
     {
-        $environment = new Environment;
+        $environment = new Environment($this->commonmarkConfig);
 
         $environment->addExtension(new CommonMarkCoreExtension);
         $environment->addExtension(new GithubFlavoredMarkdownExtension);
         $environment->addExtension(new FrontMatterExtension);
         $environment->addExtension(new HighlightCodeExtension($this->shikiThemeId));
+        $environment->addExtension(new AlertExtension);
 
         return new MarkdownConverter($environment);
     }
