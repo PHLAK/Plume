@@ -1,0 +1,193 @@
+name: Plume CI
+on: [push, pull_request, workflow_dispatch]
+
+env:
+  PHP_VERSION: 8.4
+  NODE_VERSION: 24
+
+jobs:
+  bundle-assets:
+    name: Bundle Assets
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install JavaScript Dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Bundle Assets
+        run: npm run build --verbose
+
+  js-coding-standards:
+    name: JavaScript Coding Standards
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install JavaScript Dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Lint JavaScript Files
+        run: npm run cs
+
+  php-coding-standards:
+    name: PHP Coding Standards
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          extensions: apcu, mbstring, memcached, redis, intl
+
+      - name: Install PHP Dependencies
+        run: composer install --no-interaction --no-progress --no-scripts --prefer-dist
+
+      - name: Verify Coding Standards
+        env:
+          PHP_CS_FIXER_IGNORE_ENV: true
+        run: vendor/bin/php-cs-fixer fix --diff --dry-run
+
+  static-analysis:
+    name: Static Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          extensions: apcu, mbstring, memcached, redis, intl
+
+      - name: Install PHP Dependencies
+        run: composer install --no-interaction --no-progress --no-scripts --prefer-dist
+
+      - name: Run Static Analysis
+        run: vendor/bin/phpstan analyze --no-progress
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+
+    services:
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
+        options: --health-cmd "redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    strategy:
+      matrix:
+        php-versions: ['8.2', '8.3', '8.4']
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: apcu, mbstring, memcached, redis, intl
+          coverage: xdebug
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache PHP Dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install PHP Dependencies
+        run: composer install --no-interaction --no-progress --no-scripts --prefer-dist
+
+      - name: Run Tests
+        run: vendor/bin/phpunit --coverage-text
+
+  build-and-push-image:
+    name: Build & Push Image
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/')
+    needs: [bundle-assets, js-coding-standards, php-coding-standards, static-analysis, tests]
+
+    env:
+      DOCKER_HUB_USER: phlak
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ env.DOCKER_HUB_USER }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Extract Metadata
+        id: extract-metadata
+        uses: docker/metadata-action@v5
+        with:
+          images: phlak/plume
+          tags: |
+            type=semver,pattern={{major}}.{{minor}}.{{patch}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=ref,event=tag
+            type=raw,value=latest
+
+      - name: Build & Push Image
+        uses: docker/build-push-action@v6
+        with:
+          file: Dockerfile.prod
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.extract-metadata.outputs.tags }}
+          labels: ${{ steps.extract-metadata.outputs.labels }}
+
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: [bundle-assets, js-coding-standards, php-coding-standards, static-analysis, tests]
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Get Tag
+        run: echo "TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+      - name: Publish Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: v${{ env.TAG }}
+          draft: true

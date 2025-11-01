@@ -1,0 +1,53 @@
+name: Bug Report
+description: Create a report to help us fix something that is broken
+labels: [Bug]
+assignees: [PHLAK]
+
+body:
+  - type: input
+    id: plume-version
+    attributes:
+      label: Plume Version
+      description: What version of Plume are you using?
+    validations:
+      required: true
+
+  - type: input
+    id: php-version
+    attributes:
+      label: PHP Version
+      description: |
+        What version of PHP do you have installed?
+        Run `php --version` from a command line to find your version.
+    validations:
+      required: true
+
+  - type: textarea
+    id: php-extensions
+    attributes:
+      label: PHP Extensions
+      description: |
+        What PHP extensions do you have installed?
+        Run `php -m` from a command line and paste the output here.
+    validations:
+      required: false
+
+  - type: input
+    id: web-server
+    attributes:
+      label: Web Server
+      description: |
+        What HTTP web server are you using to serve Plume?
+        **Examples:** Apache, NGINX, Caddy, etc.
+    validations:
+      required: false
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the Bug
+      description: |
+        A description of the observed behavior and any other context about the problem.
+        Error logs and/or steps required to reproduce the error would be helpful here.
+    validations:
+      required: true
