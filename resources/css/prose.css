@@ -7,11 +7,19 @@
 }
 
 .prose .alert {
-    @apply flex flex-col gap-y-2 border-l-4 border-stone-200 my-6 px-4;
+    @apply border-l-4 border-stone-200 my-6 pl-4;
+}
+
+.prose .alert :first-child {
+    @apply mt-0;
+}
+
+.prose .alert :last-child {
+    @apply mb-0;
 }
 
 .prose .alert-title {
-    @apply flex items-center font-medium gap-1;
+    @apply flex items-center font-medium gap-1 mb-4;
 }
 
 .prose .alert-title svg {
@@ -19,45 +27,41 @@
 }
 
 .prose .alert-note {
-    @apply border-blue-600;
-}
-
-.prose .alert-tip {
-    @apply border-green-600;
-}
-
-.prose .alert-important {
-    @apply border-purple-500;
-}
-
-.prose .alert-warning {
-    @apply border-yellow-500;
-}
-
-.prose .alert-caution {
-    @apply border-red-600;
+    @apply border-blue-700;
 }
 
 .prose .alert-note .alert-title {
-    @apply text-blue-600;
+    @apply text-blue-700;
+}
+
+.prose .alert-tip {
+    @apply border-green-700;
 }
 
 .prose .alert-tip .alert-title {
-    @apply text-green-600;
+    @apply text-green-700;
+}
+
+.prose .alert-important {
+    @apply border-purple-700;
 }
 
 .prose .alert-important .alert-title {
-    @apply text-purple-500;
+    @apply text-purple-700;
+}
+
+.prose .alert-warning {
+    @apply border-yellow-700;
 }
 
 .prose .alert-warning .alert-title {
-    @apply text-yellow-500;
+    @apply text-yellow-700;
+}
+
+.prose .alert-caution {
+    @apply border-red-700;
 }
 
 .prose .alert-caution .alert-title {
-    @apply text-red-600;
-}
-
-.prose .alert p {
-    @apply m-0;
+    @apply text-red-700;
 }
