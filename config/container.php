@@ -50,7 +50,7 @@ return [
 
     'middlewares' => [
         Middlewares\WhoopsMiddleware::class,
-        // Middlewares\PruneCacheMiddleware::class,
+        Middlewares\PruneCacheMiddleware::class,
         // Middlewares\CacheControlMiddleware::class,
         // Middlewares\RegisterGlobalsMiddleware::class,
         function (Slim\App $app, Slim\Views\Twig $twig): Slim\Views\TwigMiddleware {
