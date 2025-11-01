@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\ViewFunctions;
 
-use App\Config;
+use DI\Attribute\Inject;
 use Illuminate\Support\Collection;
 use UnexpectedValueException;
 
@@ -12,14 +12,13 @@ class Vite implements ViewFunction
 {
     public string $name = 'vite';
 
-    public function __construct(
-        private Config $config,
-    ) {}
+    #[Inject('manifest_path')]
+    private string $manifestPath;
 
     /** @param array<string> $assets */
     public function __invoke(array $assets): string
     {
-        $tags = is_file($this->config->get('manifest_path')) ? $this->getBuildTags($assets) : $this->getDevTags($assets);
+        $tags = is_file($this->manifestPath) ? $this->getBuildTags($assets) : $this->getDevTags($assets);
 
         return $tags->implode("\n");
     }
@@ -31,7 +30,7 @@ class Vite implements ViewFunction
      */
     private function getBuildTags(array $assets): Collection
     {
-        $manifest = json_decode((string) file_get_contents($this->config->get('manifest_path')), flags: JSON_THROW_ON_ERROR);
+        $manifest = json_decode((string) file_get_contents($this->manifestPath), flags: JSON_THROW_ON_ERROR);
 
         return Collection::make($assets)->map(
             static fn (string $asset): string => match (mb_substr($asset, (int) mb_strrpos($asset, '.'))) {

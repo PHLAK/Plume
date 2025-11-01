@@ -16,7 +16,7 @@ class ConverterFactoryTest extends TestCase
     #[Test]
     public function it_returns_a_converterfactory(): void
     {
-        $converter = (new ConverterFactory)();
+        $converter = $this->container->call(ConverterFactory::class);
 
         $this->assertInstanceOf(MarkdownConverter::class, $converter);
     }

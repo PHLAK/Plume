@@ -7,7 +7,6 @@ namespace Tests\Decorators;
 use App\Data\Page;
 use App\Decorators\CachedPages;
 use Illuminate\Support\Collection;
-use League\CommonMark\ConverterInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -21,7 +20,7 @@ class CachedPagesTest extends TestCase
     {
         parent::setUp();
 
-        $this->cachedPages = new CachedPages($this->config, $this->container->get(ConverterInterface::class), $this->cache);
+        $this->cachedPages = $this->container->make(CachedPages::class);
     }
 
     #[Test]

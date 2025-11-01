@@ -4,19 +4,23 @@ declare(strict_types=1);
 
 namespace App\ViewFunctions;
 
-use App\Config as AppConfig;
+use DI\Container;
+use DI\NotFoundException;
 
 class Config implements ViewFunction
 {
     public string $name = 'config';
 
     public function __construct(
-        private AppConfig $config
+        private Container $container,
     ) {}
 
-    /** Retrieve an item from the config. */
     public function __invoke(string $key, mixed $default = null): mixed
     {
-        return $this->config->get($key, $default);
+        try {
+            return $this->container->get($key);
+        } catch (NotFoundException) {
+            return $default;
+        }
     }
 }

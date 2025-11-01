@@ -7,19 +7,22 @@ namespace App;
 use App\Data\Post;
 use App\Exceptions\NotFoundException;
 use App\Helpers\Str;
+use DI\Attribute\Inject;
 use Illuminate\Support\Collection;
 use League\CommonMark\ConverterInterface;
 
 class Posts
 {
+    #[Inject('posts_path')]
+    private string $postsPath;
+
     public function __construct(
-        private Config $config,
         private ConverterInterface $converter,
     ) {}
 
     public function get(string $slug): Data\Post
     {
-        $postPath = sprintf('%s/%s.md', $this->config->string('posts_path'), $slug);
+        $postPath = sprintf('%s/%s.md', $this->postsPath, $slug);
 
         if (! is_readable($postPath)) {
             throw new NotFoundException;
@@ -36,10 +39,10 @@ class Posts
     public function all(): Collection
     {
         /** @var Collection<int, string> $paths */
-        $paths = new Collection(glob($this->config->string('posts_path') . '/*.md') ?: []);
+        $paths = new Collection(glob($this->postsPath . '/*.md') ?: []);
 
         return $paths->mapWithKeys(function (string $path): array {
-            [$slug] = Str::extract(sprintf('#^%s/(?<slug>.+).md$#', preg_quote($this->config->string('posts_path'), '#')), $path);
+            [$slug] = Str::extract(sprintf('#^%s/(?<slug>.+).md$#', preg_quote($this->postsPath, '#')), $path);
 
             $content = $this->converter->convert(file_get_contents($path));
 

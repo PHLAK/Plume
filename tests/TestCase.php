@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Tests;
 
 use App\Bootstrap\Builder;
-use App\Config;
 use DI\Container;
 use Dotenv\Dotenv;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase as BaseTestCase;
-use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Contracts\Cache\CacheInterface;
 
 class TestCase extends BaseTestCase
@@ -19,7 +17,6 @@ class TestCase extends BaseTestCase
     public const string TEST_FILES_PATH = __DIR__ . '/_files';
 
     protected Container $container;
-    protected Config $config;
     protected CacheInterface $cache;
 
     protected function setUp(): void
@@ -35,11 +32,11 @@ class TestCase extends BaseTestCase
             $this->filePath('cache')
         );
 
-        $this->config = $this->container->get(Config::class);
-        $this->cache = new ArrayAdapter;
-
         $this->container->set('posts_path', $this->filePath('posts'));
         $this->container->set('pages_path', $this->filePath('pages'));
+        $this->container->set('cache_driver', 'array');
+
+        $this->cache = $this->container->get(CacheInterface::class);
     }
 
     /** Get the file path to a test file. */

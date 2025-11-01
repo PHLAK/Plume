@@ -19,6 +19,8 @@ class RouteManagerTest extends TestCase
     private const array ROUTES = [
         ['posts', '/[{page:[0-9]+}]', Controllers\PostsController::class],
         ['post', '/post/{slug}', Controllers\PostController::class],
+        ['authors', '/authors', Controllers\AuthorsController::class],
+        ['author', '/author/{author}[/{page:[0-9]+}]', Controllers\AuthorController::class],
         ['tags', '/tags', Controllers\TagsController::class],
         ['tag', '/tag/{tag}[/{page:[0-9]+}]', Controllers\TagController::class],
         ['feed', '/feed', Controllers\FeedController::class],

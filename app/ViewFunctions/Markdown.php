@@ -14,7 +14,6 @@ class Markdown implements ViewFunction
         private ConverterInterface $converter
     ) {}
 
-    /** Convert markdown to HTML. */
     public function __invoke(string $markdown): string
     {
         return $this->converter->convert($markdown)->getContent();

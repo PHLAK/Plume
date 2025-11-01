@@ -19,11 +19,14 @@ class CachedTagsTest extends TestCase
 {
     private Posts&MockObject $posts;
 
+    private CachedTags $cachedTags;
+
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->posts = $this->createMock(Posts::class);
+        $this->posts = $this->mock(Posts::class);
+        $this->cachedTags = $this->container->make(CachedTags::class);
     }
 
     #[Test]
@@ -39,7 +42,7 @@ class CachedTagsTest extends TestCase
             ])
         );
 
-        $tags = new CachedTags($this->posts, $this->cache)->withCount();
+        $tags = $this->cachedTags->withCount();
 
         $this->assertEquals(new Collection(['Bar' => 5, 'Baz' => 2, 'Foo' => 3]), $tags);
         $this->assertEquals(new Collection(['Bar' => 5, 'Baz' => 2, 'Foo' => 3]), $this->cache->get('tags|with-count', function (): void {

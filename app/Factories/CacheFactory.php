@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Factories;
 
-use App\Config;
 use DI\Attribute\Inject;
 use DI\Container;
 use Memcached;
@@ -26,9 +25,14 @@ class CacheFactory
     #[Inject('cache_driver')]
     private string $cacheDriver;
 
+    #[Inject('cache_lifetime')]
+    private int $cacheLifetime;
+
+    #[Inject('cache_path')]
+    private string $cachePath;
+
     public function __construct(
         private Container $container,
-        private Config $config
     ) {}
 
     public function __invoke(): CacheInterface
@@ -47,51 +51,35 @@ class CacheFactory
 
     private function getApcuAdapter(): ApcuAdapter
     {
-        return new ApcuAdapter(self::NAMESPACE_EXTERNAL, $this->config->integer('cache_lifetime'));
+        return new ApcuAdapter(self::NAMESPACE_EXTERNAL, $this->cacheLifetime);
     }
 
     private function getArrayAdapter(): ArrayAdapter
     {
-        return new ArrayAdapter($this->config->integer('cache_lifetime'));
+        return new ArrayAdapter($this->cacheLifetime);
     }
 
     private function getFilesystemAdapter(): FilesystemAdapter
     {
-        return new FilesystemAdapter(
-            self::NAMESPACE_INTERNAL,
-            $this->config->integer('cache_lifetime'),
-            $this->config->string('cache_path')
-        );
+        return new FilesystemAdapter(self::NAMESPACE_INTERNAL, $this->cacheLifetime, $this->cachePath);
     }
 
     private function getMemcachedAdapter(): MemcachedAdapter
     {
         $this->container->call('memcached_config', [$memcached = new Memcached]);
 
-        return new MemcachedAdapter(
-            $memcached,
-            self::NAMESPACE_EXTERNAL,
-            $this->config->integer('cache_lifetime')
-        );
+        return new MemcachedAdapter($memcached, self::NAMESPACE_EXTERNAL, $this->cacheLifetime);
     }
 
     private function getPhpFilesAdapter(): PhpFilesAdapter
     {
-        return new PhpFilesAdapter(
-            self::NAMESPACE_INTERNAL,
-            $this->config->integer('cache_lifetime'),
-            $this->config->string('cache_path')
-        );
+        return new PhpFilesAdapter(self::NAMESPACE_INTERNAL, $this->cacheLifetime, $this->cachePath);
     }
 
     private function getRedisAdapter(): RedisAdapter
     {
         $this->container->call('redis_config', [$redis = new Redis]);
 
-        return new RedisAdapter(
-            $redis,
-            self::NAMESPACE_EXTERNAL,
-            $this->config->integer('cache_lifetime')
-        );
+        return new RedisAdapter($redis, self::NAMESPACE_EXTERNAL, $this->cacheLifetime);
     }
 }

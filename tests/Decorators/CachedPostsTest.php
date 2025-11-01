@@ -8,7 +8,6 @@ use App\Data\Post;
 use App\Decorators\CachedPosts;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
-use League\CommonMark\ConverterInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -22,7 +21,7 @@ class CachedPostsTest extends TestCase
     {
         parent::setUp();
 
-        $this->cachedPosts = new CachedPosts($this->config, $this->container->get(ConverterInterface::class), $this->cache);
+        $this->cachedPosts = $this->container->make(CachedPosts::class);
     }
 
     #[Test]
