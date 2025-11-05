@@ -4,11 +4,11 @@
     <div id="posts" class="grow my-12">
         {% for slug, post in posts %}
             <div id="post" class="space-y-8">
-                <h2 class="text-2xl font-light text-center md:text-4xl dark:text-stone-200">
+                <h2 class="text-2xl font-light text-center text-stone-800 md:text-4xl dark:text-stone-200">
                     <a href="{{ url_for('post', { slug: slug }) }}">{{ post.title }}</a>
                 </h2>
 
-                {% include "components/metadata.twig" %}
+                {% include 'components/metadata.twig' %}
 
                 {% if post.image %}
                     <img class="h-40 w-full object-cover" src="{{ post.image.url }}" />

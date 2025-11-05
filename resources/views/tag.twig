@@ -9,7 +9,7 @@
                         <a href="{{ url_for('post', { slug: slug }) }}">{{ post.title }}</a>
                     </h2>
 
-                    {% include "components/metadata.twig" %}
+                    {% include 'components/metadata.twig' %}
 
                     {% if post.image %}
                         <img class="h-40 w-full object-cover" src="{{ post.image.url }}" />

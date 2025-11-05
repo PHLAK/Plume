@@ -14,12 +14,12 @@
 
 <div id="app" class="light" x-data="application" x-effect="storeThemeCookie($store.theme)" :class="{ 'dark': $store.theme === 'dark' }" x-cloak>
     <div class="flex flex-col min-h-screen bg-stone-100 dark:bg-stone-800">
-        {% include "components/header.twig" %}
+        {% include 'components/header.twig' %}
 
         <div id="content" class="container flex flex-col grow max-w-4xl mx-auto px-4">
             {% block content %}{% endblock %}
         </div>
 
-        {% include "components/footer.twig" %}
+        {% include 'components/footer.twig' %}
     </div>
 </div>
