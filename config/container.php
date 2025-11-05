@@ -7,6 +7,7 @@ use App\Factories;
 use App\Managers;
 use App\Middlewares;
 use App\ViewFunctions;
+use DI\Container;
 
 use function DI\create;
 use function DI\factory;
@@ -14,6 +15,7 @@ use function DI\get;
 use function DI\string;
 
 return [
+
     // -------------------------------------------------------------------------
     // Path definitions
     // -------------------------------------------------------------------------
@@ -85,4 +87,21 @@ return [
     // Symfony\Contracts\Translation\TranslatorInterface::class => factory(Factories\TranslationFactory::class),
     Slim\Views\Twig::class => factory(Factories\TwigFactory::class),
     Whoops\RunInterface::class => create(Whoops\Run::class),
+
+    // -------------------------------------------------------------------------
+    // Application feature flags
+    // -------------------------------------------------------------------------
+
+    'tags_enabled' => function (Container $container, App\Tags $tags): bool {
+        $tagsLink = (bool) filter_var($container->get('tags_link'), FILTER_VALIDATE_BOOLEAN);
+
+        return $tagsLink && $tags->count() > 1;
+    },
+
+    'authors_enabled' => function (Container $container, App\Authors $authors): bool {
+        $authorsLink = (bool) filter_var($container->get('authors_link'), FILTER_VALIDATE_BOOLEAN);
+
+        return $authorsLink && $authors->count() > 1;
+    },
+
 ];

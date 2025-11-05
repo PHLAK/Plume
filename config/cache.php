@@ -9,6 +9,7 @@ use function DI\string;
 use function DI\value;
 
 return [
+
     /**
      * The application cache driver. Setting this value to 'array' will disable
      * the cache across requests. Additional driver-specific options may require

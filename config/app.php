@@ -56,20 +56,20 @@ return [
     'posts_per_page' => env('POSTS_PER_PAGE', 10),
 
     /**
-     * Enables the "Tags" page (and navigation link) when the number of unique
-     * post tags equals or exceeds this value.
+     * Whether or not to show the "Tags" navigation link when there are
+     * multiple unique post tags.
      *
-     * Default value: 3
+     * Default value: true
      */
-    'tags_threshold' => env('TAGS_THRESHOLD', 3),
+    'tags_link' => env('TAGS_LINK', true),
 
     /**
-     * Enables the "Authors" page (and navigation link) when the number of
-     * unique post authors equals or exceeds this value.
+     * Whether or not to show the "Authors" navigation link when there are
+     * multipe unique post authors.
      *
-     * Default value: 2
+     * Default value: true
      */
-    'authors_threshold' => env('AUTHORS_THRESHOLD', 2),
+    'authors_link' => env('AUTHORS_LINK', true),
 
     /**
      * Default date format. For additional info on date formatting see:

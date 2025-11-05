@@ -14,11 +14,11 @@ use Slim\Views\Twig;
 
 class RegisterGlobalsMiddleware
 {
-    #[Inject('tags_threshold')]
-    private int $tagsThreshold;
+    #[Inject('authors_enabled')]
+    private bool $authorsEnabled;
 
-    #[Inject('authors_threshold')]
-    private int $authorsThreshold;
+    #[Inject('tags_enabled')]
+    private bool $tagsEnabled;
 
     public function __construct(
         private Twig $view,
@@ -30,19 +30,9 @@ class RegisterGlobalsMiddleware
     {
         $twigEnvironment = $this->view->getEnvironment();
 
-        $twigEnvironment->addGlobal('tags_enabled', $this->tagsEnabled());
-        $twigEnvironment->addGlobal('authors_enabled', $this->authorsEnabled());
+        $twigEnvironment->addGlobal('authors_enabled', $this->authorsEnabled);
+        $twigEnvironment->addGlobal('tags_enabled', $this->tagsEnabled);
 
         return $handler->handle($request);
-    }
-
-    public function tagsEnabled(): bool
-    {
-        return $this->tags->count() >= $this->tagsThreshold;
-    }
-
-    public function authorsEnabled(): bool
-    {
-        return $this->authors->count() >= $this->authorsThreshold;
     }
 }
