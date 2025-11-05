@@ -16,4 +16,9 @@ class Tags
     {
         return $this->posts->all()->pluck('tags')->flatten()->countBy()->sortKeys();
     }
+
+    public function count(): int
+    {
+        return $this->posts->all()->pluck('tags')->flatten()->unique()->count();
+    }
 }

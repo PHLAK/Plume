@@ -4,23 +4,24 @@ declare(strict_types=1);
 
 namespace App\Decorators;
 
-use App\Tags;
+use App\Authors;
 use DI\Attribute\Inject;
 use Illuminate\Support\Collection;
 use Symfony\Contracts\Cache\CacheInterface;
 
-class CachedTags extends Tags
+class CachedAuthors extends Authors
 {
     #[Inject(CacheInterface::class)]
     private CacheInterface $cache;
 
+    /** Method description... */
     public function withCount(): Collection
     {
-        return $this->cache->get('tags|with-count', fn (): Collection => parent::withCount());
+        return $this->cache->get('authors|with-count', fn (): Collection => parent::withCount());
     }
 
     public function count(): int
     {
-        return $this->cache->get('tags|count', fn (): int => parent::count());
+        return $this->cache->get('authors|count', fn (): int => parent::count());
     }
 }
