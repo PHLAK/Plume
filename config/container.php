@@ -29,6 +29,7 @@ return [
     'build_path' => string('{public_path}/build'),
     'assets_path' => string('{build_path}/assets'),
     'manifest_path' => string('{build_path}/manifest.json'),
+    'icons_path' => string('{resources_path}/icons'),
     'views_path' => string('{resources_path}/views'),
     'customizations_path' => string('{base_path}/customizations'),
     // TODO: Make this a generic "customizations" file
@@ -67,6 +68,7 @@ return [
         ViewFunctions\Scripts::class,
         ViewFunctions\Markdown::class,
         ViewFunctions\Pages::class,
+        ViewFunctions\Svg::class,
         // ViewFunctions\Translate::class,
         ViewFunctions\Vite::class,
     ],

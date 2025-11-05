@@ -3,8 +3,7 @@
         <a href="{{ url_for(route, { page: pagination.previous }) }}" class="flex items-center gap-2 whitespace-nowrap hover:underline {{ html_classes({
             'invisible': pagination.previous == null
         }) }}">
-            {{ include('icons/light/arrow-left-long.svg', { class: 'size-6' }) }}
-            Previous Page
+            {{ svg('light/arrow-left-long', ['fill-current', 'size-6']) }} Previous Page
         </a>
     </div>
 
@@ -12,8 +11,7 @@
         <a href="{{ url_for(route, { page: pagination.next }) }}" class="flex items-center gap-2 whitespace-nowrap hover:underline {{ html_classes({
             'invisible': pagination.next == null
         }) }}">
-            Next Page
-            {{ include('icons/light/arrow-right-long.svg', { class: 'size-6' }) }}
+            Next Page {{ svg('light/arrow-right-long', ['fill-current', 'size-6']) }}
         </a>
     </div>
 </div>
