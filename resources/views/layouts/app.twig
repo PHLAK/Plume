@@ -6,9 +6,9 @@
 
 <link rel="icon" href="/images/favicon.svg">
 
-{{ vite(['resources/css/app.css', 'resources/js/app.js']) | raw }}
+{{ vite(['resources/css/app.css', 'resources/js/app.js']) }}
 
-{{ scripts() | raw }}
+{{ scripts() }}
 
 <title>{% if title %}{{ title }} &bull; {% endif %}{{ config('site_title') }}</title>
 

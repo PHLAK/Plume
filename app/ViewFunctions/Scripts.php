@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\ViewFunctions;
 
 use DI\Attribute\Inject;
+use Twig\Markup;
 
 class Scripts implements ViewFunction
 {
@@ -14,12 +15,14 @@ class Scripts implements ViewFunction
     private string $scriptsFile;
 
     /** Get the contents of the custom scripts file. */
-    public function __invoke(): string
+    public function __invoke(): Markup
     {
         if (! is_file($this->scriptsFile)) {
-            return '';
+            new Markup('', 'UTF-8');
         }
 
-        return trim((string) file_get_contents($this->scriptsFile));
+        $scripts = trim((string) file_get_contents($this->scriptsFile));
+
+        return new Markup($scripts, 'UTF-8');
     }
 }
