@@ -14,9 +14,9 @@
 
 ---
 
-Plume is your self-hosted publishing platform.
+Plume is your self-hosted, Markdown based publishing platform.
 
-Something, something, flat files and Markdown.
+All posts (and pages) authored in Markdown, stored in a flat-file structure.
 
 ![Screenshot](screenshot.png)
 
@@ -28,10 +28,10 @@ Features
 --------
 
   - **Dockerized installation** allows you to be up and running quickly.
-  - **Markdown rendering** for quick and easy publishing via flat files.
-  - **Custom pages** ...
+  - **Markdown rendering** for publishing formatted articles easily.
+  - **Flat file structure** makes it easy to manange and backup your content.
+  - **Customization** Custom pages, ...
   - **Light and dark themes** to suit your professional needs or personal style.
-  - **Global search** helps your users locate the information they need effortlessly.
   - ???
 
 Requirements
