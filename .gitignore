@@ -11,11 +11,13 @@
 
 /.cache/
 /cache/
-/customizations/
-/posts/
-/pages/
 /public/build/
-/public/files/
+
+# ----------------------------------------
+# User generated data and files
+# ----------------------------------------
+
+/data
 /.env
 
 # ----------------------------------------

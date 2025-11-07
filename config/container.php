@@ -24,18 +24,19 @@ return [
     'app_path' => string('{base_path}/app'),
     'cache_path' => string('{base_path}/cache'),
     'config_path' => string('{base_path}/config'),
-    'resources_path' => string('{base_path}/resources'),
-    'posts_path' => string('{base_path}/posts'),
-    'pages_path' => string('{base_path}/pages'),
     'public_path' => string('{base_path}/public'),
+    'resources_path' => string('{base_path}/resources'),
+    'icons_path' => string('{resources_path}/icons'),
+    'views_path' => string('{resources_path}/views'),
     'build_path' => string('{public_path}/build'),
     'assets_path' => string('{build_path}/assets'),
     'manifest_path' => string('{build_path}/manifest.json'),
-    'icons_path' => string('{resources_path}/icons'),
-    'views_path' => string('{resources_path}/views'),
-    'customizations_path' => string('{base_path}/customizations'),
-    // TODO: Make this a generic "customizations" file
-    'scripts_file' => string('{customizations_path}/scripts'),
+
+    // User generated data and file paths
+    'data_path' => string('{base_path}/data'),
+    'posts_path' => string('{data_path}/posts'),
+    'pages_path' => string('{data_path}/pages'),
+    'scripts_file' => string('{data_path}/scripts'),
 
     // -------------------------------------------------------------------------
     // Application managers
