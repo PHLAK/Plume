@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Commands;
 use App\Decorators;
 use App\Factories;
 use App\Managers;
@@ -37,6 +38,15 @@ return [
     'posts_path' => string('{data_path}/posts'),
     'pages_path' => string('{data_path}/pages'),
     'scripts_file' => string('{data_path}/scripts'),
+
+    // -------------------------------------------------------------------------
+    // Application commands
+    // -------------------------------------------------------------------------
+
+    'commands' => [
+        Commands\PublishPost::class,
+        Commands\PublishPosts::class,
+    ],
 
     // -------------------------------------------------------------------------
     // Application managers
@@ -83,6 +93,7 @@ return [
     App\Pages::class => get(Decorators\CachedPages::class),
     App\Posts::class => get(Decorators\CachedPosts::class),
     App\Tags::class => get(Decorators\CachedTags::class),
+    Symfony\Component\Console\Application::class => factory(Factories\ConsoleAppFactory::class),
     League\CommonMark\ConverterInterface::class => factory(Factories\ConverterFactory::class),
     Symfony\Contracts\Cache\CacheInterface::class => factory(Factories\CacheFactory::class),
     // Symfony\Contracts\Translation\TranslatorInterface::class => factory(Factories\TranslationFactory::class),

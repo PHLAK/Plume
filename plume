@@ -1,0 +1,26 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use App\Bootstrap\Builder;
+use Dotenv\Dotenv;
+use Symfony\Component\Console\Application;
+
+// Import the autoloader
+require __DIR__ . '/vendor/autoload.php';
+
+// Initialize environment variable handler
+Dotenv::createUnsafeImmutable(__DIR__)->safeLoad();
+
+// Create the DI container
+$container = Builder::createContainer(
+    __DIR__ . '/config',
+    __DIR__ . '/cache'
+);
+
+// Create the application
+$application = $container->get(Application::class);
+
+// Engage!
+$application->run();
