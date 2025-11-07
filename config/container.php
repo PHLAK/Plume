@@ -89,6 +89,10 @@ return [
     Slim\Views\Twig::class => factory(Factories\TwigFactory::class),
     Whoops\RunInterface::class => create(Whoops\Run::class),
 
+    'commonmark_config' => [
+        'alert' => ['icons' => ['active' => true, 'use_svg' => true]],
+    ],
+
     'tags_enabled' => function (Container $container, App\Tags $tags): bool {
         $tagsLink = (bool) filter_var($container->get('tags_link'), FILTER_VALIDATE_BOOLEAN);
 

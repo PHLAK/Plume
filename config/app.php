@@ -88,20 +88,6 @@ return [
     'shiki_theme_id' => env('SHIKI_THEME_ID', 'catppuccin-frappe'),
 
     /**
-     * Commonmark configuration array. Controls the way markdown is rendered.
-     *
-     * Default value: <preconfigured array>
-     */
-    'commonmark_config' => [
-        'alert' => [
-            'icons' => [
-                'active' => true,
-                'use_svg' => true,
-            ],
-        ],
-    ],
-
-    /**
      * Timezone used for date formatting. For a list of supported timezones see:
      * https://www.php.net/manual/en/timezones.php.
      *
