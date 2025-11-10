@@ -16,9 +16,8 @@ class Pages
     #[Inject('pages_path')]
     private string $pagesPath;
 
-    public function __construct(
-        private ConverterInterface $converter,
-    ) {}
+    #[Inject(ConverterInterface::class)]
+    private ConverterInterface $converter;
 
     /** @return Collection<string, Page> */
     public function all(): Collection

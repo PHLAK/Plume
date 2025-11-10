@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App;
 
+use DI\Attribute\Inject;
 use Illuminate\Support\Collection;
 
 class Tags
 {
-    public function __construct(
-        private Posts $posts
-    ) {}
+    #[Inject(Posts::class)]
+    private Posts $posts;
 
     public function withCount(): Collection
     {

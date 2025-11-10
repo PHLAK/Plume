@@ -16,9 +16,8 @@ class Posts
     #[Inject('posts_path')]
     private string $postsPath;
 
-    public function __construct(
-        private ConverterInterface $converter,
-    ) {}
+    #[Inject(ConverterInterface::class)]
+    private ConverterInterface $converter;
 
     public function get(string $slug): Data\Post
     {
