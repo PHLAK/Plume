@@ -14,14 +14,13 @@ class CachedAuthors extends Authors
     #[Inject(CacheInterface::class)]
     private CacheInterface $cache;
 
-    /** Method description... */
     public function withCount(): Collection
     {
-        return $this->cache->get('authors|with-count', fn (): Collection => parent::withCount());
+        return $this->cache->get('authors-with-count', fn (): Collection => parent::withCount());
     }
 
     public function count(): int
     {
-        return $this->cache->get('authors|count', fn (): int => parent::count());
+        return $this->cache->get('authors-count', fn (): int => parent::count());
     }
 }

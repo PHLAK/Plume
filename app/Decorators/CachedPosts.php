@@ -9,15 +9,17 @@ use App\Posts;
 use DI\Attribute\Inject;
 use Illuminate\Support\Collection;
 use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\NamespacedPoolInterface;
 
 class CachedPosts extends Posts
 {
+    /** @var CacheInterface&NamespacedPoolInterface */
     #[Inject(CacheInterface::class)]
     private CacheInterface $cache;
 
     public function get(string $slug): Post
     {
-        return $this->cache->get(sprintf('post|%s', $slug), fn (): Post => parent::get($slug));
+        return $this->cache->withSubNamespace('posts')->get($slug, fn (): Post => parent::get($slug));
     }
 
     public function all(): Collection
@@ -27,6 +29,6 @@ class CachedPosts extends Posts
 
     public function withTag(string $tag): Collection
     {
-        return $this->cache->get(sprintf('tag|%s', $tag), fn (): Collection => parent::withTag($tag));
+        return $this->cache->withSubNamespace('posts-with-tag')->get($tag, fn (): Collection => parent::withTag($tag));
     }
 }

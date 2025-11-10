@@ -68,7 +68,7 @@ class CachedPagesTest extends TestCase
         );
 
         $this->assertEquals($expected, $page);
-        $this->assertEquals($expected, $this->cache->get('page|test', function (): void {
+        $this->assertEquals($expected, $this->cache->withSubNamespace('pages')->get('test', function (): void {
             $this->fail('Failed to fetch data from the cache.');
         }));
     }

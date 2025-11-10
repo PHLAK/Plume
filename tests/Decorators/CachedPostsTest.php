@@ -38,7 +38,7 @@ class CachedPostsTest extends TestCase
         );
 
         $this->assertEquals($expected, $post);
-        $this->assertEquals($expected, $this->cache->get('post|test-post-1', function (): void {
+        $this->assertEquals($expected, $this->cache->withSubNamespace('posts')->get('test-post-1', function (): void {
             $this->fail('Failed to fetch data from the cache.');
         }));
     }
@@ -87,7 +87,7 @@ class CachedPostsTest extends TestCase
         ]);
 
         $this->assertEquals($expected, $posts);
-        $this->assertEquals($expected, $this->cache->get('tag|Foo', function (): void {
+        $this->assertEquals($expected, $this->cache->withSubNamespace('posts-with-tag')->get('Foo', function (): void {
             $this->fail('Failed to fetch data from the cache.');
         }));
     }

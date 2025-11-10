@@ -16,11 +16,11 @@ class CachedTags extends Tags
 
     public function withCount(): Collection
     {
-        return $this->cache->get('tags|with-count', fn (): Collection => parent::withCount());
+        return $this->cache->get('tags-with-count', fn (): Collection => parent::withCount());
     }
 
     public function count(): int
     {
-        return $this->cache->get('tags|count', fn (): int => parent::count());
+        return $this->cache->get('tags-count', fn (): int => parent::count());
     }
 }

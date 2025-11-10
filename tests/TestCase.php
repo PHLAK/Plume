@@ -10,6 +10,7 @@ use Dotenv\Dotenv;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\NamespacedPoolInterface;
 
 class TestCase extends BaseTestCase
 {
@@ -17,7 +18,7 @@ class TestCase extends BaseTestCase
     public const string TEST_FILES_PATH = __DIR__ . '/_files';
 
     protected Container $container;
-    protected CacheInterface $cache;
+    protected CacheInterface&NamespacedPoolInterface $cache;
 
     protected function setUp(): void
     {

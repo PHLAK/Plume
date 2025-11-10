@@ -9,9 +9,11 @@ use App\Pages;
 use DI\Attribute\Inject;
 use Illuminate\Support\Collection;
 use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\NamespacedPoolInterface;
 
 class CachedPages extends Pages
 {
+    /** @var CacheInterface&NamespacedPoolInterface */
     #[Inject(CacheInterface::class)]
     private CacheInterface $cache;
 
@@ -22,6 +24,6 @@ class CachedPages extends Pages
 
     public function get(string $slug): Page
     {
-        return $this->cache->get(sprintf('page|%s', $slug), fn (): Page => parent::get($slug));
+        return $this->cache->withSubNamespace('pages')->get($slug, fn (): Page => parent::get($slug));
     }
 }
