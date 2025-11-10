@@ -7,14 +7,17 @@ namespace App\Commands;
 use App\Posts;
 use DI\Attribute\Inject;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
+use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\NamespacedPoolInterface;
 
 #[AsCommand(
     name: 'publish:post',
@@ -23,6 +26,7 @@ use Symfony\Contracts\Cache\CacheInterface;
 )]
 class PublishPost extends Command
 {
+    /** @var CacheInterface&NamespacedPoolInterface */
     #[Inject(CacheInterface::class)]
     private CacheInterface $cache;
 
@@ -35,6 +39,7 @@ class PublishPost extends Command
     public function __invoke(
         InputInterface $input,
         OutputInterface $output,
+        Application $application,
         #[Argument('The post slug')] string $slug,
     ): int {
         if ($this->cache instanceof ArrayAdapter) {
@@ -43,28 +48,20 @@ class PublishPost extends Command
             return self::INVALID;
         }
 
-        $output->write(sprintf('Clearing cache entry for %s ... ', $slug));
-        $this->cache->delete(sprintf('post|%s', $slug));
+        $output->write('Clearing post cache ... ');
+        $this->cache->withSubNamespace('posts')->delete($slug);
         $output->writeln('<fg=green>DONE</>');
 
         $output->write('Publishing post ... ');
-        $this->posts->get($slug);
+        $post = $this->posts->get($slug);
         $output->writeln('<fg=green>DONE</>');
+
+        $output->writeln(sprintf('<fg=green>"%s" published successfully</>', $post->title));
 
         if (! $this->question->ask($input, $output, new ConfirmationQuestion('Update posts page? [y/N] ', false))) {
             return Command::SUCCESS;
         }
 
-        $output->write(sprintf('Clearing posts cache ... ', $slug));
-        $this->cache->delete('all-posts');
-        $output->writeln('<fg=green>DONE</>');
-
-        $output->write('Publishing posts page ... ');
-        $this->posts->all();
-        $output->writeln('<fg=green>DONE</>');
-
-        $output->writeln('<bg=green;fg=black;options=bold> SUCCESS </> Posts page was updated');
-
-        return Command::SUCCESS;
+        return $application->doRun(new StringInput('publish:posts'), $output);
     }
 }
