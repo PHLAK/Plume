@@ -43,18 +43,25 @@ class PublishPost extends Command
             return self::INVALID;
         }
 
+        $output->write(sprintf('Clearing cache entry for %s ... ', $slug));
         $this->cache->delete(sprintf('post|%s', $slug));
+        $output->writeln('<fg=green>DONE</>');
 
-        $post = $this->posts->get($slug);
-
-        $output->writeln(sprintf('<bg=green;fg=black;options=bold> SUCCESS </> "%s" was published', $post->title));
+        $output->write('Publishing post ... ');
+        $this->posts->get($slug);
+        $output->writeln('<fg=green>DONE</>');
 
         if (! $this->question->ask($input, $output, new ConfirmationQuestion('Update posts page? [y/N] ', false))) {
             return Command::SUCCESS;
         }
 
+        $output->write(sprintf('Clearing posts cache ... ', $slug));
         $this->cache->delete('all-posts');
-        $posts = $this->posts->all();
+        $output->writeln('<fg=green>DONE</>');
+
+        $output->write('Publishing posts page ... ');
+        $this->posts->all();
+        $output->writeln('<fg=green>DONE</>');
 
         $output->writeln('<bg=green;fg=black;options=bold> SUCCESS </> Posts page was updated');
 

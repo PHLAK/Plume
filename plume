@@ -20,7 +20,7 @@ $container = Builder::createContainer(
 );
 
 // Create the application
-$application = $container->get(Application::class);
+$app = $container->get(Application::class);
 
 // Engage!
-$application->run();
+$app->run();
