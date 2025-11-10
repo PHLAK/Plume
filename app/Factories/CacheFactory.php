@@ -19,7 +19,7 @@ use UnexpectedValueException;
 
 class CacheFactory
 {
-    private const NAMESPACE_EXTERNAL = 'plume_php';
+    private const NAMESPACE_EXTERNAL = 'plume';
     private const NAMESPACE_INTERNAL = 'app';
 
     #[Inject('cache_driver')]
