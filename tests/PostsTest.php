@@ -44,6 +44,18 @@ class PostsTest extends TestCase
     }
 
     #[Test]
+    public function it_returns_a_collection_posts_by_a_particular_author(): void
+    {
+        $posts = $this->posts->byAuthor('Arthur Dent');
+
+        $this->assertCount(1, $posts);
+        $this->assertContainsOnlyInstancesOf(Post::class, $posts);
+        $this->assertTrue($posts->doesntContain(fn (Post $post): bool => $post->draft || $post->published->isFuture()));
+
+        $this->assertTrue($posts->every(fn (Post $post): bool => $post->author === 'Arthur Dent'));
+    }
+
+    #[Test]
     public function it_returns_a_collection_posts_with_a_tag(): void
     {
         $posts = $this->posts->withTag('Test');

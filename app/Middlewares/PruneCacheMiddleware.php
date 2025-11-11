@@ -13,12 +13,11 @@ use Symfony\Contracts\Cache\CacheInterface;
 
 class PruneCacheMiddleware
 {
+    #[Inject(CacheInterface::class)]
+    private CacheInterface $cache;
+
     #[Inject('cache_lottery')]
     private int $cacheLottery;
-
-    public function __construct(
-        private CacheInterface $cache
-    ) {}
 
     public function __invoke(Request $request, RequestHandler $handler): ResponseInterface
     {

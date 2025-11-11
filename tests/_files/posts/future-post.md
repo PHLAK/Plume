@@ -1,7 +1,7 @@
 ---
 title: Future Post; Please Ignore
 published: 2999-12-31 23:59:59
-author: Arthur Dent
+author: Trillian McMillan
 tags: [Foo, Bar, Baz]
 ---
 

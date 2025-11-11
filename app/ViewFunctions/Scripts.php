@@ -18,7 +18,7 @@ class Scripts implements ViewFunction
     public function __invoke(): Markup
     {
         if (! is_file($this->scriptsFile)) {
-            new Markup('', 'UTF-8');
+            return new Markup('', 'UTF-8');
         }
 
         $scripts = trim((string) file_get_contents($this->scriptsFile));

@@ -17,15 +17,22 @@ class Svg implements ViewFunction
 
     public function __invoke(string $icon, $classes = []): Markup
     {
-        $svgPath = sprintf('%s/%s.svg', $this->iconsPath, $icon);
+        $contents = (string) file_get_contents(sprintf('%s/%s.svg', $this->iconsPath, $icon));
 
+        $svg = empty($classes) ? $contents : $this->addClassAttribute($contents, $classes);
+
+        return new Markup(trim($svg), 'UTF-8');
+    }
+
+    private function addClassAttribute(string $svg, array $classes)
+    {
         $dom = new DOMDocument;
-        $dom->loadXML((string) file_get_contents($svgPath));
+        $dom->loadXML($svg);
 
         foreach ($dom->getElementsByTagName('svg') as $element) {
             $element->setAttribute('class', implode(' ', $classes));
         }
 
-        return new Markup($dom->saveXML(), 'UTF-8');
+        return $dom->saveXML(options: LIBXML_NOXMLDECL);
     }
 }

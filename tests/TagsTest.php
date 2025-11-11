@@ -32,4 +32,12 @@ class TagsTest extends TestCase
             'Test' => 2,
         ], $tags->toArray());
     }
+
+    #[Test]
+    public function it_returns_a_count_of_unique_tags(): void
+    {
+        $count = $this->tags->count();
+
+        $this->assertSame(4, $count);
+    }
 }

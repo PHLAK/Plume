@@ -11,16 +11,15 @@ use Slim\App;
 
 class RouteManager
 {
+    /** @var App<Container> $app */
+    #[Inject(App::class)]
+    private App $app;
+
     #[Inject('authors_enabled')]
     private bool $authorsEnabled;
 
     #[Inject('tags_enabled')]
     private bool $tagsEnabled;
-
-    /** @param App<Container> $app */
-    public function __construct(
-        private App $app,
-    ) {}
 
     public function __invoke(): void
     {

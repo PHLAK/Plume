@@ -49,4 +49,25 @@ class CachedTagsTest extends TestCase
             $this->fail('Failed to fetch data from the cache.');
         }));
     }
+
+    #[Test]
+    public function it_caches_a_count_of_unique_tags(): void
+    {
+        $this->posts->expects($this->once())->method('all')->willReturn(
+            new Collection([
+                new Post('Title', 'body', Carbon::now(), tags: ['Foo', 'Bar', 'Baz']),
+                new Post('Title', 'body', Carbon::now(), tags: ['Foo', 'Bar']),
+                new Post('Title', 'body', Carbon::now(), tags: ['Bar', 'Baz']),
+                new Post('Title', 'body', Carbon::now(), tags: ['Foo', 'Bar']),
+                new Post('Title', 'body', Carbon::now(), tags: ['Bar']),
+            ])
+        );
+
+        $count = $this->cachedTags->count();
+
+        $this->assertEquals(3, $count);
+        $this->assertEquals(3, $this->cache->get('tags-count', function (): void {
+            $this->fail('Failed to fetch data from the cache.');
+        }));
+    }
 }
