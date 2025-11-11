@@ -6,7 +6,7 @@ namespace App\Factories;
 
 use App\ViewFunctions\ViewFunction;
 use DI\Attribute\Inject;
-use Invoker\CallableResolver;
+use DI\Container;
 use Slim\Views\Twig;
 use Twig\Extension\CoreExtension;
 use Twig\Extra\Html\HtmlExtension;
@@ -34,7 +34,7 @@ class TwigFactory
     private array $viewFunctions;
 
     public function __construct(
-        private CallableResolver $callableResolver,
+        private Container $container,
     ) {}
 
     public function __invoke(): Twig
@@ -51,9 +51,9 @@ class TwigFactory
 
         $twig->addExtension(new HtmlExtension);
 
-        foreach ($this->viewFunctions as $function) {
-            /** @var ViewFunction&callable $function */
-            $function = $this->callableResolver->resolve($function);
+        foreach ($this->viewFunctions as $class) {
+            /** @var ViewFunction $function */
+            $function = $this->container->get($class);
 
             $twig->getEnvironment()->addFunction(
                 new TwigFunction($function->name, $function)

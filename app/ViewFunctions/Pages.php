@@ -6,15 +6,15 @@ namespace App\ViewFunctions;
 
 use App\Data\Page;
 use App\Pages as PagesRepository;
+use DI\Attribute\Inject;
 use Illuminate\Support\Collection;
 
 class Pages implements ViewFunction
 {
     public string $name = 'pages';
 
-    public function __construct(
-        private PagesRepository $pages,
-    ) {}
+    #[Inject(PagesRepository::class)]
+    private PagesRepository $pages;
 
     public function __invoke(): Collection
     {
