@@ -28,6 +28,7 @@ final class Post
 
     public static function fromRenderedContent(RenderedContentWithFrontMatter $content): self
     {
+        /** @var array{title:string, link?:string, weight?:int} $frontMatter */
         $frontMatter = $content->getFrontMatter();
 
         return new self(
