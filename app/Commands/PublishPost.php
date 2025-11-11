@@ -43,9 +43,9 @@ class PublishPost extends Command
         #[Argument('The post slug')] string $slug,
     ): int {
         if ($this->cache instanceof ArrayAdapter) {
-            $output->writeln("<comment>This command has no affect when using the 'array' cache driver.</comment>");
+            $output->writeln("<fg=yellow>This command has no affect when using the 'array' cache driver</>");
 
-            return self::INVALID;
+            return self::FAILURE;
         }
 
         $output->write('Clearing post cache ... ');
