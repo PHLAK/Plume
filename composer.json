@@ -13,7 +13,7 @@
         "issues": "https://github.com/PHLAK/Plume/issues"
     },
     "require": {
-        "php": ">= 8.4",
+        "php": ">= 8.2",
         "filp/whoops": "^2.18",
         "illuminate/collections": "^12.28",
         "league/commonmark": "^2.7",
