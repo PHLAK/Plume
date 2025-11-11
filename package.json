@@ -2,17 +2,20 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "vite",
     "build": "vite build",
-    "dev": "vite"
-  },
-  "devDependencies": {
-    "@tailwindcss/typography": "^0.5.16",
-    "@tailwindcss/vite": "^4.1.13",
-    "tailwindcss": "^4.1.13",
-    "vite": "^7.1.5"
+    "cs": "npx eslint --quiet resources/js/"
   },
   "dependencies": {
     "alpinejs": "^3.15.1",
     "shiki": "^3.14.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@tailwindcss/typography": "^0.5.16",
+    "@tailwindcss/vite": "^4.1.13",
+    "globals": "^16.5.0",
+    "tailwindcss": "^4.1.13",
+    "vite": "^7.1.5"
   }
 }
