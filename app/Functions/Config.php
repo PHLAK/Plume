@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\ViewFunctions;
+namespace App\Functions;
 
 use DI\Attribute\Inject;
 use DI\Container;
 use DI\NotFoundException;
 
-class Config implements ViewFunction
+class Config extends ViewFunction
 {
     public string $name = 'config';
 

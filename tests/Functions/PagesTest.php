@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\ViewFunctions;
+namespace Tests\Functions;
 
-use App\ViewFunctions\Pages;
+use App\Functions\Pages;
 use Illuminate\Support\Collection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;

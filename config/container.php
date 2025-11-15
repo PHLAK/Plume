@@ -5,9 +5,10 @@ declare(strict_types=1);
 use App\Commands;
 use App\Decorators;
 use App\Factories;
+use App\Filters;
+use App\Functions;
 use App\Managers;
 use App\Middlewares;
-use App\ViewFunctions;
 use DI\Container;
 
 use function DI\create;
@@ -73,17 +74,19 @@ return [
     ],
 
     // -------------------------------------------------------------------------
-    // View functions
+    // View filters & functions
     // -------------------------------------------------------------------------
 
+    'view_filters' => [
+        Filters\Markdown::class,
+    ],
+
     'view_functions' => [
-        ViewFunctions\Config::class,
-        ViewFunctions\Scripts::class,
-        ViewFunctions\Markdown::class,
-        ViewFunctions\Pages::class,
-        ViewFunctions\Svg::class,
-        // ViewFunctions\Translate::class,
-        ViewFunctions\Vite::class,
+        Functions\Config::class,
+        Functions\Scripts::class,
+        Functions\Pages::class,
+        Functions\Svg::class,
+        Functions\Vite::class,
     ],
 
     // -------------------------------------------------------------------------
@@ -96,7 +99,6 @@ return [
     Symfony\Component\Console\Application::class => factory(Factories\ConsoleAppFactory::class),
     League\CommonMark\ConverterInterface::class => factory(Factories\ConverterFactory::class),
     Symfony\Contracts\Cache\CacheInterface::class => factory(Factories\CacheFactory::class),
-    // Symfony\Contracts\Translation\TranslatorInterface::class => factory(Factories\TranslationFactory::class),
     Slim\Views\Twig::class => factory(Factories\TwigFactory::class),
     Whoops\RunInterface::class => create(Whoops\Run::class),
 

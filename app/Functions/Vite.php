@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\ViewFunctions;
+namespace App\Functions;
 
 use DI\Attribute\Inject;
 use Illuminate\Support\Collection;
 use Twig\Markup;
 use UnexpectedValueException;
 
-class Vite implements ViewFunction
+class Vite extends ViewFunction
 {
     public string $name = 'vite';
 

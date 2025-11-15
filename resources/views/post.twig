@@ -15,7 +15,7 @@
 
                 {% if post.image.caption %}
                     <div class="prose prose-stone text-center max-w-none my-2 dark:prose-invert">
-                        {{ markdown(post.image.caption) | raw }}
+                        {{ post.image.caption | markdown }}
                     </div>
                 {% endif %}
             </div>

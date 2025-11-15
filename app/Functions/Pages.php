@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\ViewFunctions;
+namespace App\Functions;
 
 use App\Data\Page;
 use App\Pages as PagesRepository;
 use DI\Attribute\Inject;
 use Illuminate\Support\Collection;
 
-class Pages implements ViewFunction
+class Pages extends ViewFunction
 {
     public string $name = 'pages';
 

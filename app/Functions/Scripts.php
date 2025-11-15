@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\ViewFunctions;
+namespace App\Functions;
 
 use DI\Attribute\Inject;
 use Twig\Markup;
 
-class Scripts implements ViewFunction
+class Scripts extends ViewFunction
 {
     public string $name = 'scripts';
 

@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace App\Factories;
 
-use App\ViewFunctions\ViewFunction;
+use App\Filters\ViewFilter;
+use App\Functions\ViewFunction;
 use DI\Attribute\Inject;
 use DI\Container;
 use Slim\Views\Twig;
 use Twig\Extension\CoreExtension;
 use Twig\Extra\Html\HtmlExtension;
 use Twig\Loader\FilesystemLoader;
+use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 class TwigFactory
@@ -29,6 +31,9 @@ class TwigFactory
 
     #[Inject('timezone')]
     private string $timezone;
+
+    #[Inject('view_filters')]
+    private array $viewFilters;
 
     #[Inject('view_functions')]
     private array $viewFunctions;
@@ -50,6 +55,15 @@ class TwigFactory
         $core->setTimezone($this->timezone);
 
         $twig->addExtension(new HtmlExtension);
+
+        foreach ($this->viewFilters as $class) {
+            /** @var ViewFilter $filter */
+            $filter = $this->container->get($class);
+
+            $twig->getEnvironment()->addFilter(
+                new TwigFilter($filter->name, $filter)
+            );
+        }
 
         foreach ($this->viewFunctions as $class) {
             /** @var ViewFunction $function */

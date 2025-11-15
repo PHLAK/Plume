@@ -13,8 +13,9 @@ class ConsoleAppFactory
     #[Inject('commands')]
     private array $commands;
 
-    #[Inject(Container::class)]
-    private Container $container;
+    public function __construct(
+        private Container $container,
+    ) {}
 
     public function __invoke(): Application
     {

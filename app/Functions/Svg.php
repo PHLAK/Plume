@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\ViewFunctions;
+namespace App\Functions;
 
 use DI\Attribute\Inject;
 use DOMDocument;
 use Twig\Markup;
 
-class Svg implements ViewFunction
+class Svg extends ViewFunction
 {
     public string $name = 'svg';
 
