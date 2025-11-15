@@ -35,7 +35,8 @@
         "phlak/coding-standards": "^4.0",
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^11.5",
-        "symfony/var-dumper": "^7.3"
+        "symfony/var-dumper": "^7.3",
+        "zorac/phpstan-php-di": "^1.0"
     },
     "suggest": {
         "ext-apcu": "Required to use the APCu cache driver",

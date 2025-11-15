@@ -20,6 +20,7 @@ parameters:
       - RuntimeException
       - Twig\Error\Error
 
-# includes:
-#   - phpstan-baseline.neon
-#   - phpstan-ignores.neon
+includes:
+  - vendor/zorac/phpstan-php-di/extension.neon
+  # - phpstan-baseline.neon
+  # - phpstan-ignores.neon
