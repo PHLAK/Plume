@@ -11,7 +11,9 @@
                 {% include 'components/metadata.twig' %}
 
                 {% if post.image %}
-                    <img class="h-40 w-full object-cover" src="{{ post.image.url }}" />
+                    <img class="{{ html_classes('w-full', {
+                        'h-40 object-cover': config('featured_images') == 'collapsed'})
+                    }}" src="{{ post.image.url }}" />
                 {% endif %}
 
                 <article class="prose prose-stone prose-lg max-w-none md:prose-xl dark:prose-invert">{{ post.excerpt | raw }}</article>

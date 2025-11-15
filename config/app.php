@@ -56,6 +56,16 @@ return [
     'posts_per_page' => env('POSTS_PER_PAGE', 10),
 
     /**
+     * Controls the vertical sizing of featured post images. Avaialable options:
+     *
+     *   'full' - Display the full height images
+     *   'collapsed' - Constrain the images height
+     *
+     * Default value: 'collapsed'
+     */
+    'featured_images' => env('FEATURED_IMAGES', 'collapsed'),
+
+    /**
      * Whether or not to show the "Tags" navigation link when there are
      * multiple unique post tags.
      *
