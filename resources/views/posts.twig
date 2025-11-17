@@ -29,7 +29,7 @@
         {% endfor %}
     </div>
 
-    {% if pagination.pages > 1 %}
+    {% if paginator.pages > 1 %}
         {{ include('components/pagination.twig', {route: 'posts'}) }}
     {% endif %}
 {% endblock %}

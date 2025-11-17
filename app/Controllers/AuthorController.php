@@ -34,11 +34,9 @@ class AuthorController
             ]);
         }
 
-        $paginator = $this->pagination ? new Paginator($posts, $this->postsPerPage, $page) : null;
-
         return $this->view->render($response, 'posts.twig', [
             'posts' => $posts->forPage($page, $this->postsPerPage),
-            'pagination' => $paginator,
+            'pagination' => $this->pagination ? new Paginator($posts, $this->postsPerPage, $page) : null,
         ]);
     }
 }

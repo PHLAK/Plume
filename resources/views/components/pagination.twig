@@ -1,15 +1,15 @@
 <div id="pagination" class="flex justify-between border-t-2 border-stone-800 text-stone-800 -mx-4 p-4 dark:border-stone-200 dark:text-stone-200">
     <div>
-        <a href="{{ url_for(route, { page: pagination.previous }) }}" class="flex items-center gap-2 whitespace-nowrap hover:underline {{ html_classes({
-            'invisible': pagination.previous == null
+        <a href="{{ url_for(route, { page: paginator.previous }) }}" class="flex items-center gap-2 whitespace-nowrap hover:underline {{ html_classes({
+            'invisible': paginator.previous == null
         }) }}">
             {{ svg('light/arrow-left-long', ['fill-current', 'size-6']) }} Previous Page
         </a>
     </div>
 
     <div>
-        <a href="{{ url_for(route, { page: pagination.next }) }}" class="flex items-center gap-2 whitespace-nowrap hover:underline {{ html_classes({
-            'invisible': pagination.next == null
+        <a href="{{ url_for(route, { page: paginator.next }) }}" class="flex items-center gap-2 whitespace-nowrap hover:underline {{ html_classes({
+            'invisible': paginator.next == null
         }) }}">
             Next Page {{ svg('light/arrow-right-long', ['fill-current', 'size-6']) }}
         </a>

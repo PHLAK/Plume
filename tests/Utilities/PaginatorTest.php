@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Data;
+namespace Tests\Utilities;
 
-use App\Data\Paginator;
+use App\Utilities\Paginator;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
@@ -43,7 +43,10 @@ class PaginatorTest extends TestCase
     #[Test, DataProvider('paginatorProvider')]
     public function it_can_contruct_a_paginator(int $perPage, int $currentPage, int $pages, ?int $next, ?int $previous): void
     {
-        $paginator = new Paginator(self::ITEMS, $perPage, $currentPage);
+        $this->container->set('posts_per_page', $perPage);
+
+        $paginator = $this->container->make(Paginator::class);
+        $paginator->of(self::ITEMS)->page($currentPage);
 
         $this->assertSame($pages, $paginator->pages);
         $this->assertSame($next, $paginator->next);

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Tests\Controllers;
 
 use App\Controllers\PostsController;
-use App\Data\Paginator;
 use App\Data\Post;
 use App\Posts;
+use App\Utilities\Paginator;
 use Carbon\Carbon;
 use Fig\Http\Message\StatusCodeInterface;
 use Illuminate\Support\Collection;
@@ -36,10 +36,14 @@ class PostsControllerTest extends TestCase
             ))
         );
 
+        $paginator = $this->mock(Paginator::class);
+        $paginator->expects($this->once())->method('of')->with($postsCollection)->willReturnSelf();
+        $paginator->expects($this->once())->method('page')->with($page)->willReturnSelf();
+
         $twig = $this->mock(Twig::class);
         $twig->expects($this->once())->method('render')->with($testResponse = new Response, 'posts.twig', [
             'posts' => $postsCollection->forPage($page, $perPage),
-            'pagination' => new Paginator($postsCollection, $perPage, $page),
+            'paginator' => $paginator,
         ])->willReturn(
             $testResponse->withStatus(StatusCodeInterface::STATUS_OK)
         );
