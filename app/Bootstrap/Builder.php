@@ -30,7 +30,8 @@ class Builder
     {
         $app = Bridge::create($container);
 
-        foreach ($container->get('managers') as $manager) {
+        foreach ((array) $container->get('managers') as $manager) {
+            /** @var callable $manager */
             $container->call($manager);
         }
 

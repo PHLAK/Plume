@@ -19,7 +19,6 @@ class PostsController
     public function __construct(
         private Posts $posts,
         private Twig $view,
-        private Paginator $paginator,
     ) {}
 
     public function __invoke(Response $response, int $page = 1): ResponseInterface
@@ -27,14 +26,12 @@ class PostsController
         $posts = $this->posts->all();
 
         if ($posts->isEmpty()) {
-            return $this->view->render($response, 'error.twig', [
-                'message' => 'No posts found',
-            ]);
+            return $this->view->render($response, 'error.twig', ['message' => 'No posts found']);
         }
 
         return $this->view->render($response, 'posts.twig', [
             'posts' => $posts->forPage($page, $this->postsPerPage),
-            'paginator' => $this->paginator->of($posts)->page($page),
+            'paginator' => new Paginator($posts, $this->postsPerPage, $page),
         ]);
     }
 }

@@ -58,6 +58,7 @@ class Posts
         );
     }
 
+    /** @return Collection<int, Post> */
     public function withTag(string $tag): Collection
     {
         return $this->all()->filter(

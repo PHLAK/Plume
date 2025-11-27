@@ -45,8 +45,11 @@ class PaginatorTest extends TestCase
     {
         $this->container->set('posts_per_page', $perPage);
 
-        $paginator = $this->container->make(Paginator::class);
-        $paginator->of(self::ITEMS)->page($currentPage);
+        $paginator = $this->container->make(Paginator::class, [
+            'items' => self::ITEMS,
+            'perPage' => $perPage,
+            'currentPage' => $currentPage,
+        ]);
 
         $this->assertSame($pages, $paginator->pages);
         $this->assertSame($next, $paginator->next);

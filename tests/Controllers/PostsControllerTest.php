@@ -36,14 +36,10 @@ class PostsControllerTest extends TestCase
             ))
         );
 
-        $paginator = $this->mock(Paginator::class);
-        $paginator->expects($this->once())->method('of')->with($postsCollection)->willReturnSelf();
-        $paginator->expects($this->once())->method('page')->with($page)->willReturnSelf();
-
         $twig = $this->mock(Twig::class);
         $twig->expects($this->once())->method('render')->with($testResponse = new Response, 'posts.twig', [
             'posts' => $postsCollection->forPage($page, $perPage),
-            'paginator' => $paginator,
+            'paginator' => new Paginator($postsCollection, $perPage, $page),
         ])->willReturn(
             $testResponse->withStatus(StatusCodeInterface::STATUS_OK)
         );

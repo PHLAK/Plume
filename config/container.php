@@ -117,5 +117,4 @@ return [
 
         return $authorsLink && $authors->count() > 1;
     },
-
 ];

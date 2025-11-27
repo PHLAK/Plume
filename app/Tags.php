@@ -12,6 +12,7 @@ class Tags
     #[Inject(Posts::class)]
     private Posts $posts;
 
+    /** @return Collection<int, string> */
     public function withCount(): Collection
     {
         return $this->posts->all()->pluck('tags')->flatten()->countBy()->sortKeys();

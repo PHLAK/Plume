@@ -15,6 +15,7 @@ parameters:
 
     uncheckedExceptionClasses:
       - DI\DependencyException
+      - DI\NotFoundException
       - InvalidArgumentException
       - Invoker\Exception\InvocationException
       - RuntimeException

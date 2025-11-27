@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Controllers;
 
-use App\Controllers\TagController;
+use App\Controllers\AuthorController;
 use App\Data\Post;
 use App\Posts;
 use App\Utilities\Paginator;
@@ -18,21 +18,21 @@ use Slim\Psr7\Response;
 use Slim\Views\Twig;
 use Tests\TestCase;
 
-#[CoversClass(TagController::class)]
-class TagControllerTest extends TestCase
+#[CoversClass(AuthorController::class)]
+class AuthorControllerTest extends TestCase
 {
     #[Test]
-    public function it_returns_a_list_of_posts_for_a_given_tag(): void
+    public function it_returns_a_list_of_posts_for_a_given_author(): void
     {
         $this->container->set('posts_per_page', $perPage = 10);
 
         $posts = $this->mock(Posts::class);
-        $posts->expects($this->once())->method('withTag')->with('Foo')->willReturn(
-            $postsCollection = Collection::times(10, fn (int $iteration): Post => new Post(
+        $posts->expects($this->once())->method('byAuthor')->with('Arthur Dent')->willReturn(
+            $postsCollection = Collection::times(3, fn (int $iteration): Post => new Post(
                 title: sprintf('Test Post %d', $iteration),
                 body: 'Post body...',
                 published: Carbon::now()->subDays($iteration),
-                tags: ['Foo'],
+                author: 'Arthur Dent',
             ))
         );
 
@@ -44,9 +44,9 @@ class TagControllerTest extends TestCase
             $testResponse->withStatus(StatusCodeInterface::STATUS_OK)
         );
 
-        $response = $this->container->call(TagController::class, [
+        $response = $this->container->call(AuthorController::class, [
             'response' => $testResponse,
-            'tag' => 'Foo',
+            'author' => 'Arthur Dent',
         ]);
 
         $this->assertInstanceOf(ResponseInterface::class, $response);
@@ -57,18 +57,18 @@ class TagControllerTest extends TestCase
     public function it_shows_an_error_page_when_no_posts_are_found_for_the_tag(): void
     {
         $posts = $this->mock(Posts::class);
-        $posts->expects($this->once())->method('withTag')->with('Bar')->willReturn(new Collection);
+        $posts->expects($this->once())->method('byAuthor')->with('Ford Prefect')->willReturn(new Collection);
 
         $testResponse = (new Response)->withStatus(StatusCodeInterface::STATUS_NOT_FOUND);
 
         $twig = $this->mock(Twig::class);
         $twig->expects($this->once())->method('render')->with($testResponse, 'error.twig', [
-            'message' => 'No posts with tag "Bar"',
+            'message' => 'No posts by "Ford Prefect"',
         ])->willReturn($testResponse);
 
-        $response = $this->container->call(TagController::class, [
+        $response = $this->container->call(AuthorController::class, [
             'response' => $testResponse,
-            'tag' => 'Bar',
+            'author' => 'Ford Prefect',
         ]);
 
         $this->assertInstanceOf(ResponseInterface::class, $response);
