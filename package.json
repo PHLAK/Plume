@@ -7,7 +7,7 @@
     "cs": "npx eslint --quiet resources/js/"
   },
   "dependencies": {
-    "alpinejs": "^3.15.1",
+    "alpinejs": "^3.15.2",
     "shiki": "^3.14.0"
   },
   "devDependencies": {
