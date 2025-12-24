@@ -1,5 +1,5 @@
 FROM php:8.5-apache
-LABEL maintainer="Chris Kankiewicz <Chris@ChrisKankiewicz.com>"
+LABEL maintainer="Chris Kankiewicz <Chris@Kankiewicz.com>"
 
 ENV HOME="/home/app"
 ENV COMPOSER_HOME="${HOME}/.config/composer"
@@ -27,6 +27,6 @@ RUN pecl install apcu \
 RUN docker-php-ext-enable apcu memcached redis xdebug
 
 COPY .docker/apache2/config/000-default.conf /etc/apache2/sites-available/000-default.conf
-COPY .docker/php/config/php.ini /usr/local/etc/php/php.ini
+COPY .docker/php/config/php.dev.ini /usr/local/etc/php/php.ini
 
 RUN a2enmod rewrite

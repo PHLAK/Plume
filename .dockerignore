@@ -1,3 +1,4 @@
+data/
 tests/
 .editorconfig
 .php-cs-fixer.dist.php

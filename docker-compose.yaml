@@ -1,7 +1,9 @@
 services:
 
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     image: phlak/plume:dev
     depends_on: [memcached, valkey]
     extra_hosts:
@@ -25,7 +27,9 @@ services:
       - ${VALKEY_PORT:-6379}:6379
 
   npm:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     image: phlak/plume:dev
     command: npm run dev
     ports:
