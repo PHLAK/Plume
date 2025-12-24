@@ -35,7 +35,7 @@ class PageTest extends TestCase
         $converter = $this->container->get(ConverterInterface::class);
 
         $renderedContent = $converter->convert(
-            $this->fileContents('pages/test.md')
+            $this->fileContents('data/pages/test.md')
         );
 
         $page = Page::fromRenderedContent($renderedContent);

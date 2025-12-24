@@ -33,8 +33,8 @@ class TestCase extends BaseTestCase
             $this->filePath('cache')
         );
 
-        $this->container->set('posts_path', $this->filePath('posts'));
-        $this->container->set('pages_path', $this->filePath('pages'));
+        $this->container->set('posts_path', $this->filePath('data/posts'));
+        $this->container->set('pages_path', $this->filePath('data/pages'));
         $this->container->set('cache_driver', 'array');
 
         $this->cache = $this->container->get(CacheInterface::class);

@@ -62,7 +62,7 @@ class PostTest extends TestCase
         $converter = $this->container->get(ConverterInterface::class);
 
         $renderedContent = $converter->convert(
-            $this->fileContents('posts/draft-post.md')
+            $this->fileContents('data/posts/draft-post.md')
         );
 
         $post = Post::fromRenderedContent($renderedContent);
