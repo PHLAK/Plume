@@ -1,0 +1,9 @@
+tests/
+.editorconfig
+.php-cs-fixer.dist.php
+eslint.config.mjs
+LICENSE
+phpstan.neon.dist
+phpunt.xml
+README.md
+screenshot.png
