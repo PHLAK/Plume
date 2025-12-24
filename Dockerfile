@@ -1,4 +1,4 @@
-FROM php:8.4-apache
+FROM php:8.5-apache
 LABEL maintainer="Chris Kankiewicz <Chris@ChrisKankiewicz.com>"
 
 ENV HOME="/home/app"
@@ -16,8 +16,7 @@ RUN apt-get update && apt-get install --assume-yes --no-install-recommends \
     libmemcached-dev libssl-dev tar zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN docker-php-ext-install opcache \
-    && pecl install apcu \
+RUN pecl install apcu \
     && pecl install memcached \
     && pecl install redis \
     && pecl install xdebug
