@@ -38,7 +38,7 @@ return [
     'data_path' => string('{base_path}/data'),
     'posts_path' => string('{data_path}/posts'),
     'pages_path' => string('{data_path}/pages'),
-    'scripts_file' => string('{data_path}/scripts'),
+    'customizations_file' => string('{data_path}/customizations'),
 
     // -------------------------------------------------------------------------
     // Application commands
@@ -83,7 +83,7 @@ return [
 
     'view_functions' => [
         Functions\Config::class,
-        Functions\Scripts::class,
+        Functions\Customizations::class,
         Functions\Pages::class,
         Functions\Svg::class,
         Functions\Vite::class,
