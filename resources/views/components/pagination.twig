@@ -1,14 +1,20 @@
-<div id="pagination" class="flex justify-between border-t-2 border-stone-800 text-stone-800 -mx-4 p-4 dark:border-stone-200 dark:text-stone-200">
-    <div>
-        <a href="{{ url_for(route, { page: paginator.previous }) }}" class="flex items-center gap-2 whitespace-nowrap hover:underline {{ html_classes({
+<div id="pagination" class="grid grid-cols-4 align-center border-t-2 border-stone-800 text-stone-800 -mx-4 px-4 py-3 dark:border-stone-200 dark:text-stone-200">
+    <div class="col-span-1 flex justify-start items-center">
+        <a href="{{ url_for(route, { page: paginator.previous }) }}" class="inline-flex items-center gap-2 whitespace-nowrap hover:underline {{ html_classes({
             'invisible': paginator.previous == null
         }) }}">
             {{ svg('light/arrow-left-long', ['fill-current', 'size-6']) }} Previous Page
         </a>
     </div>
 
-    <div>
-        <a href="{{ url_for(route, { page: paginator.next }) }}" class="flex items-center gap-2 whitespace-nowrap hover:underline {{ html_classes({
+    <div class="col-span-2 flex justify-center items-center">
+        <a href="{{ url_for('feed') }}" class="inline-flex justify-center items-center rounded p-1 hover:bg-stone-200 dark:text-stone-200 dark:hover:bg-stone-700" title="RSS Feed">
+            {{ svg('light/rss-square', ['fill-current', 'size-6']) }}
+        </a>
+    </div>
+
+    <div class="col-span-1 flex justify-end items-center">
+        <a href="{{ url_for(route, { page: paginator.next }) }}" class="inline-flex items-center gap-2 whitespace-nowrap hover:underline {{ html_classes({
             'invisible': paginator.next == null
         }) }}">
             Next Page {{ svg('light/arrow-right-long', ['fill-current', 'size-6']) }}
