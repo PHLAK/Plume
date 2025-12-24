@@ -29,7 +29,7 @@ Features
 
   - **Dockerized installation** allows you to be up and running quickly.
   - **Markdown rendering** for publishing formatted articles easily.
-  - **Flat file structure** makes it easy to manange and backup your content.
+  - **Flat file structure** for simple content management and backup.
   - **Customization** Custom pages, ...
   - **Light and dark themes** to suit your professional needs or personal style.
   - ???
@@ -46,6 +46,7 @@ Installation
 
   1. Run `curl -sSL https://init.plume.pub | sh`
   2. Add your posts to the `posts` folder
+  3. Run `docker compose up -d`
 
 ### Manual Docker Compose
 
