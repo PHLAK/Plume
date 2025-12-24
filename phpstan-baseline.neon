@@ -1,0 +1,517 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Method App\\Authors\:\:withCount\(\) should return Illuminate\\Support\\Collection\<int, string\> but returns Illuminate\\Support\\Collection\<\(int\|string\), int\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Authors.php
+
+		-
+			message: '#^Offset ''author'' on array\{title\: string, link\?\: string, weight\?\: int\} on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Data/Post.php
+
+		-
+			message: '#^Offset ''draft'' on array\{title\: string, link\?\: string, weight\?\: int\} on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Data/Post.php
+
+		-
+			message: '#^Offset ''image'' on array\{title\: string, link\?\: string, weight\?\: int\} on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Data/Post.php
+
+		-
+			message: '#^Offset ''published'' does not exist on array\{title\: string, link\?\: string, weight\?\: int\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: app/Data/Post.php
+
+		-
+			message: '#^Offset ''tags'' on array\{title\: string, link\?\: string, weight\?\: int\} on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Data/Post.php
+
+		-
+			message: '#^Only iterables can be unpacked, mixed given in argument \#1\.$#'
+			identifier: argument.unpackNonIterable
+			count: 1
+			path: app/Data/Post.php
+
+		-
+			message: '#^Parameter \#1 \$time of static method Carbon\\Carbon\:\:parse\(\) expects Carbon\\Month\|Carbon\\WeekDay\|DateTimeInterface\|float\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Data/Post.php
+
+		-
+			message: '#^Parameter \#1 \$url of class App\\Data\\PostImage constructor expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Data/Post.php
+
+		-
+			message: '#^Ternary operator condition is always false\.$#'
+			identifier: ternary.alwaysFalse
+			count: 1
+			path: app/Data/Post.php
+
+		-
+			message: '#^Method App\\Factories\\CacheFactory\:\:getApcuAdapter\(\) throws checked exception Symfony\\Component\\Cache\\Exception\\CacheException but it''s missing from the PHPDoc @throws tag\.$#'
+			identifier: missingType.checkedException
+			count: 1
+			path: app/Factories/CacheFactory.php
+
+		-
+			message: '#^Method App\\Factories\\CacheFactory\:\:getPhpFilesAdapter\(\) throws checked exception Symfony\\Component\\Cache\\Exception\\CacheException but it''s missing from the PHPDoc @throws tag\.$#'
+			identifier: missingType.checkedException
+			count: 1
+			path: app/Factories/CacheFactory.php
+
+		-
+			message: '#^Parameter \#1 \$command of method Symfony\\Component\\Console\\Application\:\:add\(\) expects Symfony\\Component\\Console\\Command\\Command, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Factories/ConsoleAppFactory.php
+
+		-
+			message: '#^Parameter \#1 \$name of method DI\\Container\:\:make\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Factories/ConsoleAppFactory.php
+
+		-
+			message: '#^Property App\\Factories\\ConsoleAppFactory\:\:\$commands type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Factories/ConsoleAppFactory.php
+
+		-
+			message: '#^Method App\\Factories\\ConverterFactory\:\:__invoke\(\) throws checked exception League\\CommonMark\\Exception\\AlreadyInitializedException but it''s missing from the PHPDoc @throws tag\.$#'
+			identifier: missingType.checkedException
+			count: 5
+			path: app/Factories/ConverterFactory.php
+
+		-
+			message: '#^Parameter \#1 \$config of class League\\CommonMark\\Environment\\Environment constructor expects array\<string, mixed\>, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Factories/ConverterFactory.php
+
+		-
+			message: '#^Property App\\Factories\\ConverterFactory\:\:\$commonmarkConfig type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Factories/ConverterFactory.php
+
+		-
+			message: '#^Parameter \#1 \$id of method DI\\Container\:\:get\(\) expects string, App\\Filters\\ViewFilter given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Factories/TwigFactory.php
+
+		-
+			message: '#^Parameter \#1 \$id of method DI\\Container\:\:get\(\) expects string, App\\Functions\\ViewFunction given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Factories/TwigFactory.php
+
+		-
+			message: '#^Parameter \#2 \$callable of class Twig\\TwigFilter constructor expects array\{class\-string, string\}\|\(callable\(\)\: mixed\)\|null, App\\Filters\\ViewFilter given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Factories/TwigFactory.php
+
+		-
+			message: '#^Parameter \#2 \$callable of class Twig\\TwigFunction constructor expects array\{class\-string, string\}\|\(callable\(\)\: mixed\)\|null, App\\Functions\\ViewFunction given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Factories/TwigFactory.php
+
+		-
+			message: '#^Method App\\Filters\\Markdown\:\:__invoke\(\) throws checked exception League\\CommonMark\\Exception\\CommonMarkException but it''s missing from the PHPDoc @throws tag\.$#'
+			identifier: missingType.checkedException
+			count: 1
+			path: app/Filters/Markdown.php
+
+		-
+			message: '#^Method App\\Filters\\Markdown\:\:__invoke\(\) throws checked exception League\\Config\\Exception\\ConfigurationExceptionInterface but it''s missing from the PHPDoc @throws tag\.$#'
+			identifier: missingType.checkedException
+			count: 1
+			path: app/Filters/Markdown.php
+
+		-
+			message: '#^Method App\\Functions\\Pages\:\:__invoke\(\) return type with generic class Illuminate\\Support\\Collection does not specify its types\: TKey, TValue$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Functions/Pages.php
+
+		-
+			message: '#^Method App\\Functions\\Svg\:\:__invoke\(\) has parameter \$classes with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Functions/Svg.php
+
+		-
+			message: '#^Method App\\Functions\\Svg\:\:addClassAttribute\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Functions/Svg.php
+
+		-
+			message: '#^Method App\\Functions\\Svg\:\:addClassAttribute\(\) has parameter \$classes with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Functions/Svg.php
+
+		-
+			message: '#^Parameter \#1 \$string of function trim expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Functions/Svg.php
+
+		-
+			message: '#^Parameter \#2 \$classes of method App\\Functions\\Svg\:\:addClassAttribute\(\) expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Functions/Svg.php
+
+		-
+			message: '#^Cannot access property \$file on mixed\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Functions/Vite.php
+
+		-
+			message: '#^Method App\\Functions\\Vite\:\:getBuildTags\(\) throws checked exception JsonException but it''s missing from the PHPDoc @throws tag\.$#'
+			identifier: missingType.checkedException
+			count: 1
+			path: app/Functions/Vite.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$values of function sprintf expects bool\|float\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 5
+			path: app/Functions/Vite.php
+
+		-
+			message: '#^Parameter \#1 \$middleware of method Slim\\App\<DI\\Container\>\:\:add\(\) expects \(callable\(\)\: mixed\)\|Psr\\Http\\Server\\MiddlewareInterface\|string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Managers/MiddlewareManager.php
+
+		-
+			message: '#^Property App\\Managers\\MiddlewareManager\:\:\$middlewares type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Managers/MiddlewareManager.php
+
+		-
+			message: '#^Method App\\Middlewares\\PruneCacheMiddleware\:\:winsLottery\(\) throws checked exception Random\\RandomException but it''s missing from the PHPDoc @throws tag\.$#'
+			identifier: missingType.checkedException
+			count: 1
+			path: app/Middlewares/PruneCacheMiddleware.php
+
+		-
+			message: '#^Property App\\Middlewares\\RegisterGlobalsMiddleware\:\:\$authors is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: app/Middlewares/RegisterGlobalsMiddleware.php
+
+		-
+			message: '#^Property App\\Middlewares\\RegisterGlobalsMiddleware\:\:\$tags is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: app/Middlewares/RegisterGlobalsMiddleware.php
+
+		-
+			message: '#^Method App\\Pages\:\:get\(\) throws checked exception League\\CommonMark\\Exception\\CommonMarkException but it''s missing from the PHPDoc @throws tag\.$#'
+			identifier: missingType.checkedException
+			count: 1
+			path: app/Pages.php
+
+		-
+			message: '#^Method App\\Pages\:\:get\(\) throws checked exception League\\Config\\Exception\\ConfigurationExceptionInterface but it''s missing from the PHPDoc @throws tag\.$#'
+			identifier: missingType.checkedException
+			count: 1
+			path: app/Pages.php
+
+		-
+			message: '#^Parameter \#1 \$content of static method App\\Data\\Page\:\:fromRenderedContent\(\) expects League\\CommonMark\\Extension\\FrontMatter\\Output\\RenderedContentWithFrontMatter, League\\CommonMark\\Output\\RenderedContentInterface given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Pages.php
+
+		-
+			message: '#^Parameter \#1 \$input of method League\\CommonMark\\ConverterInterface\:\:convert\(\) expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Pages.php
+
+		-
+			message: '#^Method App\\Posts\:\:all\(\) should return Illuminate\\Support\\Collection\<int, App\\Data\\Post\> but returns Illuminate\\Support\\Collection\<string, App\\Data\\Post\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Posts.php
+
+		-
+			message: '#^Method App\\Posts\:\:byAuthor\(\) return type with generic class Illuminate\\Support\\Collection does not specify its types\: TKey, TValue$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Posts.php
+
+		-
+			message: '#^Method App\\Posts\:\:get\(\) throws checked exception League\\CommonMark\\Exception\\CommonMarkException but it''s missing from the PHPDoc @throws tag\.$#'
+			identifier: missingType.checkedException
+			count: 1
+			path: app/Posts.php
+
+		-
+			message: '#^Method App\\Posts\:\:get\(\) throws checked exception League\\Config\\Exception\\ConfigurationExceptionInterface but it''s missing from the PHPDoc @throws tag\.$#'
+			identifier: missingType.checkedException
+			count: 1
+			path: app/Posts.php
+
+		-
+			message: '#^Parameter \#1 \$content of static method App\\Data\\Post\:\:fromRenderedContent\(\) expects League\\CommonMark\\Extension\\FrontMatter\\Output\\RenderedContentWithFrontMatter, League\\CommonMark\\Output\\RenderedContentInterface given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Posts.php
+
+		-
+			message: '#^Parameter \#1 \$input of method League\\CommonMark\\ConverterInterface\:\:convert\(\) expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Posts.php
+
+		-
+			message: '#^Method App\\Tags\:\:withCount\(\) should return Illuminate\\Support\\Collection\<int, string\> but returns Illuminate\\Support\\Collection\<\(int\|string\), int\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Tags.php
+
+		-
+			message: '#^Method App\\Utilities\\Paginator\:\:__construct\(\) has parameter \$items with no value type specified in iterable type iterable\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Utilities/Paginator.php
+
+		-
+			message: '#^Method App\\Utilities\\Paginator\:\:__construct\(\) throws checked exception DivisionByZeroError but it''s missing from the PHPDoc @throws tag\.$#'
+			identifier: missingType.checkedException
+			count: 1
+			path: app/Utilities/Paginator.php
+
+		-
+			message: '#^Parameter \#1 \$value of function count expects array\|Countable, iterable given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Utilities/Paginator.php
+
+		-
+			message: '#^Cannot cast mixed to int\.$#'
+			identifier: cast.int
+			count: 2
+			path: config/cache.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 2
+			path: config/cache.php
+
+		-
+			message: '#^Property Tests\\AuthorsTest\:\:\$authors \(App\\Authors\) does not accept mixed\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/AuthorsTest.php
+
+		-
+			message: '#^Cannot call method convert\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/Data/PageTest.php
+
+		-
+			message: '#^Parameter \#1 \$content of static method App\\Data\\Page\:\:fromRenderedContent\(\) expects League\\CommonMark\\Extension\\FrontMatter\\Output\\RenderedContentWithFrontMatter, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Data/PageTest.php
+
+		-
+			message: '#^Cannot call method convert\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/Data/PostTest.php
+
+		-
+			message: '#^Parameter \#1 \$content of static method App\\Data\\Post\:\:fromRenderedContent\(\) expects League\\CommonMark\\Extension\\FrontMatter\\Output\\RenderedContentWithFrontMatter, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Data/PostTest.php
+
+		-
+			message: '#^Property Tests\\Decorators\\CachedAuthorsTest\:\:\$cachedAuthors \(App\\Decorators\\CachedAuthors\) does not accept mixed\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/Decorators/CachedAuthorsTest.php
+
+		-
+			message: '#^Property Tests\\Decorators\\CachedPagesTest\:\:\$cachedPages \(App\\Decorators\\CachedPages\) does not accept mixed\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/Decorators/CachedPagesTest.php
+
+		-
+			message: '#^Property Tests\\Decorators\\CachedPostsTest\:\:\$cachedPosts \(App\\Decorators\\CachedPosts\) does not accept mixed\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/Decorators/CachedPostsTest.php
+
+		-
+			message: '#^Property Tests\\Decorators\\CachedTagsTest\:\:\$cachedTags \(App\\Decorators\\CachedTags\) does not accept mixed\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/Decorators/CachedTagsTest.php
+
+		-
+			message: '#^Method Tests\\Factories\\CacheFactoryTest\:\:cacheAdapters\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Factories/CacheFactoryTest.php
+
+		-
+			message: '#^Trying to invoke mixed but it''s not a callable\.$#'
+			identifier: callable.nonCallable
+			count: 2
+			path: tests/Factories/CacheFactoryTest.php
+
+		-
+			message: '#^PHPDoc tag @var for variable \$app contains generic class Slim\\App but does not specify its types\: TContainerInterface$#'
+			identifier: missingType.generics
+			count: 1
+			path: tests/Managers/RouteManagerTest.php
+
+		-
+			message: '#^Method Tests\\Middlewares\\PruneCacheMiddlewareTest\:\:it_does_not_prune_the_cache_when_using_a_non_prunable_adapter\(\) throws checked exception PHPUnit\\Framework\\MockObject\\Exception but it''s missing from the PHPDoc @throws tag\.$#'
+			identifier: missingType.checkedException
+			count: 3
+			path: tests/Middlewares/PruneCacheMiddlewareTest.php
+
+		-
+			message: '#^Method Tests\\Middlewares\\PruneCacheMiddlewareTest\:\:it_prunes_the_cache_whe_using_a_pruneable_adapter_and_winning_the_lottery\(\) throws checked exception PHPUnit\\Framework\\MockObject\\Exception but it''s missing from the PHPDoc @throws tag\.$#'
+			identifier: missingType.checkedException
+			count: 3
+			path: tests/Middlewares/PruneCacheMiddlewareTest.php
+
+		-
+			message: '#^Method Tests\\Middlewares\\PruneCacheMiddlewareTest\:\:nonPruneableCacheAdapters\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Middlewares/PruneCacheMiddlewareTest.php
+
+		-
+			message: '#^Method Tests\\Middlewares\\PruneCacheMiddlewareTest\:\:pruneableCacheAdapters\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Middlewares/PruneCacheMiddlewareTest.php
+
+		-
+			message: '#^Method Tests\\Middlewares\\RegisterGlobalsMiddlewareTest\:\:configurationProvider\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Middlewares/RegisterGlobalsMiddlewareTest.php
+
+		-
+			message: '#^Method Tests\\Middlewares\\RegisterGlobalsMiddlewareTest\:\:it_sets_the_global_variables\(\) throws checked exception PHPUnit\\Framework\\MockObject\\Exception but it''s missing from the PHPDoc @throws tag\.$#'
+			identifier: missingType.checkedException
+			count: 2
+			path: tests/Middlewares/RegisterGlobalsMiddlewareTest.php
+
+		-
+			message: '#^Property Tests\\Middlewares\\RegisterGlobalsMiddlewareTest\:\:\$view \(Slim\\Views\\Twig\) does not accept mixed\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/Middlewares/RegisterGlobalsMiddlewareTest.php
+
+		-
+			message: '#^Method Tests\\Middlewares\\WhoopsMiddlewareTest\:\:it_registers_whoops_with_the_json_handler\(\) throws checked exception PHPUnit\\Framework\\MockObject\\Exception but it''s missing from the PHPDoc @throws tag\.$#'
+			identifier: missingType.checkedException
+			count: 5
+			path: tests/Middlewares/WhoopsMiddlewareTest.php
+
+		-
+			message: '#^Method Tests\\Middlewares\\WhoopsMiddlewareTest\:\:it_registers_whoops_with_the_page_handler\(\) throws checked exception PHPUnit\\Framework\\MockObject\\Exception but it''s missing from the PHPDoc @throws tag\.$#'
+			identifier: missingType.checkedException
+			count: 6
+			path: tests/Middlewares/WhoopsMiddlewareTest.php
+
+		-
+			message: '#^Property Tests\\PagesTest\:\:\$pages \(App\\Pages\) does not accept mixed\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/PagesTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertContainsOnlyInstancesOf\(\) with ''App\\\\Data\\\\Post'' and Illuminate\\Support\\Collection\<int, App\\Data\\Post\> will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 2
+			path: tests/PostsTest.php
+
+		-
+			message: '#^Property Tests\\PostsTest\:\:\$posts \(App\\Posts\) does not accept mixed\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/PostsTest.php
+
+		-
+			message: '#^Property Tests\\TagsTest\:\:\$tags \(App\\Tags\) does not accept mixed\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/TagsTest.php
+
+		-
+			message: '#^Method Tests\\TestCase\:\:fileContents\(\) should return string but returns string\|false\.$#'
+			identifier: return.type
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: '#^Method Tests\\TestCase\:\:mock\(\) throws checked exception PHPUnit\\Framework\\MockObject\\Exception but it''s missing from the PHPDoc @throws tag\.$#'
+			identifier: missingType.checkedException
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: '#^Property Tests\\TestCase\:\:\$cache \(Symfony\\Contracts\\Cache\\CacheInterface&Symfony\\Contracts\\Cache\\NamespacedPoolInterface\) does not accept mixed\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: '#^Cannot access property \$next on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: tests/Utilities/PaginatorTest.php
+
+		-
+			message: '#^Cannot access property \$pages on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: tests/Utilities/PaginatorTest.php
+
+		-
+			message: '#^Cannot access property \$previous on mixed\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: tests/Utilities/PaginatorTest.php
+
+		-
+			message: '#^Method Tests\\Utilities\\PaginatorTest\:\:paginatorProvider\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Utilities/PaginatorTest.php

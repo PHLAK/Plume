@@ -24,4 +24,4 @@ parameters:
 
 includes:
   - vendor/zorac/phpstan-php-di/extension.neon
-  # - phpstan-baseline.neon
+  - phpstan-baseline.neon
