@@ -18,9 +18,7 @@ return [
     'debug' => env('APP_DEBUG', false),
 
     /**
-     * The application interface language.
-     *
-     * Possible values: See the 'translations' folder for available translations.
+     * The application language.
      *
      * Defualt value: 'en'
      */

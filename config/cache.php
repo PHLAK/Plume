@@ -24,7 +24,7 @@ return [
     /**
      * The app cache lifetime (in seconds). If set to 0, cache indefinitely.
      *
-     * Default value: 3600 (one hour)
+     * Default value: 3600
      */
     'cache_lifetime' => env('CACHE_LIFETIME', 3600),
 
@@ -112,21 +112,5 @@ return [
             (int) $container->get('redis_port')
         );
     }),
-
-    /**
-     * HTTP cache values for controlling browser page cache durations.
-     *
-     * Possible values: An array of content types mapped to their cache duration
-     * in seconds
-     *
-     * Default value: [
-     *     'application/json' => '300',
-     *     'application/zip' => '300',
-     * ]
-     */
-    'http_cache' => [
-        'application/json' => 300,
-        'application/zip' => 300,
-    ],
 
 ];

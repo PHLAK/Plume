@@ -55,7 +55,6 @@ return [
 
     'managers' => [
         Managers\MiddlewareManager::class,
-        // Managers\ExceptionManager::class,
         Managers\RouteManager::class,
     ],
 
