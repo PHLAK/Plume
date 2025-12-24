@@ -5251,7 +5251,7 @@
             "authors": [
                 {
                     "name": "Chris Kankiewicz",
-                    "email": "Chris@ChrisKankiewicz.com"
+                    "email": "Chris@Kankiewicz.com"
                 }
             ],
             "description": "A pre-defined set of coding standards for PHP CS Fixer.",
