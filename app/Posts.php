@@ -19,6 +19,7 @@ class Posts
     #[Inject(ConverterInterface::class)]
     private ConverterInterface $converter;
 
+    /** @throws NotFoundException */
     public function get(string $slug): Data\Post
     {
         $postPath = sprintf('%s/%s.md', $this->postsPath, $slug);

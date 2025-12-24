@@ -18,10 +18,10 @@ parameters:
       - DI\NotFoundException
       - InvalidArgumentException
       - Invoker\Exception\InvocationException
+      - Psr\Cache\InvalidArgumentException
       - RuntimeException
       - Twig\Error\Error
 
 includes:
   - vendor/zorac/phpstan-php-di/extension.neon
   # - phpstan-baseline.neon
-  # - phpstan-ignores.neon

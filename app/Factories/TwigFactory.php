@@ -32,9 +32,11 @@ class TwigFactory
     #[Inject('timezone')]
     private string $timezone;
 
+    /** @var list<ViewFilter> */
     #[Inject('view_filters')]
     private array $viewFilters;
 
+    /** @var list<ViewFunction> */
     #[Inject('view_functions')]
     private array $viewFunctions;
 
