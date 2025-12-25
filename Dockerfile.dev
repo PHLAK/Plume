@@ -21,9 +21,6 @@ RUN pecl install apcu \
     && pecl install redis \
     && pecl install xdebug
 
-# Fix for memcached
-# RUN echo extension=memcached.so >> /usr/local/etc/php/conf.d/memcached.ini
-
 RUN docker-php-ext-enable apcu memcached redis xdebug
 
 COPY .docker/apache2/config/000-default.dev.conf /etc/apache2/sites-available/000-default.conf

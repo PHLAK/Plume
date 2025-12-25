@@ -47,9 +47,6 @@ RUN pecl install apcu \
     && pecl install memcached \
     && pecl install redis
 
-# Fix for memcached
-# RUN echo extension=memcached.so >> /usr/local/etc/php/conf.d/memcached.ini
-
 RUN docker-php-ext-enable apcu memcached redis
 
 RUN a2enmod rewrite
