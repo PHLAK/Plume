@@ -26,7 +26,7 @@ RUN pecl install apcu \
 
 RUN docker-php-ext-enable apcu memcached redis xdebug
 
-COPY .docker/apache2/config/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY .docker/apache2/config/000-default.dev.conf /etc/apache2/sites-available/000-default.conf
 COPY .docker/php/config/php.dev.ini /usr/local/etc/php/php.ini
 
 RUN a2enmod rewrite
