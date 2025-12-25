@@ -1,7 +1,9 @@
 data/
+docs/
 tests/
 .editorconfig
 .php-cs-fixer.dist.php
+docs.json
 eslint.config.mjs
 LICENSE
 phpstan.neon.dist

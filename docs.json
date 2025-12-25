@@ -1,0 +1,19 @@
+{
+    "$schema": "https://mintlify.com/docs.json",
+    "theme": "linden",
+    "name": "Plume Docs",
+    "colors": {
+        "primary": "#292524"
+    },
+    "navigation": {
+        "pages": [
+            "introduction",
+            "installation",
+            "configuration-overview",
+            "environment-variables",
+            "posts",
+            "pages",
+            "cli"
+        ]
+    }
+}
