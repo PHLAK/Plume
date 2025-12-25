@@ -1,0 +1,41 @@
+---
+title: "Environment Variables"
+---
+
+Plume utilizes environment variables for the majority of it's configuration. This page aims to be an exhaustive list of supported environment variables and their functions.
+
+## `APP_DEBUG`
+
+Enable application debugging and display error messages.
+
+<Danger>
+  It is recommended that debug remains OFF unless troubleshooting an issue. Leaving this enabled WILL cause leakage of sensitive server information.
+</Danger>
+
+<Tabs>
+  <Tab title="Possible Values">
+    `true` or `false`
+  </Tab>
+  <Tab title="Default Value">
+    `false`
+  </Tab>
+</Tabs>
+
+## `DATE_FORMAT`
+
+The format used for rendering post publish dates in the application.
+
+<Tabs>
+  <Tab title="Possible Values">
+    See the [PHP ](https://www.php.net/manual/en/function.date.php#refsect1-function.date-parameters)`date`[ format documentation](https://www.php.net/manual/en/function.date.php#refsect1-function.date-parameters) for possible values.
+
+    ---
+  </Tab>
+  <Tab title="Default Value">
+    `Y-m-d H:i:s`
+  </Tab>
+</Tabs>
+
+<Info>
+  More coming soon...
+</Info>

@@ -6,14 +6,16 @@
         "primary": "#292524"
     },
     "navigation": {
-        "pages": [
-            "introduction",
-            "installation",
+      "pages": [
+        "introduction",
+        "installation-1",
+        {
+          "group": "Configuration",
+          "pages": [
             "configuration-overview",
-            "environment-variables",
-            "posts",
-            "pages",
-            "cli"
-        ]
+            "configuration/untitled-page"
+          ]
+        }
+      ]
     }
 }
