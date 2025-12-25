@@ -31,21 +31,21 @@ LABEL maintainer="Chris Kankiewicz <Chris@Kankiewicz.com>"
 
 EXPOSE 80
 
-COPY .docker/apache2/config/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY .docker/apache2/config/000-default.prod.conf /etc/apache2/sites-available/000-default.conf
 COPY .docker/php/config/php.prod.ini /usr/local/etc/php/php.ini
 
 COPY --from=build /var/www/html /var/www/html
-
 
 RUN chown --recursive www-data:www-data /var/www/html
 
 VOLUME /var/www/html/cache
 
 RUN apt-get update && apt-get install --assume-yes --no-install-recommends \
-    libmemcached-dev zlib1g-dev \
+    libmemcached-dev tar zip zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pecl install apcu \
+RUN docker-php-ext-install zip \
+    && pecl install apcu \
     && pecl install memcached \
     && pecl install redis
 
