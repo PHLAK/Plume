@@ -14,7 +14,7 @@ COPY --from=node:24.6 /usr/local/lib/node_modules /usr/local/lib/node_modules
 RUN ln --symbolic ../lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 
 RUN apt-get update && apt-get install --assume-yes --no-install-recommends \
-    git libssl-dev zlib1g-dev \
+    git libssl-dev zip zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
 COPY ./ /var/www/html
@@ -40,12 +40,10 @@ RUN chown --recursive www-data:www-data /var/www/html
 
 VOLUME /var/www/html/cache
 
-RUN apt-get update && apt-get install --assume-yes --no-install-recommends \
-    libmemcached-dev tar zip zlib1g-dev \
+RUN apt-get update && apt-get install --assume-yes --no-install-recommends libmemcached-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN docker-php-ext-install zip \
-    && pecl install apcu \
+RUN pecl install apcu \
     && pecl install memcached \
     && pecl install redis
 
