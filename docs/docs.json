@@ -13,7 +13,15 @@
           "group": "Configuration",
           "pages": [
             "configuration-overview",
-            "configuration/untitled-page"
+            "configuration/untitled-page",
+            "configuration/advanced-configuration"
+          ]
+        },
+        {
+          "group": "Publishing",
+          "pages": [
+            "publishing/posts",
+            "publishing/pages"
           ]
         }
       ]
