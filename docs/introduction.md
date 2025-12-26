@@ -1,6 +1,7 @@
 ---
 sidebarTitle: "Introduction"
 title: "introduction"
+icon: "flag"
 ---
 
 Welcome to Plume, your self-hosted, Markdown powered publishing platform.

@@ -1,5 +1,6 @@
 ---
 title: "Installation"
+icon: "download"
 ---
 
 ## Quick Start
@@ -49,46 +50,41 @@ Once created, start the container by running `docker compose up -d` from the sam
   See the [Configuration Reference](https://docs.directorylister.com/configuration/configuration-reference) for a full list of the available environment variables.
 </Tip>
 
-\> [!TIP]
-
 ## Docker Run
 
 To get up and running quickly you can use `docker run` to launch a stand-alone Docker container from the official Docker image.
 
-\> [!WARNING]
+<Warning>
+  This is a good way to test Plume for the first time but is _not recommended_ for long-term use. Instead we recommend using the Docker Compose installation method below.
+</Warning>
 
-\> This is a good way to test Plume for the first time but is _not recommended_ for long-term use. Instead we recommend using the Docker Compose installation method below.
 
-\`\`\`shell
-
-docker run --detach [--env ENVIRONMENT_VARIABLE=value] \\
-
-    --volume \<host_path\>:/data --publish \<host_port\>:80 \\
-
+```
+docker run --detach [--env ENVIRONMENT_VARIABLE=value] \
+    --volume <host_path>:/data --publish <host_port>:80 \
     phlak/plume:latest
+```
 
-\`\`\`
+<Info>
+  Replace `<host_path>` with the path to a directory where your posts, pages and additional data will be stored.\
+  \
+  Replace `<host_port>` with the port on which you would like the application to be exposed.
+</Info>
 
-\> [!IMPORTANT]
+<Tip>
+  You may pass multiple environment variables by repeating the `--env` flag.
+</Tip>
 
-\> Replace `<host_path>` with the path to a directory where your posts, pages and additional data will be stored.
+##  Manual Installation
 
-\> 
+<Warning>
+  This is _not_ the recommended installation method and will require more work to update between versions. Instead we recommend using the Docker Compose installation method below for quick and easy updates.
+</Warning>
 
-\> Replace `<host_port>` with the port on which you would like the application to be exposed.
+<Note>
+  More details coming soon including examples for
 
-\> [!TIP]
-
-\> You may pass multiple environment variables by repeating the `--env` flag.
-
-## Manual Installation
-
-\> [!WARNING]
-
-\> This is _not_ the recommended installation method and will require more work to update between versions. Instead we recommend using the Docker Compose installation method below for quick and easy updates.
-
-- Nginx
-
-- Apache
-
-- Caddy
+  - Nginx
+  - Apache
+  - Caddy
+</Note>
