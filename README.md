@@ -18,7 +18,7 @@ Plume is your self-hosted, Markdown based publishing platform.
 
 All posts (and pages) authored in Markdown, stored in a flat-file structure.
 
-![Screenshot](screenshot.png)
+![Screenshot](docs/images/screenshot.png)
 
 Plume is created and maintained by
 [Chris Kankiewicz](https://www.chriskankiewicz.com)
