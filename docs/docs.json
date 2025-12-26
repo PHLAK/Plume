@@ -7,7 +7,7 @@
     },
     "navigation": {
       "pages": [
-        "introduction",
+        "introduction-1",
         "installation-1",
         {
           "group": "Configuration",

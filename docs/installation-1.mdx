@@ -16,7 +16,7 @@ For a long-term installation you can use Docker Compose to install Plume. To get
 ```
 /path/to/plume
 ├── data
-│   └── [your data will go here]
+│   └── [your data will go here]
 └── docker-compose.yaml
 ```
 
@@ -58,7 +58,6 @@ To get up and running quickly you can use `docker run` to launch a stand-alone D
   This is a good way to test Plume for the first time but is _not recommended_ for long-term use. Instead we recommend using the Docker Compose installation method below.
 </Warning>
 
-
 ```
 docker run --detach [--env ENVIRONMENT_VARIABLE=value] \
     --volume <host_path>:/data --publish <host_port>:80 \
@@ -75,7 +74,7 @@ docker run --detach [--env ENVIRONMENT_VARIABLE=value] \
   You may pass multiple environment variables by repeating the `--env` flag.
 </Tip>
 
-##  Manual Installation
+## Manual Installation
 
 <Warning>
   This is _not_ the recommended installation method and will require more work to update between versions. Instead we recommend using the Docker Compose installation method below for quick and easy updates.
