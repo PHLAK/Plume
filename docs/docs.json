@@ -1,9 +1,11 @@
 {
     "$schema": "https://mintlify.com/docs.json",
-    "theme": "linden",
+    "theme": "aspen",
     "name": "Plume Docs",
     "colors": {
-        "primary": "#292524"
+      "primary": "#292524",
+      "dark": "#f5f5f4",
+      "light": "#292524"
     },
     "navigation": {
       "pages": [
@@ -25,5 +27,13 @@
           ]
         }
       ]
+    },
+    "description": "The official Plume documentation.",
+    "footer": {
+      "socials": {
+        "github": "https://github.com/PHLAK/Plume",
+        "bluesky": "https://bsky.app/profile/plume.pub",
+        "website": "https://www.plume.pub"
+      }
     }
 }
