@@ -6,6 +6,7 @@ tests/
 docs.json
 eslint.config.mjs
 LICENSE
+Makefile
 phpstan.neon.dist
 phpunt.xml
 README.md
