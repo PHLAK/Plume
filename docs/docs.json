@@ -25,6 +25,12 @@
             "publishing/posts",
             "publishing/pages"
           ]
+        },
+        {
+          "group": "Help & Support",
+          "pages": [
+            "help-and-support/troubleshooting"
+          ]
         }
       ]
     },
