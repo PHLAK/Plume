@@ -40,7 +40,7 @@ return [
     'meta_description' => env('META_DESCRIPTION', 'Yet another amazing blog, published with Plume.'),
 
     /**
-     * Post pagination.
+     * Whether or not post pagination is enabled.
      *
      * Default value: true.
      */
