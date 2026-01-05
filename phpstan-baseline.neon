@@ -253,6 +253,12 @@ parameters:
 			path: app/Pages.php
 
 		-
+			message: '#^Possibly invalid array key type string\|null\.$#'
+			identifier: array.invalidKey
+			count: 1
+			path: app/Pages.php
+
+		-
 			message: '#^Method App\\Posts\:\:all\(\) should return Illuminate\\Support\\Collection\<int, App\\Data\\Post\> but returns Illuminate\\Support\\Collection\<string, App\\Data\\Post\>\.$#'
 			identifier: return.type
 			count: 1
@@ -285,6 +291,12 @@ parameters:
 		-
 			message: '#^Parameter \#1 \$input of method League\\CommonMark\\ConverterInterface\:\:convert\(\) expects string, string\|false given\.$#'
 			identifier: argument.type
+			count: 1
+			path: app/Posts.php
+
+		-
+			message: '#^Possibly invalid array key type string\|null\.$#'
+			identifier: array.invalidKey
 			count: 1
 			path: app/Posts.php
 
