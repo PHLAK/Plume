@@ -159,7 +159,7 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}.{{patch}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
-            type=semver,value=stable
+            type=semver,pattern={{version}},value=stable
             type=raw,value=latest
             type=ref,event=tag
 
