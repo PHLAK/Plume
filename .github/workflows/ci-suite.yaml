@@ -159,8 +159,9 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}.{{patch}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
-            type=ref,event=tag
+            type=semver,value=stable
             type=raw,value=latest
+            type=ref,event=tag
 
       - name: Build & Push Image
         uses: docker/build-push-action@v6
