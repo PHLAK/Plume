@@ -156,10 +156,10 @@ jobs:
         with:
           images: phlak/plume
           tags: |
+            type=semver,pattern={{version}},value=stable
             type=semver,pattern={{major}}.{{minor}}.{{patch}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
-            type=semver,pattern={{version}},value=stable
             type=raw,value=latest
             type=ref,event=tag
 
