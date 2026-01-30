@@ -14,7 +14,7 @@ COPY --from=node:25.2 /usr/local/lib/node_modules /usr/local/lib/node_modules
 RUN ln --symbolic ../lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 
 RUN apt-get update && apt-get install --assume-yes --no-install-recommends \
-    git libssl-dev zip zlib1g-dev \
+    git libssl-dev make zip zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
 COPY ./ /var/www/html
@@ -23,6 +23,8 @@ WORKDIR /var/www/html
 
 RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 RUN npm install --no-save && npm run build && npm prune --production
+
+RUN make production
 
 # --------- FINAL ----------
 

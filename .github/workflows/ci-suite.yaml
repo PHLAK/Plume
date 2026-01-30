@@ -175,25 +175,13 @@ jobs:
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
     needs: [bundle-assets, js-coding-standards, php-coding-standards, static-analysis, tests]
-
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: write
+      discussions: write
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v6
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ env.PHP_VERSION }}
-          extensions: apcu, mbstring, memcached, redis, intl
-
-      - name: Setup Node
-        uses: actions/setup-node@v6
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
 
       - name: Get Tag
         run: echo "TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
