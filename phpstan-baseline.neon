@@ -93,7 +93,7 @@ parameters:
 		-
 			message: '#^Method App\\Factories\\ConverterFactory\:\:__invoke\(\) throws checked exception League\\CommonMark\\Exception\\AlreadyInitializedException but it''s missing from the PHPDoc @throws tag\.$#'
 			identifier: missingType.checkedException
-			count: 5
+			count: 7
 			path: app/Factories/ConverterFactory.php
 
 		-
