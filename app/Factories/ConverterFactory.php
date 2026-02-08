@@ -8,6 +8,8 @@ use DI\Attribute\Inject;
 use League\CommonMark\ConverterInterface;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\Extension\DescriptionList\DescriptionListExtension;
+use League\CommonMark\Extension\Footnote\FootnoteExtension;
 use League\CommonMark\Extension\FrontMatter\FrontMatterExtension;
 use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
 use League\CommonMark\MarkdownConverter;
@@ -29,6 +31,8 @@ class ConverterFactory
         $environment->addExtension(new CommonMarkCoreExtension);
         $environment->addExtension(new GithubFlavoredMarkdownExtension);
         $environment->addExtension(new FrontMatterExtension);
+        $environment->addExtension(new FootnoteExtension);
+        $environment->addExtension(new DescriptionListExtension);
         $environment->addExtension(new HighlightCodeExtension($this->shikiThemeId));
         $environment->addExtension(new AlertExtension);
 
