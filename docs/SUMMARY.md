@@ -8,3 +8,8 @@
 * [Configuration Overview](configuration/configuration-overview.md)
 * [Environment Variables](configuration/environment-variables.md)
 * [Advanced Configuration](configuration/advanced-configuration.md)
+
+## Publishing
+
+* [Posts](publishing/posts.md)
+* [Pages](publishing/pages.md)
