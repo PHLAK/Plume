@@ -3,7 +3,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      target: dev
     image: phlak/plume:dev
     depends_on: [memcached, valkey]
     extra_hosts:
@@ -29,7 +29,7 @@ services:
   npm:
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      target: dev
     image: phlak/plume:dev
     command: npm run dev
     ports:
