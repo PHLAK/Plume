@@ -98,7 +98,7 @@ In addition to the GitHub Flavored Markdown spec Plume supports "Alerts" (a.k.a.
 > Advises about risks or negative outcomes of certain actions.
 ```
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/alerts.png" alt=""><figcaption></figcaption></figure>
 
 ### Post Images
 
