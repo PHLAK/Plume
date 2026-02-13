@@ -44,11 +44,20 @@ Installation
 
 ### Quickstart
 
+<details>
+  <summary>Coming soon, does not work yet</summary>
+
   1. Run `curl -sSL https://init.plume.pub | sh`
   2. Add your posts to the `posts` folder
   3. Run `docker compose up -d`
+</details>
 
-### Manual Docker Compose
+### Docker Compose
+
+For effortless management via [Docker Compose](https://docs.docker.com/compose/)
+check out [Plume Compose](https://github.com/PHLAK/plume-compose).
+
+#### Manual Docker Compose
 
   1. Download the [`docker-compose.yaml`](https://www.plume.pub/docker-compose.yaml) file to a directory of your choice
   2. Add your posts to the `posts` folder
