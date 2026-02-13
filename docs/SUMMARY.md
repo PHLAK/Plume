@@ -13,3 +13,7 @@
 
 * [Posts](publishing/posts.md)
 * [Pages](publishing/pages.md)
+
+## Help & Support
+
+* [Troubleshooting](help-and-support/troubleshooting.md)
