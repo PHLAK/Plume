@@ -20,15 +20,14 @@ layout:
 
 # Pages
 
-```
-/path/to/plume
+<pre><code>/path/to/plume
 ├── data
-│   ├── pages # Put your pages in this folder
-│   │   ├── about-this-blog.md
+<strong>│   ├── pages # Put your pages in this folder
+</strong>│   │   ├── about-this-blog.md
 │   │   └── something-else.md
 │   └── [other data]
 └── docker-compose.yaml
-```
+</code></pre>
 
 {% hint style="info" %}
 More coming soon...

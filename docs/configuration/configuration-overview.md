@@ -20,7 +20,7 @@ layout:
 
 # Configuration Overview
 
-Plume allows customization through configuration. You can configure Plume in a few different ways. The simplest and \*recommended\* way to configure Plume is through environment variables.
+Plume allows customization through configuration. You can configure Plume in a few different ways. The simplest and _recommended_ way to configure Plume is through environment variables.
 
 ### The `.env` File
 
@@ -46,13 +46,15 @@ To get started:
 
 The default `.env` file should look something like this:
 
-```.env
+{% code title=".env" %}
+```dotenv
 APP_DEBUG=false
 # SITE_TITLE="Yet another amazing blog"
 # META_DESCRIPTION="Yet another amazing blog, published with Plume."
 # PAGINATION=true
 # POSTS_PER_PAGE=10
 ```
+{% endcode %}
 
 {% hint style="info" %}
 You can find a list of environment variables and their function in the Environment Variables documentation.
@@ -72,18 +74,21 @@ Arbitrary code like CSS & JavaScript may be included in the HTML output of your 
 
 To inject these into your page, create a file named `customizations` in the data directory and place your code into this file.
 
-```
-/path/to/plume
+<pre><code>/path/to/plume
 ├── data
 │   ├── [other files and folders]
-│   └── customizations  # Create this file
-└── docker-compose.yaml
-```
+<strong>│   └── customizations  # Create this file
+</strong>└── docker-compose.yaml
+</code></pre>
 
-```customizations
+{% code title="customizations" %}
+```html
 <!-- Put your custom code here -->
 ```
+{% endcode %}
 
 ### Caching
 
+{% hint style="success" %}
 Coming soon...
+{% endhint %}

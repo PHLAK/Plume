@@ -22,6 +22,6 @@ layout:
 
 Please report bugs to the [GitHub Issue Tracker](https://github.com/PHLAK/Plume/issues).
 
-{% hint style="info" %}
+{% hint style="success" %}
 More coming soon...
 {% endhint %}

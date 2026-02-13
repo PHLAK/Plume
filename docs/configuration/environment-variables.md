@@ -42,7 +42,7 @@ It is recommended that debug remains OFF unless troubleshooting an issue. Leavin
 
 ### `AUTHORS_LINK`
 
-Whether or not to show the "Authors" navigation link when there are multipe unique post authors.
+Whether or not to show the "Authors" navigation link when there are multiple unique post authors.
 
 {% tabs %}
 {% tab title="Possible Values" %}
@@ -183,7 +183,11 @@ The server's timezone.
 
 ### `USAGE_REPORTING`
 
-Enable usage reporting. The data collected contains aggregated metrics and does not identify individual users.
+Enable anonymized usage reporting.
+
+{% hint style="info" %}
+The data collected contains aggregated metrics and does not identify individual users.
+{% endhint %}
 
 {% tabs %}
 {% tab title="Possible Values" %}

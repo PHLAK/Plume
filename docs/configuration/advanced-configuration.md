@@ -34,6 +34,6 @@ Plume utilizes PHP-DI for it's configuration. See the [PHP Definitions documenta
 
 For additional information about individual configuration options reference the individual config documentation.
 
-{% hint style="info" %}
+{% hint style="success" %}
 More coming soon...
 {% endhint %}

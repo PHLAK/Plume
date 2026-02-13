@@ -22,7 +22,9 @@ layout:
 
 ### Quick Start
 
+{% hint style="success" %}
 Coming soon...
+{% endhint %}
 
 ### Docker Compose
 
@@ -35,6 +37,7 @@ For a long-term installation you can use Docker Compose to install Plume. To get
 └── docker-compose.yaml
 ```
 
+{% code title="docker-compose.yaml" %}
 ```yaml
 services:
 
@@ -50,6 +53,7 @@ services:
 	  <host_path>:/data
     restart: unless-stopped
 ```
+{% endcode %}
 
 {% hint style="warning" %}
 Replace `<version>` with the version of Plume you'd like to run (e.g. `1.0.5`, `1.0` or `1`)
@@ -62,7 +66,7 @@ Replace `<host_port>` with the port on which you would like the application to b
 Once created, start the container by running `docker compose up -d` from the same directory as the `docker-compose.yaml` file.
 
 {% hint style="info" %}
-See the Configuration Reference for a full list of the available environment variables.
+See [Environent Variables](configuration/environment-variables.md) for a full list of the available environment variables.
 {% endhint %}
 
 ### Docker Run
