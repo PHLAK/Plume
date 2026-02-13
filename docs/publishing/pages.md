@@ -22,7 +22,7 @@ layout:
 
 <pre><code>/path/to/plume
 ├── data
-<strong>│   ├── pages # Put your pages in this folder
+<strong>│   ├── <a data-footnote-ref href="#user-content-fn-1">pages</a>
 </strong>│   │   ├── about-this-blog.md
 │   │   └── something-else.md
 │   └── [other data]
@@ -33,3 +33,6 @@ layout:
 More coming soon...
 {% endhint %}
 
+
+
+[^1]: Put your pages in this folder

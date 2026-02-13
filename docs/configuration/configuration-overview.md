@@ -35,29 +35,38 @@ To get started:
 1. Copy `.env.example` to `.env`
 2. Edit the configuration values in `.env`
 
-```
-/path/to/plume
+<pre><code>/path/to/plume
 ├── data
 │   └── [your data]
 ├── docker-compose.yaml
-├── .env          # Edit this
-└── .env.example  # Copy this
-```
+├── <a data-footnote-ref href="#user-content-fn-1">.env</a>
+└── <a data-footnote-ref href="#user-content-fn-2">.env.example</a>
+</code></pre>
 
 The default `.env` file should look something like this:
 
 {% code title=".env" %}
 ```dotenv
-APP_DEBUG=false
 # SITE_TITLE="Yet another amazing blog"
 # META_DESCRIPTION="Yet another amazing blog, published with Plume."
+
 # PAGINATION=true
 # POSTS_PER_PAGE=10
+
+# FEATURED_IMAGES=collapsed
+
+# TAGS_LINK=true
+# AUTHORS_LINK=true
+
+# DATE_FORMAT='Y-m-d H:i:s'
+# TIMEZONE=
+
+# USAGE_REPORTING=true
 ```
 {% endcode %}
 
 {% hint style="info" %}
-You can find a list of environment variables and their function in the Environment Variables documentation.
+You can find a list of environment variables and their function in the [Environment Variables](environment-variables.md) documentation.
 {% endhint %}
 
 ### User Customization
@@ -77,8 +86,8 @@ To inject these into your page, create a file named `customizations` in the data
 <pre><code>/path/to/plume
 ├── data
 │   ├── [other files and folders]
-<strong>│   └── customizations  # Create this file
-</strong>└── docker-compose.yaml
+│   └── <a data-footnote-ref href="#user-content-fn-3">customizations</a>
+└── docker-compose.yaml
 </code></pre>
 
 {% code title="customizations" %}
@@ -92,3 +101,9 @@ To inject these into your page, create a file named `customizations` in the data
 {% hint style="success" %}
 Coming soon...
 {% endhint %}
+
+[^1]: Edit this file
+
+[^2]: Copy this file
+
+[^3]: Create this file

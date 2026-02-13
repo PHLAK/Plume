@@ -24,8 +24,8 @@ As a publishing platform (i.e. blog), the main purpose of Plume is to facilitate
 
 <pre><code>/path/to/plume
 ├── data
-<strong>│   ├── posts # Put your posts in this folder
-</strong>│   │   ├── some-amazing-post.md
+│   ├── <a data-footnote-ref href="#user-content-fn-1">posts</a>
+│   │   ├── some-amazing-post.md
 │   │   └── yet-another-post.md
 │   └── [other data]
 └── docker-compose.yaml
@@ -115,3 +115,5 @@ You may also organize your images in arbitrary sub-folders as long as your links
 ```markdown
 ![Example Image](/files/images/some-post/example.png)
 ```
+
+[^1]: Put your posts in this folder
