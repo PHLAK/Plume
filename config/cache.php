@@ -24,9 +24,9 @@ return [
     /**
      * The app cache lifetime (in seconds). If set to 0, cache indefinitely.
      *
-     * Default value: 3600
+     * Default value: 0
      */
-    'cache_lifetime' => env('CACHE_LIFETIME', 3600),
+    'cache_lifetime' => env('CACHE_LIFETIME', 0),
 
     /**
      * Some cache drivers require manually pruning the cache periodically to
