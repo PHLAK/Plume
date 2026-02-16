@@ -63,11 +63,11 @@ Replace `<host_path>` with the path to a directory where your posts, pages and a
 Replace `<host_port>` with the port on which you would like the application to be exposed.
 {% endhint %}
 
-Once created, start the container by running `docker compose up -d` from the same directory as the `docker-compose.yaml` file.
-
 {% hint style="info" %}
-See [Environent Variables](configuration/environment-variables.md) for a full list of the available environment variables.
+See [Environment Variables](configuration/environment-variables.md) for a full list of the available environment variables.
 {% endhint %}
+
+Once created, start the container by running `docker compose up -d` from the same directory as the `docker-compose.yaml` file.
 
 ### Docker Run
 
@@ -100,7 +100,7 @@ This is _not_ the recommended installation method and will require more work to 
 {% hint style="success" %}
 More details coming soon including examples for
 
-* Nginx
+* NGINX
 * Apache
 * Caddy
 {% endhint %}
