@@ -94,7 +94,7 @@ You may pass multiple environment variables by repeating the `--env` flag.
 ### Manual Installation
 
 {% hint style="danger" %}
-This is _not_ the recommended installation method and will require more work to update between versions. Instead we recommend using the Docker Compose installation method below for quick and easy updates.
+This is _not_ the recommended installation method and will require more work to update between versions. Instead we recommend using the [Docker Compose installation method](installation.md#docker-compose) for quick and easy updates.
 {% endhint %}
 
 {% hint style="success" %}
