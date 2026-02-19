@@ -6,10 +6,11 @@ namespace App;
 
 use App\Data\Post;
 use App\Exceptions\NotFoundException;
-use App\Helpers\Str;
 use DI\Attribute\Inject;
-use Illuminate\Support\Collection;
+use GlobIterator;
+use Illuminate\Support\LazyCollection;
 use League\CommonMark\ConverterInterface;
+use SplFileInfo;
 
 class Posts
 {
@@ -22,45 +23,45 @@ class Posts
     /** @throws NotFoundException */
     public function get(string $slug): Data\Post
     {
-        $postPath = sprintf('%s/%s.md', $this->postsPath, $slug);
+        $post = new SplFileInfo(sprintf('%s/%s.md', $this->postsPath, $slug));
 
-        if (! is_readable($postPath)) {
+        if (! $post->isReadable()) {
             throw new NotFoundException;
         }
 
-        if (($contents = file_get_contents($postPath)) === false) {
+        if (($contents = file_get_contents($post->getRealPath())) === false) {
             throw new NotFoundException;
         }
 
         return Post::fromRenderedContent($this->converter->convert($contents));
     }
 
-    /** @return Collection<int, Post> */
-    public function all(): Collection
+    /** @return LazyCollection<int, Post> */
+    public function all(): LazyCollection
     {
-        /** @var Collection<int, string> $paths */
-        $paths = new Collection(glob($this->postsPath . '/*.md') ?: []);
+        /** @var GlobIterator<int, SplFileInfo> $posts */
+        $posts = new GlobIterator($this->postsPath . '/*.md');
 
-        return $paths->mapWithKeys(function (string $path): array {
-            [$slug] = Str::extract(sprintf('#^%s/(?<slug>.+).md$#', preg_quote($this->postsPath, '#')), $path);
+        return new LazyCollection(function () use ($posts) {
+            foreach ($posts as $post) {
+                $slug = $post->getBasename('.md');
 
-            $content = $this->converter->convert(file_get_contents($path));
-
-            return [$slug => Data\Post::fromRenderedContent($content)];
+                yield $slug => $this->get($slug);
+            }
         })->reject(
             fn (Post $post): bool => $post->draft || $post->published->isFuture()
         )->sortByDesc('published');
     }
 
-    public function byAuthor(string $author): Collection
+    public function byAuthor(string $author): LazyCollection
     {
         return $this->all()->filter(
             fn (Post $post): bool => $post->author === $author
         );
     }
 
-    /** @return Collection<int, Post> */
-    public function withTag(string $tag): Collection
+    /** @return LazyCollection<int, Post> */
+    public function withTag(string $tag): LazyCollection
     {
         return $this->all()->filter(
             fn (Post $post): bool => in_array($tag, $post->tags)

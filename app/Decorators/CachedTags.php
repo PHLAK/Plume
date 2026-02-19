@@ -6,7 +6,7 @@ namespace App\Decorators;
 
 use App\Tags;
 use DI\Attribute\Inject;
-use Illuminate\Support\Collection;
+use Illuminate\Support\LazyCollection;
 use Symfony\Contracts\Cache\CacheInterface;
 
 class CachedTags extends Tags
@@ -14,9 +14,9 @@ class CachedTags extends Tags
     #[Inject(CacheInterface::class)]
     private CacheInterface $cache;
 
-    public function withCount(): Collection
+    public function withCount(): LazyCollection
     {
-        return $this->cache->get('tags-with-count', fn (): Collection => parent::withCount());
+        return $this->cache->get('tags-with-count', fn (): LazyCollection => parent::withCount());
     }
 
     public function count(): int

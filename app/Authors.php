@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace App;
 
 use DI\Attribute\Inject;
-use Illuminate\Support\Collection;
+use Illuminate\Support\LazyCollection;
 
 class Authors
 {
     #[Inject(Posts::class)]
     private Posts $posts;
 
-    /** @return Collection<int, string> */
-    public function withCount(): Collection
+    /** @return LazyCollection<int, string> */
+    public function withCount(): LazyCollection
     {
         return $this->posts->all()->pluck('author')->filter()->flatten()->countBy()->sortKeys();
     }

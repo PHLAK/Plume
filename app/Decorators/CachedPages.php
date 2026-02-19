@@ -7,7 +7,7 @@ namespace App\Decorators;
 use App\Data\Page;
 use App\Pages;
 use DI\Attribute\Inject;
-use Illuminate\Support\Collection;
+use Illuminate\Support\LazyCollection;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\NamespacedPoolInterface;
 
@@ -17,9 +17,9 @@ class CachedPages extends Pages
     #[Inject(CacheInterface::class)]
     private CacheInterface $cache;
 
-    public function all(): Collection
+    public function all(): LazyCollection
     {
-        return $this->cache->get('all-pages', fn (): Collection => parent::all());
+        return $this->cache->get('all-pages', fn (): LazyCollection => parent::all());
     }
 
     public function get(string $slug): Page

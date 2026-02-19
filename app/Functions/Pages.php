@@ -7,7 +7,7 @@ namespace App\Functions;
 use App\Data\Page;
 use App\Pages as PagesRepository;
 use DI\Attribute\Inject;
-use Illuminate\Support\Collection;
+use Illuminate\Support\LazyCollection;
 
 class Pages extends ViewFunction
 {
@@ -16,7 +16,7 @@ class Pages extends ViewFunction
     #[Inject(PagesRepository::class)]
     private PagesRepository $pages;
 
-    public function __invoke(): Collection
+    public function __invoke(): LazyCollection
     {
         return $this->pages->all()->mapWithKeys(
             fn (Page $page, string $slug) => [$slug => $page->link]
