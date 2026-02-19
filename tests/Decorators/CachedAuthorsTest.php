@@ -4,72 +4,55 @@ declare(strict_types=1);
 
 namespace Tests\Decorators;
 
-use App\Data\Post;
 use App\Decorators\CachedAuthors;
-use App\Posts;
-use Carbon\Carbon;
+use Closure;
 use Generator;
 use Illuminate\Support\LazyCollection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
+use Symfony\Contracts\Cache\CacheInterface;
 use Tests\TestCase;
 
 #[CoversClass(CachedAuthors::class)]
 class CachedAuthorsTest extends TestCase
 {
-    private Posts&MockObject $posts;
-
+    private CacheInterface&MockObject $cacheInterface;
     private CachedAuthors $cachedAuthors;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->posts = $this->mock(Posts::class);
+        $this->cacheInterface = $this->mock(CacheInterface::class);
         $this->cachedAuthors = $this->container->make(CachedAuthors::class);
     }
 
     #[Test]
     public function it_caches_a_collection_of_authors_with_count(): void
     {
-        $this->posts->expects($this->once())->method('all')->willReturn(
-            new LazyCollection(fn (): Generator => yield from [
-                new Post('Title', 'body', Carbon::now(), author: 'Arthur Dent'),
-                new Post('Title', 'body', Carbon::now(), author: 'Ford Prefect'),
-                new Post('Title', 'body', Carbon::now(), author: 'Arthur Dent'),
-                new Post('Title', 'body', Carbon::now(), author: 'Arthur Dent'),
-                new Post('Title', 'body', Carbon::now(), author: 'Trisha McMillan'),
-                new Post('Title', 'body', Carbon::now(), author: 'Ford Prefect'),
-            ])
+        $this->cacheInterface->expects($this->once())->method('get')->with(
+            $this->identicalTo('authors-with-count'),
+            $this->isInstanceOf(Closure::class)
+        )->willReturn(
+            new LazyCollection(fn (): Generator => yield from ['Arthur Dent' => 3, 'Ford Prefect' => 2, 'Trisha McMillan' => 1])
         );
 
         $authors = $this->cachedAuthors->withCount();
 
         $this->assertEquals(['Arthur Dent' => 3, 'Ford Prefect' => 2, 'Trisha McMillan' => 1], iterator_to_array($authors));
-        $this->assertEquals(['Arthur Dent' => 3, 'Ford Prefect' => 2, 'Trisha McMillan' => 1], $this->cache->get('authors-with-count', function (): void {
-            $this->fail('Failed to fetch data from the cache.');
-        }));
     }
 
     #[Test]
     public function it_caches_a_count_of_unique_authors(): void
     {
-        $this->posts->expects($this->once())->method('all')->willReturn(
-            new LazyCollection(fn (): Generator => yield from [
-                new Post('Title', 'body', Carbon::now(), author: 'Arthur Dent'),
-                new Post('Title', 'body', Carbon::now(), author: 'Ford Prefect'),
-                new Post('Title', 'body', Carbon::now(), author: 'Arthur Dent'),
-                new Post('Title', 'body', Carbon::now(), author: 'Arthur Dent'),
-                new Post('Title', 'body', Carbon::now(), author: 'Trisha McMillan'),
-            ])
-        );
+        $this->cacheInterface->expects($this->once())->method('get')->with(
+            $this->identicalTo('authors-count'),
+            $this->isInstanceOf(Closure::class)
+        )->willReturn(3);
 
         $count = $this->cachedAuthors->count();
 
         $this->assertEquals(3, $count);
-        $this->assertEquals(3, $this->cache->get('authors-count', function (): void {
-            $this->fail('Failed to fetch data from the cache.');
-        }));
     }
 }

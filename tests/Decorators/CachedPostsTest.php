@@ -7,27 +7,33 @@ namespace Tests\Decorators;
 use App\Data\Post;
 use App\Decorators\CachedPosts;
 use Carbon\Carbon;
+use Closure;
+use Generator;
+use Illuminate\Support\LazyCollection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\MockObject;
+use Symfony\Component\Cache\Adapter\AbstractAdapter;
+use Symfony\Contracts\Cache\CacheInterface;
 use Tests\TestCase;
 
 #[CoversClass(CachedPosts::class)]
 class CachedPostsTest extends TestCase
 {
+    private AbstractAdapter&MockObject $cacheInterface;
     private CachedPosts $cachedPosts;
 
     protected function setUp(): void
     {
         parent::setUp();
 
+        $this->cacheInterface = $this->mock(AbstractAdapter::class, as: CacheInterface::class);
         $this->cachedPosts = $this->container->make(CachedPosts::class);
     }
 
     #[Test]
     public function it_caches_a_single_post_by_slug(): void
     {
-        $post = $this->cachedPosts->get('test-post-1');
-
         $expected = new Post(
             title: 'Test Post; Please Ignore',
             published: Carbon::parse('1986-05-20 12:34:56'),
@@ -36,17 +42,23 @@ class CachedPostsTest extends TestCase
             body: "<p><excerpt>Lorem ipsum dolor sit amet</excerpt>, consectetur adipiscing elit.</p>\n"
         );
 
+        $this->cacheInterface->expects($this->once())->method('withSubNamespace')->with(
+            $this->identicalTo('posts')
+        )->willReturnSelf();
+
+        $this->cacheInterface->expects($this->once())->method('get')->with(
+            $this->identicalTo('test-post-1'),
+            $this->isInstanceOf(Closure::class)
+        )->willReturn($expected);
+
+        $post = $this->cachedPosts->get('test-post-1');
+
         $this->assertEquals($expected, $post);
-        $this->assertEquals($expected, $this->cache->withSubNamespace('posts')->get('test-post-1', function (): void {
-            $this->fail('Failed to fetch data from the cache.');
-        }));
     }
 
     #[Test]
     public function it_caches_a_collection_of_all_posts(): void
     {
-        $posts = $this->cachedPosts->all();
-
         $expected = [
             'test-post-2' => new Post(
                 title: 'Another Test Post',
@@ -64,17 +76,21 @@ class CachedPostsTest extends TestCase
             ),
         ];
 
+        $this->cacheInterface->expects($this->once())->method('get')->with(
+            $this->identicalTo('all-posts'),
+            $this->isInstanceOf(Closure::class)
+        )->willReturn(
+            new LazyCollection(fn (): Generator => yield from $expected)
+        );
+
+        $posts = $this->cachedPosts->all();
+
         $this->assertEquals($expected, iterator_to_array($posts));
-        $this->assertEquals($expected, $this->cache->get('all-posts', function (): void {
-            $this->fail('Failed to fetch data from the cache.');
-        }));
     }
 
     #[Test]
     public function it_caches_a_collection_of_posts_with_a_tag(): void
     {
-        $posts = $this->cachedPosts->withTag('Foo');
-
         $expected = [
             'test-post-1' => new Post(
                 title: 'Test Post; Please Ignore',
@@ -85,9 +101,19 @@ class CachedPostsTest extends TestCase
             ),
         ];
 
+        $this->cacheInterface->expects($this->once())->method('withSubNamespace')->with(
+            $this->identicalTo('posts-with-tag')
+        )->willReturnSelf();
+
+        $this->cacheInterface->expects($this->once())->method('get')->with(
+            $this->identicalTo('Foo'),
+            $this->isInstanceOf(Closure::class)
+        )->willReturn(
+            new LazyCollection(fn (): Generator => yield from $expected)
+        );
+
+        $posts = $this->cachedPosts->withTag('Foo');
+
         $this->assertEquals($expected, iterator_to_array($posts));
-        $this->assertEquals($expected, $this->cache->withSubNamespace('posts-with-tag')->get('Foo', function (): void {
-            $this->fail('Failed to fetch data from the cache.');
-        }));
     }
 }
