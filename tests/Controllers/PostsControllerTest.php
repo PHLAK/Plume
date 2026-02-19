@@ -10,7 +10,7 @@ use App\Posts;
 use App\Utilities\Paginator;
 use Carbon\Carbon;
 use Fig\Http\Message\StatusCodeInterface;
-use Illuminate\Support\Collection;
+use Illuminate\Support\LazyCollection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestWith;
@@ -29,7 +29,7 @@ class PostsControllerTest extends TestCase
 
         $posts = $this->mock(Posts::class);
         $posts->expects($this->once())->method('all')->willReturn(
-            $postsCollection = Collection::times(10, fn (int $iteration): Post => new Post(
+            $postsCollection = LazyCollection::times(10, fn (int $iteration): Post => new Post(
                 title: sprintf('Test Post %d', $iteration),
                 body: 'Post body...',
                 published: Carbon::now()->subDays($iteration),
@@ -57,9 +57,7 @@ class PostsControllerTest extends TestCase
     public function it_shows_an_error_page_when_there_are_no_posts(): void
     {
         $posts = $this->mock(Posts::class);
-        $posts->expects($this->once())->method('all')->willReturn(
-            $postsCollection = new Collection
-        );
+        $posts->expects($this->once())->method('all')->willReturn(new LazyCollection);
 
         $twig = $this->mock(Twig::class);
         $twig->expects($this->once())->method('render')->with($testResponse = new Response, 'error.twig', [

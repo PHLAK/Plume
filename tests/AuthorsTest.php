@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests;
 
 use App\Authors;
-use Illuminate\Support\Collection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 
@@ -26,10 +25,10 @@ class AuthorsTest extends TestCase
     {
         $authors = $this->authors->withCount();
 
-        $this->assertEquals(new Collection([
+        $this->assertEquals([
             'Arthur Dent' => 1,
             'Ford Prefect' => 1,
-        ]), $authors);
+        ], iterator_to_array($authors));
     }
 
     #[Test]

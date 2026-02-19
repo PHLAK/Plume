@@ -6,7 +6,6 @@ namespace Tests\Decorators;
 
 use App\Data\Page;
 use App\Decorators\CachedPages;
-use Illuminate\Support\Collection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -28,7 +27,7 @@ class CachedPagesTest extends TestCase
     {
         $pages = $this->cachedPages->all();
 
-        $expected = new Collection([
+        $expected = [
             'about' => new Page(
                 title: 'About this Blog',
                 link: 'About',
@@ -47,9 +46,9 @@ class CachedPagesTest extends TestCase
                 body: "<p>I should apear last in the navigation bar.</p>\n",
                 weight: 999,
             ),
-        ]);
+        ];
 
-        $this->assertEquals($expected, $pages);
+        $this->assertEquals($expected, iterator_to_array($pages));
         $this->assertEquals($expected, $this->cache->get('all-pages', function (): void {
             $this->fail('Failed to fetch data from the cache.');
         }));

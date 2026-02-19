@@ -7,7 +7,6 @@ namespace Tests\Decorators;
 use App\Data\Post;
 use App\Decorators\CachedPosts;
 use Carbon\Carbon;
-use Illuminate\Support\Collection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -48,7 +47,7 @@ class CachedPostsTest extends TestCase
     {
         $posts = $this->cachedPosts->all();
 
-        $expected = new Collection([
+        $expected = [
             'test-post-2' => new Post(
                 title: 'Another Test Post',
                 published: Carbon::parse('1986-07-06 12:34:56'),
@@ -63,9 +62,9 @@ class CachedPostsTest extends TestCase
                 tags: ['Foo', 'Bar', 'Test'],
                 body: "<p><excerpt>Lorem ipsum dolor sit amet</excerpt>, consectetur adipiscing elit.</p>\n"
             ),
-        ]);
+        ];
 
-        $this->assertEquals($expected, $posts);
+        $this->assertEquals($expected, iterator_to_array($posts));
         $this->assertEquals($expected, $this->cache->get('all-posts', function (): void {
             $this->fail('Failed to fetch data from the cache.');
         }));
@@ -76,7 +75,7 @@ class CachedPostsTest extends TestCase
     {
         $posts = $this->cachedPosts->withTag('Foo');
 
-        $expected = new Collection([
+        $expected = [
             'test-post-1' => new Post(
                 title: 'Test Post; Please Ignore',
                 published: Carbon::parse('1986-05-20 12:34:56'),
@@ -84,9 +83,9 @@ class CachedPostsTest extends TestCase
                 tags: ['Foo', 'Bar', 'Test'],
                 body: "<p><excerpt>Lorem ipsum dolor sit amet</excerpt>, consectetur adipiscing elit.</p>\n"
             ),
-        ]);
+        ];
 
-        $this->assertEquals($expected, $posts);
+        $this->assertEquals($expected, iterator_to_array($posts));
         $this->assertEquals($expected, $this->cache->withSubNamespace('posts-with-tag')->get('Foo', function (): void {
             $this->fail('Failed to fetch data from the cache.');
         }));

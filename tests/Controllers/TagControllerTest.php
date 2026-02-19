@@ -10,7 +10,7 @@ use App\Posts;
 use App\Utilities\Paginator;
 use Carbon\Carbon;
 use Fig\Http\Message\StatusCodeInterface;
-use Illuminate\Support\Collection;
+use Illuminate\Support\LazyCollection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\ResponseInterface;
@@ -28,7 +28,7 @@ class TagControllerTest extends TestCase
 
         $posts = $this->mock(Posts::class);
         $posts->expects($this->once())->method('withTag')->with('Foo')->willReturn(
-            $postsCollection = Collection::times(10, fn (int $iteration): Post => new Post(
+            $postsCollection = LazyCollection::times(10, fn (int $iteration): Post => new Post(
                 title: sprintf('Test Post %d', $iteration),
                 body: 'Post body...',
                 published: Carbon::now()->subDays($iteration),
@@ -57,7 +57,7 @@ class TagControllerTest extends TestCase
     public function it_shows_an_error_page_when_no_posts_are_found_for_the_tag(): void
     {
         $posts = $this->mock(Posts::class);
-        $posts->expects($this->once())->method('withTag')->with('Bar')->willReturn(new Collection);
+        $posts->expects($this->once())->method('withTag')->with('Bar')->willReturn(new LazyCollection);
 
         $testResponse = (new Response)->withStatus(StatusCodeInterface::STATUS_NOT_FOUND);
 

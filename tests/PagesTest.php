@@ -6,7 +6,6 @@ namespace Tests;
 
 use App\Data\Page;
 use App\Pages;
-use Illuminate\Support\Collection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 
@@ -27,7 +26,7 @@ class PagesTest extends TestCase
     {
         $pages = $this->pages->all();
 
-        $this->assertEquals(new Collection([
+        $this->assertEquals([
             'about' => new Page(
                 title: 'About this Blog',
                 link: 'About',
@@ -46,7 +45,7 @@ class PagesTest extends TestCase
                 weight: 999,
                 body: "<p>I should apear last in the navigation bar.</p>\n"
             ),
-        ]), $pages);
+        ], iterator_to_array($pages));
     }
 
     #[Test]

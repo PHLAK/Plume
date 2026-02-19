@@ -7,7 +7,7 @@ namespace Tests\Controllers;
 use App\Controllers\FeedController;
 use App\Posts;
 use Fig\Http\Message\StatusCodeInterface;
-use Illuminate\Support\Collection;
+use Illuminate\Support\LazyCollection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\ResponseInterface;
@@ -25,13 +25,13 @@ class FeedControllerTest extends TestCase
         $this->container->set('meta_description', 'This is a test site description.');
 
         $posts = $this->mock(Posts::class);
-        $posts->expects($this->once())->method('all')->willReturn(new Collection);
+        $posts->expects($this->once())->method('all')->willReturn(new LazyCollection);
 
         $twig = $this->mock(Twig::class);
         $twig->expects($this->once())->method('render')->with($testResponse = new Response, 'feed.twig', [
             'title' => 'Test site; please ignore',
             'description' => 'This is a test site description.',
-            'posts' => new Collection,
+            'posts' => new LazyCollection,
         ])->willReturn(
             $testResponse->withStatus(StatusCodeInterface::STATUS_OK)
         );

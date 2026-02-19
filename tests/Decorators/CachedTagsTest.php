@@ -8,7 +8,8 @@ use App\Data\Post;
 use App\Decorators\CachedTags;
 use App\Posts;
 use Carbon\Carbon;
-use Illuminate\Support\Collection;
+use Generator;
+use Illuminate\Support\LazyCollection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -33,7 +34,7 @@ class CachedTagsTest extends TestCase
     public function it_caches_a_collection_of_tags_with_count(): void
     {
         $this->posts->expects($this->once())->method('all')->willReturn(
-            new Collection([
+            new LazyCollection(fn (): Generator => yield from [
                 new Post('Title', 'body', Carbon::now(), tags: ['Foo', 'Bar', 'Baz']),
                 new Post('Title', 'body', Carbon::now(), tags: ['Foo', 'Bar']),
                 new Post('Title', 'body', Carbon::now(), tags: ['Bar', 'Baz']),
@@ -44,8 +45,8 @@ class CachedTagsTest extends TestCase
 
         $tags = $this->cachedTags->withCount();
 
-        $this->assertEquals(new Collection(['Bar' => 5, 'Baz' => 2, 'Foo' => 3]), $tags);
-        $this->assertEquals(new Collection(['Bar' => 5, 'Baz' => 2, 'Foo' => 3]), $this->cache->get('tags-with-count', function (): void {
+        $this->assertEquals(['Bar' => 5, 'Baz' => 2, 'Foo' => 3], iterator_to_array($tags));
+        $this->assertEquals(['Bar' => 5, 'Baz' => 2, 'Foo' => 3], $this->cache->get('tags-with-count', function (): void {
             $this->fail('Failed to fetch data from the cache.');
         }));
     }
@@ -54,7 +55,7 @@ class CachedTagsTest extends TestCase
     public function it_caches_a_count_of_unique_tags(): void
     {
         $this->posts->expects($this->once())->method('all')->willReturn(
-            new Collection([
+            new LazyCollection(fn (): Generator => yield from [
                 new Post('Title', 'body', Carbon::now(), tags: ['Foo', 'Bar', 'Baz']),
                 new Post('Title', 'body', Carbon::now(), tags: ['Foo', 'Bar']),
                 new Post('Title', 'body', Carbon::now(), tags: ['Bar', 'Baz']),

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Functions;
 
 use App\Functions\Pages;
-use Illuminate\Support\Collection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -18,9 +17,9 @@ class PagesTest extends TestCase
     {
         $pages = $this->container->call(Pages::class);
 
-        $this->assertEquals(new Collection([
+        $this->assertEquals([
             'about' => 'About',
             'test' => 'Test', 'last' => 'Last',
-        ]), $pages);
+        ], iterator_to_array($pages));
     }
 }

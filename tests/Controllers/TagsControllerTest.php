@@ -7,7 +7,8 @@ namespace Tests\Controllers;
 use App\Controllers\TagsController;
 use App\Tags;
 use Fig\Http\Message\StatusCodeInterface;
-use Illuminate\Support\Collection;
+use Generator;
+use Illuminate\Support\LazyCollection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\ResponseInterface;
@@ -23,7 +24,7 @@ class TagsControllerTest extends TestCase
     {
         $posts = $this->mock(Tags::class);
         $posts->expects($this->once())->method('withCount')->willReturn(
-            $tags = new Collection(['Foo' => 3, 'Bar' => 5, 'Baz' => 2])
+            $tags = new LazyCollection(fn (): Generator => yield from ['Foo' => 3, 'Bar' => 5, 'Baz' => 2])
         );
 
         $twig = $this->mock(Twig::class);
@@ -45,7 +46,7 @@ class TagsControllerTest extends TestCase
     public function it_shows_an_error_page_when_no_tags_are_found(): void
     {
         $posts = $this->mock(Tags::class);
-        $posts->expects($this->once())->method('withCount')->willReturn(new Collection);
+        $posts->expects($this->once())->method('withCount')->willReturn(new LazyCollection);
 
         $testResponse = (new Response)->withStatus(StatusCodeInterface::STATUS_NOT_FOUND);
 

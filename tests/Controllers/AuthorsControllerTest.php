@@ -7,7 +7,8 @@ namespace Tests\Controllers;
 use App\Authors;
 use App\Controllers\AuthorsController;
 use Fig\Http\Message\StatusCodeInterface;
-use Illuminate\Support\Collection;
+use Generator;
+use Illuminate\Support\LazyCollection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\ResponseInterface;
@@ -23,7 +24,7 @@ class AuthorsControllerTest extends TestCase
     {
         $posts = $this->mock(Authors::class);
         $posts->expects($this->once())->method('withCount')->willReturn(
-            $tags = new Collection(['Arthur Dent' => 3, 'Ford Prefect' => 5, 'Trisha McMillan' => 2])
+            $tags = new LazyCollection(fn (): Generator => yield from ['Arthur Dent' => 3, 'Ford Prefect' => 5, 'Trisha McMillan' => 2])
         );
 
         $twig = $this->mock(Twig::class);
@@ -45,7 +46,7 @@ class AuthorsControllerTest extends TestCase
     public function it_shows_an_error_page_when_no_authors_are_found(): void
     {
         $posts = $this->mock(Authors::class);
-        $posts->expects($this->once())->method('withCount')->willReturn(new Collection);
+        $posts->expects($this->once())->method('withCount')->willReturn(new LazyCollection);
 
         $testResponse = (new Response)->withStatus(StatusCodeInterface::STATUS_NOT_FOUND);
 
