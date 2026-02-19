@@ -37,3 +37,7 @@ html {
 }
 
 @import "./prose.css";
+
+.video {
+    @apply aspect-video w-full;
+}
