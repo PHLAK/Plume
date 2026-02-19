@@ -12,7 +12,7 @@ class Tags
     #[Inject(Posts::class)]
     private Posts $posts;
 
-    /** @return LazyCollection<int, string> */
+    /** @return LazyCollection<string, int> */
     public function withCount(): LazyCollection
     {
         return $this->posts->all()->pluck('tags')->flatten()->countBy()->sortKeys();

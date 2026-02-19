@@ -16,6 +16,7 @@ class Pages extends ViewFunction
     #[Inject(PagesRepository::class)]
     private PagesRepository $pages;
 
+    /** @return LazyCollection<string, string> */
     public function __invoke(): LazyCollection
     {
         return $this->pages->all()->mapWithKeys(

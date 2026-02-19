@@ -39,11 +39,11 @@ class Pages
     /** @return LazyCollection<string, Page> */
     public function all(): LazyCollection
     {
-        /** @var GlobIterator<int, SplFileInfo> $posts */
         $pages = new GlobIterator($this->pagesPath . '/*.md');
 
-        return  new LazyCollection(function () use ($pages) {
+        return new LazyCollection(function () use ($pages) {
             foreach ($pages as $page) {
+                /** @var SplFileInfo $page */
                 $slug = $page->getBasename('.md');
 
                 yield $slug => $this->get($slug);

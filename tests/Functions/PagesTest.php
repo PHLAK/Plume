@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Functions;
 
 use App\Functions\Pages;
+use Illuminate\Support\LazyCollection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -15,6 +16,7 @@ class PagesTest extends TestCase
     #[Test]
     public function it_returns_a_list_of_pages(): void
     {
+        /** @var LazyCollection<string, string> $pages */
         $pages = $this->container->call(Pages::class);
 
         $this->assertEquals([

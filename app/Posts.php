@@ -39,11 +39,11 @@ class Posts
     /** @return LazyCollection<int, Post> */
     public function all(): LazyCollection
     {
-        /** @var GlobIterator<int, SplFileInfo> $posts */
         $posts = new GlobIterator($this->postsPath . '/*.md');
 
         return new LazyCollection(function () use ($posts) {
             foreach ($posts as $post) {
+                /** @var SplFileInfo $post */
                 $slug = $post->getBasename('.md');
 
                 yield $slug => $this->get($slug);
@@ -53,6 +53,7 @@ class Posts
         )->sortByDesc('published');
     }
 
+    /** @return LazyCollection<int, Post> */
     public function byAuthor(string $author): LazyCollection
     {
         return $this->all()->filter(
