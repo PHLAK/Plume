@@ -1,38 +1,8 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Method App\\Authors\:\:withCount\(\) should return Illuminate\\Support\\Collection\<int, string\> but returns Illuminate\\Support\\Collection\<\(int\|string\), int\>\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Authors.php
-
-		-
-			message: '#^Offset ''author'' on array\{title\: string, link\?\: string, weight\?\: int\} on left side of \?\? does not exist\.$#'
-			identifier: nullCoalesce.offset
-			count: 1
-			path: app/Data/Post.php
-
-		-
-			message: '#^Offset ''draft'' on array\{title\: string, link\?\: string, weight\?\: int\} on left side of \?\? does not exist\.$#'
-			identifier: nullCoalesce.offset
-			count: 1
-			path: app/Data/Post.php
-
-		-
-			message: '#^Offset ''image'' on array\{title\: string, link\?\: string, weight\?\: int\} on left side of \?\? does not exist\.$#'
-			identifier: nullCoalesce.offset
-			count: 1
-			path: app/Data/Post.php
-
-		-
 			message: '#^Offset ''published'' does not exist on array\{title\: string, link\?\: string, weight\?\: int\}\.$#'
 			identifier: offsetAccess.notFound
-			count: 1
-			path: app/Data/Post.php
-
-		-
-			message: '#^Offset ''tags'' on array\{title\: string, link\?\: string, weight\?\: int\} on left side of \?\? does not exist\.$#'
-			identifier: nullCoalesce.offset
 			count: 1
 			path: app/Data/Post.php
 
@@ -51,12 +21,6 @@ parameters:
 		-
 			message: '#^Parameter \#1 \$url of class App\\Data\\PostImage constructor expects string, mixed given\.$#'
 			identifier: argument.type
-			count: 1
-			path: app/Data/Post.php
-
-		-
-			message: '#^Ternary operator condition is always false\.$#'
-			identifier: ternary.alwaysFalse
 			count: 1
 			path: app/Data/Post.php
 
@@ -143,12 +107,6 @@ parameters:
 			identifier: missingType.checkedException
 			count: 1
 			path: app/Filters/Markdown.php
-
-		-
-			message: '#^Method App\\Functions\\Pages\:\:__invoke\(\) return type with generic class Illuminate\\Support\\Collection does not specify its types\: TKey, TValue$#'
-			identifier: missingType.generics
-			count: 1
-			path: app/Functions/Pages.php
 
 		-
 			message: '#^Method App\\Functions\\Svg\:\:__invoke\(\) has parameter \$classes with no type specified\.$#'
@@ -243,32 +201,8 @@ parameters:
 		-
 			message: '#^Parameter \#1 \$content of static method App\\Data\\Page\:\:fromRenderedContent\(\) expects League\\CommonMark\\Extension\\FrontMatter\\Output\\RenderedContentWithFrontMatter, League\\CommonMark\\Output\\RenderedContentInterface given\.$#'
 			identifier: argument.type
-			count: 2
-			path: app/Pages.php
-
-		-
-			message: '#^Parameter \#1 \$input of method League\\CommonMark\\ConverterInterface\:\:convert\(\) expects string, string\|false given\.$#'
-			identifier: argument.type
 			count: 1
 			path: app/Pages.php
-
-		-
-			message: '#^Possibly invalid array key type string\|null\.$#'
-			identifier: array.invalidKey
-			count: 1
-			path: app/Pages.php
-
-		-
-			message: '#^Method App\\Posts\:\:all\(\) should return Illuminate\\Support\\Collection\<int, App\\Data\\Post\> but returns Illuminate\\Support\\Collection\<string, App\\Data\\Post\>\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Posts.php
-
-		-
-			message: '#^Method App\\Posts\:\:byAuthor\(\) return type with generic class Illuminate\\Support\\Collection does not specify its types\: TKey, TValue$#'
-			identifier: missingType.generics
-			count: 1
-			path: app/Posts.php
 
 		-
 			message: '#^Method App\\Posts\:\:get\(\) throws checked exception League\\CommonMark\\Exception\\CommonMarkException but it''s missing from the PHPDoc @throws tag\.$#'
@@ -285,26 +219,8 @@ parameters:
 		-
 			message: '#^Parameter \#1 \$content of static method App\\Data\\Post\:\:fromRenderedContent\(\) expects League\\CommonMark\\Extension\\FrontMatter\\Output\\RenderedContentWithFrontMatter, League\\CommonMark\\Output\\RenderedContentInterface given\.$#'
 			identifier: argument.type
-			count: 2
-			path: app/Posts.php
-
-		-
-			message: '#^Parameter \#1 \$input of method League\\CommonMark\\ConverterInterface\:\:convert\(\) expects string, string\|false given\.$#'
-			identifier: argument.type
 			count: 1
 			path: app/Posts.php
-
-		-
-			message: '#^Possibly invalid array key type string\|null\.$#'
-			identifier: array.invalidKey
-			count: 1
-			path: app/Posts.php
-
-		-
-			message: '#^Method App\\Tags\:\:withCount\(\) should return Illuminate\\Support\\Collection\<int, string\> but returns Illuminate\\Support\\Collection\<\(int\|string\), int\>\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Tags.php
 
 		-
 			message: '#^Method App\\Utilities\\Paginator\:\:__construct\(\) has parameter \$items with no value type specified in iterable type iterable\.$#'
@@ -467,12 +383,6 @@ parameters:
 			identifier: assign.propertyType
 			count: 1
 			path: tests/PagesTest.php
-
-		-
-			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertContainsOnlyInstancesOf\(\) with ''App\\\\Data\\\\Post'' and Illuminate\\Support\\Collection\<int, App\\Data\\Post\> will always evaluate to true\.$#'
-			identifier: method.alreadyNarrowedType
-			count: 2
-			path: tests/PostsTest.php
 
 		-
 			message: '#^Property Tests\\PostsTest\:\:\$posts \(App\\Posts\) does not accept mixed\.$#'
