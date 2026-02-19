@@ -60,8 +60,6 @@ COPY --from=base /usr/local/lib/node_modules /usr/local/lib/node_modules
 COPY --from=build /var/www/html /var/www/html
 RUN chown --recursive www-data:www-data /var/www/html
 
-VOLUME /var/www/html/cache
-
 # --------- DEV ----------
 
 FROM prod AS dev
