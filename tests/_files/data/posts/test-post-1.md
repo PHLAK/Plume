@@ -5,4 +5,6 @@ author: Arthur Dent
 tags: [Foo, Bar, Test]
 ---
 
-<excerpt>Lorem ipsum dolor sit amet</excerpt>, consectetur adipiscing elit.
+<!-- excerpt -->
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+<!-- /excerpt -->

@@ -20,7 +20,7 @@ class PostTest extends TestCase
     {
         $post = new Post(
             title: 'Test title; please ignore',
-            body: "<excerpt>Hello world!</excerpt>\n<p>This is a test post</p>",
+            body: "<!-- excerpt -->Hello world!<!-- /excerpt -->\n<p>This is a test post</p>",
             published: Carbon::parse('1986-05-20 12:34:56'),
             author: 'Arthur Dent',
             tags: ['Foo', 'Bar', 'Baz'],
@@ -29,7 +29,7 @@ class PostTest extends TestCase
         );
 
         $this->assertSame('Test title; please ignore', $post->title);
-        $this->assertSame("<excerpt>Hello world!</excerpt>\n<p>This is a test post</p>", $post->body);
+        $this->assertSame("<!-- excerpt -->Hello world!<!-- /excerpt -->\n<p>This is a test post</p>", $post->body);
         $this->assertSame('Hello world!', $post->excerpt);
         $this->assertTrue($post->published->equalTo('1986-05-20 12:34:56'));
         $this->assertSame('Arthur Dent', $post->author);

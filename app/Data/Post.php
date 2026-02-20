@@ -48,7 +48,7 @@ final class Post
             return $this->body;
         }
 
-        [$excerpt] = Str::extract('/<!-- excerpt -->(?<excerpt>.+)<!-- \/excerpt -->/s', $body);
+        [$excerpt] = Str::extract('/<!-- excerpt -->(?:\s+)?(?<excerpt>.+)(?:\s+)?<!-- \/excerpt -->/s', $body);
 
         return $excerpt ?? null;
     }
