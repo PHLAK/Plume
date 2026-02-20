@@ -48,13 +48,13 @@ final class Post
             return $this->body;
         }
 
-        [$excerpt] = Str::extract('/<excerpt>(?<excerpt>.+)<\/excerpt>/s', $body);
+        [$excerpt] = Str::extract('/<!-- excerpt -->(?<excerpt>.+)<!-- \/excerpt -->/s', $body);
 
         return $excerpt ?? null;
     }
 
     private function hasExcerpt(string $body): bool
     {
-        return mb_strstr($body, '<excerpt>') && mb_strstr($body, '</excerpt>');
+        return mb_strstr($body, '<!-- excerpt -->') && mb_strstr($body, '<!-- /excerpt -->');
     }
 }
