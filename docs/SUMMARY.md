@@ -13,6 +13,7 @@
 
 * [Posts](publishing/posts.md)
 * [Pages](publishing/pages.md)
+* [Markdown](publishing/markdown.md)
 
 ## Help & Support
 

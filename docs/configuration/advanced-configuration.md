@@ -34,6 +34,6 @@ Plume utilizes PHP-DI for it's configuration. See the [PHP Definitions documenta
 
 For additional information about individual configuration options reference the individual config documentation.
 
-{% hint style="success" %}
+{% hint style="success" icon="clock-five" %}
 More coming soon...
 {% endhint %}

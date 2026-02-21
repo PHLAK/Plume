@@ -22,7 +22,7 @@ layout:
 
 ### Quick Start
 
-{% hint style="success" %}
+{% hint style="success" icon="clock-five" %}
 Coming soon...
 {% endhint %}
 
