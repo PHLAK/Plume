@@ -109,14 +109,10 @@ return [
     ],
 
     'tags_enabled' => function (Container $container, App\Tags $tags): bool {
-        $tagsLink = (bool) filter_var($container->get('tags_link'), FILTER_VALIDATE_BOOLEAN);
-
-        return $tagsLink && $tags->count() > 1;
+        return (bool) filter_var($container->get('tags_link'), FILTER_VALIDATE_BOOLEAN);
     },
 
     'authors_enabled' => function (Container $container, App\Authors $authors): bool {
-        $authorsLink = (bool) filter_var($container->get('authors_link'), FILTER_VALIDATE_BOOLEAN);
-
-        return $authorsLink && $authors->count() > 1;
+        return (bool) filter_var($container->get('authors_link'), FILTER_VALIDATE_BOOLEAN);
     },
 ];

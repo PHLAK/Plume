@@ -75,9 +75,9 @@ return [
      * Whether or not to show the "Authors" navigation link when there are
      * multipe unique post authors.
      *
-     * Default value: true
+     * Default value: false
      */
-    'authors_link' => env('AUTHORS_LINK', true),
+    'authors_link' => env('AUTHORS_LINK', false),
 
     /**
      * Default date format. For additional info on date formatting see:
