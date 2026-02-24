@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ config('language') }}">
+<html lang="{{ config('language') }}" class="light" x-data="application" x-effect="storeThemeCookie($store.theme)" :class="{ 'dark': $store.theme === 'dark' }" x-cloak>
 
 <meta charset="utf-8">
 <meta name="description" content="{{ config('meta_description') }}">
@@ -13,16 +13,14 @@
 
 <title>{% if title %}{{ title }} &bull; {% endif %}{{ config('site_title') }}</title>
 
-<div id="app" class="light" x-data="application" x-effect="storeThemeCookie($store.theme)" :class="{ 'dark': $store.theme === 'dark' }" x-cloak>
-    <div class="flex flex-col min-h-screen bg-stone-100 dark:bg-stone-800">
-        {% include 'components/header.twig' %}
+<div class="flex flex-col min-h-screen">
+    {% include 'components/header.twig' %}
 
-        <div id="content" class="container flex flex-col grow max-w-4xl mx-auto px-4">
-            {% block content %}{% endblock %}
-        </div>
-
-        {% include 'components/footer.twig' %}
+    <div id="content" class="container flex flex-col grow max-w-4xl mx-auto px-4">
+        {% block content %}{% endblock %}
     </div>
+
+    {% include 'components/footer.twig' %}
 </div>
 
 {% if config('usage_reporting') %}

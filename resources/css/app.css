@@ -32,7 +32,7 @@
     @apply hidden;
 }
 
-html {
+html, body {
     @apply bg-stone-100 dark:bg-stone-800;
 }
 
