@@ -37,8 +37,8 @@ parameters:
 			path: app/Factories/CacheFactory.php
 
 		-
-			message: '#^Call to an undefined method Symfony\\Component\\Console\\Application\:\:add\(\)\.$#'
-			identifier: method.notFound
+			message: '#^Parameter \#1 \$command of method Symfony\\Component\\Console\\Application\:\:addCommand\(\) expects \(callable\(\)\: mixed\)\|Symfony\\Component\\Console\\Command\\Command, mixed given\.$#'
+			identifier: argument.type
 			count: 1
 			path: app/Factories/ConsoleAppFactory.php
 
