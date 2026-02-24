@@ -22,7 +22,7 @@ class ConsoleAppFactory
         $application = new Application;
 
         foreach ($this->commands as $command) {
-            $application->add($this->container->make($command));
+            $application->addCommand($this->container->make($command));
         }
 
         return $application;
