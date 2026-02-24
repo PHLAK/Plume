@@ -8,12 +8,12 @@ use App\Data\Page;
 use App\Pages;
 use DI\Attribute\Inject;
 use Illuminate\Support\LazyCollection;
+use Symfony\Component\Cache\Adapter\AbstractAdapter;
 use Symfony\Contracts\Cache\CacheInterface;
-use Symfony\Contracts\Cache\NamespacedPoolInterface;
 
 class CachedPages extends Pages
 {
-    /** @var CacheInterface&NamespacedPoolInterface */
+    /** @var AbstractAdapter $cache */
     #[Inject(CacheInterface::class)]
     private CacheInterface $cache;
 

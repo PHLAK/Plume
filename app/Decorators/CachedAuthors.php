@@ -7,10 +7,12 @@ namespace App\Decorators;
 use App\Authors;
 use DI\Attribute\Inject;
 use Illuminate\Support\LazyCollection;
+use Symfony\Component\Cache\Adapter\AbstractAdapter;
 use Symfony\Contracts\Cache\CacheInterface;
 
 class CachedAuthors extends Authors
 {
+    /** @var AbstractAdapter $cache */
     #[Inject(CacheInterface::class)]
     private CacheInterface $cache;
 

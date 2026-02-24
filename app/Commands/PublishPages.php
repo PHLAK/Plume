@@ -6,6 +6,7 @@ namespace App\Commands;
 
 use App\Pages;
 use DI\Attribute\Inject;
+use Symfony\Component\Cache\Adapter\AbstractAdapter;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -19,6 +20,7 @@ use Symfony\Contracts\Cache\CacheInterface;
 )]
 class PublishPages extends Command
 {
+    /** @var AbstractAdapter $cache */
     #[Inject(CacheInterface::class)]
     private CacheInterface $cache;
 
@@ -35,6 +37,7 @@ class PublishPages extends Command
 
         $output->write('Clearing pages cache ... ');
         $this->cache->delete('all-pages');
+        $this->cache->withSubNamespace('pages')->clear();
         $output->writeln('<fg=green>DONE</>');
 
         $output->write('Publishing all pages ... ');
