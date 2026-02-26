@@ -19,6 +19,7 @@ parameters:
       - DI\NotFoundException
       - InvalidArgumentException
       - Invoker\Exception\InvocationException
+      - PHPUnit\Framework\MockObject\Exception
       - Psr\Cache\InvalidArgumentException
       - RuntimeException
       - Twig\Error\Error
