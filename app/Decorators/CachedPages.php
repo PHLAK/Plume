@@ -13,17 +13,23 @@ use Symfony\Contracts\Cache\CacheInterface;
 
 class CachedPages extends Pages
 {
-    /** @var AbstractAdapter $cache */
-    #[Inject(CacheInterface::class)]
+    /** @var AbstractAdapter */
     private CacheInterface $cache;
+
+    /** @param AbstractAdapter $cache */
+    public function __construct(
+        #[Inject(CacheInterface::class)] CacheInterface $cache,
+    ) {
+        $this->cache = $cache->withSubNamespace('pages');
+    }
 
     public function all(): LazyCollection
     {
-        return $this->cache->get('all-pages', fn (): LazyCollection => parent::all());
+        return $this->cache->get('all', fn (): LazyCollection => parent::all());
     }
 
     public function get(string $slug): Page
     {
-        return $this->cache->withSubNamespace('pages')->get($slug, fn (): Page => parent::get($slug));
+        return $this->cache->get(hash('xxh128', $slug), fn (): Page => parent::get($slug));
     }
 }

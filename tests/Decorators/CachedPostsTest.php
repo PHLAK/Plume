@@ -20,14 +20,20 @@ use Tests\TestCase;
 #[CoversClass(CachedPosts::class)]
 class CachedPostsTest extends TestCase
 {
-    private AbstractAdapter&MockObject $cacheInterface;
+    private AbstractAdapter&MockObject $postsCache;
     private CachedPosts $cachedPosts;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->cacheInterface = $this->mock(AbstractAdapter::class, as: CacheInterface::class);
+        $this->postsCache = $this->createMock(AbstractAdapter::class);
+
+        $cacheInterface = $this->mock(AbstractAdapter::class, as: CacheInterface::class);
+        $cacheInterface->expects($this->once())->method('withSubNamespace')->with(
+            $this->identicalTo('posts')
+        )->willReturn($this->postsCache);
+
         $this->cachedPosts = $this->container->make(CachedPosts::class);
     }
 
@@ -42,12 +48,8 @@ class CachedPostsTest extends TestCase
             body: "<p><excerpt>Lorem ipsum dolor sit amet</excerpt>, consectetur adipiscing elit.</p>\n"
         );
 
-        $this->cacheInterface->expects($this->once())->method('withSubNamespace')->with(
-            $this->identicalTo('posts')
-        )->willReturnSelf();
-
-        $this->cacheInterface->expects($this->once())->method('get')->with(
-            $this->identicalTo('test-post-1'),
+        $this->postsCache->expects($this->once())->method('get')->with(
+            $this->identicalTo('9e9c650fbf52bb28c474bcf1e0bb54e6'),
             $this->isInstanceOf(Closure::class)
         )->willReturn($expected);
 
@@ -76,14 +78,45 @@ class CachedPostsTest extends TestCase
             ),
         ];
 
-        $this->cacheInterface->expects($this->once())->method('get')->with(
-            $this->identicalTo('all-posts'),
+        $this->postsCache->expects($this->once())->method('get')->with(
+            $this->identicalTo('all'),
             $this->isInstanceOf(Closure::class)
         )->willReturn(
             new LazyCollection(fn (): Generator => yield from $expected)
         );
 
         $posts = $this->cachedPosts->all();
+
+        $this->assertEquals($expected, iterator_to_array($posts));
+    }
+
+    #[Test]
+    public function it_caches_a_collection_of_posts_by_author(): void
+    {
+        $expected = [
+            'test-post-1' => new Post(
+                title: 'Test Post; Please Ignore',
+                published: Carbon::parse('1986-05-20 12:34:56'),
+                author: 'Arthur Dent',
+                tags: ['Foo', 'Bar', 'Test'],
+                body: "<p><excerpt>Lorem ipsum dolor sit amet</excerpt>, consectetur adipiscing elit.</p>\n"
+            ),
+        ];
+
+        $byAuthorCache = $this->createMock(AbstractAdapter::class);
+
+        $this->postsCache->expects($this->once())->method('withSubNamespace')->with(
+            $this->identicalTo('by-author')
+        )->willReturn($byAuthorCache);
+
+        $byAuthorCache->expects($this->once())->method('get')->with(
+            $this->identicalTo('Arthur Dent'),
+            $this->isInstanceOf(Closure::class)
+        )->willReturn(
+            new LazyCollection(fn (): Generator => yield from $expected)
+        );
+
+        $posts = $this->cachedPosts->byAuthor('Arthur Dent');
 
         $this->assertEquals($expected, iterator_to_array($posts));
     }
@@ -101,11 +134,13 @@ class CachedPostsTest extends TestCase
             ),
         ];
 
-        $this->cacheInterface->expects($this->once())->method('withSubNamespace')->with(
-            $this->identicalTo('posts-with-tag')
-        )->willReturnSelf();
+        $withTagCache = $this->createMock(AbstractAdapter::class);
 
-        $this->cacheInterface->expects($this->once())->method('get')->with(
+        $this->postsCache->expects($this->once())->method('withSubNamespace')->with(
+            $this->identicalTo('with-tag')
+        )->willReturn($withTagCache);
+
+        $withTagCache->expects($this->once())->method('get')->with(
             $this->identicalTo('Foo'),
             $this->isInstanceOf(Closure::class)
         )->willReturn(

@@ -19,14 +19,20 @@ use Tests\TestCase;
 #[CoversClass(CachedPages::class)]
 class CachedPagesTest extends TestCase
 {
-    private AbstractAdapter&MockObject $cacheInterface;
+    private AbstractAdapter&MockObject $pagesCache;
     private CachedPages $cachedPages;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->cacheInterface = $this->mock(AbstractAdapter::class, as: CacheInterface::class);
+        $this->pagesCache = $this->createMock(AbstractAdapter::class);
+
+        $cacheinterface = $this->mock(AbstractAdapter::class, as: CacheInterface::class);
+        $cacheinterface->expects($this->once())->method('withSubNamespace')->with(
+            $this->identicalTo('pages')
+        )->willReturn($this->pagesCache);
+
         $this->cachedPages = $this->container->make(CachedPages::class);
     }
 
@@ -54,8 +60,8 @@ class CachedPagesTest extends TestCase
             ),
         ];
 
-        $this->cacheInterface->expects($this->once())->method('get')->with(
-            $this->identicalTo('all-pages'),
+        $this->pagesCache->expects($this->once())->method('get')->with(
+            $this->identicalTo('all'),
             $this->isInstanceOf(Closure::class)
         )->willReturn(
             new LazyCollection(fn (): Generator => yield from $expected)
@@ -76,12 +82,8 @@ class CachedPagesTest extends TestCase
             weight: 0,
         );
 
-        $this->cacheInterface->expects($this->once())->method('withSubNamespace')->with(
-            $this->identicalTo('pages')
-        )->willReturnSelf();
-
-        $this->cacheInterface->expects($this->once())->method('get')->with(
-            $this->identicalTo('test'),
+        $this->pagesCache->expects($this->once())->method('get')->with(
+            $this->identicalTo('6c78e0e3bd51d358d01e758642b85fb8'),
             $this->isInstanceOf(Closure::class)
         )->willReturn($expected);
 

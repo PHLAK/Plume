@@ -17,9 +17,4 @@ class Authors
     {
         return $this->posts->all()->pluck('author')->filter()->flatten()->countBy()->sortKeys();
     }
-
-    public function count(): int
-    {
-        return $this->posts->all()->pluck('author')->filter()->unique()->count();
-    }
 }

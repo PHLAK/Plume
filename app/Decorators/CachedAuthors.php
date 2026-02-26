@@ -12,17 +12,18 @@ use Symfony\Contracts\Cache\CacheInterface;
 
 class CachedAuthors extends Authors
 {
-    /** @var AbstractAdapter $cache */
-    #[Inject(CacheInterface::class)]
+    /** @var AbstractAdapter */
     private CacheInterface $cache;
+
+    /** @param AbstractAdapter $cache */
+    public function __construct(
+        #[Inject(CacheInterface::class)] CacheInterface $cache,
+    ) {
+        $this->cache = $cache->withSubNamespace('authors');
+    }
 
     public function withCount(): LazyCollection
     {
-        return $this->cache->get('authors-with-count', fn (): LazyCollection => parent::withCount());
-    }
-
-    public function count(): int
-    {
-        return $this->cache->get('authors-count', fn (): int => parent::count());
+        return $this->cache->get('with-count', fn (): LazyCollection => parent::withCount());
     }
 }

@@ -94,6 +94,7 @@ return [
     // Container bindings
     // -------------------------------------------------------------------------
 
+    App\Authors::class => get(Decorators\CachedAuthors::class),
     App\Pages::class => get(Decorators\CachedPages::class),
     App\Posts::class => get(Decorators\CachedPosts::class),
     App\Tags::class => get(Decorators\CachedTags::class),

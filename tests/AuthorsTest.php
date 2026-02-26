@@ -30,12 +30,4 @@ class AuthorsTest extends TestCase
             'Ford Prefect' => 1,
         ], iterator_to_array($authors));
     }
-
-    #[Test]
-    public function it_returns_a_couny_of_unique_authors(): void
-    {
-        $count = $this->authors->count();
-
-        $this->assertSame(2, $count);
-    }
 }
