@@ -33,6 +33,10 @@ class PostController
             ]);
         }
 
+        if ($post->canonical !== null) {
+            $response = $response->withHeader('Link', sprintf('Link: <%s>; rel="canonical"', $post->canonical));
+        }
+
         return $this->view->render($response, 'post.twig', ['post' => $post]);
     }
 }

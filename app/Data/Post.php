@@ -21,6 +21,7 @@ final class Post
         public ?string $author = null,
         public array $tags = [],
         public ?PostImage $image = null,
+        public ?string $canonical = null,
         public bool $draft = false,
     ) {
         $this->excerpt = $this->excerpt($body);
@@ -38,6 +39,7 @@ final class Post
             author:  $frontMatter['author'] ?? null,
             tags: $frontMatter['tags'] ?? [],
             image: ($frontMatter['image'] ?? false) ? new PostImage(...$frontMatter['image']) : null,
+            canonical: $frontMatter['canonical'] ?? null,
             draft: (bool) ($frontMatter['draft'] ?? false),
         );
     }
