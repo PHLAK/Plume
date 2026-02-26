@@ -4,46 +4,41 @@ declare(strict_types=1);
 
 namespace App\Commands;
 
-use App\Pages;
 use DI\Attribute\Inject;
 use Symfony\Component\Cache\Adapter\AbstractAdapter;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
+use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 
 #[AsCommand(
-    name: 'publish:pages',
-    description: 'Publish all pages',
+    name: 'publish',
+    description: 'Publish all posts, pages, authors and tags',
     help: 'Coming soon...',
 )]
-class PublishPages extends Command
+class Publish extends Command
 {
     /** @var AbstractAdapter $cache */
     #[Inject(CacheInterface::class)]
     private CacheInterface $cache;
 
-    #[Inject(Pages::class)]
-    private Pages $pages;
-
-    public function __invoke(OutputInterface $output): int
-    {
+    public function __invoke(
+        OutputInterface $output,
+        Application $application,
+    ): int {
         if ($this->cache instanceof ArrayAdapter) {
             $output->writeln("<fg=yellow>This command has no affect when using the 'array' cache driver</>");
 
             return self::FAILURE;
         }
 
-        $output->write('Clearing pages cache ... ');
-        $this->cache->withSubNamespace('pages')->clear();
-        $output->writeln('<fg=green>DONE</>');
-
-        $output->write('Publishing all pages ... ');
-        $posts = $this->pages->all();
-        $output->writeln('<fg=green>DONE</>');
-
-        $output->writeln(sprintf('<fg=green>%d pages published successfully</>', $posts->count()));
+        $application->doRun(new StringInput('publish:posts'), $output);
+        $application->doRun(new StringInput('publish:pages'), $output);
+        $application->doRun(new StringInput('publish:authors'), $output);
+        $application->doRun(new StringInput('publish:tags'), $output);
 
         return Command::SUCCESS;
     }

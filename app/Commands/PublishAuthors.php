@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Commands;
 
-use App\Pages;
+use App\Authors;
 use DI\Attribute\Inject;
 use Symfony\Component\Cache\Adapter\AbstractAdapter;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
@@ -14,18 +14,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 
 #[AsCommand(
-    name: 'publish:pages',
-    description: 'Publish all pages',
+    name: 'publish:authors',
+    description: 'Publish all authors',
     help: 'Coming soon...',
 )]
-class PublishPages extends Command
+class PublishAuthors extends Command
 {
     /** @var AbstractAdapter $cache */
     #[Inject(CacheInterface::class)]
     private CacheInterface $cache;
 
-    #[Inject(Pages::class)]
-    private Pages $pages;
+    #[Inject(Authors::class)]
+    private Authors $authors;
 
     public function __invoke(OutputInterface $output): int
     {
@@ -35,15 +35,16 @@ class PublishPages extends Command
             return self::FAILURE;
         }
 
-        $output->write('Clearing pages cache ... ');
-        $this->cache->withSubNamespace('pages')->clear();
+        $output->write('Clearing authors cache ... ');
+        $this->cache->withSubNamespace('authors')->clear();
+        $this->cache->withSubNamespace('posts')->withSubNamespace('by-author')->clear();
         $output->writeln('<fg=green>DONE</>');
 
-        $output->write('Publishing all pages ... ');
-        $posts = $this->pages->all();
+        $output->write('Publishing all authors ... ');
+        $authors = $this->authors->withCount();
         $output->writeln('<fg=green>DONE</>');
 
-        $output->writeln(sprintf('<fg=green>%d pages published successfully</>', $posts->count()));
+        $output->writeln(sprintf('<fg=green>%d authors published successfully</>', $authors->count()));
 
         return Command::SUCCESS;
     }

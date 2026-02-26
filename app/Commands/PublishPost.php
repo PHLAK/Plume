@@ -49,7 +49,7 @@ class PublishPost extends Command
         }
 
         $output->write('Clearing post cache ... ');
-        $this->cache->withSubNamespace('posts')->delete($slug);
+        $this->cache->withSubNamespace('posts')->delete(hash('xxh128', $slug));
         $output->writeln('<fg=green>DONE</>');
 
         $output->write('Publishing post ... ');

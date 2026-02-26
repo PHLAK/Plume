@@ -15,7 +15,7 @@ use Symfony\Contracts\Cache\CacheInterface;
 
 #[AsCommand(
     name: 'publish:posts',
-    description: 'Cache the posts lists, already cached posts will not be re-cached',
+    description: 'Publish the posts lists',
     help: 'Coming soon...',
 )]
 class PublishPosts extends Command
@@ -36,7 +36,6 @@ class PublishPosts extends Command
         }
 
         $output->write('Clearing posts cache ... ');
-        $this->cache->delete('all-posts');
         $this->cache->withSubNamespace('posts')->clear();
         $output->writeln('<fg=green>DONE</>');
 

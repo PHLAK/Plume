@@ -45,10 +45,13 @@ return [
     // -------------------------------------------------------------------------
 
     'commands' => [
+        Commands\Publish::class,
+        Commands\PublishAuthors::class,
         Commands\PublishPage::class,
         Commands\PublishPages::class,
         Commands\PublishPost::class,
         Commands\PublishPosts::class,
+        Commands\PublishTags::class,
     ],
 
     // -------------------------------------------------------------------------

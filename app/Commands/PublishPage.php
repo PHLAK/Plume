@@ -49,7 +49,7 @@ class PublishPage extends Command
         }
 
         $output->write('Clearing page cache ... ');
-        $this->cache->withSubNamespace('pages')->delete($slug);
+        $this->cache->withSubNamespace('pages')->delete(hash('xxh128', $slug));
         $output->writeln('<fg=green>DONE</>');
 
         $output->write('Publishing page ... ');
