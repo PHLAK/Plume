@@ -11,8 +11,7 @@
 <div x-data="{ open: false }">
     <div class="flex justify-between items-center">
         <div class="container max-w-4xl flex justify-between items-center border-double border-stone-800 border-t-4 border-b-4 text-stone-800 mx-auto px-4 py-2 dark:border-stone-200 dark:text-stone-200">
-            <!-- Desktop Navigation -->
-            <a href="{{ full_url_for('posts') }}" class="flex justify-center items-center rounded cursor-pointer p-1 hover:bg-stone-200 dark:text-stone-200 dark:hover:bg-stone-700 sm:flex">
+            <a href="{{ full_url_for('posts') }}" title="Home" class="nav-button">
                 {{ svg('light/home', ['fill-current', 'size-6']) }}
             </a>
 
@@ -20,31 +19,32 @@
                 {{ svg('light/bars', ['fill-current', 'size-6']) }}
             </button>
 
+            <!-- Desktop Navigation -->
             <div class="items-center gap-2 hidden sm:flex">
                 {% if tags_enabled %}
                     <a href="/tags" class="hover:underline">Tags</a>
                 {% endif %}
 
                 {% if authors_enabled %}
-                    <div class="bold text-xl">&bull;</div>
+                    <div class="nav-bullet">&bull;</div>
                     <a href="{{ url_for('authors') }}" class="hover:underline">Authors</a>
                 {% endif %}
 
                 {% if pages %}
-                    <div class="bold text-xl">&bull;</div>
+                    <div class="nav-bullet">&bull;</div>
 
                     {% for slug, title in pages %}
                         <a href="{{ url_for('page', { slug: slug }) }}" class="hover:underline">{{ title }}</a>
 
                         {% if not loop.last %}
-                            <div class="bold text-xl">&bull;</div>
+                            <div class="nav-bullet">&bull;</div>
                         {% endif %}
                     {% endfor %}
                 {% endif %}
             </div>
 
             <div class="flex justify-end items-center gap-2">
-                <div @click="toggleTheme()" class="flex justify-center items-center rounded cursor-pointer p-1 hover:bg-stone-200 dark:text-stone-200 dark:hover:bg-stone-700" title="Toggle Theme">
+                <div @click="toggleTheme()"title="Toggle Theme" class="nav-button">
                     {{ svg('light/lightbulb', ['fill-current', 'size-6']) }}
                 </div>
             </div>

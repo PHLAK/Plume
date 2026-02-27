@@ -38,6 +38,14 @@ html, body {
 
 @import "./prose.css";
 
+.nav-button {
+    @apply flex justify-center items-center rounded cursor-pointer p-1 hover:bg-stone-200 dark:text-stone-200 dark:hover:bg-stone-700;
+}
+
+.nav-bullet {
+    @apply text-2xl text-stone-400 dark:text-stone-600;
+}
+
 .video {
     @apply aspect-video w-full;
 }
