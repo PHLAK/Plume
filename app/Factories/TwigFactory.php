@@ -14,6 +14,7 @@ use Twig\Extra\Html\HtmlExtension;
 use Twig\Loader\FilesystemLoader;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
+use Webmozart\Assert\Assert;
 
 class TwigFactory
 {
@@ -32,11 +33,11 @@ class TwigFactory
     #[Inject('timezone')]
     private string $timezone;
 
-    /** @var list<ViewFilter> */
+    /** @var list<class-string<ViewFilter>> */
     #[Inject('view_filters')]
     private array $viewFilters;
 
-    /** @var list<ViewFunction> */
+    /** @var list<class-string<ViewFunction>> */
     #[Inject('view_functions')]
     private array $viewFunctions;
 
@@ -59,8 +60,9 @@ class TwigFactory
         $twig->addExtension(new HtmlExtension);
 
         foreach ($this->viewFilters as $class) {
-            /** @var ViewFilter $filter */
             $filter = $this->container->get($class);
+
+            Assert::isInstanceOf($filter, ViewFilter::class);
 
             $twig->getEnvironment()->addFilter(
                 new TwigFilter($filter->name, $filter)
@@ -68,8 +70,9 @@ class TwigFactory
         }
 
         foreach ($this->viewFunctions as $class) {
-            /** @var ViewFunction $function */
             $function = $this->container->get($class);
+
+            Assert::isInstanceOf($function, ViewFunction::class);
 
             $twig->getEnvironment()->addFunction(
                 new TwigFunction($function->name, $function)

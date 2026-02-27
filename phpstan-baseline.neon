@@ -73,18 +73,6 @@ parameters:
 			path: app/Factories/ConverterFactory.php
 
 		-
-			message: '#^Parameter \#1 \$id of method DI\\Container\:\:get\(\) expects string, App\\Filters\\ViewFilter given\.$#'
-			identifier: argument.type
-			count: 1
-			path: app/Factories/TwigFactory.php
-
-		-
-			message: '#^Parameter \#1 \$id of method DI\\Container\:\:get\(\) expects string, App\\Functions\\ViewFunction given\.$#'
-			identifier: argument.type
-			count: 1
-			path: app/Factories/TwigFactory.php
-
-		-
 			message: '#^Parameter \#2 \$callable of class Twig\\TwigFilter constructor expects array\{class\-string, string\}\|\(callable\(\)\: mixed\)\|null, App\\Filters\\ViewFilter given\.$#'
 			identifier: argument.type
 			count: 1
