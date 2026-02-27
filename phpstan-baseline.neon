@@ -163,18 +163,6 @@ parameters:
 			path: app/Middlewares/PruneCacheMiddleware.php
 
 		-
-			message: '#^Property App\\Middlewares\\RegisterGlobalsMiddleware\:\:\$authors is never read, only written\.$#'
-			identifier: property.onlyWritten
-			count: 1
-			path: app/Middlewares/RegisterGlobalsMiddleware.php
-
-		-
-			message: '#^Property App\\Middlewares\\RegisterGlobalsMiddleware\:\:\$tags is never read, only written\.$#'
-			identifier: property.onlyWritten
-			count: 1
-			path: app/Middlewares/RegisterGlobalsMiddleware.php
-
-		-
 			message: '#^Method App\\Pages\:\:get\(\) throws checked exception League\\CommonMark\\Exception\\CommonMarkException but it''s missing from the PHPDoc @throws tag\.$#'
 			identifier: missingType.checkedException
 			count: 1
