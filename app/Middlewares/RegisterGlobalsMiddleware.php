@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Middlewares;
 
-use App\Authors;
-use App\Tags;
 use DI\Attribute\Inject;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -22,8 +20,6 @@ class RegisterGlobalsMiddleware
 
     public function __construct(
         private Twig $view,
-        private Tags $tags,
-        private Authors $authors,
     ) {}
 
     public function __invoke(Request $request, RequestHandler $handler): ResponseInterface
