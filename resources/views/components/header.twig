@@ -55,16 +55,16 @@
     <div x-show="open" class="container max-w-4xl border-double border-stone-800 border-b-4 text-stone-800 mx-auto px-4 py-2 transition dark:border-stone-200 dark:text-stone-200 sm:hidden" x-transition>
         <div class="flex flex-col justify-between">
             {% if tags_enabled %}
-                <a href="{{ url_for('tags') }}" class="rounded text-center px-1.5 py-1 hover:bg-stone-700">Tags</a>
+                <a href="{{ url_for('tags') }}" class="nav-link">Tags</a>
             {% endif %}
 
             {% if authors_enabled %}
-                <a href="{{ url_for('authors') }}" class="rounded text-center px-1.5 py-1 hover:bg-stone-700">Authors</a>
+                <a href="{{ url_for('authors') }}" class="nav-link">Authors</a>
             {% endif %}
 
             {% if pages %}
                 {% for slug, title in pages %}
-                    <a href="{{ url_for('page', { slug: slug }) }}" class="rounded text-center px-1.5 py-1 hover:bg-stone-700">{{ title }}</a>
+                    <a href="{{ url_for('page', { slug: slug }) }}" class="nav-link">{{ title }}</a>
                 {% endfor %}
             {% endif %}
         </div>
