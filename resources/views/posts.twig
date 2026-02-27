@@ -18,8 +18,10 @@
 
                 <article class="prose prose-stone prose-lg max-w-none md:prose-xl dark:prose-invert">{{ post.excerpt | raw }}</article>
 
-                <a href="{{ url_for('post', { slug: slug }) }}" class="inline-block text-stone-600 underline dark:text-stone-400">
-                    Read More
+                <a href="{{ url_for('post', { slug: slug }) }}" class="inline-block text-stone-600 text-lg uppercase dark:text-stone-400 hover:underline">
+                    <span class="flex items-center gap-1 ">
+                        Read More {{ svg('light/arrow-right', ['fill-current', 'size-5']) }}
+                    </span>
                 </a>
             </div>
 
