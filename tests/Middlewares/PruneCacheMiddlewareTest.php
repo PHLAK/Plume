@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Middlewares;
 
 use App\Middlewares\PruneCacheMiddleware;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
@@ -44,7 +45,7 @@ class PruneCacheMiddlewareTest extends TestCase
     }
 
     /** @param class-string $cacheAdapter */
-    #[Test, DataProvider('pruneableCacheAdapters')]
+    #[Test, DataProvider('pruneableCacheAdapters'), AllowMockObjectsWithoutExpectations]
     public function it_prunes_the_cache_whe_using_a_pruneable_adapter_and_winning_the_lottery(string $cacheAdapter): void
     {
         /** @var CacheInterface&MockObject */
@@ -52,23 +53,33 @@ class PruneCacheMiddlewareTest extends TestCase
         $this->container->set(CacheInterface::class, $cache);
         $cache->expects($this->once())->method('prune');
 
+        $handler = $this->createMock(RequestHandlerInterface::class);
+        $handler->expects($this->once())->method('handle')->with(
+            $request = $this->createMock(ServerRequestInterface::class)
+        );
+
         $this->container->call(PruneCacheMiddleware::class, [
-            'request' => $this->createMock(ServerRequestInterface::class),
-            'handler' => $this->createMock(RequestHandlerInterface::class),
+            'request' => $request,
+            'handler' => $handler,
         ]);
     }
 
     /** @param class-string $cacheAdapter */
-    #[Test, DataProvider('nonPruneableCacheAdapters')]
+    #[Test, DataProvider('nonPruneableCacheAdapters'), AllowMockObjectsWithoutExpectations]
     public function it_does_not_prune_the_cache_when_using_a_non_prunable_adapter(string $cacheAdapter): void
     {
         $cache = $this->createMock($cacheAdapter);
         $this->container->set(CacheInterface::class, $cache);
         $cache->expects($this->never())->method($this->anything());
 
+        $handler = $this->createMock(RequestHandlerInterface::class);
+        $handler->expects($this->once())->method('handle')->with(
+            $request = $this->createMock(ServerRequestInterface::class)
+        );
+
         $this->container->call(PruneCacheMiddleware::class, [
-            'request' => $this->createMock(ServerRequestInterface::class),
-            'handler' => $this->createMock(RequestHandlerInterface::class),
+            'request' => $request,
+            'handler' => $handler,
         ]);
     }
 }

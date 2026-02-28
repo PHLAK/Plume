@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Middlewares;
 
 use App\Middlewares\WhoopsMiddleware;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\ServerRequestInterface;
@@ -18,7 +19,7 @@ use Whoops\RunInterface;
 #[CoversClass(WhoopsMiddleware::class)]
 class WhoopsMiddlewareTest extends TestCase
 {
-    #[Test]
+    #[Test, AllowMockObjectsWithoutExpectations]
     public function it_registers_whoops_with_the_page_handler(): void
     {
         $pageHandler = $this->createMock(PrettyPageHandler::class);
@@ -44,7 +45,7 @@ class WhoopsMiddlewareTest extends TestCase
         );
     }
 
-    #[Test]
+    #[Test, AllowMockObjectsWithoutExpectations]
     public function it_registers_whoops_with_the_json_handler(): void
     {
         $pageHandler = $this->createMock(PrettyPageHandler::class);

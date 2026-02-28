@@ -35,7 +35,7 @@
     "require-dev": {
         "phlak/coding-standards": "^5.0",
         "phpstan/phpstan": "^2.1",
-        "phpunit/phpunit": "^11.5",
+        "phpunit/phpunit": "^13.0",
         "symfony/var-dumper": "^8.0",
         "zorac/phpstan-php-di": "^1.0"
     },

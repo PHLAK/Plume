@@ -9,6 +9,7 @@ use App\Posts;
 use Closure;
 use Generator;
 use Illuminate\Support\LazyCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -38,7 +39,7 @@ class CachedTagsTest extends TestCase
         $this->cachedTags = $this->container->make(CachedTags::class);
     }
 
-    #[Test]
+    #[Test, AllowMockObjectsWithoutExpectations]
     public function it_caches_a_collection_of_tags_with_count(): void
     {
         $this->tagsCache->expects($this->once())->method('get')->with(

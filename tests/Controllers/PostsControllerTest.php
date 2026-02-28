@@ -29,7 +29,11 @@ class PostsControllerTest extends TestCase
 
         $posts = $this->mock(Posts::class);
         $posts->expects($this->once())->method('all')->willReturn(
-            $postsCollection = LazyCollection::times(10, fn (int $iteration): Post => new Post(
+            $appPosts = $this->createMock(LazyCollection::class)
+        );
+
+        $appPosts->expects($this->once())->method('forPage')->with($page, $perPage)->willReturn(
+            $postsForPage = LazyCollection::times(4, fn (int $iteration): Post => new Post(
                 title: sprintf('Test Post %d', $iteration),
                 body: 'Post body...',
                 published: Carbon::now()->subDays($iteration),
@@ -38,8 +42,8 @@ class PostsControllerTest extends TestCase
 
         $twig = $this->mock(Twig::class);
         $twig->expects($this->once())->method('render')->with($testResponse = new Response, 'posts.twig', [
-            'posts' => $postsCollection->forPage($page, $perPage),
-            'paginator' => new Paginator($postsCollection, $perPage, $page),
+            'posts' => $postsForPage,
+            'paginator' => new Paginator($appPosts, $perPage, $page),
         ])->willReturn(
             $testResponse->withStatus(StatusCodeInterface::STATUS_OK)
         );

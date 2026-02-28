@@ -9,6 +9,7 @@ use App\Posts;
 use Closure;
 use Generator;
 use Illuminate\Support\LazyCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -38,7 +39,7 @@ class CachedAuthorsTest extends TestCase
         $this->cachedAuthors = $this->container->make(CachedAuthors::class);
     }
 
-    #[Test]
+    #[Test, AllowMockObjectsWithoutExpectations]
     public function it_caches_a_collection_of_authors_with_count(): void
     {
         $this->authorsCache->expects($this->once())->method('get')->with(

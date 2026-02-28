@@ -28,7 +28,11 @@ class TagControllerTest extends TestCase
 
         $posts = $this->mock(Posts::class);
         $posts->expects($this->once())->method('withTag')->with('Foo')->willReturn(
-            $postsCollection = LazyCollection::times(10, fn (int $iteration): Post => new Post(
+            $postsWithTag = $this->createMock(LazyCollection::class)
+        );
+
+        $postsWithTag->expects($this->once())->method('forPage')->with(1, $perPage)->willReturn(
+            $postsForPage = LazyCollection::times(10, fn (int $iteration): Post => new Post(
                 title: sprintf('Test Post %d', $iteration),
                 body: 'Post body...',
                 published: Carbon::now()->subDays($iteration),
@@ -38,8 +42,8 @@ class TagControllerTest extends TestCase
 
         $twig = $this->mock(Twig::class);
         $twig->expects($this->once())->method('render')->with($testResponse = new Response, 'posts.twig', [
-            'posts' => $postsCollection->forPage(1, $perPage),
-            'paginator' => new Paginator($postsCollection, $perPage, 1),
+            'posts' => $postsForPage,
+            'paginator' => new Paginator($postsWithTag, $perPage, 1),
         ])->willReturn(
             $testResponse->withStatus(StatusCodeInterface::STATUS_OK)
         );

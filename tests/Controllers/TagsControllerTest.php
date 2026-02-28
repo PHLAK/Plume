@@ -24,12 +24,16 @@ class TagsControllerTest extends TestCase
     {
         $posts = $this->mock(Tags::class);
         $posts->expects($this->once())->method('withCount')->willReturn(
-            $tags = new LazyCollection(fn (): Generator => yield from ['Foo' => 3, 'Bar' => 5, 'Baz' => 2])
+            $tagsWithCount = $this->createMock(LazyCollection::class)
+        );
+
+        $tagsWithCount->expects($this->once())->method('sortKeys')->willReturn(
+            $tagsSorted = new LazyCollection(fn (): Generator => yield from ['Foo' => 3, 'Bar' => 5, 'Baz' => 2])
         );
 
         $twig = $this->mock(Twig::class);
         $twig->expects($this->once())->method('render')->with($testResponse = new Response, 'tags.twig', [
-            'tags' => $tags,
+            'tags' => $tagsSorted,
         ])->willReturn(
             $testResponse->withStatus(StatusCodeInterface::STATUS_OK)
         );

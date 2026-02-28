@@ -24,12 +24,16 @@ class AuthorsControllerTest extends TestCase
     {
         $posts = $this->mock(Authors::class);
         $posts->expects($this->once())->method('withCount')->willReturn(
-            $tags = new LazyCollection(fn (): Generator => yield from ['Arthur Dent' => 3, 'Ford Prefect' => 5, 'Trisha McMillan' => 2])
+            $tags = $this->createMock(LazyCollection::class)
+        );
+
+        $tags->expects($this->once())->method('sortKeys')->willReturn(
+            $tagsSorted = new LazyCollection(fn (): Generator => yield from ['Arthur Dent' => 3, 'Ford Prefect' => 5, 'Trisha McMillan' => 2])
         );
 
         $twig = $this->mock(Twig::class);
         $twig->expects($this->once())->method('render')->with($testResponse = new Response, 'authors.twig', [
-            'authors' => $tags,
+            'authors' => $tagsSorted,
         ])->willReturn(
             $testResponse->withStatus(StatusCodeInterface::STATUS_OK)
         );
