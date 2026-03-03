@@ -12,6 +12,7 @@ use League\CommonMark\Extension\DescriptionList\DescriptionListExtension;
 use League\CommonMark\Extension\Footnote\FootnoteExtension;
 use League\CommonMark\Extension\FrontMatter\FrontMatterExtension;
 use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
+use League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension;
 use League\CommonMark\MarkdownConverter;
 use PomoDocs\CommonMark\Alert\AlertExtension;
 use Spatie\CommonMarkShikiHighlighter\HighlightCodeExtension;
@@ -30,11 +31,12 @@ class ConverterFactory
 
         $environment->addExtension(new CommonMarkCoreExtension);
         $environment->addExtension(new GithubFlavoredMarkdownExtension);
-        $environment->addExtension(new FrontMatterExtension);
-        $environment->addExtension(new FootnoteExtension);
-        $environment->addExtension(new DescriptionListExtension);
-        $environment->addExtension(new HighlightCodeExtension($this->shikiThemeId));
         $environment->addExtension(new AlertExtension);
+        $environment->addExtension(new DescriptionListExtension);
+        $environment->addExtension(new FootnoteExtension);
+        $environment->addExtension(new FrontMatterExtension);
+        $environment->addExtension(new HeadingPermalinkExtension);
+        $environment->addExtension(new HighlightCodeExtension($this->shikiThemeId));
 
         return new MarkdownConverter($environment);
     }

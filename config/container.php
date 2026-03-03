@@ -110,6 +110,7 @@ return [
     'commonmark_config' => [
         'alert' => ['icons' => ['active' => true, 'use_svg' => true]],
         'disallowed_raw_html' => ['disallowed_tags' => ['script']],
+        'heading_permalink' => ['heading_class' => 'group', 'symbol' => '#'],
     ],
 
     'tags_enabled' => function (Container $container, App\Tags $tags): bool {

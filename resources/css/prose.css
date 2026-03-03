@@ -1,3 +1,27 @@
+.prose h1 {
+    @apply font-semibold text-4xl mt-0;
+}
+
+.prose h2 {
+    @apply font-semibold text-3xl mt-0;
+}
+
+.prose h3 {
+    @apply font-semibold text-2xl mt-0;
+}
+
+.prose h4 {
+    @apply font-semibold text-xl mt-0;
+}
+
+.prose h5 {
+    @apply font-semibold text-lg mt-0;
+}
+
+.prose h6 {
+    @apply font-semibold text-base mt-0;
+}
+
 .prose code:before, .prose code:after {
     content: none;
 }
