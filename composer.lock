@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "830669b2464b09bac5ec32347fd93823",
+    "content-hash": "cd6e0773943bb8a60a3725f0dc318b93",
     "packages": [
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -602,16 +602,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "2.8.0",
+            "version": "2.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "4efa10c1e56488e658d10adf7b7b7dcd19940bfb"
+                "reference": "84b1ca48347efdbe775426f108622a42735a6579"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/4efa10c1e56488e658d10adf7b7b7dcd19940bfb",
-                "reference": "4efa10c1e56488e658d10adf7b7b7dcd19940bfb",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/84b1ca48347efdbe775426f108622a42735a6579",
+                "reference": "84b1ca48347efdbe775426f108622a42735a6579",
                 "shasum": ""
             },
             "require": {
@@ -636,9 +636,9 @@
                 "phpstan/phpstan": "^1.8.2",
                 "phpunit/phpunit": "^9.5.21 || ^10.5.9 || ^11.0.0",
                 "scrutinizer/ocular": "^1.8.1",
-                "symfony/finder": "^5.3 | ^6.0 | ^7.0",
-                "symfony/process": "^5.4 | ^6.0 | ^7.0",
-                "symfony/yaml": "^2.3 | ^3.0 | ^4.0 | ^5.0 | ^6.0 | ^7.0",
+                "symfony/finder": "^5.3 | ^6.0 | ^7.0 || ^8.0",
+                "symfony/process": "^5.4 | ^6.0 | ^7.0 || ^8.0",
+                "symfony/yaml": "^2.3 | ^3.0 | ^4.0 | ^5.0 | ^6.0 | ^7.0 || ^8.0",
                 "unleashedtech/php-coding-standard": "^3.1.1",
                 "vimeo/psalm": "^4.24.0 || ^5.0.0 || ^6.0.0"
             },
@@ -705,7 +705,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-26T21:48:24+00:00"
+            "time": "2026-03-05T21:37:03+00:00"
         },
         {
             "name": "league/config",
@@ -1349,16 +1349,16 @@
         },
         {
             "name": "pomodocs/commonmark-alert",
-            "version": "v0.6",
+            "version": "v0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pomodocs/commonmark-alert.git",
-                "reference": "54fa7f2fd99980fea45a0fa5337542750bea93cc"
+                "reference": "952ccf0bff913d73d365199880d1230e653fabba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pomodocs/commonmark-alert/zipball/54fa7f2fd99980fea45a0fa5337542750bea93cc",
-                "reference": "54fa7f2fd99980fea45a0fa5337542750bea93cc",
+                "url": "https://api.github.com/repos/pomodocs/commonmark-alert/zipball/952ccf0bff913d73d365199880d1230e653fabba",
+                "reference": "952ccf0bff913d73d365199880d1230e653fabba",
                 "shasum": ""
             },
             "require": {
@@ -1381,9 +1381,9 @@
             "description": "CommonMark extension to support alerts in Github blockquote style",
             "support": {
                 "issues": "https://github.com/pomodocs/commonmark-alert/issues",
-                "source": "https://github.com/pomodocs/commonmark-alert/tree/v0.6"
+                "source": "https://github.com/pomodocs/commonmark-alert/tree/v0.7"
             },
-            "time": "2025-10-04T13:32:29+00:00"
+            "time": "2026-03-06T06:42:32+00:00"
         },
         {
             "name": "psr/cache",

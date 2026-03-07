@@ -108,7 +108,7 @@ return [
     Whoops\RunInterface::class => create(Whoops\Run::class),
 
     'commonmark_config' => [
-        'alert' => ['icons' => ['active' => true, 'use_svg' => true]],
+        'alert' => ['icons' => ['active' => true]],
         'disallowed_raw_html' => ['disallowed_tags' => ['script']],
         'heading_permalink' => ['heading_class' => 'group', 'symbol' => '#'],
     ],
