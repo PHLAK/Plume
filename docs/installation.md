@@ -9,7 +9,7 @@
 
 For a long-term installation you can use Docker Compose to install Plume. To get started, create a directory for your Plume installation and, in that directory, add a `docker-compose.yaml` file and a folder for your data (e.g. `data`).
 
-```tree{4}
+```text{4}
 /path/to/plume
 ├── data
 │   └── [your data will go here]
@@ -52,7 +52,7 @@ To get up and running quickly you can use `docker run` to launch a stand-alone D
 
 This is a good way to test Plume for the first time but is _not recommended_ for long-term use. Instead we recommend using the Docker Compose installation method below.
 
-```cli
+```console
 docker run --detach [--env ENVIRONMENT_VARIABLE=value] \
     --volume <host_path>:/data --publish <host_port>:80 \
     phlak/plume:latest
