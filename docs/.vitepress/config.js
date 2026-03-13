@@ -27,7 +27,7 @@ export default defineConfig({
             {
                 text: 'Configuration',
                 items: [
-                    { text: 'Configuration Overview', link: '/configuration/configuration-overview', activeMatch: '/configuration/' },
+                    { text: 'Configuration Overview', link: '/configuration/configuration-overview' },
                     { text: 'Environment Variables', link: '/configuration/environment-variables' },
                     { text: 'Advanced Configuration', link: '/configuration/advanced-configuration' },
                 ]
@@ -53,7 +53,8 @@ export default defineConfig({
         search: { provider: 'local' },
 
         socialLinks: [
-            { icon: 'github', link: 'https://github.com/PHLAK/Plume' }
+            { icon: 'bluesky', link: 'https://bsky.app/profile/plume.pub' },
+            { icon: 'github', link: 'https://github.com/PHLAK/Plume' },
         ],
 
         editLink: {
