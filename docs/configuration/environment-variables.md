@@ -1,200 +1,93 @@
----
-icon: square-list
-layout:
-  width: default
-  title:
-    visible: true
-  description:
-    visible: false
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
-  metadata:
-    visible: true
-  tags:
-    visible: true
----
-
 # Environment Variables
 
 Plume utilizes environment variables for the majority of it's configuration. This page aims to be an exhaustive list of supported environment variables and their functions.
 
-### `APP_DEBUG`
+## `APP_DEBUG`
 
 Enable application debugging and display error messages.
 
-{% hint style="danger" %}
-It is recommended that debug remains OFF unless troubleshooting an issue. Leaving this enabled WILL cause leakage of sensitive server information.
-{% endhint %}
+> [!DANGER]
+> It is recommended that debug remains OFF unless troubleshooting an issue. Leaving this enabled WILL cause leakage of sensitive server information.
 
-{% tabs %}
-{% tab title="Possible Values" %}
-`true` or `false`
-{% endtab %}
+- **Possible Values:** `true` or `false`
+- **Default Value:** `false`
 
-{% tab title="Default Value" %}
-`false`
-{% endtab %}
-{% endtabs %}
-
-### `AUTHORS_LINK`
+## `AUTHORS_LINK`
 
 Whether or not to show the "Authors" navigation link when there are multiple unique post authors.
 
-{% tabs %}
-{% tab title="Possible Values" %}
-`true` or `false`
-{% endtab %}
+- **Possible Values:** `true` or `false`
+- **Default Value:** `true`
 
-{% tab title="Default Value" %}
-`true`&#x20;
-{% endtab %}
-{% endtabs %}
-
-### `DATE_FORMAT`
+## `DATE_FORMAT`
 
 Default date format.
 
-{% tabs %}
-{% tab title="Possible Values" %}
-See the [PHP \`date\` format documentation](https://www.php.net/manual/en/function.date.php#refsect1-function.date-parameters) for possible values.
-{% endtab %}
+- **Possible Values:** See the [PHP \`date\` format documentation](https://www.php.net/manual/en/function.date.php#refsect1-function.date-parameters) for possible values.
+- **Default Value:** `Y-m-d H:i:s`
 
-{% tab title="Default Value" %}
-`Y-m-d H:i:s`
-{% endtab %}
-{% endtabs %}
-
-### `FEATURED_IMAGES`
+## `FEATURED_IMAGES`
 
 Controls the vertical sizing of featured post images.
 
-{% tabs %}
-{% tab title="Possible Values" %}
-* `full` - Display the full height images
-* `collapsed` - Constrain the images height&#x20;
-{% endtab %}
+- **Possible Values:** `full` (display the full height images) or `collapsed` (constrain the images height)
+- **Default Value:** `collapsed`
 
-{% tab title="Default Value" %}
-`collapsed`
-{% endtab %}
-{% endtabs %}
-
-### `META_DESCRIPTION`
+## `META_DESCRIPTION`
 
 [Meta tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta) description text.
 
-{% tabs %}
-{% tab title="Possible Values" %}
-Any string.
-{% endtab %}
+- **Possible Values:** Any string
+- **Default Value:** `Yet another amazing blog, published with Plume.`
 
-{% tab title="Default Value" %}
-`Yet another amazing blog, published with Plume.`
-{% endtab %}
-{% endtabs %}
-
-### `PAGINATION`
+## `PAGINATION`
 
 Whether or not post pagination is enabled.
 
-{% tabs %}
-{% tab title="Possible Values" %}
-`true` or `false`
-{% endtab %}
+- **Possible Values:** `true` or `false`
+- **Default Value:** `true`
 
-{% tab title="Default Value" %}
-`true`
-{% endtab %}
-{% endtabs %}
-
-### `POSTS_PER_PAGE`
+## `POSTS_PER_PAGE`
 
 The number of posts to display per page when pagination is enabled.
 
-{% tabs %}
-{% tab title="Possible Values" %}
-Any positive integer.
-{% endtab %}
+- **Possible Values:** Any positive integer
+- **Default Value:** `10`
 
-{% tab title="Default Value" %}
-`10`
-{% endtab %}
-{% endtabs %}
-
-### `SHIKI_THEME_ID`
+## `SHIKI_THEME_ID`
 
 The Shiki theme ID used for syntax highlighting in rendered code blocks.
 
-{% tabs %}
-{% tab title="Possible Values" %}
-See the [Shiki themes documentation](https://shiki.style/themes) for a list of themes to choose from.
-{% endtab %}
+- **Possible Values:** See the [Shiki themes documentation](https://shiki.style/themes) for a list of themes to choose from.
+- **Default Value:** `catppuccin-frappe`
 
-{% tab title="Default Value" %}
-`catppuccin-frappe`
-{% endtab %}
-{% endtabs %}
-
-### `SITE_TITLE`
+## `SITE_TITLE`
 
 The title of your blog. This will be displayed in the browser tab/title bar along with the current path.
 
-{% tabs %}
-{% tab title="Possible Values" %}
-Any string.
-{% endtab %}
+- **Possible Values:** Any string
+- **Default Value:** `Yet another amazing blog`
 
-{% tab title="Default Value" %}
-Yet another amazing blog
-{% endtab %}
-{% endtabs %}
-
-### `TAGS_LINK`
+## `TAGS_LINK`
 
 Whether or not to show the "Tags" navigation link when there are multiple unique post tags.
 
-{% tabs %}
-{% tab title="Possible Values" %}
-`true` or `false`
-{% endtab %}
+- **Possible Values:** `true` or `false`
+- **Default Value:** `true`
 
-{% tab title="Default Value" %}
-`true`
-{% endtab %}
-{% endtabs %}
-
-### `TIMEZONE`
+## `TIMEZONE`
 
 Timezone used for date formatting.
 
-{% tabs %}
-{% tab title="Possible Values" %}
-See the [PHP List of Supported Timezones](https://www.php.net/manual/en/timezones.php) for a list of supported values.
-{% endtab %}
+- **Possible Values:** See the [PHP List of Supported Timezones](https://www.php.net/manual/en/timezones.php) for a list of supported values.
+- **Default Value:** The server's timezone
 
-{% tab title="Default Value" %}
-The server's timezone.
-{% endtab %}
-{% endtabs %}
-
-### `USAGE_REPORTING`
+## `USAGE_REPORTING`
 
 Enable anonymized usage reporting.
 
-{% hint style="info" %}
-The data collected contains aggregated metrics and does not identify individual users.
-{% endhint %}
+> [!INFO]
+> The data collected contains aggregated metrics and does not identify individual users.
 
-{% tabs %}
-{% tab title="Possible Values" %}
-`true` or `false`
-{% endtab %}
-
-{% tab title="Default Value" %}
-`true`
-{% endtab %}
-{% endtabs %}
+- **Possible Values:** `true` or `false`
+- **Default Value:** `true`

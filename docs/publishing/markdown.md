@@ -1,26 +1,6 @@
----
-icon: markdown
-layout:
-  width: default
-  title:
-    visible: true
-  description:
-    visible: false
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
-  metadata:
-    visible: true
-  tags:
-    visible: true
----
-
 # Markdown
 
-Plume supports the extended set of Markdown known as [GitHub Flavored Markdown](https://github.github.com/gfm/). See [here](https://www.markdownguide.org/basic-syntax/) for an overview of the basic syntax of Markdown.
+Plume supports the extended set of Markdown known as [GitHub Flavored Markdown](https://github.github.com/gfm/). For an overview of the basic syntax of Markdown check out the [Markdown Basic Syntax](https://www.markdownguide.org/basic-syntax/) guide.
 
 ### Alerts
 
@@ -44,7 +24,7 @@ In addition to the GitHub Flavored Markdown spec Plume supports "Alerts" (a.k.a.
 > This is a test of a multi-paragraph alert.
 ```
 
-<figure><img src="../.gitbook/assets/alerts.png" alt=""><figcaption></figcaption></figure>
+![Markdown Alerts](/images/alerts.png)
 
 ### Post Images
 
@@ -69,3 +49,6 @@ You may also organize your images in arbitrary sub-folders as long as your links
 ```
 
 ### Embeds
+
+> [!NOTE]
+> Coming soon...

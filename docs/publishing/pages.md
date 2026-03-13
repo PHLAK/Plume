@@ -1,42 +1,21 @@
----
-icon: memo
-layout:
-  width: default
-  title:
-    visible: true
-  description:
-    visible: false
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
-  metadata:
-    visible: true
-  tags:
-    visible: true
----
-
 # Pages
 
-
-
-<pre><code>/path/to/plume
+```text{3}
+/path/to/plume
 ├── data
-<strong>│   ├── <a data-footnote-ref href="#user-content-fn-1">pages</a>
-</strong>│   │   ├── about-this-blog.md
+│   ├── pages
+│   │   ├── about-this-blog.md
 │   │   └── something-else.md
 │   └── [other data]
 └── docker-compose.yaml
-</code></pre>
+```
 
 ### Front Matter
 
 Pages, like posts, _must_ contain some metadata like a title and the link text. This metadata is defined as "front matter", that is, some YAML set between triple-dashes (i.e. `---`) and must be the first thing in the file.
 
-{% code title="about-this-blog.md" %}
-```markdown
+::: code-group
+```markdown [about-this-blog.md]
 ---
 title: About this Blog
 link: About
@@ -45,17 +24,20 @@ weight: 200
 
 Your page contents goes here...
 ```
-{% endcode %}
+:::
 
 #### Metadata Fields
 
 The following metadata fields are supported for pages.
 
-<table><thead><tr><th>Key</th><th>Type</th><th width="119.5" align="center">Required</th><th>Details</th></tr></thead><tbody><tr><td><code>title</code></td><td><code>string</code></td><td align="center">✅️</td><td>Page title</td></tr><tr><td><code>link</code></td><td><code>string</code></td><td align="center">✅️</td><td>Navigation link text</td></tr><tr><td><code>weight</code></td><td><code>int</code></td><td align="center">❌️</td><td>Sort weight. Lower values will be sorted before higher value.</td></tr></tbody></table>
+| Key       | Type     | Required  | Details                                          |
+| --------- | -------- | :-------: | ------------------------------------------------ |
+|  `title`  | `string` |     ✅️    | Page title                                       |
+|  `link`   | `string` |     ✅️    | Navigation link text                             |
+|  `weight` | `int`    |     ❌️    | Lower values will be sorted before higher value. |
 
-{% hint style="info" %}
-Metadata fields that are not required may be omitted.
-{% endhint %}
+> [!TIP]
+> Metadata fields that are not required may be omitted.
 
 ### Markdown
 
@@ -63,20 +45,28 @@ Immediately following the front matter should be your page contents, authored in
 
 ### Publishing
 
-{% hint style="warning" icon="traffic-cone" %}
-This section is a work in progress.
-{% endhint %}
+After adding or editing a page it must be published. Publishing a page will render the contents, and update the page cache.
 
 #### Publish a single page
 
+::: code-group
+```console [Docker Compose]
+docker compose run --rm php plume publish:page <slug>
 ```
-plume publish:page <slug>
+
+```console [Manual]
+php plume publish:page <slug>
 ```
+:::
 
 #### Publish all pages
 
-```
-plume publish:pages
+::: code-group
+```console [Docker Compose]
+docker compose run --rm php plume publish:pages
 ```
 
-[^1]: Put your pages in this folder
+```console [Manual]
+php plume publish:pages
+```
+:::

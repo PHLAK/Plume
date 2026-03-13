@@ -1,28 +1,13 @@
 ---
-icon: flag
-layout:
-  width: default
-  title:
-    visible: true
-  description:
-    visible: false
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
-  metadata:
-    visible: true
-  tags:
-    visible: true
+layout: doc
+lastUpdated: true
 ---
 
 # Introduction
 
 Welcome to Plume, your self-hosted, Markdown powered publishing platform.
 
-<figure><img src=".gitbook/assets/screenshot.png" alt=""><figcaption></figcaption></figure>
+![Plume Screenshoot](/images/screenshot.png)
 
 Plume is quick and easy to set up with Docker compose and simple to manage with all posts (and pages) authored in Markdown and stored in a flat-file structure. And with flexible customization options Plume can be tailored to fit your personal or professional style.
 
