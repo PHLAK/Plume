@@ -10,9 +10,11 @@
 └── docker-compose.yaml
 ```
 
-### Front Matter
+## Front Matter
 
-Pages, like posts, _must_ contain some metadata like a title and the link text. This metadata is defined as "front matter", that is, some YAML set between triple-dashes (i.e. `---`) and must be the first thing in the file.
+Pages, like posts, _must_ contain some metadata like a title and the link text.
+This metadata is defined as "front matter", that is, some YAML set between
+triple-dashes (i.e. `---`) and must be the first thing in the file.
 
 ::: code-group
 ```markdown [about-this-blog.md]
@@ -26,7 +28,7 @@ Your page contents goes here...
 ```
 :::
 
-#### Metadata Fields
+### Metadata Fields
 
 The following metadata fields are supported for pages.
 
@@ -39,27 +41,20 @@ The following metadata fields are supported for pages.
 > [!TIP]
 > Metadata fields that are not required may be omitted.
 
-### Markdown
+## Markdown
 
-Immediately following the front matter should be your page contents, authored in Markdown format. See the [Markdown documentation](markdown.md) for more information about authoring with Markdown.
+Immediately following the front matter should be your page contents, authored in
+Markdown format. See the [Markdown documentation](markdown.md) for more
+information about authoring with Markdown.
 
-### Publishing
+## Publishing Pages
 
-After adding or editing a page it must be published. Publishing a page will render the contents, and update the page cache.
+> [!IMPORTANT]
+> After adding a page you must publish your pages in order for the new page to 
+> show up in the list of pages (i.e. navigation).
 
-#### Publish a single page
-
-::: code-group
-```console [Docker Compose]
-docker compose run --rm php plume publish:page <slug>
-```
-
-```console [Manual]
-php plume publish:page <slug>
-```
-:::
-
-#### Publish all pages
+Publishing pages will render the contents of and update the cache for all pages
+and the pages list.
 
 ::: code-group
 ```console [Docker Compose]
@@ -68,5 +63,21 @@ docker compose run --rm php plume publish:pages
 
 ```console [Manual]
 php plume publish:pages
+```
+:::
+
+### Updating a page
+
+Sometimes you may need to update a page after it's already been published (e.g.
+after making some edits). Publishing a single page will render the contents and
+update the cache for the specified page without updating the pages list.
+
+::: code-group
+```console [Docker Compose]
+docker compose run --rm php plume publish:page <slug>
+```
+
+```console [Manual]
+php plume publish:page <slug>
 ```
 :::

@@ -1,10 +1,16 @@
 # Markdown
 
-Plume supports the extended set of Markdown known as [GitHub Flavored Markdown](https://github.github.com/gfm/). For an overview of the basic syntax of Markdown check out the [Markdown Basic Syntax](https://www.markdownguide.org/basic-syntax/) guide.
+Plume supports the extended set of Markdown known as
+[GitHub Flavored Markdown](https://github.github.com/gfm/).
+For an overview of the basic syntax of Markdown check out the
+[Markdown Basic Syntax](https://www.markdownguide.org/basic-syntax/) guide.
 
 ### Alerts
 
-In addition to the GitHub Flavored Markdown spec Plume supports "Alerts" (a.k.a. callouts or admonitions), an extension of the blockquote syntax useful for emphasizing important information. Alerts render as block quotes with a distinctive color and icon to emphasize the content.
+In addition to the GitHub Flavored Markdown spec Plume supports "Alerts" (a.k.a.
+callouts or admonitions), an extension of the blockquote syntax useful for
+emphasizing important information. Alerts render as block quotes with a
+distinctive color and icon to emphasize the content.
 
 ```markdown
 > [!NOTE]
@@ -28,7 +34,8 @@ In addition to the GitHub Flavored Markdown spec Plume supports "Alerts" (a.k.a.
 
 ### Post Images
 
-Images can be uploaded to the `data/files` folder and referenced in your post markdown or raw HTML.
+Images can be uploaded to the `data/files` folder and referenced in your post
+markdown or raw HTML.
 
 ```markdown
 ![Image Alt Text](/files/some-image.png)
@@ -42,7 +49,9 @@ or
 
 Make sure you preface the file path with a forward slash (i.e. `/`).
 
-You may also organize your images in arbitrary sub-folders as long as your links follow suit. For example, an image at `data/images/some-post/example.png` can be referenced like so.
+You may also organize your images in arbitrary sub-folders as long as your links
+follow suit. For example, an image at `data/images/some-post/example.png` can be
+referenced like so.
 
 ```markdown
 ![Example Image](/files/images/some-post/example.png)
@@ -50,5 +59,4 @@ You may also organize your images in arbitrary sub-folders as long as your links
 
 ### Embeds
 
-> [!NOTE]
-> Coming soon...
+> [!NOTE] Coming soon...

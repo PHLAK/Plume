@@ -1,6 +1,9 @@
 # Posts
 
-As a publishing platform (i.e. blog), the main purpose of Plume is to facilitate the authoring and publishing of posts. This is made possible through Markdown files with a bit of YAML sprinkled in. To get started you may add your files with an extension of `.md` in the `data/posts` directory.
+As a publishing platform (i.e. blog), the main purpose of Plume is to facilitate
+the authoring and publishing of posts. This is made possible through Markdown
+files with a bit of YAML sprinkled in. To get started you may add your files
+with an extension of `.md` in the `data/posts` directory.
 
 ```text{3}
 /path/to/plume
@@ -13,11 +16,17 @@ As a publishing platform (i.e. blog), the main purpose of Plume is to facilitate
 ```
 
 > [!TIP]
-> The name of the file (not including the `.md` extension) will be used as the post "slug", the part that shows up in the URL. For example, for the file `data/posts/vogon-poetry.md` the URL would be something like `example.com/posts/vogon-poetry`.
+> The name of the file (not including the `.md` extension) will be used as the
+> post "slug", the part that shows up in the URL. For example, for the file 
+> `data/posts/vogon-poetry.md` the URL would be something like
+> `example.com/posts/vogon-poetry`.
 
-### Front Matter
+## Front Matter
 
-In order for a post to be recognized by Plume it _must_ contain some metadata like a title and published date. This metadata is defined as "front matter", that is, some YAML set between triple-dashes (i.e. `---`) and must be the first thing in the file.
+In order for a post to be recognized by Plume it _must_ contain some metadata
+like a title and published date. This metadata is defined as "front matter",
+that is, some YAML set between triple-dashes (i.e. `---`) and must be the first
+thing in the file.
 
 ::: code-group
 ```markdown [vogon-poetry.md]
@@ -36,7 +45,7 @@ Your post contents goes here...
 ```
 :::
 
-#### Metadata Fields
+### Metadata Fields
 
 The following metadata fields are supported.
 
@@ -53,31 +62,36 @@ The following metadata fields are supported.
 > [!TIP]
 > Metadata fields that are not required rest may be omitted.
 
-### Markdown
+## Markdown
 
-Immediately following the front matter should be your post contents, authored in Markdown format. See the [Markdown documentation](markdown.md) for more information about authoring with Markdown.
+Immediately following the front matter should be your post contents, authored in
+Markdown format. See the [Markdown documentation](markdown.md) for more
+information about authoring with Markdown.
 
-### Publishing
+## Excerpts
 
-After adding or editing a post it must be published.
+By default, the main posts list will show the entire contents of a post. If
+instead you would like to only show an _excerpt_ of the post  you may specify
+the content to show by wrapping it with `<!— excerpt -->` and `<!— /excerpt -->`
+tags. The portion of text within the excerpt tags will be the content that 
+is displayed in the main posts list.
 
-#### Publish a single post
+```markdown
+<!-- excerpt -->
+The answer to life, the universe and everything is ...
+<!-- /ecxcerpt -->
 
-Publishing a single post will render the contents and update the post cache for the specified post.
-
-::: code-group
-```console [Docker Compose]
-docker compose run --rm php plume publish:post <slug>
+Why that would be 42 of course!
 ```
 
-```console [Manual]
-php plume publish:post <slug>
-```
-:::
+## Publishing Posts
 
-#### Publish all posts
+> [!IMPORTANT]
+> After adding a post you must publish your posts in order for the new post to 
+> show up in the list of posts.
 
-Publishing all posts will render the contents and update the post cache for all posts as well as updated the posts list cache.
+Publishing posts will render the contents of and update the cache for all posts
+and the posts list.
 
 ::: code-group
 ```console [Docker Compose]
@@ -86,5 +100,21 @@ docker compose run --rm php plume publish:posts
 
 ```console [Manual]
 php plume publish:posts
+```
+:::
+
+### Updating a Post
+
+Sometimes you may need to update a post after it's already been published (e.g.
+after making some edits). Publishing a single post will render the contents and
+update the cache for the specified post without updating the posts list.
+
+::: code-group
+```console [Docker Compose]
+docker compose run --rm php plume publish:post <slug>
+```
+
+```console [Manual]
+php plume publish:post <slug>
 ```
 :::

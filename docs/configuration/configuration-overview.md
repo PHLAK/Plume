@@ -1,18 +1,67 @@
 # Configuration Overview
 
-Plume allows customization through configuration. You can configure Plume in a few different ways. The simplest and _recommended_ way to configure Plume is through environment variables.
+## Environment Variables
 
-## The `.env` File
+Plume allows customization through configuration. You can configure Plume in a
+few different ways. The simplest and _recommended_ way to configure Plume is
+through environment variables.
 
-Most configuration is possible via the `.env` file. You may define environment variables and their value in this file.
+> [!TIP]
+> You can find a list of environment variables and their function in the
+> [Environment Variables](environment-variables.md) documentation.
 
-> [!SUCCESS]
-> This is the recommended method for configuring your app.
+### Plume Compose
 
-To get started:
+When using the [Plume Compose](/installation#plume-compose) installation method
+enviroment variables should be defined in the `environment.d/plume.env` file.
 
-1. Copy `.env.example` to `.env`
-2. Edit the configuration values in `.env`
+> [!IMPORTANT]
+> After modifying `environment.d/plume.env` you must restart your containers
+> (i.e. `docker compose up -d`) for the changes to apply.
+
+### Docker Compose
+
+For a manual [Docker Compose](/installation#docker-compose) installation, you
+may define environment variables with the [`environment`](https://docs.docker.com/reference/compose-file/services/#environment)
+attribute in your `docker-compose.yaml` file.
+
+::: code-group
+```yaml [docker-compose.yaml]
+services:
+
+  plume:
+    image: phlak/plume:<version>
+    environment: # [!code focus]
+      SITE_TITLE: My Amazing Blog # [!code focus]
+      TIMEZONE: America/Phoenix # [!code focus]
+    ports:
+      - <host_port>:80
+    volumes:
+      - ./data:/data
+    restart: unless-stopped
+```
+:::
+
+> [!IMPORTANT]
+> After modifying your `docker-compose.yaml` file  you must restart your
+> containers (i.e. `docker compose up -d`) for the changes to apply.
+
+### Docker Run
+
+You may pass environment variables to the `docker run` command via the `--env`
+flag. Multiple environment variables can be set by passing the `--env` flag
+multiple times for each option.
+
+```console
+docker run --detach --publish 8080:80 --volume ./data:/data \
+    --env SITE_TITLE="My Amazing Blog" --env TIMEZONE="America/Phoenix" \ // [!code focus]
+    phlak/plume:latest
+```
+
+### Manual Installation
+
+When Plume is installed manually, environment variables should be defined in the
+`.env` file. You may copy `.env.example` to `.env` if the file is missing.
 
 ```text{5,6}
 /path/to/plume
@@ -45,9 +94,6 @@ The default `.env` file should look something like this:
 ```
 :::
 
-> [!TIP]
-> You can find a list of environment variables and their function in the [Environment Variables](environment-variables.md) documentation.
-
 ## User Customization
 
 > [!WARNING] Advanced user customization is currently in development.
@@ -73,8 +119,3 @@ To inject your customization into your page, create a file named `customizations
 <!-- Put your custom code here -->
 ```
 :::
-
-## Caching
-
-> [!INFO]
-> Coming soon...

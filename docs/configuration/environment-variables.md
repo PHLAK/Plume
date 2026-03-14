@@ -1,20 +1,24 @@
 # Environment Variables
 
-Plume utilizes environment variables for the majority of it's configuration. This page aims to be an exhaustive list of supported environment variables and their functions.
+Plume utilizes environment variables for the majority of it's configuration.
+This page aims to be an exhaustive list of supported environment variables and
+their functions.
 
 ## `APP_DEBUG`
 
 Enable application debugging and display error messages.
 
 > [!DANGER]
-> It is recommended that debug remains OFF unless troubleshooting an issue. Leaving this enabled WILL cause leakage of sensitive server information.
+> It is recommended that debug remains OFF unless troubleshooting an issue.
+> Leaving this enabled WILL cause leakage of sensitive server information.
 
 - **Possible Values:** `true` or `false`
 - **Default Value:** `false`
 
 ## `AUTHORS_LINK`
 
-Whether or not to show the "Authors" navigation link when there are multiple unique post authors.
+Whether or not to show the "Authors" navigation link when there are multiple
+unique post authors.
 
 - **Possible Values:** `true` or `false`
 - **Default Value:** `true`
@@ -63,14 +67,16 @@ The Shiki theme ID used for syntax highlighting in rendered code blocks.
 
 ## `SITE_TITLE`
 
-The title of your blog. This will be displayed in the browser tab/title bar along with the current path.
+The title of your blog. This will be displayed in the browser tab/title bar
+along with the current path.
 
 - **Possible Values:** Any string
 - **Default Value:** `Yet another amazing blog`
 
 ## `TAGS_LINK`
 
-Whether or not to show the "Tags" navigation link when there are multiple unique post tags.
+Whether or not to show the "Tags" navigation link when there are multiple unique
+post tags.
 
 - **Possible Values:** `true` or `false`
 - **Default Value:** `true`
