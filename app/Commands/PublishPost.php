@@ -14,9 +14,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Contracts\Cache\CacheInterface;
 
 #[AsCommand(
@@ -58,10 +56,6 @@ class PublishPost extends Command
 
         $output->writeln(sprintf('<fg=green>"%s" published successfully</>', $post->title));
 
-        if (! $this->question->ask($input, $output, new ConfirmationQuestion('Update posts page? [y/N] ', false))) {
-            return Command::SUCCESS;
-        }
-
-        return $application->doRun(new StringInput('publish:posts'), $output);
+        return self::SUCCESS;
     }
 }
