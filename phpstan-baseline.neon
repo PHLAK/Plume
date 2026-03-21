@@ -55,12 +55,6 @@ parameters:
 			path: app/Factories/ConsoleAppFactory.php
 
 		-
-			message: '#^Method App\\Factories\\ConverterFactory\:\:__invoke\(\) throws checked exception League\\CommonMark\\Exception\\AlreadyInitializedException but it''s missing from the PHPDoc @throws tag\.$#'
-			identifier: missingType.checkedException
-			count: 8
-			path: app/Factories/ConverterFactory.php
-
-		-
 			message: '#^Parameter \#1 \$config of class League\\CommonMark\\Environment\\Environment constructor expects array\<string, mixed\>, array given\.$#'
 			identifier: argument.type
 			count: 1

@@ -111,6 +111,7 @@ return [
         'alert' => ['icons' => ['active' => true]],
         'disallowed_raw_html' => ['disallowed_tags' => ['script']],
         'heading_permalink' => ['heading_class' => 'group', 'symbol' => '#'],
+        'table_of_contents' => ['position' => 'placeholder', 'placeholder' => '[[TOC]]'],
     ],
 
     'tags_enabled' => function (Container $container, App\Tags $tags): bool {

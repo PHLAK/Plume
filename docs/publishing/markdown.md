@@ -5,12 +5,21 @@ Plume supports the extended set of Markdown known as
 For an overview of the basic syntax of Markdown check out the
 [Markdown Basic Syntax](https://www.markdownguide.org/basic-syntax/) guide.
 
-### Alerts
+In addition to the GitHub Flavored Markdown spec Plume supports some additional
+features detailed below.
 
-In addition to the GitHub Flavored Markdown spec Plume supports "Alerts" (a.k.a.
-callouts or admonitions), an extension of the blockquote syntax useful for
-emphasizing important information. Alerts render as block quotes with a
-distinctive color and icon to emphasize the content.
+## Table of Contents
+
+A table of contents can be renderd by adding the `[[TOC]]` placeholder to your
+Markdown file where you would like it to be rendered. The placeholder will be
+replaced with a list of links to the header tags (`h1` - `h6`) within the
+document when published.
+
+## Alerts
+
+"Alerts" (a.k.a. callouts or admonitions) are an extension of the blockquote
+syntax useful for emphasizing important information. Alerts render as block
+quotes with a distinctive color and icon to emphasize the content.
 
 ```markdown
 > [!NOTE]
@@ -32,7 +41,7 @@ distinctive color and icon to emphasize the content.
 
 ![Markdown Alerts](/images/alerts.png)
 
-### Post Images
+## Images
 
 Images can be uploaded to the `data/files` folder and referenced in your post
 markdown or raw HTML.
@@ -57,6 +66,6 @@ referenced like so.
 ![Example Image](/files/images/some-post/example.png)
 ```
 
-### Embeds
+## Embeds
 
 > [!NOTE] Coming soon...

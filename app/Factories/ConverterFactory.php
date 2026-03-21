@@ -13,6 +13,7 @@ use League\CommonMark\Extension\Footnote\FootnoteExtension;
 use League\CommonMark\Extension\FrontMatter\FrontMatterExtension;
 use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
 use League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension;
+use League\CommonMark\Extension\TableOfContents\TableOfContentsExtension;
 use League\CommonMark\MarkdownConverter;
 use PomoDocs\CommonMark\Alert\AlertExtension;
 use Spatie\CommonMarkShikiHighlighter\HighlightCodeExtension;
@@ -36,6 +37,7 @@ class ConverterFactory
         $environment->addExtension(new FootnoteExtension);
         $environment->addExtension(new FrontMatterExtension);
         $environment->addExtension(new HeadingPermalinkExtension);
+        $environment->addExtension(new TableOfContentsExtension);
         $environment->addExtension(new HighlightCodeExtension($this->shikiThemeId));
 
         return new MarkdownConverter($environment);

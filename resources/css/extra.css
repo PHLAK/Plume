@@ -10,6 +10,18 @@
     @apply rounded text-center px-1.5 py-1 hover:bg-stone-200 dark:hover:bg-stone-700;
 }
 
+.table-of-contents {
+    @apply list-['#'] rounded-lg bg-stone-200 font-medium text-base px-8 py-2 marker:text-stone-400 dark:bg-stone-700  dark:marker:text-stone-600;
+}
+
+.table-of-contents ul {
+    @apply list-['#'] pl-4;
+}
+
+.table-of-contents a {
+    @apply text-stone-800 dark:text-stone-400;
+}
+
 .heading-permalink {
     @apply invisible flex justify-center items-center absolute -translate-x-full text-stone-400 no-underline pr-2 group-hover:visible dark:text-stone-600;
 }
