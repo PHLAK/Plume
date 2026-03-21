@@ -98,24 +98,31 @@ The default `.env` file should look something like this:
 
 > [!WARNING] Advanced user customization is currently in development.
 > 
-> If there's something you would like to be able to customize that isn't currently possible, open a feature request.
+> If there's something you would like to be able to customize that isn't
+> currently possible, open a feature request.
 
 ## Custom JavaScript and CSS
 
-Arbitrary code like CSS & JavaScript may be included in the HTML output of your site through the `customizations` file. This is particularly useful for including analytics tracking code from [Google Analytics](https://analytics.google.com), [Matomo Analytics](https://matomo.org), [Umami Analytics](https://umami.is) or other similar analytics service.
+Arbitrary code like CSS & JavaScript may be included in the HTML output of your
+site through the `customizations.html` file. This is particularly useful for
+including analytics tracking code from [Google
+Analytics](https://analytics.google.com), [Matomo
+Analytics](https://matomo.org), [Umami Analytics](https://umami.is) or other
+similar analytics service.
 
-To inject your customization into your page, create a file named `customizations` in the data directory and place your code into this file.
+To inject your customization into your page, create a file named
+`customizations.html` in the data directory and place your code into this file.
 
 ```text{4}
 /path/to/plume
 ├── data
 │   ├── [other files and folders]
-│   └── customizations
+│   └── customizations.html
 └── docker-compose.yaml
 ```
 
 ::: code-group
-```html [customizations]
+```html [customizations.html]
 <!-- Put your custom code here -->
 ```
 :::

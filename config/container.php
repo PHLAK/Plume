@@ -38,7 +38,7 @@ return [
     'data_path' => string('{base_path}/data'),
     'posts_path' => string('{data_path}/posts'),
     'pages_path' => string('{data_path}/pages'),
-    'customizations_file' => string('{data_path}/customizations'),
+    'customizations_file' => string('{data_path}/customizations.html'),
 
     // -------------------------------------------------------------------------
     // Application commands

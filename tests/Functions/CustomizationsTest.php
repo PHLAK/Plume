@@ -15,7 +15,7 @@ class CustomizationsTest extends TestCase
     #[Test]
     public function it_can_return_the_customizations_file_contents(): void
     {
-        $this->container->set('customizations_file', $this->filePath('data/customizations'));
+        $this->container->set('customizations_file', $this->filePath('data/customizations.html'));
 
         $scripts = $this->container->call(Customizations::class);
 
