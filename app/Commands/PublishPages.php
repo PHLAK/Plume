@@ -40,10 +40,11 @@ class PublishPages extends Command
         $output->writeln('<fg=green>DONE</>');
 
         $output->write('Publishing all pages ... ');
-        $posts = $this->pages->all();
+        $pages = $this->pages->all();
+        $count = $pages->count();
         $output->writeln('<fg=green>DONE</>');
 
-        $output->writeln(sprintf('<fg=green>%d pages published successfully</>', $posts->count()));
+        $output->writeln(sprintf('<fg=green>%d pages published successfully</>', $count));
 
         return Command::SUCCESS;
     }

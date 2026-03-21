@@ -42,9 +42,10 @@ class PublishTags extends Command
 
         $output->write('Publishing all tags ... ');
         $tags = $this->tags->withCount();
+        $count = $tags->count();
         $output->writeln('<fg=green>DONE</>');
 
-        $output->writeln(sprintf('<fg=green>%d tags published successfully</>', $tags->count()));
+        $output->writeln(sprintf('<fg=green>%d tags published successfully</>', $count));
 
         return Command::SUCCESS;
     }

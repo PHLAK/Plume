@@ -41,9 +41,10 @@ class PublishPosts extends Command
 
         $output->write('Publishing all posts ... ');
         $posts = $this->posts->all();
+        $count = $posts->count();
         $output->writeln('<fg=green>DONE</>');
 
-        $output->writeln(sprintf('<fg=green>%d posts published successfully</>', $posts->count()));
+        $output->writeln(sprintf('<fg=green>%d posts published successfully</>', $count));
 
         return Command::SUCCESS;
     }

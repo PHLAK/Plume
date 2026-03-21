@@ -42,9 +42,10 @@ class PublishAuthors extends Command
 
         $output->write('Publishing all authors ... ');
         $authors = $this->authors->withCount();
+        $count = $authors->count();
         $output->writeln('<fg=green>DONE</>');
 
-        $output->writeln(sprintf('<fg=green>%d authors published successfully</>', $authors->count()));
+        $output->writeln(sprintf('<fg=green>%d authors published successfully</>', $count));
 
         return Command::SUCCESS;
     }
