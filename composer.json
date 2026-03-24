@@ -15,7 +15,7 @@
     "require": {
         "php": ">= 8.4",
         "filp/whoops": "^2.18",
-        "illuminate/collections": "^12.28",
+        "illuminate/collections": "^13.1",
         "league/commonmark": "^2.7",
         "nesbot/carbon": "^3.10",
         "php-di/php-di": "^7.1",

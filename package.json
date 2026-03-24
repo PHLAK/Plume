@@ -19,7 +19,7 @@
     "@tailwindcss/vite": "^4.1.13",
     "globals": "^17.3.0",
     "tailwindcss": "^4.1.13",
-    "vite": "^7.1.5",
+    "vite": "^8.0.2",
     "vitepress": "^2.0.0-alpha.16"
   }
 }
