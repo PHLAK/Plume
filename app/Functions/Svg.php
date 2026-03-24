@@ -15,6 +15,7 @@ class Svg extends ViewFunction
     #[Inject('icons_path')]
     private string $iconsPath;
 
+    /** @param array<string> $classes */
     public function __invoke(string $icon, $classes = []): Markup
     {
         $contents = (string) file_get_contents(sprintf('%s/%s.svg', $this->iconsPath, $icon));
@@ -24,6 +25,7 @@ class Svg extends ViewFunction
         return new Markup(trim($svg), 'UTF-8');
     }
 
+    /** @param array<string> $classes */
     private function addClassAttribute(string $svg, array $classes)
     {
         $dom = new DOMDocument;
