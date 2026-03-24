@@ -2,14 +2,14 @@
 
 ## Plume Compose
 
-For a long-term installation we provide [Plume Compose](https://github.com/PHLAK/plume-compose)
-as a quick and easy way of getting up and running with a pre-configured 
-[Docker Compose](https://docs.docker.com/compose/) configuration.
-
 > [!IMPORTANT] Requirements
 > - [Docker Compose](https://docs.docker.com/compose/)
 > - [Git Version Control](https://git-scm.com)
 > - [GNU Make](https://www.gnu.org/software/make/)
+
+For a long-term installation we provide [Plume Compose](https://github.com/PHLAK/plume-compose)
+as a quick and easy way of getting up and running with a pre-configured
+[Docker Compose](https://docs.docker.com/compose/) configuration.
 
 1. Clone the repository to a location of your choosing
 
@@ -32,6 +32,9 @@ as a quick and easy way of getting up and running with a pre-configured
 6. Run `docker compose up -d` to start the containers
 
 ## Docker Compose
+
+> [!IMPORTANT] Requirements
+> - [Docker Compose](https://docs.docker.com/compose/)
 
 If you prefer a maunal [Docker Compose](https://docs.docker.com/compose/)
 installation you may create a directory for your Plume app and, in that
@@ -77,6 +80,9 @@ same directory as the `docker-compose.yaml` file.
 
 ## Docker Run
 
+> [!IMPORTANT] Requirements
+> - [Docker](https://docs.docker.com)
+
 You may alternatively use `docker run` to launch a stand-alone Docker container
 from the official Docker image.
 
@@ -101,6 +107,10 @@ docker run --detach [--env ENVIRONMENT_VARIABLE=value] \
 > You may pass multiple environment variables by repeating the `--env` flag.
 
 ## Manual Installation
+
+> [!IMPORTANT] Requirements
+> - [PHP](https://www.php.net)
+> - A web server capable of serving PHP (e.g NGINX, Apache, etc.)
 
 > [!DANGER] This is not a recommended installation method
 > Installing manually _will_ require more work to update between versions.
