@@ -1,11 +1,11 @@
 <div class="fixed bottom-0 left-0 right-0 pointer-events-none" x-data="{ visible: false }"
-    x-init="visible = window.scrollY > 10" x-show="visible" x-transition.opacity x-cloak
+    x-init="visible = window.scrollY > document.getElementById('content').offsetTop" x-show="visible" x-transition x-cloak
 >
-    <div class="container flex justify-end mx-auto px-4 py-10 xl:max-w-4xl">
-        <button title="Scroll to Top" class="flex justify-center items-center w-12 h-12 right-0 rounded-full shadow-lg bg-stone-600 text-white cursor-pointer pointer-events-auto transition dark:bg-stone-600  hover:scale-110"
-            @click="window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });" @scroll.window="visible = window.scrollY > 10"
+    <div class="container max-w-4xl flex justify-center items-end mx-auto py-2 xl:max-w-4xl">
+        <button title="Scroll to Top" class="flex justify-center items-center rounded border border-stone-600 bg-stone-100 shadow font-medium text-stone-600 cursor-pointer pointer-events-auto transition px-4 py-2 hover:bg-stone-200 dark:bg-stone-800 dark:border-stone-400 dark:text-stone-400 dark:hover:bg-stone-700"
+            @click="window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });" @scroll.window="visible = window.scrollY > document.getElementById('content').offsetTop"
         >
-            {{ svg('light/arrow-up', ['fill-current', 'size-6']) }}
+            Back to top
         </button>
     </div>
 </div>
