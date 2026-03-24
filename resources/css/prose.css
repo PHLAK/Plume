@@ -89,3 +89,15 @@
 .prose .alert-caution .alert-title {
     @apply text-red-700;
 }
+
+.prose th[align="left"], .prose td[align="left"] {
+    @apply text-left;
+}
+
+.prose th[align="center"], .prose td[align="center"] {
+    @apply text-center;
+}
+
+.prose th[align="right"], .prose td[align="right"] {
+    @apply text-right;
+}
