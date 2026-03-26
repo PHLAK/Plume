@@ -6,7 +6,13 @@ export default defineConfig({
 
     head: [
         ['link', { rel: 'icon', href: '/images/plume.svg' }],
-        ['script', { src: 'https://example.com/analytics.js' }],
+        ...(process.env.APP_ENV === 'production' ? [
+            'script', {
+                defer: '',
+                src: 'https://analytics.phlak.net/script.js',
+                'data-website-id': '07fa46f2-8a0d-4cc0-b3aa-c7bf9e1b6be7',
+            }
+        ] : []),
     ],
 
     themeConfig: {
