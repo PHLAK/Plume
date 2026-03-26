@@ -3,10 +3,10 @@
 FROM php:8.5-apache AS base
 LABEL maintainer="Chris Kankiewicz <Chris@Kankiewicz.com>"
 
-RUN a2enmod rewrite
 EXPOSE 80
+RUN a2enmod rewrite
 
-ENV HOME="/home/app"
+ENV HOME="/tmp"
 ENV COMPOSER_HOME="${HOME}/.config/composer"
 ENV XDG_CONFIG_HOME="${HOME}/.config"
 
@@ -34,10 +34,6 @@ RUN docker-php-ext-enable apcu memcached redis
 
 FROM base AS build
 
-RUN apt-get update && apt-get install --assume-yes --no-install-recommends \
-    libmemcached-dev zlib1g-dev \
-    && rm -rf /var/lib/apt/lists/*
-
 # TODO: Delete dev files/caches (perhaps using .dockerignore)
 COPY ./ /var/www/html
 WORKDIR /var/www/html
@@ -60,15 +56,14 @@ COPY --from=base /usr/local/lib/node_modules /usr/local/lib/node_modules
 COPY --from=build /var/www/html /var/www/html
 RUN chown --recursive www-data:www-data /var/www/html
 
+VOLUME /var/www/html/cache
+
 # --------- DEV ----------
 
 FROM prod AS dev
 
 COPY .docker/apache2/config/000-default.dev.conf /etc/apache2/sites-available/000-default.conf
 COPY .docker/php/config/php.dev.ini /usr/local/etc/php/php.ini
-
-# RUN apt-get update && apt-get install --assume-yes --no-install-recommends libssl-dev \
-#     && rm -rf /var/lib/apt/lists/*
 
 RUN pecl install xdebug
 RUN docker-php-ext-enable xdebug
