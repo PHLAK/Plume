@@ -2,11 +2,6 @@ import { defineConfig } from 'vitepress'
 
 const head = [
     ['link', { rel: 'icon', href: '/images/plume.svg' }],
-    ['script', {
-        defer: '',
-        src: 'https://analytics.phlak.net/script.js',
-        'data-website-id': '07fa46f2-8a0d-4cc0-b3aa-c7bf9e1b6be7',
-    }],
 ];
 
 if (process.env.ENVIRONMENT === 'production') {
