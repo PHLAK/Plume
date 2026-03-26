@@ -6,7 +6,7 @@ export default defineConfig({
 
     head: [
         ['link', { rel: 'icon', href: '/images/plume.svg' }],
-        ...(process.env.APP_ENV === 'production' ? [
+        ...(process.env.ENVIRONMENT === 'production' ? [
             'script', {
                 defer: '',
                 src: 'https://analytics.phlak.net/script.js',
