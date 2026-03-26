@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Bootstrap\Builder;
 use Dotenv\Dotenv;
+use Slim\App;
 
 // Import the autoloader
 require dirname(__DIR__) . '/vendor/autoload.php';
@@ -18,7 +19,7 @@ $container = Builder::createContainer(
 );
 
 // Create the application
-$app = Builder::createApp($container);
+$app = $container->get(App::class);
 
 // Engage!
 $app->run();

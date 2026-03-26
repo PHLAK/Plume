@@ -97,15 +97,17 @@ return [
     // Container bindings
     // -------------------------------------------------------------------------
 
+    Slim\App::class => factory(Factories\AppFactory::class),
+    Symfony\Component\Console\Application::class => factory(Factories\ConsoleAppFactory::class),
+    Symfony\Contracts\Cache\CacheInterface::class => factory(Factories\CacheFactory::class),
+    League\CommonMark\ConverterInterface::class => factory(Factories\ConverterFactory::class),
+    Slim\Views\Twig::class => factory(Factories\TwigFactory::class),
+    Whoops\RunInterface::class => create(Whoops\Run::class),
+
     App\Authors::class => get(Decorators\CachedAuthors::class),
     App\Pages::class => get(Decorators\CachedPages::class),
     App\Posts::class => get(Decorators\CachedPosts::class),
     App\Tags::class => get(Decorators\CachedTags::class),
-    Symfony\Component\Console\Application::class => factory(Factories\ConsoleAppFactory::class),
-    League\CommonMark\ConverterInterface::class => factory(Factories\ConverterFactory::class),
-    Symfony\Contracts\Cache\CacheInterface::class => factory(Factories\CacheFactory::class),
-    Slim\Views\Twig::class => factory(Factories\TwigFactory::class),
-    Whoops\RunInterface::class => create(Whoops\Run::class),
 
     'commonmark_config' => [
         'alert' => ['icons' => ['active' => true]],
@@ -114,11 +116,11 @@ return [
         'table_of_contents' => ['position' => 'placeholder', 'placeholder' => '[[TOC]]'],
     ],
 
-    'tags_enabled' => function (Container $container, App\Tags $tags): bool {
+    'tags_enabled' => function (Container $container): bool {
         return (bool) filter_var($container->get('tags_link'), FILTER_VALIDATE_BOOLEAN);
     },
 
-    'authors_enabled' => function (Container $container, App\Authors $authors): bool {
+    'authors_enabled' => function (Container $container): bool {
         return (bool) filter_var($container->get('authors_link'), FILTER_VALIDATE_BOOLEAN);
     },
 ];

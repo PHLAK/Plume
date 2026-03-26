@@ -18,7 +18,6 @@ class MiddlewareManager
         private App $app,
     ) {}
 
-    /** Register application middlewares. */
     public function __invoke(): void
     {
         foreach ($this->middlewares as $middleware) {
