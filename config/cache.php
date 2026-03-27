@@ -38,11 +38,11 @@ return [
     'cache_lottery' => env('CACHE_LOTTERY', 2),
 
     /**
-     * Path to the view cache directory. Set to 'false' to disable
-     * view caching entirely. The view cache is separate from the application
-     * cache defined above.
+     * Path to the view cache directory. Set to 'false' to disable view caching
+     * entirely. The view cache is separate from the application cache defined
+     * above.
      *
-     * Default value: 'cache/views'
+     * Default value: '{cache_path}/views'
      */
     'view_cache' => env('VIEW_CACHE', string('{cache_path}/views')),
 
