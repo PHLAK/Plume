@@ -1,20 +1,8 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Offset ''published'' does not exist on array\{title\: string, link\?\: string, weight\?\: int\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: app/Data/Post.php
-
-		-
 			message: '#^Only iterables can be unpacked, mixed given in argument \#1\.$#'
 			identifier: argument.unpackNonIterable
-			count: 1
-			path: app/Data/Post.php
-
-		-
-			message: '#^Parameter \#1 \$time of static method Carbon\\Carbon\:\:parse\(\) expects Carbon\\Month\|Carbon\\WeekDay\|DateTimeInterface\|float\|int\|string\|null, mixed given\.$#'
-			identifier: argument.type
 			count: 1
 			path: app/Data/Post.php
 

@@ -29,7 +29,7 @@ final class Post
 
     public static function fromRenderedContent(RenderedContentWithFrontMatter $content): self
     {
-        /** @var array{title:string, link?:string, weight?:int} $frontMatter */
+        /** @var array{title:string, published:string|int, author?:string, tags?: list<string>, canonical?: string, draft?: bool} $frontMatter */
         $frontMatter = $content->getFrontMatter();
 
         return new self(
