@@ -15,6 +15,19 @@ Markdown file where you would like it to be rendered. The placeholder will be
 replaced with a list of links to the header tags (`h1` - `h6`) within the
 document when published.
 
+:::code-group
+```markdown [dont-panic.md]
+---
+title: Don't Panic
+published: 1970-01-01 00:00:00
+---
+
+[[TOC]]
+
+Your post contents goes here...
+```
+:::
+
 ## Alerts
 
 "Alerts" (a.k.a. callouts or admonitions) are an extension of the blockquote

@@ -18,8 +18,7 @@ export default defineConfig({
         logo: '/images/plume.svg',
 
         nav: [
-          { text: 'Documentation', link: '/' },
-          { text: 'CLI Reference', link: '/cli-reference' }
+          { text: 'Changelog', link: 'https://github.com/PHLAK/Plume/releases' },
         ],
 
         sidebar: [
