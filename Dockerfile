@@ -10,15 +10,15 @@ ENV HOME="/tmp"
 ENV COMPOSER_HOME="${HOME}/.config/composer"
 ENV XDG_CONFIG_HOME="${HOME}/.config"
 
-COPY .docker/apache2/config/000-default.dev.conf /etc/apache2/sites-available/000-default.conf
-COPY .docker/php/config/php.dev.ini /usr/local/etc/php/php.ini
-
 COPY --from=composer:2.9 /usr/bin/composer /usr/bin/composer
 COPY --from=node:25.8 /usr/local/bin/node /usr/local/bin/node
 COPY --from=node:25.8 /usr/local/lib/node_modules /usr/local/lib/node_modules
 
 RUN ln --symbolic ../lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 RUN ln --symbolic ../lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx
+
+COPY .docker/apache2/config/000-default.dev.conf /etc/apache2/sites-available/000-default.conf
+COPY .docker/php/config/php.dev.ini /usr/local/etc/php/php.ini
 
 RUN apt-get update && apt-get install --assume-yes --no-install-recommends \
     git libmemcached-dev libssl-dev make zip zlib1g-dev \
@@ -47,16 +47,14 @@ RUN make production
 
 FROM base AS prod
 
-COPY .docker/apache2/config/000-default.prod.conf /etc/apache2/sites-available/000-default.conf
-COPY .docker/php/config/php.prod.ini /usr/local/etc/php/php.ini
-
 COPY --from=base /usr/local/bin/node /usr/local/bin/node
 COPY --from=base /usr/local/lib/node_modules /usr/local/lib/node_modules
 
+COPY .docker/apache2/config/000-default.prod.conf /etc/apache2/sites-available/000-default.conf
+COPY .docker/php/config/php.prod.ini /usr/local/etc/php/php.ini
+
 COPY --from=build /var/www/html /var/www/html
 RUN chown --recursive www-data:www-data /var/www/html
-
-VOLUME /var/www/html/cache
 
 # --------- DEV ----------
 
