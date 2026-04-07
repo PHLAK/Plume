@@ -60,6 +60,10 @@
       "sort-packages": true
   },
   "scripts": {
-      "serve": "php --server localhost:8080 --docroot public"
+      "serve": "php --server localhost:8080 --docroot public",
+      "post-create-project-cmd": [
+          "npm install && npm run dev",
+          "cp .env.example .env"
+      ]
   }
 }
