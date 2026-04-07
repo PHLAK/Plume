@@ -22,33 +22,34 @@ class WhoopsMiddlewareTest extends TestCase
     #[Test, AllowMockObjectsWithoutExpectations]
     public function it_registers_whoops_with_the_page_handler(): void
     {
-        $pageHandler = $this->createMock(PrettyPageHandler::class);
+        $this->container->set('debug', 'true');
+
+        $pageHandler = $this->mock(PrettyPageHandler::class);
         $pageHandler->expects($this->once())->method('getPageTitle')->willReturn(
             'Test title; please ignore'
         );
+
         $pageHandler->expects($this->once())->method('setPageTitle')->with(
             'Test title; please ignore • Plume'
         );
 
-        $whoops = $this->createMock(RunInterface::class);
+        $whoops = $this->mock(RunInterface::class);
         $whoops->expects($this->once())->method('pushHandler')->with(
             $pageHandler
         );
 
-        $middleware = new WhoopsMiddleware(
-            $whoops, $pageHandler, new JsonResponseHandler
-        );
-
-        $middleware(
-            $this->createMock(ServerRequestInterface::class),
-            $this->createMock(RequestHandlerInterface::class)
-        );
+        $this->container->call(WhoopsMiddleware::class, [
+            'request' => $this->createMock(ServerRequestInterface::class),
+            'handler' => $this->createMock(RequestHandlerInterface::class),
+        ]);
     }
 
     #[Test, AllowMockObjectsWithoutExpectations]
     public function it_registers_whoops_with_the_json_handler(): void
     {
-        $pageHandler = $this->createMock(PrettyPageHandler::class);
+        $this->container->set('debug', 'true');
+
+        $pageHandler = $this->mock(PrettyPageHandler::class);
         $pageHandler->expects($this->once())->method('getPageTitle')->willReturn(
             'Test title; please ignore'
         );
@@ -56,9 +57,9 @@ class WhoopsMiddlewareTest extends TestCase
             'Test title; please ignore • Plume'
         );
 
-        $jsonHandler = new JsonResponseHandler;
+        $jsonHandler = $this->mock(JsonResponseHandler::class);
 
-        $whoops = $this->createMock(RunInterface::class);
+        $whoops = $this->mock(RunInterface::class);
         $whoops->expects($matcher = $this->exactly(2))->method('pushHandler')->willReturnCallback(
             fn (Handler $parameter) => match ($matcher->numberOfInvocations()) {
                 1 => $this->assertSame($pageHandler, $parameter),
@@ -67,11 +68,29 @@ class WhoopsMiddlewareTest extends TestCase
             }
         );
 
-        $middleware = new WhoopsMiddleware($whoops, $pageHandler, $jsonHandler);
-
         $request = $this->createMock(ServerRequestInterface::class);
         $request->expects($this->once())->method('getHeaderLine')->willReturn('application/json');
 
-        $middleware($request, $this->createMock(RequestHandlerInterface::class));
+        $this->container->call(WhoopsMiddleware::class, [
+            'request' => $request,
+            'handler' => $this->createMock(RequestHandlerInterface::class),
+        ]);
+    }
+
+    #[Test, AllowMockObjectsWithoutExpectations]
+    public function it_does_not_register_whoops_when_debug_is_disabled(): void
+    {
+        $this->container->set('debug', 'false');
+
+        $pageHandler = $this->mock(PrettyPageHandler::class);
+        $pageHandler->expects($this->never())->method('setPageTitle');
+
+        $whoops = $this->mock(RunInterface::class);
+        $whoops->expects($this->never())->method('pushHandler');
+
+        $this->container->call(WhoopsMiddleware::class, [
+            'request' => $this->createMock(ServerRequestInterface::class),
+            'handler' => $this->createMock(RequestHandlerInterface::class),
+        ]);
     }
 }
