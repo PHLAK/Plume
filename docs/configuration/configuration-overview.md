@@ -4,16 +4,21 @@
 
 Plume allows customization through configuration. You can configure Plume in a
 few different ways. The simplest and _recommended_ way to configure Plume is
-through environment variables.
-
-> [!TIP]
-> You can find a list of environment variables and their function in the
-> [Environment Variables](environment-variables.md) documentation.
+through environment variables. You can find a list of environment variables and
+their function in the [Environment Variables](environment-variables.md)
+documentation.
 
 ### Plume Compose
 
 When using the [Plume Compose](/installation#plume-compose) installation method
 enviroment variables should be defined in the `environment.d/plume.env` file.
+
+::: code-group
+```yaml [plume.env]
+SITE_TITLE: My Amazing Blog
+TIMEZONE: America/Phoenix
+```
+:::
 
 > [!IMPORTANT]
 > After modifying `environment.d/plume.env` you must restart your containers
