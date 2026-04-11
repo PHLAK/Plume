@@ -1,8 +1,16 @@
 export default () => ({
-    init() {
-        const [cookie, theme] = document.cookie.match(/theme=(dark|light)/) || [null, null];
+    systemTheme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
 
-        this.$store.theme = theme || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    themes: ['system', 'dark', 'light'],
+
+    init() {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (darkMode) => {
+            this.systemTheme = darkMode.matches ? 'dark' : 'light';
+        });
+
+        const [cookie, theme] = document.cookie.match(/theme=(dark|light|system)/) || [null, 'system'];
+
+        this.$store.theme = theme;
 
         if (cookie === undefined) {
             this.storeThemeCookie(this.$store.theme);
@@ -10,7 +18,7 @@ export default () => ({
     },
 
     toggleTheme() {
-        this.$store.theme = this.$store.theme == 'light' ? 'dark' : 'light';
+        this.$store.theme = this.themes[this.themes.indexOf(this.$store.theme) + 1] ?? this.themes[0];
     },
 
     storeThemeCookie(theme) {

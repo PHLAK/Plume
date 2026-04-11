@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="{{ config('language') }}" class="light" x-data="application" x-effect="storeThemeCookie($store.theme)" :class="{ 'dark': $store.theme === 'dark' }" x-cloak>
+<html lang="{{ config('language') }}" x-data="application" x-effect="storeThemeCookie($store.theme)" :class="{
+    'light': $store.theme === 'light' || ($store.theme === 'system' && systemTheme === 'light'),
+    'dark': $store.theme === 'dark' || ($store.theme === 'system' && systemTheme === 'dark'),
+}" x-cloak>
 
 <meta charset="utf-8">
 <meta name="description" content="{{ config('meta_description') }}">

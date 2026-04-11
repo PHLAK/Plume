@@ -44,15 +44,7 @@
             </div>
 
             <div class="flex justify-end items-center gap-2">
-                <div @click="toggleTheme()" title="Toggle Theme" class="nav-button">
-                    <div x-show="$store.theme == 'light'">
-                        {{ svg('light/lightbulb-on', ['fill-current', 'size-6']) }}
-                    </div>
-
-                    <div x-show="$store.theme == 'dark'">
-                        {{ svg('light/lightbulb', ['fill-current', 'size-6']) }}
-                    </div>
-                </div>
+                {% include 'components/theme-toggle.twig' %}
             </div>
         </div>
     </div>
