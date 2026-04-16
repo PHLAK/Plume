@@ -35,14 +35,14 @@ return [
     /**
      * Meta tag description text.
      *
-     * Default value: 'Yet another amazing blog, published with Plume.'.
+     * Default value: 'Yet another amazing blog, published with Plume.'
      */
     'meta_description' => env('META_DESCRIPTION', 'Yet another amazing blog, published with Plume.'),
 
     /**
      * Whether or not post pagination is enabled.
      *
-     * Default value: true.
+     * Default value: true
      */
     'pagination' => env('PAGINATION', true),
 

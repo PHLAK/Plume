@@ -21,9 +21,6 @@ class TwigFactory
     #[Inject('views_path')]
     private string $viewsPath;
 
-    #[Inject('icons_path')]
-    private string $iconsPath;
-
     #[Inject('view_cache')]
     private string $viewCache;
 
@@ -47,7 +44,7 @@ class TwigFactory
 
     public function __invoke(): Twig
     {
-        $twig = new Twig(new FilesystemLoader([$this->viewsPath, $this->iconsPath]), [
+        $twig = new Twig(new FilesystemLoader([$this->viewsPath]), [
             'cache' => strtolower($this->viewCache) === 'false' ? false : $this->viewCache,
         ]);
 
