@@ -15,14 +15,14 @@ give you full control over every application option and even allows full PHP
 code if desired.
 
 > [!TIP]
-> Plume utilizes [PHP-DI](https://php-di.org) for it's configuration. See the
+> Plume utilizes [PHP-DI](https://php-di.org) for its configuration. See the
 > [PHP Definitions documentation](https://php-di.org/doc/php-definitions.html)
 > for more info on writing manual configuration definitions.
 
 For additional information about individual configuration options reference the
 individual config documentation below.
 
-## Configuraton Options
+## Configuration Options
 
 ### `memcached_config`
 
@@ -62,7 +62,7 @@ Memcached servers. At a minimum you must connect one Memcached server via the
 
 The Redis configuration [anonymous function](https://www.php.net/manual/en/functions.anonymous.php)
 (i.e. closure) is evaluated when the `cache_driver` configuration option is set
-to `redis`. The closure receives a `Redis` object as it's only parameter. You
+to `redis`. The closure receives a `Redis` object as its only parameter. You
 may use this object to configure a connection to one or more Redis servers. At a
 minimum you must connect to one Redis server via the `connect()` or `pconnect()`
 methods.

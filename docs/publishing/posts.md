@@ -60,7 +60,7 @@ The following metadata fields are supported.
 |  `draft`         | `boolean`       |     ❌️    |                                                      |
 
 > [!TIP]
-> Metadata fields that are not required rest may be omitted.
+> Metadata fields that are not required may be omitted.
 
 ## Markdown
 
@@ -79,7 +79,7 @@ is displayed in the main posts list.
 ```markdown
 <!-- excerpt -->
 The answer to life, the universe and everything is ...
-<!-- /ecxcerpt -->
+<!-- /excerpt -->
 
 Why that would be 42 of course!
 ```

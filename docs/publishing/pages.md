@@ -32,11 +32,11 @@ Your page contents goes here...
 
 The following metadata fields are supported for pages.
 
-| Key       | Type     | Required  | Details                                          |
-| --------- | -------- | :-------: | ------------------------------------------------ |
-|  `title`  | `string` |     ✅️    | Page title                                       |
-|  `link`   | `string` |     ✅️    | Navigation link text                             |
-|  `weight` | `int`    |     ❌️    | Lower values will be sorted before higher value. |
+| Key      | Type     | Required | Details                                           |
+| -------- | -------- | :------: | ------------------------------------------------- |
+| `title`  | `string` |    ✅️    | Page title                                        |
+| `link`   | `string` |    ✅️    | Navigation link text                              |
+| `weight` | `int`    |    ❌️    | Lower values will be sorted before higher values. |
 
 > [!TIP]
 > Metadata fields that are not required may be omitted.

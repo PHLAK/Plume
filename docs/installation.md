@@ -25,18 +25,18 @@ as a quick and easy way of getting up and running with a pre-configured
     make init
     ```
 
-4. Modify the environment variables in `.env` for your installation
+3. Modify the environment variables in `.env` for your installation
 
-5. Run `docker compose config` to validate and confirm your configuration
+4. Run `docker compose config` to validate and confirm your configuration
 
-6. Run `docker compose up -d` to start the containers
+5. Run `docker compose up -d` to start the containers
 
 ## Docker Compose
 
 > [!IMPORTANT] Requirements
 > - [Docker Compose](https://docs.docker.com/compose/)
 
-If you prefer a maunal [Docker Compose](https://docs.docker.com/compose/)
+If you prefer a manual [Docker Compose](https://docs.docker.com/compose/)
 installation you may create a directory for your Plume app and, in that
 directory, add a `docker-compose.yaml` file and a folder (e.g. `data`) to 
 contain your data.

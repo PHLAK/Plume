@@ -1,6 +1,6 @@
 # Environment Variables
 
-Plume utilizes environment variables for the majority of it's configuration.
+Plume utilizes environment variables for the majority of its configuration.
 This page aims to be an exhaustive list of supported environment variables and
 their functions.
 
@@ -114,7 +114,7 @@ post tags.
 
 ### `THEME`
 
-Custom theme ID. Specifies the cutsom application theme to use.
+Custom theme ID. Specifies the custom application theme to use.
 
 - **Possible Values:** `string` or `null`
 - **Default Value:** `null`
@@ -161,12 +161,12 @@ Some cache drivers require manually pruning the cache periodically to remove
 expired items. This is the percentage chance (out of 100) of a request "winning"
 the lottery causing the cache to be pruned.
 
-- **Possible Values:** Any integer betweeen `1` and `100`
+- **Possible Values:** Any integer between `1` and `100`
 - **Default Value:** `2`
 
 ### `VIEW_CACHE`
 
-ath to the view cache directory. Set to `false` to disable view caching
+Path to the view cache directory. Set to `false` to disable view caching
 entirely. The view cache is separate from the application cache defined above.
 
 - **Possible Values:** A directory path as a string or `false`

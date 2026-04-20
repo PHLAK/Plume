@@ -7,7 +7,7 @@ lastUpdated: true
 
 Welcome to Plume, your self-hosted, Markdown powered publishing platform.
 
-![Plume Screenshoot](/images/screenshot.png)
+![Plume Screenshot](/images/screenshot.png)
 
 Plume is quick and easy to set up with Docker compose and simple to manage with
 all posts (and pages) authored in Markdown and stored in a flat-file structure.

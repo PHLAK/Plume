@@ -10,7 +10,7 @@ features detailed below.
 
 ## Table of Contents
 
-A table of contents can be renderd by adding the `[[TOC]]` placeholder to your
+A table of contents can be rendered by adding the `[[TOC]]` placeholder to your
 Markdown file where you would like it to be rendered. The placeholder will be
 replaced with a list of links to the header tags (`h1` - `h6`) within the
 document when published.

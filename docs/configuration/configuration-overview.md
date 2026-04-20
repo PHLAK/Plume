@@ -11,7 +11,7 @@ documentation.
 ### Plume Compose
 
 When using the [Plume Compose](/installation#plume-compose) installation method
-enviroment variables should be defined in the `environment.d/plume.env` file.
+environment variables should be defined in the `environment.d/plume.env` file.
 
 ::: code-group
 ```yaml [plume.env]

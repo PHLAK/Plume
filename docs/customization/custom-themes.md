@@ -2,7 +2,8 @@
 
 > [!DANGER]
 > Custom themes are a _work-in-progress_ and not finalized. Things may change
-> and/or break with updates _without warning_.
+> and/or break with updates _without warning_.  If there's something you would
+> like to see changed about custom themes, open a feature request.
 
 ## Using a Custom Theme
 
@@ -33,7 +34,7 @@ THEME=hyperspace #[!code focus]
 ## Custom Theme Development
 
 A theme is a folder that consists of the views, icons, styles and scripts needed
-to reder the theme. These files are nested in separate, top-level folders within
+to render the theme. These files are nested in separate, top-level folders within
 the theme directory.
 
 ```text{5-8}
@@ -86,12 +87,12 @@ Displays the list of authors and a count of their posts.
 
 #### `error.twig`
 
-Shows an error message when an error occures. For example, shows a "Page not
+Shows an error message when an error occurs. For example, shows a "Page not
 found" error for `404` errors.
 
 ##### Data
 
-- `message`: A message of the error that occured.
+- `message`: A message of the error that occurred.
 
 #### `page.twig` <badge type="info" text="/page/{slug}" />
 
@@ -115,7 +116,7 @@ author, and posts with a specific tag.
 
 - `posts`: A list of [`Post`](https://github.com/PHLAK/Plume/blob/master/app/Data/Post.php)
   objects for the current page.
-  - `Post`: An indivitual [`Post`](https://github.com/PHLAK/Plume/blob/master/app/Data/Post.php)
+  - `Post`: An individual [`Post`](https://github.com/PHLAK/Plume/blob/master/app/Data/Post.php)
     object with following properties
     - `title`: The post title
     - `body`: The raw post contents
@@ -126,7 +127,7 @@ author, and posts with a specific tag.
       object with the following properties
         - `url`: The post image URL
         - `caption`: The raw post image caption
-    - `canonical`: The cannoncial post link
+    - `canonical`: The canonical post link
     - `draft`: Post draft status
     - `excerpt`: The raw post excerpt
 
