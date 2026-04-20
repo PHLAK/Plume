@@ -53,12 +53,10 @@ return [
 
     'commands' => [
         Commands\Publish::class,
-        Commands\PublishAuthors::class, // QUESTION: Remove this?
         Commands\PublishPage::class,
         Commands\PublishPages::class,
         Commands\PublishPost::class,
         Commands\PublishPosts::class,
-        Commands\PublishTags::class, // QUESTION: Remove this?
     ],
 
     // -------------------------------------------------------------------------
