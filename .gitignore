@@ -12,6 +12,7 @@
 /.cache/
 /cache/
 /public/build/
+/themes/
 
 # ----------------------------------------
 # User generated data and files

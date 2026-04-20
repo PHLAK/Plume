@@ -112,6 +112,13 @@ post tags.
 - **Possible Values:** `true` or `false`
 - **Default Value:** `true`
 
+### `THEME`
+
+Custom theme ID. Specifies the cutsom application theme to use.
+
+- **Possible Values:** `string` or `null`
+- **Default Value:** `null`
+
 ### `TIMEZONE`
 
 Timezone used for date formatting.

@@ -9,7 +9,7 @@ return [
     /**
      * Enable application debugging and display error messages.
      *
-     * !!! WARNING !!!
+     * !!!  WARNING  !!!  WARNING  !!!  WARNING  !!!  WARNING  !!!  WARNING  !!!
      * It is recommended that debug remains OFF unless troubleshooting an issue.
      * Leaving this enabled WILL cause leakage of sensitive server information.
      *
@@ -38,6 +38,13 @@ return [
      * Default value: 'Yet another amazing blog, published with Plume.'
      */
     'meta_description' => env('META_DESCRIPTION', 'Yet another amazing blog, published with Plume.'),
+
+    /**
+     * Custom theme ID. Specifies the cutsom application theme to use.
+     *
+     * Default value: null
+     */
+    'theme' => env('THEME', null),
 
     /**
      * Whether or not post pagination is enabled.
