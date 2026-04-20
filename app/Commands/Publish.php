@@ -37,8 +37,6 @@ class Publish extends Command
 
         $application->doRun(new StringInput('publish:posts'), $output);
         $application->doRun(new StringInput('publish:pages'), $output);
-        $application->doRun(new StringInput('publish:authors'), $output);
-        $application->doRun(new StringInput('publish:tags'), $output);
 
         return Command::SUCCESS;
     }
