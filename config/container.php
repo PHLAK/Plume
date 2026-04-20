@@ -26,10 +26,16 @@ return [
     'app_path' => string('{base_path}/app'),
     'cache_path' => string('{base_path}/cache'),
     'config_path' => string('{base_path}/config'),
-    'public_path' => string('{base_path}/public'),
     'resources_path' => string('{base_path}/resources'),
-    'icons_path' => string('{resources_path}/icons'),
-    'views_path' => string('{resources_path}/views'),
+
+    // Theme resource paths
+    'css_path' => string('{theme_path}/css'),
+    'icons_path' => string('{theme_path}/icons'),
+    'js_path' => string('{theme_path}/js'),
+    'views_path' => string('{theme_path}/views'),
+
+    // Public asset paths
+    'public_path' => string('{base_path}/public'),
     'build_path' => string('{public_path}/build'),
     'assets_path' => string('{build_path}/assets'),
     'manifest_path' => string('{build_path}/manifest.json'),
@@ -38,6 +44,7 @@ return [
     'data_path' => string('{base_path}/data'),
     'posts_path' => string('{data_path}/posts'),
     'pages_path' => string('{data_path}/pages'),
+    'themes_path' => string('{base_path}/themes'),
     'customizations_file' => string('{data_path}/customizations.html'),
 
     // -------------------------------------------------------------------------
@@ -46,12 +53,12 @@ return [
 
     'commands' => [
         Commands\Publish::class,
-        Commands\PublishAuthors::class,
+        Commands\PublishAuthors::class, // QUESTION: Remove this?
         Commands\PublishPage::class,
         Commands\PublishPages::class,
         Commands\PublishPost::class,
         Commands\PublishPosts::class,
-        Commands\PublishTags::class,
+        Commands\PublishTags::class, // QUESTION: Remove this?
     ],
 
     // -------------------------------------------------------------------------
@@ -94,7 +101,37 @@ return [
     ],
 
     // -------------------------------------------------------------------------
-    // Container bindings
+    // Configuration bindings
+    // -------------------------------------------------------------------------
+
+    'commonmark_config' => [
+        'alert' => ['icons' => ['active' => true]],
+        'disallowed_raw_html' => ['disallowed_tags' => ['script']],
+        'heading_permalink' => ['heading_class' => 'group', 'symbol' => '#'],
+        'table_of_contents' => ['position' => 'placeholder', 'placeholder' => '[[TOC]]'],
+    ],
+
+    // -------------------------------------------------------------------------
+    // Dynamic bindings
+    // -------------------------------------------------------------------------
+
+    'tags_enabled' => function (Container $container): bool {
+        return (bool) filter_var($container->get('tags_link'), FILTER_VALIDATE_BOOLEAN);
+    },
+
+    'authors_enabled' => function (Container $container): bool {
+        return (bool) filter_var($container->get('authors_link'), FILTER_VALIDATE_BOOLEAN);
+    },
+
+    'theme_path' => function (Container $container): string {
+        /** @var string|null $theme */
+        $theme = $container->get('theme');
+
+        return $theme ? sprintf('%s/%s', $container->get('themes_path'), $theme) : $container->get('resources_path');
+    },
+
+    // -------------------------------------------------------------------------
+    // App factories and decorators
     // -------------------------------------------------------------------------
 
     Slim\App::class => factory(Factories\AppFactory::class),
@@ -109,18 +146,4 @@ return [
     App\Posts::class => get(Decorators\CachedPosts::class),
     App\Tags::class => get(Decorators\CachedTags::class),
 
-    'commonmark_config' => [
-        'alert' => ['icons' => ['active' => true]],
-        'disallowed_raw_html' => ['disallowed_tags' => ['script']],
-        'heading_permalink' => ['heading_class' => 'group', 'symbol' => '#'],
-        'table_of_contents' => ['position' => 'placeholder', 'placeholder' => '[[TOC]]'],
-    ],
-
-    'tags_enabled' => function (Container $container): bool {
-        return (bool) filter_var($container->get('tags_link'), FILTER_VALIDATE_BOOLEAN);
-    },
-
-    'authors_enabled' => function (Container $container): bool {
-        return (bool) filter_var($container->get('authors_link'), FILTER_VALIDATE_BOOLEAN);
-    },
 ];

@@ -37,6 +37,13 @@ export default defineConfig({
                 ]
             },
             {
+                text: 'Customization',
+                items: [
+                    { text: 'Customization Overview', link: '/customization/customization-overview' },
+                    { text: 'Custom Themes', link: '/customization/custom-themes' },
+                ]
+            },
+            {
                 text: 'Publishing',
                 items: [
                     { text: 'Posts', link: '/publishing/posts' },
