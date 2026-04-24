@@ -1,6 +1,18 @@
 parameters:
 	ignoreErrors:
 		-
+			message: '#^Method App\\Commands\\PublishPages\:\:cachePages\(\) should return array\<string, SplFileInfo\> but returns array\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Commands/PublishPages.php
+
+		-
+			message: '#^Method App\\Commands\\PublishPosts\:\:cachePosts\(\) should return array\<int, string\> but returns array\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Commands/PublishPosts.php
+
+		-
 			message: '#^Only iterables can be unpacked, mixed given in argument \#1\.$#'
 			identifier: argument.unpackNonIterable
 			count: 1

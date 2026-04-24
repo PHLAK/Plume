@@ -47,13 +47,16 @@ class PublishPosts extends Command
         return Command::SUCCESS;
     }
 
+    /** @return array<int, string> */
     private function cachePosts(): array
     {
-        /** @var array<string, string> $slugs */
-        $slugs = array_map(
-            fn (SplFileInfo $file): string => $file->getBasename('.md'),
-            iterator_to_array(new GlobIterator($this->postsPath . '/*.md'))
-        );
+        /** @var iterable<string, SplFileInfo> */
+        $posts = new GlobIterator($this->postsPath . '/*.md');
+
+        $slugs = [];
+        foreach ($posts as $post) {
+            $slugs[] = $post->getBasename('.md');
+        }
 
         $pool = Pool::create();
 

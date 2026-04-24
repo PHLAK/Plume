@@ -47,13 +47,16 @@ class PublishPages extends Command
         return Command::SUCCESS;
     }
 
+    /** @return array<string, SplFileInfo> */
     private function cachePages(): array
     {
-        /** @var array<string, string> $slugs */
-        $slugs = array_map(
-            fn (SplFileInfo $file): string => $file->getBasename('.md'),
-            iterator_to_array(new GlobIterator($this->pagesPath . '/*.md'))
-        );
+        /** @var iterable<string, SplFileInfo> */
+        $pages = new GlobIterator($this->pagesPath . '/*.md');
+
+        $slugs = [];
+        foreach ($pages as $page) {
+            $slugs[] = $page->getBasename('.md');
+        }
 
         $pool = Pool::create();
 
