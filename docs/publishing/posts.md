@@ -90,8 +90,7 @@ Why that would be 42 of course!
 > After adding a post you must publish your posts in order for the new post to 
 > show up in the list of posts.
 
-Publishing posts will render the contents of and update the cache for all posts
-and the posts list.
+Publishing posts will render the contents of and update the cache for all posts.
 
 ::: code-group
 ```console [Docker Compose]
@@ -107,7 +106,7 @@ php plume publish:posts
 
 Sometimes you may need to update a post after it's already been published (e.g.
 after making some edits). Publishing a single post will render the contents and
-update the cache for the specified post without updating the posts list.
+update the cache for a single post specified by it's slug.
 
 ::: code-group
 ```console [Docker Compose]

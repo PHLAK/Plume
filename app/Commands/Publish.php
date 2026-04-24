@@ -14,11 +14,7 @@ use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 
-#[AsCommand(
-    name: 'publish',
-    description: 'Publish all posts, pages, authors and tags',
-    help: 'Coming soon...',
-)]
+#[AsCommand('publish', description: 'Publish all posts and pages')]
 class Publish extends Command
 {
     /** @var AbstractAdapter $cache */

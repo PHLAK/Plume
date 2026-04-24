@@ -24,6 +24,7 @@
         "slim/psr7": "^1.7",
         "slim/slim": "^4.15",
         "slim/twig-view": "^3.4",
+        "spatie/async": "^1.8",
         "spatie/commonmark-shiki-highlighter": "^2.5",
         "symfony/cache": "^8.0",
         "symfony/console": "^8.0",

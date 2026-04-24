@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Commands;
 
-use App\Posts;
+use App\Tasks\CachePost;
 use DI\Attribute\Inject;
+use GlobIterator;
+use Spatie\Async\Pool;
+use SplFileInfo;
 use Symfony\Component\Cache\Adapter\AbstractAdapter;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -13,19 +16,15 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 
-#[AsCommand(
-    name: 'publish:posts',
-    description: 'Publish the posts lists',
-    help: 'Coming soon...',
-)]
+#[AsCommand('publish:posts', description: 'Publish all posts')]
 class PublishPosts extends Command
 {
     /** @var AbstractAdapter $cache */
     #[Inject(CacheInterface::class)]
     private CacheInterface $cache;
 
-    #[Inject(Posts::class)]
-    private Posts $posts;
+    #[Inject('posts_path')]
+    private string $postsPath;
 
     public function __invoke(OutputInterface $output): int
     {
@@ -40,12 +39,28 @@ class PublishPosts extends Command
         $output->writeln('<fg=green>DONE</>');
 
         $output->write('Publishing all posts ... ');
-        $posts = $this->posts->all();
-        $count = $posts->count();
+        $slugs = $this->cachePosts();
         $output->writeln('<fg=green>DONE</>');
 
-        $output->writeln(sprintf('<fg=green>%d posts published successfully</>', $count));
+        $output->writeln(sprintf('<fg=green>%d posts published successfully</>', count($slugs)));
 
         return Command::SUCCESS;
+    }
+
+    private function cachePosts(): array
+    {
+        /** @var array<string, string> $slugs */
+        $slugs = array_map(
+            fn (SplFileInfo $file): string => $file->getBasename('.md'),
+            iterator_to_array(new GlobIterator($this->postsPath . '/*.md'))
+        );
+
+        $pool = Pool::create();
+
+        foreach ($slugs as $slug) {
+            $pool->add(new CachePost($slug));
+        }
+
+        return $pool->wait();
     }
 }

@@ -53,8 +53,7 @@ information about authoring with Markdown.
 > After adding a page you must publish your pages in order for the new page to 
 > show up in the list of pages (i.e. navigation).
 
-Publishing pages will render the contents of and update the cache for all pages
-and the pages list.
+Publishing pages will render the contents of and update the cache for all pages.
 
 ::: code-group
 ```console [Docker Compose]
@@ -70,7 +69,7 @@ php plume publish:pages
 
 Sometimes you may need to update a page after it's already been published (e.g.
 after making some edits). Publishing a single page will render the contents and
-update the cache for the specified page without updating the pages list.
+update the cache for a single page specified by it's slug.
 
 ::: code-group
 ```console [Docker Compose]

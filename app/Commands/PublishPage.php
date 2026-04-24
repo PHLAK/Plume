@@ -17,7 +17,6 @@ use Symfony\Contracts\Cache\CacheInterface;
 #[AsCommand(
     name: 'publish:page',
     description: 'Publish a page by slug',
-    help: 'Coming soon...',
 )]
 class PublishPage extends Command
 {
