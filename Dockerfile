@@ -24,6 +24,8 @@ RUN apt-get update && apt-get install --assume-yes --no-install-recommends \
     git libmemcached-dev libssl-dev make zip zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
+RUN docker-php-ext-install pcntl
+
 RUN pecl install apcu \
     && pecl install memcached \
     && pecl install redis
