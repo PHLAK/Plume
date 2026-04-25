@@ -37,5 +37,9 @@ class RouteManager
         if ($this->tagsEnabled) {
             $this->app->get('/tags', Controllers\TagsController::class)->setName('tags');
         }
+
+        // Theme resources
+        $this->app->get('/theme/css/{stylesheet}', Controllers\Themes\CssController::class)->setName('theme.css');
+        $this->app->get('/theme/js/{script}', Controllers\Themes\JsController::class)->setName('theme.js');
     }
 }

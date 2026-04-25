@@ -92,7 +92,9 @@ return [
 
     'view_functions' => [
         Functions\Config::class,
+        Functions\Css::class,
         Functions\Customizations::class,
+        Functions\Js::class,
         Functions\Pages::class,
         Functions\Svg::class,
         Functions\Vite::class,
