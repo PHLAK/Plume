@@ -25,6 +25,7 @@ class JsTest extends TestCase
     #[Test]
     public function it_returns_a_script_tag_with_modifiers(): void
     {
+        /** @var Markup $scriptTag */
         $scriptTag = $this->container->call(Js::class, ['script' => 'alpha', 'modifiers' => ['type' => 'test', 'async']]);
 
         $this->assertEquals('<script src="/theme/js/alpha.js" type="test" async></script>', (string) $scriptTag);
