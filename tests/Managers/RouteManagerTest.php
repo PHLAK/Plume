@@ -25,6 +25,8 @@ class RouteManagerTest extends TestCase
         ['page', '/pages/{slug}', Controllers\PageController::class],
         ['authors', '/authors', Controllers\AuthorsController::class],
         ['tags', '/tags', Controllers\TagsController::class],
+        ['theme.css', '/theme/css/{stylesheet}', Controllers\Themes\CssController::class],
+        ['theme.js', '/theme/js/{script}', Controllers\Themes\JsController::class],
     ];
 
     #[Test]
