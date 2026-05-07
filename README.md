@@ -29,44 +29,34 @@ Features
 
   - **Dockerized installation** allows you to be up and running quickly.
   - **Markdown rendering** for publishing formatted articles easily.
-  - **Flat file structure** for simple content management and backup.
-  - **Customization** Custom pages, ...
-  - **Light and dark themes** to suit your professional needs or personal style.
-  - ???
+  - **Flat file structure** enables simple content management and backup.
+  - **Light and dark mode** to suit your professional needs or personal style.
+  - **Advanced customization** including [Shiki](https://shiki.style) powered 
+    syntax highligting and experimental theme support.
 
 Requirements
 ------------
 
-Plume requires [Docker](...) with [Docker Compose](...) or [PHP](https://www.php.net/) (>= 8.2) if installing manually.
+Plume requires [Docker](https://www.docker.com) with [Docker Compose](https://docs.docker.com/compose/)
+or [PHP](https://www.php.net/) if installing manually.
 
 Installation
 ------------
 
 ### Quickstart
 
-<details>
-  <summary>Coming soon, does not work yet</summary>
+For effortless management via Docker check out [Plume Compose](https://github.com/PHLAK/plume-compose),
+a quick and easy way of getting up and running with a pre-configured
+[Docker Compose](https://docs.docker.com/compose/) configuration.
 
-  1. Run `curl -sSL https://init.plume.pub | sh`
-  2. Add your posts to the `posts` folder
-  3. Run `docker compose up -d`
-</details>
+#### Other Installation Methods
 
-### Docker Compose
-
-For effortless management via [Docker Compose](https://docs.docker.com/compose/)
-check out [Plume Compose](https://github.com/PHLAK/plume-compose).
-
-#### Manual Docker Compose
-
-  1. Download the [`docker-compose.yaml`](https://www.plume.pub/docker-compose.yaml) file to a directory of your choice
-  2. Add your posts to the `posts` folder
-  3. Run `docker compose up -d`
+See the [Insallation documentation](https://docs.plume.pub/installation.html) for more information.
 
 Configuration
 -------------
 
-See the [Configuration Documentation](https://docs.plume.pub/configuration) for more information.
+See the [Configuration documentation](https://docs.plume.pub/configuration/configuration-overview.html) for more information.
 
 Sponsors
 --------
@@ -82,9 +72,11 @@ A list of changes can be found on the [GitHub Releases](https://github.com/PHLAK
 Troubleshooting
 ---------------
 
-See the [Help & Support](https://docs.plume.pub/help-and-support) section of the documentation for troubleshooting instructions.
+See the [Troubleshooting](https://docs.plume.pub/help-and-support/troubleshooting.html)
+section of the documentation for troubleshooting instructions.
 
-For general help and support join our [GitHub Discussion](https://github.com/PHLAK/Plume/discussions) or reach out on [Bluesky](https://bsky.app/profile/plume.pub).
+For general help and support join our [GitHub Discussion](https://github.com/PHLAK/Plume/discussions)
+or reach out on [Bluesky](https://bsky.app/profile/plume.pub).
 
 Please report bugs to the [GitHub Issue Tracker](https://github.com/PHLAK/Plume/issues).
 
