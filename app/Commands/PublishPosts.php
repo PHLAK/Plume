@@ -11,8 +11,10 @@ use Spatie\Async\Pool;
 use SplFileInfo;
 use Symfony\Component\Cache\Adapter\AbstractAdapter;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
+use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 
@@ -26,7 +28,7 @@ class PublishPosts extends Command
     #[Inject('posts_path')]
     private string $postsPath;
 
-    public function __invoke(OutputInterface $output): int
+    public function __invoke(OutputInterface $output, Application $application): int
     {
         if ($this->cache instanceof ArrayAdapter) {
             $output->writeln("<fg=yellow>This command has no affect when using the 'array' cache driver</>");
@@ -38,11 +40,13 @@ class PublishPosts extends Command
         $this->cache->withSubNamespace('posts')->clear();
         $output->writeln('<fg=green>DONE</>');
 
-        $output->write('Publishing all posts ... ');
+        $output->write('Rebuilding posts cache ... ');
         $slugs = $this->cachePosts();
         $output->writeln('<fg=green>DONE</>');
 
         $output->writeln(sprintf('<fg=green>%d posts published successfully</>', count($slugs)));
+
+        $application->doRun(new StringInput('reindex:posts'), $output);
 
         return Command::SUCCESS;
     }

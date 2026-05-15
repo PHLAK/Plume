@@ -57,6 +57,10 @@ return [
         Commands\PublishPages::class,
         Commands\PublishPost::class,
         Commands\PublishPosts::class,
+        Commands\ReindexPage::class,
+        Commands\ReindexPages::class,
+        Commands\ReindexPost::class,
+        Commands\ReindexPosts::class,
     ],
 
     // -------------------------------------------------------------------------
@@ -111,6 +115,10 @@ return [
         'table_of_contents' => ['position' => 'placeholder', 'placeholder' => '[[TOC]]'],
     ],
 
+    'search_config' => [
+        'storage' => ['path' => string('{cache_path}/search.db')],
+    ],
+
     // -------------------------------------------------------------------------
     // Dynamic bindings
     // -------------------------------------------------------------------------
@@ -135,10 +143,12 @@ return [
     // -------------------------------------------------------------------------
 
     Slim\App::class => factory(Factories\AppFactory::class),
+    Slim\Views\Twig::class => factory(Factories\TwigFactory::class),
     Symfony\Component\Console\Application::class => factory(Factories\ConsoleAppFactory::class),
     Symfony\Contracts\Cache\CacheInterface::class => factory(Factories\CacheFactory::class),
     League\CommonMark\ConverterInterface::class => factory(Factories\ConverterFactory::class),
-    Slim\Views\Twig::class => factory(Factories\TwigFactory::class),
+    YetiSearch\YetiSearch::class => factory(Factories\SearchFactory::class),
+
     Whoops\RunInterface::class => create(Whoops\Run::class),
 
     App\Authors::class => get(Decorators\CachedAuthors::class),

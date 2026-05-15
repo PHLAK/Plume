@@ -26,6 +26,8 @@
     --font-sans: Montserrat;
     --font-serif: Rokkitt;
     --font-mono: Source Code Pro;
+
+    --text-2xs: 0.65rem;
 }
 
 [x-cloak] {

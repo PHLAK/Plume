@@ -29,3 +29,7 @@
 .video {
     @apply aspect-video w-full;
 }
+
+kbd {
+    @apply inline-flex justify-center items-center rounded bg-stone-100 border border-stone-300 text-stone-600 font-mono px-1 py-0.5 dark:bg-stone-800 dark:border-stone-600 dark:text-stone-400;
+}

@@ -36,7 +36,7 @@ class Posts
         return Post::fromRenderedContent($this->converter->convert($contents));
     }
 
-    /** @return LazyCollection<int, Post> */
+    /** @return LazyCollection<string, Post> */
     public function all(): LazyCollection
     {
         $posts = new GlobIterator($this->postsPath . '/*.md');
@@ -53,7 +53,7 @@ class Posts
         )->sortByDesc('published');
     }
 
-    /** @return LazyCollection<int, Post> */
+    /** @return LazyCollection<string, Post> */
     public function byAuthor(string $author): LazyCollection
     {
         return $this->all()->filter(
@@ -61,7 +61,7 @@ class Posts
         );
     }
 
-    /** @return LazyCollection<int, Post> */
+    /** @return LazyCollection<string, Post> */
     public function withTag(string $tag): LazyCollection
     {
         return $this->all()->filter(

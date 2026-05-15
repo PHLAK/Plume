@@ -30,6 +30,7 @@ Features
   - **Dockerized installation** allows you to be up and running quickly.
   - **Markdown rendering** for publishing formatted articles easily.
   - **Flat file structure** enables simple content management and backup.
+  - **Full text search** powered by [YetiSearch](https://github.com/yetidevworks/yetisearch)
   - **Light and dark mode** to suit your professional needs or personal style.
   - **Advanced customization** including [Shiki](https://shiki.style) powered 
     syntax highligting and experimental theme support.
