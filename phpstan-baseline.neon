@@ -1,7 +1,7 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Method App\\Commands\\PublishPages\:\:cachePages\(\) should return array\<string, SplFileInfo\> but returns array\.$#'
+			message: '#^Method App\\Commands\\PublishPages\:\:cachePages\(\) should return array\<int, string\> but returns array\.$#'
 			identifier: return.type
 			count: 1
 			path: app/Commands/PublishPages.php

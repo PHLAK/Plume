@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 use DI\Attribute\Inject;
 use Psr\Http\Message\ResponseInterface;
+use Slim\Psr7\Factory\StreamFactory;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 use Slim\Views\Twig;
@@ -22,12 +23,20 @@ class SearchController
 
     public function __invoke(Request $request, Response $response): ResponseInterface
     {
-        ['q' => $query] = $request->getQueryParams();
+        $queryParams = $request->getQueryParams();
 
-        ['results' => $results] = $this->search->searchMultiple(['posts', 'pages'], $query);
+        if (! array_key_exists('q', $queryParams)) {
+            return $response->withStatus(422);
+        }
 
-        return $this->view->render($response, 'search.twig', [
-            'results' => $results,
+        ['q' => $query] = $queryParams;
+
+        ['results' => $results] = $this->search->searchMultiple(['posts', 'pages'], $query, [
+            'limit' => 8,
         ]);
+
+        return $response->withHeader('Content-Type', 'application/json')->withBody(
+            (new StreamFactory)->createStream(json_encode($results, flags: JSON_THROW_ON_ERROR))
+        );
     }
 }

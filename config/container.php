@@ -144,6 +144,7 @@ return [
 
     Slim\App::class => factory(Factories\AppFactory::class),
     Slim\Views\Twig::class => factory(Factories\TwigFactory::class),
+    Slim\Interfaces\RouteParserInterface::class => factory(Factories\RouteParserFactory::class),
     Symfony\Component\Console\Application::class => factory(Factories\ConsoleAppFactory::class),
     Symfony\Contracts\Cache\CacheInterface::class => factory(Factories\CacheFactory::class),
     League\CommonMark\ConverterInterface::class => factory(Factories\ConverterFactory::class),

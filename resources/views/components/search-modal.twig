@@ -2,25 +2,46 @@
     class="fixed inset-0 flex flex-col justify-start items-center bg-stone-800/50 px-4 z-50 dark:bg-stone-600/50"
     @show-search.window="show()" x-transition:enter.opacity x-cloak
 >
-    <div class="flex flex-col justify-start items-center gap-4 rounded bg-stone-200 max-w-2xl w-full mt-[20vh] p-4 shadow dark:bg-stone-800 dark:border-stone-400 dark:text-stone-400"
+    <div class="flex flex-col justify-start items-center gap-4 rounded bg-stone-100 max-w-2xl w-full mt-[20vh] p-4 shadow dark:bg-stone-800 dark:border-stone-400 dark:text-stone-400"
         @click.away="hide()" x-trap.inert="visible"
     >
-        <form class="group relative block border border-stone-600 bg-stone-200 rounded w-full dark:bg-stone-800"
-            @submit.prevent="submit()"
-        >
-            <input id="search" type="text" name="search" placeholder="Search" class="bg-transparent placeholder-stone-600 w-full px-10 py-2 focus:outline-none"
-                x-model="query" @keyup.?.prevent.window="$el.focus()" @focus="$event.target.select()"
+        <div class="group relative block border border-stone-600 bg-stone-100 rounded w-full dark:bg-stone-800">
+            <input id="search" type="text" name="search" autocomplete="off" placeholder="Search" class="bg-transparent placeholder-stone-600 w-full px-10 py-2 focus:outline-none"
+                x-model="query" @keyup.?.prevent.window="$el.focus()" @focus="$event.target.select()" @input.debounce="search"
             >
 
             <div class="flex items-center absolute left-0 inset-y-0 ml-2 pointer-events-none">
                 {{ svg('light/magnifying-glass', ['fill-current', 'size-6', 'text-stone-600']) }}
             </div>
-        </form>
+        </div>
+
+        <div x-show="loading" class="flex items-center gap-2 text-stone-400 p-2">
+            {{ svg('light/spinner-third', ['fill-current', 'size-6', 'animate-spin']) }}
+            Loading
+        </div>
+
+        <ul x-show="! loading && results.length >= 1" class="flex flex-col gap-1 w-full">
+            <template x-for="result in results">
+                <li class="w-full text-sm md:text-base">
+                    <a x-bind:href="result.metadata.url" class="flex items-center gap-2 rounded border border-stone-600 w-full font-medium text-stone-600 px-4 py-2 focus:outline-none focus:bg-stone-200 hover:bg-stone-200 hover:bg-stone-200 dark:border-stone-400 dark:text-stone-400 dark:focus:bg-stone-700 dark:hover:bg-stone-700">
+                        <div class="text-stone-400 dark:text-stone-600">#</div>
+                        <div x-text="result._index.charAt(0).toUpperCase() + result._index.slice(1)"></div>
+                        <div class="text-stone-400 dark:text-stone-600">→</div>
+                        <div x-text="result.title" class="shrink overflow-hidden text-ellipsis text-nowrap"></div>
+                    </a>
+                </li>
+            </template>
+        </ul>
 
         <div class="flex gap-4 text-stone-800 dark:text-stone-400">
+            <div class="hidden items-center gap-1 sm:flex">
+                <kbd class="text-xs">tab</kbd>
+                to navigate
+            </div>
+
             <div class="flex items-center gap-1">
                 <kbd>{{ svg('light/arrow-turn-down-left', ['fill-current', 'size-4']) }}</kbd>
-                to search
+                to select
             </div>
 
             <div class="flex items-center gap-1">

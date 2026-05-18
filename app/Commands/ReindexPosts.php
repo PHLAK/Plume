@@ -7,6 +7,7 @@ namespace App\Commands;
 use App\Data\Post;
 use App\Posts;
 use DI\Attribute\Inject;
+use Slim\Interfaces\RouteParserInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,6 +22,9 @@ class ReindexPosts extends Command
 
     #[Inject(YetiSearch::class)]
     private YetiSearch $search;
+
+    #[Inject(RouteParserInterface::class)]
+    private RouteParserInterface $routeParser;
 
     public function __invoke(OutputInterface $output): int
     {
@@ -59,6 +63,7 @@ class ReindexPosts extends Command
                     'tags' => $post->tags,
                 ],
                 'metadata' => [
+                    'url' => $this->routeParser->urlFor('post', ['slug' => $slug]),
                     'published' => $post->published->toDateTimeString(),
                     'draft' => $post->draft,
                 ],

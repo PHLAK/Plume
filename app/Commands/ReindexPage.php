@@ -6,6 +6,7 @@ namespace App\Commands;
 
 use App\Pages;
 use DI\Attribute\Inject;
+use Slim\Interfaces\RouteParserInterface;
 use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -21,6 +22,9 @@ class ReindexPage extends Command
 
     #[Inject(YetiSearch::class)]
     private YetiSearch $search;
+
+    #[Inject(RouteParserInterface::class)]
+    private RouteParserInterface $routeParser;
 
     public function __invoke(
         OutputInterface $output,
@@ -42,6 +46,9 @@ class ReindexPage extends Command
                 'title' => $page->title,
                 'link' => $page->link,
                 'body' => $page->body,
+            ],
+            'metadata' => [
+                'url' => $this->routeParser->urlFor('page', ['slug' => $slug]),
             ],
             'type' => 'page',
         ]);
