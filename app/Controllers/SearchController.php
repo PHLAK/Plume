@@ -24,10 +24,15 @@ class SearchController
             return $response->withStatus(422);
         }
 
+        /** @var string $query */
         ['q' => $query] = $queryParams;
 
+        /** @var list<array<string, mixed>> $postResults */
         ['results' => $postResults] = $this->search->search('posts', $query, ['fuzzy' => true, 'limit' => 8]);
+
+        /** @var list<array<string, mixed>> $pageResults */
         ['results' => $pageResults] = $this->search->search('pages', $query, ['fuzzy' => true, 'limit' => 8]);
+
         $allResults = [...$postResults, ...$pageResults];
 
         usort($allResults, static fn (array $a, array $b): int => $b['score'] <=> $a['score']);

@@ -109,12 +109,6 @@ parameters:
 			path: app/Functions/Vite.php
 
 		-
-			message: '#^Method App\\Functions\\Vite\:\:getBuildTags\(\) throws checked exception JsonException but it''s missing from the PHPDoc @throws tag\.$#'
-			identifier: missingType.checkedException
-			count: 1
-			path: app/Functions/Vite.php
-
-		-
 			message: '#^Parameter \#2 \.\.\.\$values of function sprintf expects bool\|float\|int\|string\|null, mixed given\.$#'
 			identifier: argument.type
 			count: 5
