@@ -1,11 +1,11 @@
-<div x-data="searchModal" x-show="visible" @click.self="hide()" @keyup.escape.window="hide()"
-    class="fixed inset-0 flex flex-col justify-start items-center bg-stone-800/50 px-4 z-50 dark:bg-stone-600/50"
-    @show-search.window="show()" x-transition:enter.opacity x-cloak
+<div class="fixed inset-0 flex flex-col justify-start items-center bg-stone-800/50 px-4 z-50 dark:bg-stone-600/50"
+    x-data="searchModal" x-show="visible" @click.self="hide()" @show-search.window="show()" @keyup.escape.window="hide()"
+    x-transition:enter.opacity x-cloak
 >
-    <div class="flex flex-col justify-start items-center gap-4 rounded bg-stone-100 max-w-2xl w-full mt-[20vh] p-4 shadow dark:bg-stone-800 dark:border-stone-400 dark:text-stone-400"
+    <div class="flex flex-col justify-start items-center gap-4 rounded bg-stone-100 max-w-3xl w-full mt-[20vh] p-4 shadow dark:bg-stone-800 dark:border-stone-400 dark:text-stone-400"
         @click.away="hide()" x-trap.inert="visible"
     >
-        <div class="group relative block border border-stone-600 bg-stone-100 rounded w-full dark:bg-stone-800">
+        <div class="group relative block border border-stone-400 bg-stone-100 rounded w-full dark:border-stone-600 dark:bg-stone-800">
             <input id="search" type="text" name="search" autocomplete="off" placeholder="Search" class="bg-transparent placeholder-stone-600 w-full px-10 py-2 focus:outline-none"
                 x-model="query" @keyup.?.prevent.window="$el.focus()" @focus="$event.target.select()" @input.debounce="search"
             >
@@ -20,18 +20,22 @@
             Loading
         </div>
 
-        <ul x-show="! loading && results.length >= 1" class="flex flex-col gap-1 w-full">
-            <template x-for="result in results">
+        <ul x-show="! loading && results.length >= 1" class="flex flex-col gap-1 w-full" x-transition>
+            <template x-for="result in results" :key="result.id">
                 <li class="w-full text-sm md:text-base">
-                    <a x-bind:href="result.metadata.url" class="flex items-center gap-2 rounded border border-stone-600 w-full font-medium text-stone-600 px-4 py-2 focus:outline-none focus:bg-stone-200 hover:bg-stone-200 hover:bg-stone-200 dark:border-stone-400 dark:text-stone-400 dark:focus:bg-stone-700 dark:hover:bg-stone-700">
-                        <div class="text-stone-400 dark:text-stone-600">#</div>
-                        <div x-text="result._index.charAt(0).toUpperCase() + result._index.slice(1)"></div>
-                        <div class="text-stone-400 dark:text-stone-600">→</div>
-                        <div x-text="result.title" class="shrink overflow-hidden text-ellipsis text-nowrap"></div>
+                    <a x-bind:href="result.metadata.url" class="flex items-center gap-2 rounded border border-stone-400 w-full font-medium text-stone-600 text-nowrap overflow-hidden px-4 py-2 focus:outline-none focus:bg-stone-200 hover:bg-stone-200 hover:bg-stone-200 dark:border-stone-600 dark:text-stone-400 dark:focus:bg-stone-700 dark:hover:bg-stone-700">
+                        <div class="text-stone-400 dark:text-stone-600">❯</div>
+                        <div x-text="result.document.title" class=""></div>
+                        <div x-show.important="result.highlights.body" class="text-stone-400 dark:text-stone-600">❯</div>
+                        <div x-show.important="result.highlights.body" x-html="result.highlights.body" class="shrink overflow-hidden text-ellipsis"></div>
                     </a>
                 </li>
             </template>
         </ul>
+
+        <div x-show="! loading && query !== '' && results.length === 0"  class="flex items-center gap-2 text-stone-400 p-2" x-transition>
+            No results found
+        </div>
 
         <div class="flex gap-4 text-stone-800 dark:text-stone-400">
             <div class="hidden items-center gap-1 sm:flex">

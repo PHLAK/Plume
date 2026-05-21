@@ -45,7 +45,7 @@ class ReindexPage extends Command
             'content' => [
                 'title' => $page->title,
                 'link' => $page->link,
-                'body' => $page->body,
+                'body' => str_replace("\n", ' ', strip_tags($page->body)),
             ],
             'metadata' => [
                 'url' => $this->routeParser->urlFor('page', ['slug' => $slug]),

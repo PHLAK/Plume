@@ -7,13 +7,13 @@ export default () => ({
     loading: false,
 
     show() {
-        this.query = '';
         this.visible = true;
     },
 
     hide() {
         this.visible = false;
         this.query = '';
+        this.results = [];
     },
 
     async search() {

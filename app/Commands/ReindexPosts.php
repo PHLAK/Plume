@@ -59,7 +59,7 @@ class ReindexPosts extends Command
                 'content' => [
                     'title' => $post->title,
                     'author' => $post->author,
-                    'body' => $post->body,
+                    'body' => str_replace("\n", ' ', strip_tags($post->body)),
                     'tags' => $post->tags,
                 ],
                 'metadata' => [

@@ -8,9 +8,11 @@ use App\Posts;
 use DI\Attribute\Inject;
 use Symfony\Component\Cache\Adapter\AbstractAdapter;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
+use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 
@@ -29,6 +31,7 @@ class PublishPost extends Command
 
     public function __invoke(
         OutputInterface $output,
+        Application $application,
         #[Argument('The post slug')] string $slug,
     ): int {
         if ($this->cache instanceof ArrayAdapter) {
@@ -46,6 +49,8 @@ class PublishPost extends Command
         $output->writeln('<fg=green>DONE</>');
 
         $output->writeln(sprintf('<fg=green>"%s" published successfully</>', $post->title));
+
+        $application->doRun(new StringInput(sprintf('reindex:post %s', $slug)), $output);
 
         return self::SUCCESS;
     }
