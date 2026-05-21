@@ -1,5 +1,5 @@
 import Alpine from 'alpinejs';
-import focus from '@alpinejs/focus'
+import focus from '@alpinejs/focus';
 import Application from '@/components/Application.js';
 import SearchModal from '@/components/SearchModal.js';
 
