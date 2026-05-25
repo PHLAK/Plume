@@ -30,6 +30,6 @@ final readonly class Page
 
     public function bodyForIndex(): string
     {
-        return preg_replace('/\s+/', ' ', html_entity_decode(strip_tags($this->body)));
+        return preg_replace('/\s+/', ' ', html_entity_decode(strip_tags($this->body))) ?? $this->body;
     }
 }

@@ -13,6 +13,12 @@ parameters:
 			path: app/Commands/PublishPosts.php
 
 		-
+			message: '#^Parameter \#1 \$string of function trim expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Controllers/SearchController.php
+
+		-
 			message: '#^Only iterables can be unpacked, mixed given in argument \#1\.$#'
 			identifier: argument.unpackNonIterable
 			count: 1
