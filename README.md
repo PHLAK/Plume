@@ -18,7 +18,7 @@ Plume is your self-hosted, Markdown based publishing platform.
 
 All posts (and pages) authored in Markdown, stored in a flat-file structure.
 
-![Screenshot](docs/.gitbook/assets/screenshot.png)
+![Screenshot](docs/public/images/screenshot.png)
 
 Plume is created and maintained by
 [Chris Kankiewicz](https://www.chriskankiewicz.com)
@@ -28,18 +28,18 @@ Features
 --------
 
   - **Dockerized installation** allows you to be up and running quickly.
-  - **Markdown rendering** for publishing formatted articles easily.
   - **Flat file structure** enables simple content management and backup.
-  - **Full text search** powered by [YetiSearch](https://github.com/yetidevworks/yetisearch)
-  - **Light and dark mode** to suit your professional needs or personal style.
-  - **Advanced customization** including [Shiki](https://shiki.style) powered 
-    syntax highligting and experimental theme support.
+  - **Markdown rendering** for publishing, including [Shiki](https://shiki.style) powered syntax highligting.
+  - **Full text search** to find the content you're looking for, powered by [YetiSearch](https://github.com/yetidevworks/yetisearch).
+  - **Automatic light and dark modes** based on the users system theme with custom override.
+  - **Theme support (experimental)** for full customization of the look and feel of your app.
 
 Requirements
 ------------
 
-Plume requires [Docker](https://www.docker.com) with [Docker Compose](https://docs.docker.com/compose/)
-or [PHP](https://www.php.net/) if installing manually.
+Plume requires [Docker](https://www.docker.com) with [Docker Compose](https://docs.docker.com/compose/).
+
+Alternatively, for a manual installation [PHP](https://www.php.net/) is required.
 
 Installation
 ------------
