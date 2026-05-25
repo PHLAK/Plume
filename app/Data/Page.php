@@ -27,4 +27,9 @@ final readonly class Page
             weight: $frontMatter['weight'] ?? 0,
         );
     }
+
+    public function bodyForIndex(): string
+    {
+        return preg_replace('/\s+/', ' ', html_entity_decode(strip_tags($this->body)));
+    }
 }

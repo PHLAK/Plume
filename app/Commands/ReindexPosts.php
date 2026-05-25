@@ -34,10 +34,9 @@ class ReindexPosts extends Command
 
         $indexer = $this->search->createIndex('posts', [
             'fields' => [
-                'title' => ['boost' => 3.0, 'store' => true],
-                'author' => ['boost' => 2.0, 'store' => true],
+                'title' => ['boost' => 5.0, 'store' => true],
                 'body' => ['boost' => 1.0, 'store' => true],
-                'tags' => ['boost' => 1.0, 'store' => true],
+                'tags' => ['boost' => 2.0, 'store' => true],
             ],
         ]);
 
@@ -58,14 +57,12 @@ class ReindexPosts extends Command
                 'id' => $slug,
                 'content' => [
                     'title' => $post->title,
-                    'author' => $post->author,
-                    'body' => str_replace("\n", ' ', strip_tags($post->body)),
-                    'tags' => $post->tags,
+                    'body' => $post->bodyForIndex(),
+                    'tags' => implode(' ', $post->tags),
                 ],
                 'metadata' => [
                     'url' => $this->routeParser->urlFor('post', ['slug' => $slug]),
                     'published' => $post->published->toDateTimeString(),
-                    'draft' => $post->draft,
                 ],
                 'type' => 'post',
             ])

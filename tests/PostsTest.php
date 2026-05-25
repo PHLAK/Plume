@@ -34,7 +34,7 @@ class PostsTest extends TestCase
         $testPost = $posts->get('test-post-1');
 
         $this->assertSame('Test Post; Please Ignore', $testPost->title);
-        $this->assertSame("<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n", $testPost->excerpt);
+        $this->assertSame("<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n", $testPost->excerpt());
         $this->assertTrue($testPost->published->equalTo('1986-05-20 12:34:56'));
         $this->assertSame('Arthur Dent', $testPost->author);
         $this->assertSame(['Foo', 'Bar', 'Test'], $testPost->tags);

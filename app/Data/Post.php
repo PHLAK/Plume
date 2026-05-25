@@ -11,8 +11,6 @@ use League\CommonMark\Extension\FrontMatter\Output\RenderedContentWithFrontMatte
 
 final class Post
 {
-    public readonly ?string $excerpt;
-
     /** @param string[] $tags */
     public function __construct(
         public string $title,
@@ -23,9 +21,7 @@ final class Post
         public ?PostImage $image = null,
         public ?string $canonical = null,
         public bool $draft = false,
-    ) {
-        $this->excerpt = $this->excerpt($body);
-    }
+    ) {}
 
     public static function fromRenderedContent(RenderedContentWithFrontMatter $content): self
     {
@@ -44,19 +40,24 @@ final class Post
         );
     }
 
-    private function excerpt(string $body): ?string
+    public function bodyForIndex(): string
     {
-        if (! $this->hasExcerpt($body)) {
+        return preg_replace('/\s+/', ' ', html_entity_decode(strip_tags($this->body)));
+    }
+
+    public function excerpt(): string
+    {
+        if (! $this->hasExcerpt()) {
             return $this->body;
         }
 
-        [$excerpt] = Str::extract('/<!-- excerpt -->(?:\s+)?(?<excerpt>.+)(?:\s+)?<!-- \/excerpt -->/s', $body);
+        [$excerpt] = Str::extract('/<!-- excerpt -->(?:\s+)?(?<excerpt>.+)(?:\s+)?<!-- \/excerpt -->/s', $this->body);
 
-        return $excerpt ?? null;
+        return $excerpt ?? $this->body;
     }
 
-    private function hasExcerpt(string $body): bool
+    private function hasExcerpt(): bool
     {
-        return mb_strstr($body, '<!-- excerpt -->') && mb_strstr($body, '<!-- /excerpt -->');
+        return mb_strstr($this->body, '<!-- excerpt -->') && mb_strstr($this->body, '<!-- /excerpt -->');
     }
 }

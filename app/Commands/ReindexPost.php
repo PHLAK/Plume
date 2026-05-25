@@ -44,14 +44,12 @@ class ReindexPost extends Command
             'id' => $slug,
             'content' => [
                 'title' => $post->title,
-                'author' => $post->author,
-                'body' => str_replace("\n", ' ', strip_tags($post->body)),
+                'body' => $post->bodyForIndex(),
                 'tags' => implode(' ', $post->tags),
             ],
             'metadata' => [
                 'url' => $this->routeParser->urlFor('post', ['slug' => $slug]),
                 'published' => $post->published->toDateTimeString(),
-                'draft' => $post->draft,
             ],
             'type' => 'post',
         ]);

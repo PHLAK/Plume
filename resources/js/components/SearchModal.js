@@ -32,6 +32,8 @@ export default () => ({
             response = await axios.get('/search', { params: { q: this.query } });
         } catch (error) {
             console.error(error);
+
+            return;
         } finally {
             this.loading = false;
         }

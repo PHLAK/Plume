@@ -34,8 +34,7 @@ class ReindexPages extends Command
 
         $indexer = $this->search->createIndex('pages', [
             'fields' => [
-                'title' => ['boost' => 3.0, 'store' => true],
-                'link' => ['boost' => 2.0, 'store' => true],
+                'title' => ['boost' => 5.0, 'store' => true],
                 'body' => ['boost' => 1.0, 'store' => true],
             ],
         ]);
@@ -57,8 +56,7 @@ class ReindexPages extends Command
                 'id' => $slug,
                 'content' => [
                     'title' => $page->title,
-                    'link' => $page->link,
-                    'body' => str_replace("\n", ' ', strip_tags($page->body)),
+                    'body' => $page->bodyForIndex(),
                 ],
                 'metadata' => [
                     'url' => $this->routeParser->urlFor('page', ['slug' => $slug]),
@@ -66,6 +64,8 @@ class ReindexPages extends Command
                 'type' => 'page',
             ])
         );
+
+        $indexer->flush();
 
         return $pages->keys()->all();
     }

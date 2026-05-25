@@ -6,7 +6,7 @@
         @click.away="hide()" x-trap.inert="visible"
     >
         <div class="group relative block border border-stone-400 bg-stone-100 rounded w-full dark:border-stone-600 dark:bg-stone-800">
-            <input id="search" type="text" name="search" autocomplete="off" placeholder="Search" class="bg-transparent placeholder-stone-600 w-full px-10 py-2 focus:outline-none"
+            <input id="search" type="text" name="search" autocomplete="off" placeholder="Search" class="bg-transparent placeholder-stone-600 w-full p-2 pl-10 focus:outline-none"
                 x-model="query" @keyup.?.prevent.window="$el.focus()" @focus="$event.target.select()" @input.debounce="search"
             >
 
@@ -24,10 +24,9 @@
             <template x-for="result in results" :key="result.id">
                 <li class="w-full text-sm md:text-base">
                     <a x-bind:href="result.metadata.url" class="flex items-center gap-2 rounded border border-stone-400 w-full font-medium text-stone-600 text-nowrap overflow-hidden px-4 py-2 focus:outline-none focus:bg-stone-200 hover:bg-stone-200 hover:bg-stone-200 dark:border-stone-600 dark:text-stone-400 dark:focus:bg-stone-700 dark:hover:bg-stone-700">
-                        <div class="text-stone-400 dark:text-stone-600">❯</div>
                         <div x-text="result.document.title" class=""></div>
                         <div x-show.important="result.highlights.body" class="text-stone-400 dark:text-stone-600">❯</div>
-                        <div x-show.important="result.highlights.body" x-html="result.highlights.body" class="shrink overflow-hidden text-ellipsis"></div>
+                        <div x-show.important="result.highlights.body" x-html="result.highlights.body" class="shrink overflow-hidden text-ellipsis text-stone-400"></div>
                     </a>
                 </li>
             </template>
