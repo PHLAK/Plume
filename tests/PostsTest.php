@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests;
 
 use App\Data\Post;
+use App\Exceptions\NotFoundException;
 use App\Posts;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
@@ -65,5 +66,13 @@ class PostsTest extends TestCase
         $this->assertTrue($posts->doesntContain(fn (Post $post): bool => $post->draft || $post->published->isFuture()));
 
         $this->assertTrue($posts->every(fn (Post $post): bool => in_array('Test', $post->tags)));
+    }
+
+    #[Test]
+    public function it_throws_a_not_found_exception_for_a_nonexistent_post(): void
+    {
+        $this->expectException(NotFoundException::class);
+
+        $this->posts->get('nonexistent-post');
     }
 }

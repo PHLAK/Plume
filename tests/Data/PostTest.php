@@ -75,4 +75,16 @@ class PostTest extends TestCase
         $this->assertNull($post->image);
         $this->assertTrue($post->draft);
     }
+
+    #[Test]
+    public function it_can_get_the_body_for_index(): void
+    {
+        $post = new Post(
+            title: 'Test title; please ignore',
+            body: "<h1>Hello world!</h1>\n<p>This is a test post</p>",
+            published: Carbon::parse('1986-05-20 12:34:56'),
+        );
+
+        $this->assertSame('Hello world! This is a test post', $post->bodyForIndex());
+    }
 }

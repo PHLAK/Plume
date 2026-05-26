@@ -45,4 +45,16 @@ class PageTest extends TestCase
         $this->assertSame("<p>I'm a test page, please ignore me.</p>\n", $page->body);
         $this->assertSame(0, $page->weight);
     }
+
+    #[Test]
+    public function it_can_generate_a_body_for_index(): void
+    {
+        $page = new Page(
+            title: 'Test title; please ignore',
+            link: 'Test',
+            body: "<h1>Hello world!</h1>\n<p>This is a test page</p>",
+        );
+
+        $this->assertSame('Hello world! This is a test page', $page->bodyForIndex());
+    }
 }

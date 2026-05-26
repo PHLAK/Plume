@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests;
 
 use App\Data\Page;
+use App\Exceptions\NotFoundException;
 use App\Pages;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
@@ -59,5 +60,13 @@ class PagesTest extends TestCase
             weight: 0,
             body: "<p>I'm a test page, please ignore me.</p>\n"
         ), $page);
+    }
+
+    #[Test]
+    public function it_throws_a_not_found_exception_for_a_nonexistent_page(): void
+    {
+        $this->expectException(NotFoundException::class);
+
+        $this->pages->get('nonexistent-page');
     }
 }
