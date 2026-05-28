@@ -131,7 +131,7 @@ Timezone used for date formatting.
 
 Enable anonymized usage reporting.
 
-> [!INFO]
+> [!NOTE]
 > The data collected contains aggregated metrics and does not identify individual users.
 
 - **Possible Values:** `true` or `false`

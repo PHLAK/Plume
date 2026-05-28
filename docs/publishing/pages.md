@@ -65,7 +65,7 @@ php plume publish:pages
 ```
 :::
 
-### Updating a page
+### Updating a Page
 
 Sometimes you may need to update a page after it's already been published (e.g.
 after making some edits). Publishing a single page will render the contents and

@@ -71,8 +71,8 @@ information about authoring with Markdown.
 ## Excerpts
 
 By default, the main posts list will show the entire contents of a post. If
-instead you would like to only show an _excerpt_ of the post  you may specify
-the content to show by wrapping it with `<!— excerpt -->` and `<!— /excerpt -->`
+instead you would like to only show an _excerpt_ of the post you may specify
+the content to show by wrapping it with `<!-- excerpt -->` and `<!-- /excerpt -->`
 tags. The portion of text within the excerpt tags will be the content that 
 is displayed in the main posts list.
 

@@ -16,7 +16,7 @@ as a quick and easy way of getting up and running with a pre-configured
     ```console
     cd /your/chosen/path/
     git clone git@github.com:PHLAK/plume-compose.git
-    ````
+    ```
 
 2. Switch to the `plume-compose` directory and initialize the configuration files
 

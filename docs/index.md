@@ -19,7 +19,10 @@ personal or professional style.
 * **Dockerized installation** allows you to be up and running quickly.
 * **Markdown rendering** for publishing formatted articles easily.
 * **Flat file structure** for simple content management and backup.
-* **User customization** including light and dark themes with more coming soon...
+* **User customization** including light and dark themes.
+* **Full text search** to quickly find the content you're looking for.
+* **Shiki syntax highlighting** for beautiful code blocks.
+* **Automatic light and dark modes** based on your system theme.
 
 ## Changelog
 
