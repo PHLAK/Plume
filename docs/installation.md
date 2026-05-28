@@ -115,8 +115,48 @@ docker run --detach [--env ENVIRONMENT_VARIABLE=value] \
 > [!DANGER] This is not a recommended installation method
 > Installing manually _will_ require more work to update between versions.
 
-> [!NOTE] More details coming soon including examples for
->
-> - NGINX
-> - Apache
-> - Caddy
+## Reverse Proxy
+
+Plume can be run behind a reverse proxy for improved performance, security, and
+flexibility. The following examples assume Plume is accessible on the host at
+`127.0.0.1:8080`.
+
+> [!TIP]
+> Replace `8080` with the port you configured for your Plume installation.
+
+### NGINX
+
+```nginx
+server {
+    listen 80;
+    server_name example.com;
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+
+### Apache
+
+```apache
+<VirtualHost *:80>
+    ServerName example.com
+
+    ProxyPass / http://127.0.0.1:8080/
+    ProxyPassReverse / http://127.0.0.1:8080/
+</VirtualHost>
+```
+
+### Caddy
+
+```caddyfile
+example.com
+
+reverse_proxy 127.0.0.1:8080
+```
