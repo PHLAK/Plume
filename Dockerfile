@@ -56,7 +56,6 @@ COPY .docker/apache2/config/000-default.prod.conf /etc/apache2/sites-available/0
 COPY .docker/php/config/php.prod.ini /usr/local/etc/php/php.ini
 
 COPY --from=build /var/www/html /var/www/html
-RUN chown --recursive www-data:www-data /var/www/html
 
 # --------- DEV ----------
 
