@@ -93,8 +93,12 @@ Why that would be 42 of course!
 Publishing posts will render the contents of and update the cache for all posts.
 
 ::: code-group
+```console [Plume Compose]
+docker compose run --rm plume publish:posts
+```
+
 ```console [Docker Compose]
-docker compose run --rm php plume publish:posts
+docker compose run --rm --user www-data php plume publish:posts
 ```
 
 ```console [Manual]
@@ -109,8 +113,12 @@ after making some edits). Publishing a single post will render the contents and
 update the cache for a single post specified by it's slug.
 
 ::: code-group
+```console [Plume Compose]
+docker compose run --rm plume publish:post <slug>
+```
+
 ```console [Docker Compose]
-docker compose run --rm php plume publish:post <slug>
+docker compose run --rm --user www-data php plume publish:post <slug>
 ```
 
 ```console [Manual]

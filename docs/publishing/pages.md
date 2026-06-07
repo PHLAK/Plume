@@ -56,8 +56,12 @@ information about authoring with Markdown.
 Publishing pages will render the contents of and update the cache for all pages.
 
 ::: code-group
+```console [Plume Compose]
+docker compose run --rm plume publish:pages
+```
+
 ```console [Docker Compose]
-docker compose run --rm php plume publish:pages
+docker compose run --rm --user www-data php plume publish:pages
 ```
 
 ```console [Manual]
@@ -72,8 +76,12 @@ after making some edits). Publishing a single page will render the contents and
 update the cache for a single page specified by it's slug.
 
 ::: code-group
+```console [Plume Compose]
+docker compose run --rm plume publish:page <slug>
+```
+
 ```console [Docker Compose]
-docker compose run --rm php plume publish:page <slug>
+docker compose run --rm --user www-data php plume publish:page <slug>
 ```
 
 ```console [Manual]
