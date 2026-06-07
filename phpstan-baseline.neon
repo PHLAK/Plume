@@ -37,12 +37,6 @@ parameters:
 			path: app/Factories/CacheFactory.php
 
 		-
-			message: '#^Method App\\Factories\\CacheFactory\:\:getPhpFilesAdapter\(\) throws checked exception Symfony\\Component\\Cache\\Exception\\CacheException but it''s missing from the PHPDoc @throws tag\.$#'
-			identifier: missingType.checkedException
-			count: 1
-			path: app/Factories/CacheFactory.php
-
-		-
 			message: '#^Parameter \#1 \$command of method Symfony\\Component\\Console\\Application\:\:addCommand\(\) expects \(callable\(\)\: mixed\)\|Symfony\\Component\\Console\\Command\\Command, mixed given\.$#'
 			identifier: argument.type
 			count: 1
@@ -95,6 +89,12 @@ parameters:
 			identifier: missingType.checkedException
 			count: 1
 			path: app/Filters/Markdown.php
+
+		-
+			message: '#^Constant LIBXML_NOXMLDECL is not allowed for parameter \$options of method DOMDocument\:\:saveXML\(\)\.$#'
+			identifier: argument.invalidConstant
+			count: 1
+			path: app/Functions/Svg.php
 
 		-
 			message: '#^Method App\\Functions\\Svg\:\:addClassAttribute\(\) has no return type specified\.$#'
