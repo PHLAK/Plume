@@ -61,6 +61,7 @@ return [
         Commands\ReindexPages::class,
         Commands\ReindexPost::class,
         Commands\ReindexPosts::class,
+        Commands\ViewClearCache::class,
     ],
 
     // -------------------------------------------------------------------------
