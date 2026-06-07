@@ -110,12 +110,4 @@ return [
      */
     'timezone' => env('TIMEZONE', date_default_timezone_get()),
 
-    /**
-     * Enable usage reporting. The data collected contains aggregated metrics
-     * and does not identify individual users.
-     *
-     * Default value: true
-     */
-    'usage_reporting' => env('USAGE_REPORTING', true),
-
 ];

@@ -127,16 +127,6 @@ Timezone used for date formatting.
   for a list of supported values.
 - **Default Value:** The server's timezone
 
-### `USAGE_REPORTING`
-
-Enable anonymized usage reporting.
-
-> [!NOTE]
-> The data collected contains aggregated metrics and does not identify individual users.
-
-- **Possible Values:** `true` or `false`
-- **Default Value:** `true`
-
 ## Cache Configuration
 
 ### `CACHE_DRIVER`

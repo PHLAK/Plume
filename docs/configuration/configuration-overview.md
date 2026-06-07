@@ -94,8 +94,6 @@ The default `.env` file should look something like this:
 
 # DATE_FORMAT='Y-m-d H:i:s'
 # TIMEZONE=
-
-# USAGE_REPORTING=true
 ```
 :::
 
