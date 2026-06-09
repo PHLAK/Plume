@@ -14,10 +14,10 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
 
 #[AsCommand(
-    name: 'view:clear-cache',
-    description: 'Clear the view cache',
+    name: 'purge:view-cache',
+    description: 'Purge the view cache',
 )]
-class ViewClearCache extends Command
+class PurgeViewCache extends Command
 {
     #[Inject('view_cache')]
     private string $viewCache;

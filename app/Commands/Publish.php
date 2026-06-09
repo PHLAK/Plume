@@ -14,7 +14,7 @@ use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 
-#[AsCommand('publish', description: 'Publish all posts and pages')]
+#[AsCommand('publish', description: 'Publish all posts and pages and purge caches')]
 class Publish extends Command
 {
     /** @var AbstractAdapter $cache */
@@ -33,7 +33,8 @@ class Publish extends Command
 
         $application->doRun(new StringInput('publish:posts'), $output);
         $application->doRun(new StringInput('publish:pages'), $output);
-        $application->doRun(new StringInput('view:clear-cache'), $output);
+        $application->doRun(new StringInput('purge:view-cache'), $output);
+        $application->doRun(new StringInput('purge:container-cache'), $output);
 
         return Command::SUCCESS;
     }
