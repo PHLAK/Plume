@@ -33,7 +33,7 @@ class PurgeViewCache extends BaseCommand
 
         $this->start('Purging the view cache');
         $this->process('Deleting view cache files', fn () => $this->clearViewCache());
-        $this->success(sprintf('Purged <fg=green>%s</> successfully', $this->cachePath()));
+        $this->success(sprintf('Purged <fg=green>%s</> successfully', $this->relativeCachePath()));
 
         return self::SUCCESS;
     }
@@ -49,7 +49,7 @@ class PurgeViewCache extends BaseCommand
         }
     }
 
-    private function cachePath(): string
+    private function relativeCachePath(): string
     {
         return ltrim(str_replace($this->basePath, '', $this->viewCache), DIRECTORY_SEPARATOR);
     }
