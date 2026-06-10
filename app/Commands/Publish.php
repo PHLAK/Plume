@@ -33,18 +33,18 @@ class Publish extends BaseCommand
             return self::FAILURE;
         }
 
+        if ($purgeCaches) {
+            $application->doRun(new StringInput('purge:view-cache'), $output);
+            $this->newLine();
+            $application->doRun(new StringInput('purge:container-cache'), $output);
+            $this->newLine();
+        }
+
         $application->doRun(new StringInput('publish:posts'), $output);
 
         $this->newLine();
 
         $application->doRun(new StringInput('publish:pages'), $output);
-
-        if ($purgeCaches) {
-            $this->newLine();
-            $application->doRun(new StringInput('purge:view-cache'), $output);
-            $this->newLine();
-            $application->doRun(new StringInput('purge:container-cache'), $output);
-        }
 
         return Command::SUCCESS;
     }
