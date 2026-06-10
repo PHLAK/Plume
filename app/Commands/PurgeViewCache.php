@@ -10,32 +10,30 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
 use Symfony\Component\Console\Attribute\AsCommand;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Output\OutputInterface;
 
 #[AsCommand(
     name: 'purge:view-cache',
     description: 'Purge the view cache',
 )]
-class PurgeViewCache extends Command
+class PurgeViewCache extends BaseCommand
 {
     #[Inject('view_cache')]
     private string $viewCache;
 
-    public function __invoke(
-        OutputInterface $output,
-    ): int {
+    #[Inject('base_path')]
+    private string $basePath;
+
+    public function __invoke(): int
+    {
         if (strtolower($this->viewCache) === 'false') {
-            $output->writeln('<fg=yellow>View caching is currently disabled, nothing to clear</>');
+            $this->warning('View caching is currently disabled, nothing to clear');
 
             return self::SUCCESS;
         }
 
-        $output->write('Clearing view cache ... ');
-        $this->clearViewCache();
-        $output->writeln('<fg=green>DONE</>');
-
-        $output->writeln(sprintf('<fg=green>%s cleared successfully</>', $this->viewCache));
+        $this->start('Purging the view cache');
+        $this->process('Deleting view cache files', fn () => $this->clearViewCache());
+        $this->success(sprintf('Purged <fg=green>%s</> successfully', $this->cachePath()));
 
         return self::SUCCESS;
     }
@@ -49,5 +47,10 @@ class PurgeViewCache extends Command
         foreach ($iteratorIterator as $file) {
             $file->isDir() ? rmdir($file->getRealPath()) : unlink($file->getRealPath());
         }
+    }
+
+    private function cachePath(): string
+    {
+        return ltrim(str_replace($this->basePath, '', $this->viewCache), DIRECTORY_SEPARATOR);
     }
 }

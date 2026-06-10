@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Commands;
 
+use App\Data\Page;
 use App\Pages;
 use DI\Attribute\Inject;
 use Symfony\Component\Cache\Adapter\AbstractAdapter;
@@ -11,16 +12,14 @@ use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\StringInput;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 
 #[AsCommand(
     name: 'publish:page',
     description: 'Publish a page by slug',
 )]
-class PublishPage extends Command
+class PublishPage extends BaseCommand
 {
     /** @var AbstractAdapter $cache */
     #[Inject(CacheInterface::class)]
@@ -30,27 +29,23 @@ class PublishPage extends Command
     private Pages $pages;
 
     public function __invoke(
-        OutputInterface $output,
         Application $application,
         #[Argument('The page slug')] string $slug,
     ): int {
         if ($this->cache instanceof ArrayAdapter) {
-            $output->writeln("<fg=yellow>This command has no affect when using the 'array' cache driver</>");
+            $this->error("This command has no affect when using the 'array' cache driver");
 
             return self::FAILURE;
         }
 
-        $output->write('Clearing page cache ... ');
-        $this->cache->withSubNamespace('pages')->delete(hash('xxh128', $slug));
-        $output->writeln('<fg=green>DONE</>');
+        $this->start(sprintf('Publishing the <fg=cyan>%s</> page', $slug));
+        $this->process('Clearing page cache', fn (): bool => $this->cache->withSubNamespace('pages')->delete(hash('xxh128', $slug)));
+        $page = $this->process('Rebuilding page cache', fn (): Page => $this->pages->get($slug));
+        $this->success(sprintf('Published <fg=magenta>%s</> successfully</>', $page->title));
 
-        $output->write('Publishing page ... ');
-        $page = $this->pages->get($slug);
-        $output->writeln('<fg=green>DONE</>');
+        $this->newLine();
 
-        $output->writeln(sprintf('<fg=green>"%s" published successfully</>', $page->title));
-
-        $application->doRun(new StringInput(sprintf('reindex:page %s', $slug)), $output);
+        $application->doRun(new StringInput(sprintf('reindex:page %s', $slug)), $this->output);
 
         return self::SUCCESS;
     }

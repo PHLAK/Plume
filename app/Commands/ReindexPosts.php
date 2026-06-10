@@ -15,7 +15,7 @@ use YetiSearch\Index\Indexer;
 use YetiSearch\YetiSearch;
 
 #[AsCommand('reindex:posts', description: 'Rebuild the posts search index')]
-class ReindexPosts extends Command
+class ReindexPosts extends BaseCommand
 {
     #[Inject(Posts::class)]
     private Posts $posts;
@@ -28,23 +28,21 @@ class ReindexPosts extends Command
 
     public function __invoke(OutputInterface $output): int
     {
-        $output->write('Deleting posts search index ... ');
-        $this->search->dropIndex('posts');
-        $output->writeln('<fg=green>DONE</>');
+        $this->start('Rebuilding posts search index');
 
-        $indexer = $this->search->createIndex('posts', [
+        $this->process('Deleting posts search index', fn () => $this->search->dropIndex('posts'));
+
+        $indexer = $this->process('Creating posts search index', fn (): Indexer => $this->search->createIndex('posts', [
             'fields' => [
                 'title' => ['boost' => 5.0, 'store' => true],
                 'body' => ['boost' => 1.0, 'store' => true],
                 'tags' => ['boost' => 2.0, 'store' => true],
             ],
-        ]);
+        ]));
 
-        $output->write('Rebuilding posts search index ... ');
-        $slugs = $this->rebuildSearchIndex($indexer);
-        $output->writeln('<fg=green>DONE</>');
+        $slugs = $this->process('Reindexing posts', fn (): array => $this->rebuildSearchIndex($indexer));
 
-        $output->writeln(sprintf('<fg=green>%d posts reindexed successfully</>', count($slugs)));
+        $this->success(sprintf('Reindexed <fg=magenta>%d</> posts successfully', count($slugs)));
 
         return Command::SUCCESS;
     }

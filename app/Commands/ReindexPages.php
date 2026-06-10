@@ -15,7 +15,7 @@ use YetiSearch\Index\Indexer;
 use YetiSearch\YetiSearch;
 
 #[AsCommand('reindex:pages', description: 'Rebuild the pages search index')]
-class ReindexPages extends Command
+class ReindexPages extends BaseCommand
 {
     #[Inject(Pages::class)]
     private Pages $pages;
@@ -28,22 +28,20 @@ class ReindexPages extends Command
 
     public function __invoke(OutputInterface $output): int
     {
-        $output->write('Deleting pages search index ... ');
-        $this->search->dropIndex('pages');
-        $output->writeln('<fg=green>DONE</>');
+        $this->start('Rebuilding pages search index');
 
-        $indexer = $this->search->createIndex('pages', [
+        $this->process('Deleting pages search index', fn () => $this->search->dropIndex('pages'));
+
+        $indexer = $this->process('Creating pages search index', fn (): Indexer => $this->search->createIndex('pages', [
             'fields' => [
                 'title' => ['boost' => 5.0, 'store' => true],
                 'body' => ['boost' => 1.0, 'store' => true],
             ],
-        ]);
+        ]));
 
-        $output->write('Rebuilding pages search index ... ');
-        $slugs = $this->rebuildSearchIndex($indexer);
-        $output->writeln('<fg=green>DONE</>');
+        $slugs = $this->process('Reindexing pages', fn (): array => $this->rebuildSearchIndex($indexer));
 
-        $output->writeln(sprintf('<fg=green>%d pages reindexed successfully</>', count($slugs)));
+        $this->success(sprintf('Reindexed <fg=magenta>%d</> pages successfully', count($slugs)));
 
         return Command::SUCCESS;
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Commands;
 
+use App\Exceptions\NotFoundException;
 use App\Pages;
 use DI\Attribute\Inject;
 use Slim\Interfaces\RouteParserInterface;
@@ -15,7 +16,7 @@ use YetiSearch\Index\Indexer;
 use YetiSearch\YetiSearch;
 
 #[AsCommand('reindex:page', description: 'Update the search index for a single page')]
-class ReindexPage extends Command
+class ReindexPage extends BaseCommand
 {
     #[Inject(Pages::class)]
     private Pages $pages;
@@ -30,17 +31,25 @@ class ReindexPage extends Command
         OutputInterface $output,
         #[Argument('The page slug')] string $slug,
     ): int {
-        $page = $this->pages->get($slug);
-        $indexer = $this->search->getIndex('pages');
-
-        if (! $indexer instanceof Indexer) {
-            $output->writeln('<fg=red>No pages have been indexed yet</>');
+        try {
+            $page = $this->pages->get($slug);
+        } catch (NotFoundException) {
+            $this->error(sprintf('No page with slug <fg=cyan>%s</> found', $slug));
 
             return Command::FAILURE;
         }
 
-        $output->write('Updating page search index ... ');
-        $indexer->update([
+        $indexer = $this->search->getIndex('pages');
+
+        if (! $indexer instanceof Indexer) {
+            $this->error('No pages have been indexed yet');
+
+            return Command::FAILURE;
+        }
+
+        $this->start(sprintf('Updatting the <fg=cyan>%s</> page search index', $slug));
+
+        $this->process('Updating page search index', fn () => $indexer->update([
             'id' => $slug,
             'content' => [
                 'title' => $page->title,
@@ -50,10 +59,9 @@ class ReindexPage extends Command
                 'url' => $this->routeParser->urlFor('page', ['slug' => $slug]),
             ],
             'type' => 'page',
-        ]);
-        $output->writeln('<fg=green>DONE</>');
+        ]));
 
-        $output->writeln(sprintf('<fg=green>"%s" reindexed successfully</>', $page->title));
+        $this->success(sprintf('Reindexed <fg=magenta>%s</> successfully</>', $page->title));
 
         return Command::SUCCESS;
     }

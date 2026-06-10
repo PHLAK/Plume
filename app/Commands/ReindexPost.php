@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Commands;
 
+use App\Exceptions\NotFoundException;
 use App\Posts;
 use DI\Attribute\Inject;
 use Slim\Interfaces\RouteParserInterface;
@@ -15,7 +16,7 @@ use YetiSearch\Index\Indexer;
 use YetiSearch\YetiSearch;
 
 #[AsCommand('reindex:post', description: 'Update the search index for a single post')]
-class ReindexPost extends Command
+class ReindexPost extends BaseCommand
 {
     #[Inject(Posts::class)]
     private Posts $posts;
@@ -30,17 +31,25 @@ class ReindexPost extends Command
         OutputInterface $output,
         #[Argument('The post slug')] string $slug,
     ): int {
-        $post = $this->posts->get($slug);
-        $indexer = $this->search->getIndex('posts');
-
-        if (! $indexer instanceof Indexer) {
-            $output->writeln('<fg=red>No posts have been indexed yet</>');
+        try {
+            $post = $this->posts->get($slug);
+        } catch (NotFoundException) {
+            $this->error(sprintf('No post with slug <fg=cyan>%s</> found', $slug));
 
             return Command::FAILURE;
         }
 
-        $output->write('Updating post search index ... ');
-        $indexer->update([
+        $indexer = $this->search->getIndex('posts');
+
+        if (! $indexer instanceof Indexer) {
+            $this->error('No posts have been indexed yet');
+
+            return Command::FAILURE;
+        }
+
+        $this->start(sprintf('Updatting the <fg=cyan>%s</> post search index', $slug));
+
+        $this->process('Updating post search index', fn () => $indexer->update([
             'id' => $slug,
             'content' => [
                 'title' => $post->title,
@@ -52,10 +61,9 @@ class ReindexPost extends Command
                 'published' => $post->published->toDateTimeString(),
             ],
             'type' => 'post',
-        ]);
-        $output->writeln('<fg=green>DONE</>');
+        ]));
 
-        $output->writeln(sprintf('<fg=green>"%s" reindexed successfully</>', $post->title));
+        $this->success(sprintf('Reindexed <fg=magenta>%s</> successfully</>', $post->title));
 
         return Command::SUCCESS;
     }

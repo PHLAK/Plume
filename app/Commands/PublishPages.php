@@ -19,7 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 
 #[AsCommand('publish:pages', description: 'Publish all pages')]
-class PublishPages extends Command
+class PublishPages extends BaseCommand
 {
     /** @var AbstractAdapter $cache */
     #[Inject(CacheInterface::class)]
@@ -36,15 +36,12 @@ class PublishPages extends Command
             return self::FAILURE;
         }
 
-        $output->write('Clearing pages cache ... ');
-        $this->cache->withSubNamespace('pages')->clear();
-        $output->writeln('<fg=green>DONE</>');
+        $this->start('Publishing all pages');
+        $this->process('Clearing pages cache', fn (): bool => $this->cache->withSubNamespace('pages')->clear());
+        $slugs = $this->process('Rebuilding pages cache', $this->cachePages(...));
+        $this->success(sprintf('Published <fg=magenta>%d</> pages successfully', count($slugs)));
 
-        $output->write('Rebuilding pages cache ... ');
-        $slugs = $this->cachePages();
-        $output->writeln('<fg=green>DONE</>');
-
-        $output->writeln(sprintf('<fg=green>%d pages published successfully</>', count($slugs)));
+        $this->newLine();
 
         $application->doRun(new StringInput('reindex:pages'), $output);
 

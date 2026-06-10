@@ -9,13 +9,14 @@ use Symfony\Component\Cache\Adapter\AbstractAdapter;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Attribute\Option;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 
 #[AsCommand('publish', description: 'Publish all posts and pages and purge caches')]
-class Publish extends Command
+class Publish extends BaseCommand
 {
     /** @var AbstractAdapter $cache */
     #[Inject(CacheInterface::class)]
@@ -24,6 +25,7 @@ class Publish extends Command
     public function __invoke(
         OutputInterface $output,
         Application $application,
+        #[Option('Purge view and container caches after publishing')] bool $purgeCaches = false
     ): int {
         if ($this->cache instanceof ArrayAdapter) {
             $output->writeln("<fg=yellow>This command has no affect when using the 'array' cache driver</>");
@@ -32,9 +34,17 @@ class Publish extends Command
         }
 
         $application->doRun(new StringInput('publish:posts'), $output);
+
+        $this->newLine();
+
         $application->doRun(new StringInput('publish:pages'), $output);
-        $application->doRun(new StringInput('purge:view-cache'), $output);
-        $application->doRun(new StringInput('purge:container-cache'), $output);
+
+        if ($purgeCaches) {
+            $this->newLine();
+            $application->doRun(new StringInput('purge:view-cache'), $output);
+            $this->newLine();
+            $application->doRun(new StringInput('purge:container-cache'), $output);
+        }
 
         return Command::SUCCESS;
     }

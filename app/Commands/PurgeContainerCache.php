@@ -6,31 +6,36 @@ namespace App\Commands;
 
 use DI\Attribute\Inject;
 use Symfony\Component\Console\Attribute\AsCommand;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Output\OutputInterface;
 
 #[AsCommand(
     name: 'purge:container-cache',
     description: 'Purge the container cache',
 )]
-class PurgeContainerCache extends Command
+class PurgeContainerCache extends BaseCommand
 {
     #[Inject('cache_path')]
     private string $cachePath;
 
-    public function __invoke(
-        OutputInterface $output,
-    ): int {
+    #[Inject('base_path')]
+    private string $basePath;
+
+    public function __invoke(): int
+    {
         $compiledContainer = sprintf('%s/CompiledContainer.php', $this->cachePath);
 
+        $this->start('Purging the container cache');
+
         if (file_exists($compiledContainer)) {
-            $output->write('Clearing container cache ... ');
-            unlink($compiledContainer);
-            $output->writeln('<fg=green>DONE</>');
+            $this->process('Deleting the container cache', fn (): bool => unlink($compiledContainer));
         }
 
-        $output->writeln(sprintf('<fg=green>%s cleared successfully</>', $compiledContainer));
+        $this->success(sprintf('Purged <fg=green>%s</> successfully', $this->relativePath($compiledContainer)));
 
         return self::SUCCESS;
+    }
+
+    public function relativePath(string $toPath): string
+    {
+        return ltrim(str_replace($this->basePath, '', $toPath), DIRECTORY_SEPARATOR);
     }
 }
