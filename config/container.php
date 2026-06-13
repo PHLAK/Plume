@@ -24,9 +24,12 @@ return [
 
     'base_path' => dirname(__DIR__),
     'app_path' => string('{base_path}/app'),
-    'cache_path' => string('{base_path}/cache'),
     'config_path' => string('{base_path}/config'),
     'resources_path' => string('{base_path}/resources'),
+
+    // Cache paths
+    'cache_path' => string('{base_path}/cache'),
+    'app_cache' => string('{cache_path}/app'),
 
     // Theme resource paths
     'css_path' => string('{theme_path}/css'),
@@ -118,7 +121,7 @@ return [
     ],
 
     'search_config' => [
-        'storage' => ['path' => string('{cache_path}/search.db')],
+        'storage' => ['path' => string('{app_cache}/search.db')],
     ],
 
     // -------------------------------------------------------------------------

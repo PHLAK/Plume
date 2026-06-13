@@ -19,8 +19,7 @@ use UnexpectedValueException;
 
 class CacheFactory
 {
-    private const NAMESPACE_EXTERNAL = 'plume';
-    private const NAMESPACE_INTERNAL = 'app';
+    private const NAMESPACE = 'plume';
 
     #[Inject('cache_driver')]
     private string $cacheDriver;
@@ -28,8 +27,8 @@ class CacheFactory
     #[Inject('cache_lifetime')]
     private int $cacheLifetime;
 
-    #[Inject('cache_path')]
-    private string $cachePath;
+    #[Inject('app_cache')]
+    private string $appCache;
 
     public function __construct(
         private Container $container,
@@ -51,7 +50,7 @@ class CacheFactory
 
     private function getApcuAdapter(): ApcuAdapter
     {
-        return new ApcuAdapter(self::NAMESPACE_EXTERNAL, $this->cacheLifetime);
+        return new ApcuAdapter(self::NAMESPACE, $this->cacheLifetime);
     }
 
     private function getArrayAdapter(): ArrayAdapter
@@ -61,25 +60,25 @@ class CacheFactory
 
     private function getFilesystemAdapter(): FilesystemAdapter
     {
-        return new FilesystemAdapter(self::NAMESPACE_INTERNAL, $this->cacheLifetime, $this->cachePath);
+        return new FilesystemAdapter(self::NAMESPACE, $this->cacheLifetime, $this->appCache);
     }
 
     private function getMemcachedAdapter(): MemcachedAdapter
     {
         $this->container->call('memcached_config', [$memcached = new Memcached]);
 
-        return new MemcachedAdapter($memcached, self::NAMESPACE_EXTERNAL, $this->cacheLifetime);
+        return new MemcachedAdapter($memcached, self::NAMESPACE, $this->cacheLifetime);
     }
 
     private function getPhpFilesAdapter(): PhpFilesAdapter
     {
-        return new PhpFilesAdapter(self::NAMESPACE_INTERNAL, $this->cacheLifetime, $this->cachePath);
+        return new PhpFilesAdapter(self::NAMESPACE, $this->cacheLifetime, $this->appCache);
     }
 
     private function getRedisAdapter(): RedisAdapter
     {
         $this->container->call('redis_config', [$redis = new Redis]);
 
-        return new RedisAdapter($redis, self::NAMESPACE_EXTERNAL, $this->cacheLifetime);
+        return new RedisAdapter($redis, self::NAMESPACE, $this->cacheLifetime);
     }
 }
