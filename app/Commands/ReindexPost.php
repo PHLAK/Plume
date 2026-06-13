@@ -11,7 +11,6 @@ use Slim\Interfaces\RouteParserInterface;
 use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Output\OutputInterface;
 use YetiSearch\Index\Indexer;
 use YetiSearch\YetiSearch;
 
@@ -28,7 +27,6 @@ class ReindexPost extends BaseCommand
     private RouteParserInterface $routeParser;
 
     public function __invoke(
-        OutputInterface $output,
         #[Argument('The post slug')] string $slug,
     ): int {
         try {

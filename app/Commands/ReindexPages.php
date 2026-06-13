@@ -10,7 +10,6 @@ use DI\Attribute\Inject;
 use Slim\Interfaces\RouteParserInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Output\OutputInterface;
 use YetiSearch\Index\Indexer;
 use YetiSearch\YetiSearch;
 
@@ -26,7 +25,7 @@ class ReindexPages extends BaseCommand
     #[Inject(RouteParserInterface::class)]
     private RouteParserInterface $routeParser;
 
-    public function __invoke(OutputInterface $output): int
+    public function __invoke(): int
     {
         $this->start('Rebuilding pages search index');
 

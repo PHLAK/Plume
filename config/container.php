@@ -60,8 +60,6 @@ return [
         Commands\PublishPages::class,
         Commands\PublishPost::class,
         Commands\PublishPosts::class,
-        Commands\PurgeContainerCache::class,
-        Commands\PurgeViewCache::class,
         Commands\ReindexPage::class,
         Commands\ReindexPages::class,
         Commands\ReindexPost::class,

@@ -15,7 +15,6 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\StringInput;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 
 #[AsCommand('publish:posts', description: 'Publish all posts')]
@@ -28,10 +27,10 @@ class PublishPosts extends BaseCommand
     #[Inject('posts_path')]
     private string $postsPath;
 
-    public function __invoke(OutputInterface $output, Application $application): int
+    public function __invoke(Application $application): int
     {
         if ($this->cache instanceof ArrayAdapter) {
-            $output->writeln("<fg=yellow>This command has no affect when using the 'array' cache driver</>");
+            $this->error("This command has no affect when using the 'array' cache driver");
 
             return self::FAILURE;
         }
@@ -43,7 +42,7 @@ class PublishPosts extends BaseCommand
 
         $this->newLine();
 
-        $application->doRun(new StringInput('reindex:posts'), $output);
+        $application->doRun(new StringInput('reindex:posts'), $this->output);
 
         return Command::SUCCESS;
     }
