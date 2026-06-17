@@ -25,6 +25,8 @@ class FeedController
 
     public function __invoke(Response $response): ResponseInterface
     {
+        $response = $response->withHeader('Content-Type', 'application/rss+xml');
+
         return $this->view->render($response, 'feed.twig', [
             'title' => $this->title,
             'description' => $this->description,
