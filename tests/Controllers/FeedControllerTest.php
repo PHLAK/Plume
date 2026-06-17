@@ -27,8 +27,10 @@ class FeedControllerTest extends TestCase
         $posts = $this->mock(Posts::class);
         $posts->expects($this->once())->method('all')->willReturn(new LazyCollection);
 
+        $testResponse = (new Response)->withHeader('Content-Type', 'application/rss+xml');
+
         $twig = $this->mock(Twig::class);
-        $twig->expects($this->once())->method('render')->with($testResponse = new Response, 'feed.twig', [
+        $twig->expects($this->once())->method('render')->with($testResponse, 'feed.twig', [
             'title' => 'Test site; please ignore',
             'description' => 'This is a test site description.',
             'posts' => new LazyCollection,
