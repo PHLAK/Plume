@@ -2,10 +2,6 @@
     @apply flex justify-center items-center rounded cursor-pointer p-1 hover:bg-stone-200 dark:text-stone-200 dark:hover:bg-stone-700;
 }
 
-.nav-bullet {
-    @apply text-2xl text-stone-400 dark:text-stone-600;
-}
-
 .nav-link {
     @apply rounded text-center px-1.5 py-1 hover:bg-stone-200 dark:hover:bg-stone-700;
 }
