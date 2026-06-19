@@ -51,12 +51,12 @@ class SearchControllerTest extends TestCase
         $search = $this->mock(YetiSearch::class);
 
         $search->expects($this->exactly(2))->method('search')->willReturnMap([
-            ['posts', 'test', ['highlight_length' => 50, 'limit' => 8], [
+            ['posts', 'test', ['highlight_length' => 50, 'limit' => 8, 'fuzzy' => false], [
                 'results' => [
                     ['id' => 'test-post', 'score' => 0.9, 'metadata' => ['url' => '/post/test-post']],
                 ],
             ]],
-            ['pages', 'test', ['highlight_length' => 50, 'limit' => 8], [
+            ['pages', 'test', ['highlight_length' => 50, 'limit' => 8, 'fuzzy' => false], [
                 'results' => [
                     ['id' => 'test-page', 'score' => 0.7, 'metadata' => ['url' => '/pages/test-page']],
                 ],
