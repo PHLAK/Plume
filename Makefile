@@ -16,4 +16,4 @@ clear-build: # Clear the compiled build assets
 	@rm --recursive --force --verbose public/build/*
 
 clear-cache: # Clear the application cache
-	@rm --recursive --force --verbose cache/*
+	@rm --recursive --force --verbose cache/app/* cache/views/* cache/*.php
