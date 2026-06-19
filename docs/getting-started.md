@@ -9,7 +9,7 @@ haven't installed Plume yet, see the [Installation guide](installation.md).
 Posts live in the `data/posts` directory as Markdown files. Create a new file
 named `hello-world.md` in that directory.
 
-```text{3}
+```text{4}
 /path/to/plume
 ├── data
 │   └── posts
@@ -17,8 +17,7 @@ named `hello-world.md` in that directory.
 └── docker-compose.yaml
 ```
 
-Open `hello-world.md` in your favorite text editor and add the following
-content.
+Open `hello-world.md` in your favorite text editor and add some content.
 
 ::: code-group
 ```markdown [hello-world.md]
@@ -51,17 +50,16 @@ After saving your post, you must publish it so Plume can render the Markdown
 and update the site cache.
 
 ::: code-group
-```console [Docker Compose]
-docker compose run --rm php plume publish:posts
+```console [Plume Compose]
+docker compose run --rm plume publish
 ```
 
-```console [Manual]
-php plume publish:posts
+```console [Docker Compose]
+docker compose run --rm plume php plume publish
 ```
 :::
 
-You should see output indicating that your post has been published
-successfully.
+You should see output indicating that your post has been published successfully.
 
 > [!TIP]
 > You will need to run `publish:posts` every time you add, edit, or delete a
@@ -69,9 +67,8 @@ successfully.
 
 ## View It Live
 
-Open your browser and navigate to the URL where Plume is running. Your new
-post will appear on the home page. Click the post title to read the full
-article.
+Open your browser and navigate to the URL where Plume is running. Your new post
+will appear on the home page. Click the post title to read the full article.
 
 ## Next Steps
 
@@ -79,7 +76,7 @@ Now that you've published your first post, you can explore more of what Plume
 has to offer:
 
 - Learn about [post options](publishing/posts.md) such as excerpts, featured
-  images, tags, and drafts.
-- Create [static pages](publishing/pages.md) like an About or Contact page.
+  images, tags and drafts
+- Create [static pages](publishing/pages.md) like an About or Contact page
 - [Configure your site](configuration/configuration-overview.md) with a custom
-  title, timezone, and other options.
+  title, timezone and other options

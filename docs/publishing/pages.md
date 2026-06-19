@@ -61,11 +61,7 @@ docker compose run --rm plume publish:pages
 ```
 
 ```console [Docker Compose]
-docker compose run --rm --user www-data php plume publish:pages
-```
-
-```console [Manual]
-php plume publish:pages
+docker compose exec plume php plume publish:pages
 ```
 :::
 
@@ -81,10 +77,6 @@ docker compose run --rm plume publish:page <slug>
 ```
 
 ```console [Docker Compose]
-docker compose run --rm --user www-data php plume publish:page <slug>
-```
-
-```console [Manual]
-php plume publish:page <slug>
+docker compose exec plume php plume publish:page <slug>
 ```
 :::

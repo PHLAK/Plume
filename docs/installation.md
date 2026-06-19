@@ -15,7 +15,7 @@ as a quick and easy way of getting up and running with a pre-configured
 
     ```console
     cd /your/chosen/path/
-    git clone git@github.com:PHLAK/plume-compose.git
+    git clone https://github.com/PHLAK/plume-compose.git
     ```
 
 2. Switch to the `plume-compose` directory and initialize the configuration files
@@ -53,22 +53,25 @@ contain your data.
 services:
 
   plume:
-    image: phlak/plume:<version>
+    image: phlak/plume:latest
     environment:
-      # SITE_TITLE: My Amazing Blog
-      # TIMEZONE: America/Phoenix
+      SITE_TITLE: My Amazing Blog
       # See configuration docs for additional variables
     ports:
       - <host_port>:80
     volumes:
-      - ./data:/data
+      - ./data:/var/www/html/data
+      - ./themes:/var/www/html/themes
+      - plume-cache:/var/www/html/cache/app
+    user: www-data
     restart: unless-stopped
+
+volumes:
+  plume-cache: {}
 ```
 :::
 
 > [!IMPORTANT]
-> Replace `<version>` with the version of Plume you'd like to run (e.g. `1.0.5`, `1.0` or `1`)
->
 > Replace `<host_port>` with the port on which you would like the application to be exposed.
 
 > [!TIP]
@@ -83,46 +86,33 @@ same directory as the `docker-compose.yaml` file.
 > [!IMPORTANT] Requirements
 > - [Docker](https://docs.docker.com)
 
-You may alternatively use `docker run` to launch a stand-alone Docker container
-from the official Docker image.
-
-This is a good way to test Plume for the first time but is _not recommended_ for
-long-term use. Instead we recommend using either the [Plume Compose](#plume-compose)
-or [Docker Compose](#docker-compose) installation method instead.
+You may use `docker run` to launch a stand-alone Docker container from the
+official Docker image. This is a good way to test Plume for the first time but
+is _not recommended_ for long-term use. Instead we recommend using either the
+[Plume Compose](#plume-compose) or [Docker Compose](#docker-compose)
+installation method instead.
 
 ```console
-docker run --detach [--env ENVIRONMENT_VARIABLE=value] \
-    --volume <host_path>:/data --publish <host_port>:80 \
+docker run --detach --publish <host_port>:80 \
+    [--env ENVIRONMENT_VARIABLE=value] \
+    --volume ./data:/var/www/html/data \
     phlak/plume:latest
 ```
 
 > [!IMPORTANT]
-> Replace `<host_path>` with the path to a directory where your posts, pages and
-> additional data will be stored.
->
 > Replace `<host_port>` with the port on which you would like the application to
 > be exposed.
 
 > [!TIP]
 > You may pass multiple environment variables by repeating the `--env` flag.
 
-## Manual Installation
-
-> [!IMPORTANT] Requirements
-> - [PHP](https://www.php.net)
-> - A web server capable of serving PHP (e.g NGINX, Apache, etc.)
-
-> [!DANGER] This is not a recommended installation method
-> Installing manually _will_ require more work to update between versions.
-
 ## Reverse Proxy
 
-Plume can be run behind a reverse proxy for improved performance, security, and
-flexibility. The following examples assume Plume is accessible on the host at
-`127.0.0.1:8080`.
+It's recommended to run Plume behind a reverse proxy. The following examples
+assume Plume is accessible on the host at `127.0.0.1:8076`.
 
 > [!TIP]
-> Replace `8080` with the port you configured for your Plume installation.
+> Replace `8076` with the port you configured for your Plume installation.
 
 ### NGINX
 
@@ -132,7 +122,7 @@ server {
     server_name example.com;
 
     location / {
-        proxy_pass http://127.0.0.1:8080;
+        proxy_pass http://127.0.0.1:8076;
 
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
@@ -148,8 +138,8 @@ server {
 <VirtualHost *:80>
     ServerName example.com
 
-    ProxyPass / http://127.0.0.1:8080/
-    ProxyPassReverse / http://127.0.0.1:8080/
+    ProxyPass / http://127.0.0.1:8076/
+    ProxyPassReverse / http://127.0.0.1:8076/
 </VirtualHost>
 ```
 
@@ -158,5 +148,5 @@ server {
 ```caddyfile
 example.com
 
-reverse_proxy 127.0.0.1:8080
+reverse_proxy 127.0.0.1:8076
 ```

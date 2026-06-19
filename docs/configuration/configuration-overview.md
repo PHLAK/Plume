@@ -63,49 +63,6 @@ docker run --detach --publish 8080:80 --volume ./data:/data \
     phlak/plume:latest
 ```
 
-### Manual Installation
-
-When Plume is installed manually, environment variables should be defined in the
-`.env` file. You may copy `.env.example` to `.env` if the file is missing.
-
-```text{5,6}
-/path/to/plume
-├── data
-│   └── [your data]
-├── docker-compose.yaml
-├── .env
-└── .env.example
-```
-
-The default `.env` file should look something like this:
-
-::: code-group
-```dotenv [.env]
-# SITE_TITLE="Yet another amazing blog"
-# META_DESCRIPTION="Yet another amazing blog, published with Plume."
-
-# PAGINATION=true
-# POSTS_PER_PAGE=10
-
-# FEATURED_IMAGES=collapsed
-
-# FUZZY_SEARCH=false
-
-# TAGS_LINK=true
-# AUTHORS_LINK=true
-
-# DATE_FORMAT='Y-m-d H:i:s'
-# TIMEZONE=
-```
-:::
-
-## User Customization
-
-> [!WARNING] Advanced user customization is currently in development.
-> 
-> If there's something you would like to be able to customize that isn't
-> currently possible, open a feature request.
-
 ## Custom JavaScript and CSS
 
 Arbitrary code like CSS & JavaScript may be included in the HTML output of your

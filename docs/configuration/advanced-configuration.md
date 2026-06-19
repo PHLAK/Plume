@@ -3,10 +3,10 @@
 Some configuration values do not have corresponding environment variable. These
 values can only be controlled through their entries in the `app/config` files.
 
-> [!DANGER]
-> When upgrading your application the files in `app/config` will be overwritten.
-> If you make manual changes to these files be sure to back up any modifications
-> before upgrading.
+> [!IMPORTANT]
+> To persist changes to files in `app/config`, you must add a volume definition
+> for this directory. Without it, any modifications will be lost when the
+> container restarts.
 
 ## Application Configs
 
