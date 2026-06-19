@@ -17,6 +17,7 @@ class SearchController
     #[Inject(YetiSearch::class)]
     private YetiSearch $search;
 
+    /** @var array<string, mixed> */
     private array $searchOptions = ['highlight_length' => 50, 'limit' => 8];
 
     public function __construct(
