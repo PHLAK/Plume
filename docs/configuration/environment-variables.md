@@ -66,6 +66,13 @@ Controls the vertical sizing of featured post images.
   (constrain the images height)
 - **Default Value:** `collapsed`
 
+### `FUZZY_SEARCH`
+
+Enable fuzzy matching in search results for typo tolerance.
+
+- **Possible Values:** `true` or `false`
+- **Default Value:** `false`
+
 ### `META_DESCRIPTION`
 
 [Meta tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta)

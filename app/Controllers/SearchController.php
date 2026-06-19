@@ -14,10 +14,16 @@ use YetiSearch\YetiSearch;
 
 class SearchController
 {
-    private const SEARCH_OPTIONS = ['highlight_length' => 50, 'limit' => 8];
-
     #[Inject(YetiSearch::class)]
     private YetiSearch $search;
+
+    private array $searchOptions = ['highlight_length' => 50, 'limit' => 8];
+
+    public function __construct(
+        #[Inject('fuzzy_search')] bool|string $fuzzySearch
+    ) {
+        $this->searchOptions['fuzzy'] = (bool) filter_var($fuzzySearch, FILTER_VALIDATE_BOOLEAN);
+    }
 
     public function __invoke(Request $request, Response $response): ResponseInterface
     {
@@ -31,10 +37,10 @@ class SearchController
         ['q' => $query] = $queryParams;
 
         /** @var list<array<string, mixed>> $postResults */
-        ['results' => $postResults] = $this->search->search('posts', $query, self::SEARCH_OPTIONS);
+        ['results' => $postResults] = $this->search->search('posts', $query, $this->searchOptions);
 
         /** @var list<array<string, mixed>> $pageResults */
-        ['results' => $pageResults] = $this->search->search('pages', $query, self::SEARCH_OPTIONS);
+        ['results' => $pageResults] = $this->search->search('pages', $query, $this->searchOptions);
 
         $allResults = [...$postResults, ...$pageResults];
 

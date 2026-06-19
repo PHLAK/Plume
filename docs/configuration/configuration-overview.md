@@ -89,6 +89,8 @@ The default `.env` file should look something like this:
 
 # FEATURED_IMAGES=collapsed
 
+# FUZZY_SEARCH=false
+
 # TAGS_LINK=true
 # AUTHORS_LINK=true
 

@@ -87,6 +87,13 @@ return [
     'authors_link' => env('AUTHORS_LINK', false),
 
     /**
+     * Enable fuzzy matching in search results for typo tolerance.
+     *
+     * Default value: false
+     */
+    'fuzzy_search' => env('FUZZY_SEARCH', false),
+
+    /**
      * Default date format. For additional info on date formatting see:
      * https://www.php.net/manual/en/function.date.php.
      *
