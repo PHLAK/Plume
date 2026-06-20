@@ -52,7 +52,7 @@ a quick and easy way of getting up and running with a pre-configured
 
 #### Other Installation Methods
 
-See the [Insallation documentation](https://docs.plume.pub/installation.html) for more information.
+See the [Installation documentation](https://docs.plume.pub/installation.html) for more information.
 
 Configuration
 -------------
