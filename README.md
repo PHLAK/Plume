@@ -29,9 +29,9 @@ Features
 
   - **Dockerized installation** allows you to be up and running quickly.
   - **Flat file structure** enables simple content management and backup.
-  - **Markdown rendering** for publishing, including [Shiki](https://shiki.style) powered syntax highligting.
+  - **Markdown rendering** for publishing, including [Shiki](https://shiki.style) powered syntax highlighting.
   - **Full text search** to find the content you're looking for, powered by [YetiSearch](https://github.com/yetidevworks/yetisearch).
-  - **Automatic light and dark modes** based on the users system theme with custom override.
+  - **Automatic light and dark modes** based on the user's system theme with custom override.
   - **RSS feed** for post syndication.
   - **Theme support (experimental)** for full customization of the look and feel of your app.
 
