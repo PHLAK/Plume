@@ -35,6 +35,13 @@ on subsequent requests.
 
 Enable application debugging and display error messages.
 
+### `APP_LANGUAGE`
+
+The application language.
+
+- **Possible Values:** Any valid language code (e.g. `en`, `es`, `fr`)
+- **Default Value:** `en`
+
 > [!DANGER]
 > It is recommended that debug remains OFF unless troubleshooting an issue.
 > Leaving this enabled WILL cause leakage of sensitive server information.
