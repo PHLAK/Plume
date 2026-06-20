@@ -16,13 +16,13 @@ personal or professional style.
 
 ## Features
 
-* **Dockerized installation** allows you to be up and running quickly.
-* **Markdown rendering** for publishing formatted articles easily.
-* **Flat file structure** for simple content management and backup.
-* **User customization** including light and dark themes.
-* **Full text search** to quickly find the content you're looking for.
-* **Shiki syntax highlighting** for beautiful code blocks.
-* **Automatic light and dark modes** based on your system theme.
+  - **Dockerized installation** allows you to be up and running quickly.
+  - **Flat file structure** enables simple content management and backup.
+  - **Markdown rendering** for publishing, including [Shiki](https://shiki.style) powered syntax highligting.
+  - **Full text search** to find the content you're looking for, powered by [YetiSearch](https://github.com/yetidevworks/yetisearch).
+  - **Automatic light and dark modes** based on the users system theme with custom override.
+  - **RSS feed** for post syndication.
+  - **RSS feed** for post syndication.
 
 ## Changelog
 
