@@ -94,7 +94,7 @@ found" error for `404` errors.
 
 - `message`: A message of the error that occurred.
 
-#### `page.twig` <badge type="info" text="/page/{slug}" />
+#### `page.twig` <badge type="info" text="/pages/{slug}" />
 
 Displays a user-generated page.
 
@@ -133,12 +133,9 @@ author, and posts with a specific tag.
 
 - `paginator`: A [`Paginator`](https://github.com/PHLAK/Plume/blob/master/app/Utilities/Paginator.php)
   object with the following properties
-  - `currentPage`: The current page number
-  - `totalPages`: Total number of pages
-  - `hasNextPage`: Whether there is a next page
-  - `hasPreviousPage`: Whether there is a previous page
-  - `nextPage`: The next page number
-  - `previousPage`: The previous page number
+  - `pages`: Total number of pages
+  - `previous`: The previous page number (or `null` if on the first page)
+  - `next`: The next page number (or `null` if on the last page)
 
 #### `post.twig` <badge type="info" text="/post/{slug}" />
 

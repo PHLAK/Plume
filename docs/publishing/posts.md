@@ -19,7 +19,7 @@ with an extension of `.md` in the `data/posts` directory.
 > The name of the file (not including the `.md` extension) will be used as the
 > post "slug", the part that shows up in the URL. For example, for the file 
 > `data/posts/vogon-poetry.md` the URL would be something like
-> `example.com/posts/vogon-poetry`.
+> `example.com/post/vogon-poetry`.
 
 ## Front Matter
 
@@ -58,6 +58,7 @@ The following metadata fields are supported.
 |  `image.caption` | `string`        |     ❌️    | Markdown allowed                                     |
 |  `tags`          | `array`         |     ❌️    | Array of tags                                        |
 |  `draft`         | `boolean`       |     ❌️    |                                                      |
+|  `canonical`     | `string`        |     ❌️    | Canonical URL for the post                           |
 
 > [!TIP]
 > Metadata fields that are not required may be omitted.

@@ -48,7 +48,7 @@ Whether or not to show the "Authors" navigation link when there are multiple
 unique post authors.
 
 - **Possible Values:** `true` or `false`
-- **Default Value:** `true`
+- **Default Value:** `false`
 
 ### `DATE_FORMAT`
 

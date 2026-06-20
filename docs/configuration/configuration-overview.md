@@ -14,9 +14,9 @@ When using the [Plume Compose](/installation#plume-compose) installation method
 environment variables should be defined in the `environment.d/plume.env` file.
 
 ::: code-group
-```yaml [plume.env]
-SITE_TITLE: My Amazing Blog
-TIMEZONE: America/Phoenix
+```dotenv [plume.env]
+SITE_TITLE="My Amazing Blog"
+TIMEZONE="America/Phoenix"
 ```
 :::
 
