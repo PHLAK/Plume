@@ -1,9 +1,9 @@
 export default () => ({
-    systemTheme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
-
     themes: ['system', 'dark', 'light'],
 
     init() {
+        this.systemTheme = window.systemTheme;
+
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (darkMode) => {
             this.systemTheme = darkMode.matches ? 'dark' : 'light';
         });

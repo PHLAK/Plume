@@ -1,13 +1,17 @@
 <div @click="toggleTheme()" title="Toggle Theme" class="nav-button">
-    <div x-show="$store.theme == 'system'">
+    <div x-show="! $store.theme">
+        {{ svg('light/spinner-third', ['fill-current', 'size-6', 'animate-spin', 'text-stone-400', 'dark:text-stone-500']) }}
+    </div>
+
+    <div x-show="$store.theme == 'system'" x-cloak>
         {{ svg('light/display', ['fill-current', 'size-6']) }}
     </div>
 
-    <div x-show="$store.theme == 'dark'">
+    <div x-show="$store.theme == 'dark'" x-cloak>
         {{ svg('light/lightbulb', ['fill-current', 'size-6']) }}
     </div>
 
-    <div x-show="$store.theme == 'light'">
+    <div x-show="$store.theme == 'light'" x-cloak>
         {{ svg('light/lightbulb-on', ['fill-current', 'size-6']) }}
     </div>
 </div>
