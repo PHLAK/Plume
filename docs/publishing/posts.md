@@ -36,12 +36,12 @@ published: 2021-02-06 08:56:42
 author: Arthur Dent
 image:
   url: https://example.com/image.png
-  caption: Photo by [Trillina McMillan](https://example.com)
+  caption: Photo by [Tricia McMillan](https://example.com)
 tags: [Vogons, Poetry, Art]
 draft: true
 ---
 
-Your post contents goes here...
+Your post content goes here...
 ```
 :::
 

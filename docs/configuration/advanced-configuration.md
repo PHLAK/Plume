@@ -1,10 +1,10 @@
 # Advanced Configuration
 
-Some configuration values do not have corresponding environment variable. These
+Some configuration values do not have corresponding environment variables. These
 values can only be controlled through their entries in the `app/config` files.
 
 > [!IMPORTANT]
-> To persist changes to files in `app/config`, you must add a volume definition
+> To persist changes to files in `app/config` you must add a volume definition
 > for this directory. Without it, any modifications will be lost when the
 > container restarts.
 

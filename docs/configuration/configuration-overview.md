@@ -48,7 +48,7 @@ services:
 :::
 
 > [!IMPORTANT]
-> After modifying your `docker-compose.yaml` file  you must restart your
+> After modifying your `docker-compose.yaml` file you must restart your
 > containers (i.e. `docker compose up -d`) for the changes to apply.
 
 ### Docker Run

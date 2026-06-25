@@ -4,7 +4,7 @@
 
 ### I added a post but it doesn't appear on the site
 
-You mush run `plume publish:posts` after creating the file to render and cache
+You must run `plume publish:posts` after creating the file to render and cache
 the post. Also verify the post does not have `draft: true` set in its front
 matter.
 

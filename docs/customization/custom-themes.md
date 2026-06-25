@@ -81,7 +81,7 @@ Displays the list of authors and a count of their posts.
   [
       'Arthur Dent' => 42,
       'Ford Prefect' => 13,
-      'Trishia McMillan' => 27,
+      'Tricia McMillan' => 27,
   ]
   ```
 

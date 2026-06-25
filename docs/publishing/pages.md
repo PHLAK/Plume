@@ -24,7 +24,7 @@ link: About
 weight: 200
 ---
 
-Your page contents goes here...
+Your page content goes here...
 ```
 :::
 

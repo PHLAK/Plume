@@ -66,7 +66,7 @@ markdown or raw HTML.
 or
 
 ```html
-<img src="/files/some-image.png" alt="Image Alt Text"></img>
+<img src="/files/some-image.png" alt="Image Alt Text" />
 ```
 
 Make sure you preface the file path with a forward slash (i.e. `/`).
