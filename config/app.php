@@ -61,6 +61,41 @@ return [
     'posts_per_page' => env('POSTS_PER_PAGE', 10),
 
     /**
+     * Show the post title in the posts list.
+     *
+     * Default value: true
+     */
+    'posts_show_title' => env('POSTS_SHOW_TITLE', true),
+
+    /**
+     * Show the post metadata (e.g. published, author, tags) in the posts list.
+     *
+     * Default value: true
+     */
+    'posts_show_metadata' => env('POSTS_SHOW_METADATA', true),
+
+    /**
+     * Show the featured image in the posts list.
+     *
+     * Default value: true
+     */
+    'posts_show_image' => env('POSTS_SHOW_IMAGE', true),
+
+    /**
+     * Show the post excerpt or body in the posts list.
+     *
+     * Default value: true
+     */
+    'posts_show_excerpt' => env('POSTS_SHOW_EXCERPT', true),
+
+    /**
+     * Show the "Read More" link in the posts list.
+     *
+     * Default value: true
+     */
+    'posts_show_read_more' => env('POSTS_SHOW_READ_MORE', true),
+
+    /**
      * Controls the vertical sizing of featured post images. Avaialable options:
      *
      *   'full' - Display the full height images

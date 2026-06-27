@@ -102,6 +102,41 @@ The number of posts to display per page when pagination is enabled.
 - **Possible Values:** Any positive integer
 - **Default Value:** `10`
 
+### `POSTS_SHOW_EXCERPT`
+
+Show the post excerpt or body in the posts list.
+
+- **Possible Values:** `true` or `false`
+- **Default Value:** `true`
+
+### `POSTS_SHOW_IMAGE`
+
+Show the featured image in the posts list.
+
+- **Possible Values:** `true` or `false`
+- **Default Value:** `true`
+
+### `POSTS_SHOW_METADATA`
+
+Show the post metadata (e.g. published, author, tags) in the posts list.
+
+- **Possible Values:** `true` or `false`
+- **Default Value:** `true`
+
+### `POSTS_SHOW_READ_MORE`
+
+Show the "Read More" link in the posts list.
+
+- **Possible Values:** `true` or `false`
+- **Default Value:** `true`
+
+### `POSTS_SHOW_TITLE`
+
+Show the post title in the posts list.
+
+- **Possible Values:** `true` or `false`
+- **Default Value:** `true`
+
 ### `SHIKI_THEME_ID`
 
 The Shiki theme ID used for syntax highlighting in rendered code blocks.

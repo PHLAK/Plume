@@ -94,6 +94,7 @@ return [
     // -------------------------------------------------------------------------
 
     'view_filters' => [
+        Filters\Boolean::class,
         Filters\Markdown::class,
     ],
 
