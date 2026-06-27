@@ -2,7 +2,7 @@
     x-data="searchModal" x-show="visible" @click.self="hide()" @show-search.window="show()" @keyup.escape.window="hide()"
     x-transition:enter.opacity x-cloak
 >
-    <div class="flex flex-col justify-start items-center gap-4 rounded bg-stone-100 max-w-3xl w-full mt-[20vh] p-4 shadow dark:bg-stone-800 dark:border-stone-400 dark:text-stone-400"
+    <div class="flex flex-col justify-start items-center gap-4 rounded bg-stone-100 max-w-4xl w-full mt-[20vh] p-4 shadow dark:bg-stone-800 dark:border-stone-400 dark:text-stone-400"
         @click.away="hide()" x-trap.inert="visible"
     >
         <div class="group relative block border border-stone-400 bg-stone-100 rounded w-full dark:border-stone-600 dark:bg-stone-800">
