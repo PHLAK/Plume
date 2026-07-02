@@ -91,12 +91,6 @@ parameters:
 			path: app/Filters/Markdown.php
 
 		-
-			message: '#^Constant LIBXML_NOXMLDECL is not allowed for parameter \$options of method DOMDocument\:\:saveXML\(\)\.$#'
-			identifier: argument.invalidConstant
-			count: 1
-			path: app/Functions/Svg.php
-
-		-
 			message: '#^Method App\\Functions\\Svg\:\:addClassAttribute\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1
