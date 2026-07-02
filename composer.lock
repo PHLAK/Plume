@@ -5562,16 +5562,16 @@
         },
         {
             "name": "phlak/coding-standards",
-            "version": "5.0.0",
+            "version": "5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHLAK/CodingStandards.git",
-                "reference": "a2e1b531cddb91070512a6886d3e7ef890771f11"
+                "reference": "cee6e6630bfc932d2f1a9c638cac21245932a899"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHLAK/CodingStandards/zipball/a2e1b531cddb91070512a6886d3e7ef890771f11",
-                "reference": "a2e1b531cddb91070512a6886d3e7ef890771f11",
+                "url": "https://api.github.com/repos/PHLAK/CodingStandards/zipball/cee6e6630bfc932d2f1a9c638cac21245932a899",
+                "reference": "cee6e6630bfc932d2f1a9c638cac21245932a899",
                 "shasum": ""
             },
             "require": {
@@ -5608,7 +5608,7 @@
             "description": "A pre-defined set of coding standards for PHP CS Fixer.",
             "support": {
                 "issues": "https://github.com/PHLAK/CodingStandards/issues",
-                "source": "https://github.com/PHLAK/CodingStandards/tree/5.0.0"
+                "source": "https://github.com/PHLAK/CodingStandards/tree/5.0.1"
             },
             "funding": [
                 {
@@ -5620,7 +5620,7 @@
                     "type": "paypal"
                 }
             ],
-            "time": "2026-02-28T03:26:38+00:00"
+            "time": "2026-07-02T03:36:32+00:00"
         },
         {
             "name": "phpstan/phpstan",
