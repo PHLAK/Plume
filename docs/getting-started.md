@@ -4,7 +4,7 @@ This guide will walk you through creating, publishing, and viewing your first
 blog post. It assumes you already have Plume installed and running. If you
 haven't installed Plume yet, see the [Installation guide](installation.md).
 
-## Create Your Post
+## Creating Your First Post
 
 Posts live in the `data/posts` directory as Markdown files. Create a new file
 named `hello-world.md` in that directory.
@@ -44,18 +44,18 @@ Happy publishing!
 > "slug", which shows up in the URL. For example, `hello-world.md` will be
 > accessible at `example.com/post/hello-world`.
 
-## Publish Your Content
+### Publishing Your Post
 
 After saving your post, you must publish it so Plume can render the Markdown
 and update the site cache.
 
 ::: code-group
 ```console [Plume Compose]
-docker compose run --rm plume publish
+docker compose run --rm plume publish:posts
 ```
 
 ```console [Docker Compose]
-docker compose run --rm plume php plume publish
+docker compose run --rm plume php plume publish:posts
 ```
 :::
 
@@ -65,7 +65,7 @@ You should see output indicating that your post has been published successfully.
 > You will need to run `publish:posts` every time you add, edit, or delete a
 > post for the changes to appear on the site.
 
-## View It Live
+### View It Live
 
 Open your browser and navigate to the URL where Plume is running. Your new post
 will appear on the home page. Click the post title to read the full article.
@@ -79,4 +79,4 @@ has to offer:
   images, tags and drafts
 - Create [static pages](publishing/pages.md) like an About or Contact page
 - [Configure your site](configuration/configuration-overview.md) with a custom
-  title, timezone and other options
+  title, customize the navigation or layout and more
