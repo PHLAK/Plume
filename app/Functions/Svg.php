@@ -16,7 +16,7 @@ class Svg extends ViewFunction
     private string $iconsPath;
 
     /** @param array<string> $classes */
-    public function __invoke(string $icon, $classes = []): Markup
+    public function __invoke(string $icon, array $classes = []): Markup
     {
         $contents = (string) file_get_contents(sprintf('%s/%s.svg', $this->iconsPath, $icon));
 
