@@ -1,8 +1,8 @@
-<div class="fixed inset-0 flex flex-col justify-start items-center bg-stone-800/50 px-4 z-50 dark:bg-stone-600/50"
+<div class="fixed inset-0 flex flex-col justify-center items-center bg-stone-800/50 px-4 z-50 dark:bg-stone-600/50 sm:justify-start"
     x-data="searchModal" x-show="visible" @click.self="hide()" @show-search.window="show()" @keyup.escape.window="hide()"
     x-transition:enter.opacity x-cloak
 >
-    <div class="flex flex-col justify-start items-center gap-4 rounded bg-stone-100 max-w-4xl w-full mt-[20vh] p-4 shadow dark:bg-stone-800 dark:border-stone-400 dark:text-stone-400"
+    <div class="flex flex-col justify-start items-center gap-4 rounded bg-stone-100 max-w-4xl w-full p-4 shadow dark:bg-stone-800 dark:border-stone-400 dark:text-stone-400 sm:mt-[20vh]"
         @click.away="hide()" x-trap.inert="visible"
     >
         <div class="group relative block border border-stone-400 bg-stone-100 rounded w-full dark:border-stone-600 dark:bg-stone-800">
@@ -24,7 +24,7 @@
             <template x-for="result in results" :key="result.id">
                 <li class="w-full text-sm md:text-base">
                     <a x-bind:href="result.metadata.url" class="flex flex-col rounded border border-stone-400 w-full font-medium text-stone-600 text-nowrap overflow-hidden px-4 py-2 focus:outline-none focus:bg-stone-200 hover:bg-stone-200 hover:bg-stone-200 dark:border-stone-600 dark:text-stone-400 dark:focus:bg-stone-700 dark:hover:bg-stone-700 sm:flex-row sm:items-center sm:gap-2">
-                        <div x-text="result.document.title" class="grow font-semibold overflow-hidden text-ellipsis sm:block sm:overflow-visible"></div>
+                        <div x-text="result.document.title" class="flex-none font-semibold overflow-hidden text-ellipsis sm:block sm:overflow-visible"></div>
                         <div x-show.important="result.highlights.body" class="hidden text-stone-400 dark:text-stone-600 sm:block">❯</div>
                         <div x-show.important="result.highlights.body" x-html="result.highlights.body" class="shrink overflow-hidden text-ellipsis text-stone-400"></div>
                     </a>
