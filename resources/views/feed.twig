@@ -10,7 +10,7 @@
         <item>
             <title>{{ post.title }}</title>
             <link>{{ full_url_for('post', { slug: slug }) }}</link>
-            <pubDate>{{ post.published_at | date("r") }}</pubDate>
+            <pubDate>{{ post.published | date("r") }}</pubDate>
             {% if post.author.email %}
                 <author>{{ post.author.email }}</author>
             {% endif %}
