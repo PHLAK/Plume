@@ -64,8 +64,8 @@ content. When set, relative image paths will be prefixed with this URL. When
 set to `null`, local image URLs will be left as-is.
 
 > [!IMPORTANT]
-> You must re-publish your [posts](publishing/posts.md) and/or
-> [pages](publishing/pages.md) for the base URL changes to apply.
+> You must re-publish your [posts](/publishing/posts.md) and/or
+> [pages](/publishing/pages.md) for the base URL changes to apply.
 
 - **Possible Values:** Any valid URL or `null`
 - **Default Value:** `null`
