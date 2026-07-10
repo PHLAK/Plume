@@ -1,6 +1,6 @@
 {
     "name": "phlak/plume",
-    "description": "Self-hosted, flat-file blogging platform",
+    "description": "Self-hosted, markdown powered, flat-file blogging platform",
     "type": "project",
     "license": "MIT",
     "authors": [
@@ -58,15 +58,15 @@
         }
     },
     "config": {
-      "optimize-autoloader": true,
-      "platform-check": true,
-      "sort-packages": true
-  },
-  "scripts": {
-      "serve": "php --server localhost:8080 --docroot public",
-      "post-create-project-cmd": [
-          "npm install && npm run dev",
-          "cp .env.example .env"
-      ]
-  }
+        "optimize-autoloader": true,
+        "platform-check": true,
+        "sort-packages": true
+    },
+    "scripts": {
+        "serve": "php --server localhost:8080 --docroot public",
+        "post-create-project-cmd": [
+            "npm install && npm run dev",
+            "cp .env.example .env"
+        ]
+    }
 }
