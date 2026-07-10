@@ -15,6 +15,7 @@ use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
 use League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension;
 use League\CommonMark\Extension\TableOfContents\TableOfContentsExtension;
 use League\CommonMark\MarkdownConverter;
+use PHLAK\CommonMarkExtensions\RewriteLocalImageURLs;
 use PomoDocs\CommonMark\Alert\AlertExtension;
 use Spatie\CommonMarkShikiHighlighter\HighlightCodeExtension;
 
@@ -25,6 +26,9 @@ class ConverterFactory
 
     #[Inject('shiki_theme_id')]
     private string $shikiThemeId;
+
+    #[Inject('base_url')]
+    private string|null $baseUrl;
 
     public function __invoke(): ConverterInterface
     {
@@ -39,6 +43,10 @@ class ConverterFactory
         $environment->addExtension(new HeadingPermalinkExtension);
         $environment->addExtension(new TableOfContentsExtension);
         $environment->addExtension(new HighlightCodeExtension($this->shikiThemeId));
+
+        if ($this->baseUrl !== null) {
+            $environment->addExtension(new RewriteLocalImageURLs($this->baseUrl));
+        }
 
         return new MarkdownConverter($environment);
     }

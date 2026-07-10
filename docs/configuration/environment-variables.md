@@ -57,6 +57,19 @@ unique post authors.
 - **Possible Values:** `true` or `false`
 - **Default Value:** `false`
 
+### `BASE_URL`
+
+The base URL used for rewriting local (relative) image URLs in rendered Markdown
+content. When set, relative image paths will be prefixed with this URL. When
+set to `null`, local image URLs will be left as-is.
+
+> [!IMPORTANT]
+> You must re-publish your [posts](publishing/posts.md) and/or
+> [pages](publishing/pages.md) for the base URL changes to apply.
+
+- **Possible Values:** Any valid URL or `null`
+- **Default Value:** `null`
+
 ### `DATE_FORMAT`
 
 Default date format.

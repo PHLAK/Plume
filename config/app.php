@@ -18,6 +18,15 @@ return [
     'debug' => env('APP_DEBUG', false),
 
     /**
+     * The base URL used for rewriting local (relative) image URLs in rendered
+     * Markdown content. When set, relative image paths will be prefixed with
+     * this URL. When set to null, local image URLs will be left as-is.
+     *
+     * Default value: null
+     */
+    'base_url' => env('BASE_URL', null),
+
+    /**
      * The application language.
      *
      * Defualt value: 'en'

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ed3ed3feae8160008a332720194cbc22",
+    "content-hash": "69fd099eb275734292d922206629dbca",
     "packages": [
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -1101,6 +1101,62 @@
                 "source": "https://github.com/nikic/FastRoute/tree/master"
             },
             "time": "2018-02-13T20:26:39+00:00"
+        },
+        {
+            "name": "phlak/commonmark-rewrite-local-image-urls",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHLAK/commonmark-rewrite-local-image-urls.git",
+                "reference": "96b25ac710eb6f723260a8880f181c8cf4ac948c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHLAK/commonmark-rewrite-local-image-urls/zipball/96b25ac710eb6f723260a8880f181c8cf4ac948c",
+                "reference": "96b25ac710eb6f723260a8880f181c8cf4ac948c",
+                "shasum": ""
+            },
+            "require": {
+                "league/commonmark": "^2.0"
+            },
+            "require-dev": {
+                "phlak/coding-standards": "^5.0",
+                "phpstan/phpstan": "^2.2",
+                "phpunit/phpunit": "^13.2",
+                "symfony/var-dumper": "^8.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PHLAK\\CommonMarkExtensions\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Kankiewicz",
+                    "email": "Chris@Kankiewicz.com"
+                }
+            ],
+            "description": "CommonMark extension for rewriting local, relatiave image URLs to absolute URLs",
+            "support": {
+                "issues": "https://github.com/PHLAK/commonmark-rewrite-local-image-urls/issues",
+                "source": "https://github.com/PHLAK/commonmark-rewrite-local-image-urls/tree/0.1.1"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/ChrisKankiewicz",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/PHLAK",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-07-10T02:57:29+00:00"
         },
         {
             "name": "php-di/invoker",
