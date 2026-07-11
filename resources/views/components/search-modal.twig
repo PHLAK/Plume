@@ -1,8 +1,8 @@
-<div class="fixed inset-0 flex flex-col justify-center items-center bg-stone-800/50 px-4 z-50 dark:bg-stone-600/50 sm:justify-start"
+<div class="fixed inset-0 flex flex-col justify-start items-center bg-stone-800/50 px-4 z-50 dark:bg-stone-600/50 sm:justify-start"
     x-data="searchModal" x-show="visible" @click.self="hide()" @show-search.window="show()" @keyup.escape.window="hide()"
     x-transition:enter.opacity x-cloak
 >
-    <div class="flex flex-col justify-start items-center gap-4 rounded bg-stone-100 max-w-4xl w-full p-4 shadow dark:bg-stone-800 dark:border-stone-400 dark:text-stone-400 sm:mt-[20vh]"
+    <div class="flex flex-col justify-start items-center gap-4 rounded bg-stone-100 shadow max-w-4xl w-full p-4 mt-[10vh] dark:bg-stone-800 dark:border-stone-400 dark:text-stone-400 sm:mt-[20vh]"
         @click.away="hide()" x-trap.inert="visible"
     >
         <div class="group relative block border border-stone-400 bg-stone-100 rounded w-full dark:border-stone-600 dark:bg-stone-800">
