@@ -14,7 +14,7 @@
             <div class="flex justify-between items-center gap-1.5">
                 <div class="flex items-center gap-1.5">
                     <a href="{{ full_url_for('posts') }}" title="Home" class="nav-button">
-                        {{ svg('light/home', ['fill-current', 'size-6']) }}
+                        {{ svg('light/house', ['fill-current', 'size-6']) }}
                     </a>
 
                     {% if tags_enabled %}
@@ -48,7 +48,7 @@
                 <div class="flex items-center gap-1.5 bg-stone-200 rounded font-medium cursor-pointer text-stone-400 text-sm px-1.5 py-1 dark:bg-stone-700 dark:text-stone-500"
                     @keydown.ctrl.k.window.prevent="$dispatch('show-search')" @click="$dispatch('show-search')"
                 >
-                    {{ svg('light/magnifying-glass', ['fill-current', 'size-6', 'p-0.5']) }}
+                    {{ svg('light/magnifying-glass', ['fill-current', 'size-6', 'p-1']) }}
 
                     <div class="px-1">Search</div>
 
