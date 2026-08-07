@@ -108,11 +108,20 @@ return [
      * Controls the vertical sizing of featured post images. Avaialable options:
      *
      *   'full' - Display the full height images
-     *   'collapsed' - Constrain the images height
+     *   'custom' - Constrain the images to a custom height defined by the
+     *              'featured_image_hegith' configuration option.
      *
-     * Default value: 'collapsed'
+     * Default value: 'custom'
      */
-    'featured_images' => env('FEATURED_IMAGES', 'collapsed'),
+    'featured_images' => env('FEATURED_IMAGES', 'full'),
+
+    /**
+     * The vertical height of featured post images when the 'featured_images'
+     * configuration option is set to 'custom'.
+     *
+     * Default value: '10rem'
+     */
+    'featured_image_height' => env('FEATURED_IMAGE_HEIGHT', '10rem'),
 
     /**
      * Whether or not to show the "Tags" navigation link when there are

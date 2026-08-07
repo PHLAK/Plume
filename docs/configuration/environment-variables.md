@@ -82,9 +82,17 @@ Default date format.
 
 Controls the vertical sizing of featured post images.
 
-- **Possible Values:** `full` (display the full height images) or `collapsed` 
-  (constrain the images height)
-- **Default Value:** `collapsed`
+- **Possible Values:** `full` (display the full height images) or `custom` 
+  (constrain the images to a custom height defined by `FEATURED_IMAGE_HEIGHT`)
+- **Default Value:** `custom`
+
+### `FEATURED_IMAGE_HEIGHT`
+
+The vertical height of featured post images when the `FEATURED_IMAGES`
+configuration option is set to `custom`.
+
+- **Possible Values:** Any valid CSS length value (e.g. `10rem`, `200px`, `50vh`)
+- **Default Value:** `10rem`
 
 ### `FUZZY_SEARCH`
 
