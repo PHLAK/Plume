@@ -33,11 +33,13 @@ export default () => ({
         } catch (error) {
             console.error(error);
 
-            return;
-        } finally {
+            this.results = [];
             this.loading = false;
+
+            return;
         }
 
         this.results = response.data;
+        this.loading = false;
     },
 });
