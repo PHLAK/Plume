@@ -105,23 +105,13 @@ return [
     'posts_show_read_more' => env('POSTS_SHOW_READ_MORE', true),
 
     /**
-     * Controls the vertical sizing of featured post images. Avaialable options:
+     * Controls the vertical sizing of featured post images. When set to 'full'
+     * images will be displayed at their full height. Any other value will be
+     * used as the constrained image height. Examples: 10rem, 400px, etc.
      *
-     *   'full' - Display the full height images
-     *   'custom' - Constrain the images to a custom height defined by the
-     *              'featured_image_hegith' configuration option.
-     *
-     * Default value: 'custom'
+     * Default value: 'full'
      */
-    'featured_images' => env('FEATURED_IMAGES', 'full'),
-
-    /**
-     * The vertical height of featured post images when the 'featured_images'
-     * configuration option is set to 'custom'.
-     *
-     * Default value: '10rem'
-     */
-    'featured_image_height' => env('FEATURED_IMAGE_HEIGHT', '10rem'),
+    'featured_image_height' => env('FEATURED_IMAGE_HEIGHT', 'full'),
 
     /**
      * Whether or not to show the "Tags" navigation link when there are

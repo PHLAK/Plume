@@ -15,7 +15,7 @@
                 {% endif %}
 
                 {% if config('posts_show_image') | boolean and post.image %}
-                    <img src="{{ post.image.url }}" class="w-full" style="{{ config('featured_images') == 'custom' ? 'object-fit: cover; height:' ~ config('featured_image_height') ~ ';' : null }}" />
+                    <img src="{{ post.image.url }}" class="w-full" style="{{ config('featured_image_height') != 'full' ? 'object-fit: cover; height:' ~ config('featured_image_height') ~ ';' : null }}" />
                 {% endif %}
 
                 {% if config('posts_show_excerpt') | boolean %}
