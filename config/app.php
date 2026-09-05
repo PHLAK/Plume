@@ -114,16 +114,14 @@ return [
     'featured_image_height' => env('FEATURED_IMAGE_HEIGHT', 'full'),
 
     /**
-     * Whether or not to show the "Tags" navigation link when there are
-     * multiple unique post tags.
+     * Whether or not to show the "Tags" navigation link.
      *
      * Default value: true
      */
     'tags_link' => env('TAGS_LINK', true),
 
     /**
-     * Whether or not to show the "Authors" navigation link when there are
-     * multipe unique post authors.
+     * Whether or not to show the "Authors" navigation link.
      *
      * Default value: false
      */
