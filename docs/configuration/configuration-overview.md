@@ -42,7 +42,7 @@ services:
     ports:
       - <host_port>:80
     volumes:
-      - ./data:/data
+      - ./data:/var/www/html/data
     restart: unless-stopped
 ```
 :::
@@ -58,7 +58,7 @@ flag. Multiple environment variables can be set by passing the `--env` flag
 multiple times for each option.
 
 ```console
-docker run --detach --publish 8080:80 --volume ./data:/data \
+docker run --detach --publish 8080:80 --volume ./data:/var/www/html/data \
     --env SITE_TITLE="My Amazing Blog" --env TIMEZONE="America/Phoenix" \ // [!code focus]
     phlak/plume:latest
 ```

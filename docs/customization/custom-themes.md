@@ -94,6 +94,17 @@ found" error for `404` errors.
 
 - `message`: A message of the error that occurred.
 
+#### `feed.twig` <badge type="info" text="/feed" />
+
+Renders the RSS feed of published posts.
+
+##### Data
+
+- `title`: The site title
+- `description`: The site meta description
+- `posts`: A list of [`Post`](https://github.com/PHLAK/Plume/blob/master/app/Data/Post.php)
+  objects with the same properties as those listed for `posts.twig` below
+
 #### `page.twig` <badge type="info" text="/pages/{slug}" />
 
 Displays a user-generated page.
@@ -104,10 +115,10 @@ Displays a user-generated page.
   object with the following properties
   - `title`: The page title
   - `link`: The link text
-  - `body`: The raw page contents
+  - `body`: The rendered page contents (HTML)
   - `weight`: The sort weight
 
-#### `posts.twig` <badge type="info" text="/" /> <badge type="info" text="/author/{slug}" /> <badge type="info" text="/tag/{slug}" />
+#### `posts.twig` <badge type="info" text="/" /> <badge type="info" text="/author/{author}" /> <badge type="info" text="/tag/{tag}" />
 
 Displays a paginated list of posts. Used for the home page, posts by a specific
 author, and posts with a specific tag.
@@ -119,17 +130,17 @@ author, and posts with a specific tag.
   - `Post`: An individual [`Post`](https://github.com/PHLAK/Plume/blob/master/app/Data/Post.php)
     object with following properties
     - `title`: The post title
-    - `body`: The raw post contents
-    - `published`: The post publish date
+    - `body`: The rendered post contents (HTML)
+    - `published`: The post publish date (a Carbon date object)
     - `author`: The post author
     - `tags`: A list of post tags
     - `image`: A [`PostImage`](https://github.com/PHLAK/Plume/blob/master/app/Data/PostImage.php)
       object with the following properties
         - `url`: The post image URL
-        - `caption`: The raw post image caption
+        - `caption`: The raw post image caption (Markdown)
     - `canonical`: The canonical post link
     - `draft`: Post draft status
-    - `excerpt`: The raw post excerpt
+    - `excerpt`: The post excerpt (rendered HTML, from the `excerpt()` method)
 
 - `paginator`: A [`Paginator`](https://github.com/PHLAK/Plume/blob/master/app/Utilities/Paginator.php)
   object with the following properties
@@ -146,17 +157,17 @@ Displays a single blog post.
 - `post`: A [`Post`](https://github.com/PHLAK/Plume/blob/master/app/Data/Post.php)
   object with the following properties
   - `title`: The post title
-  - `body`: The raw post contents
-  - `published`: The post publish date
+  - `body`: The rendered post contents (HTML)
+  - `published`: The post publish date (a Carbon date object)
   - `author`: The author's name
   - `tags`: A list of tags
   - `image`: A [`PostImage`](https://github.com/PHLAK/Plume/blob/master/app/Data/PostImage.php)
     object with the following properties
     - `url`: The post image URL
-    - `caption`: The raw post image caption
+    - `caption`: The raw post image caption (Markdown)
   - `canonical`: A canonical URL
   - `draft`: Whether the post is a draft
-  - `excerpt`: A manually defined excerpt
+  - `excerpt`: The post excerpt (rendered HTML, from the `excerpt()` method)
 
 #### `tags.twig` <badge type="info" text="/tags" />
 

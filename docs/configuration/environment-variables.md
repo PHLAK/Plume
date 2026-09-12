@@ -7,7 +7,7 @@ their functions.
 ## Bootstrap Configuration
 
 These configuration options are special configuration options only configurable
-through environment variables (e.g. through the `.env` file).
+through environment variables.
 
 > [!NOTE]
 > There are no corresponding configuration options for these values in the 
@@ -35,6 +35,9 @@ on subsequent requests.
 
 Enable application debugging and display error messages.
 
+> [!NOTE]
+> Container compilation is also disabled when `APP_DEBUG` is enabled.
+
 > [!DANGER]
 > It is recommended that debug remains OFF unless troubleshooting an issue.
 > Leaving this enabled WILL cause leakage of sensitive server information.
@@ -51,8 +54,8 @@ The application language.
 
 ### `AUTHORS_LINK`
 
-Whether or not to show the "Authors" navigation link when there are multiple
-unique post authors.
+Whether or not to show the "Authors" navigation link (and enable the
+`/authors` page).
 
 - **Possible Values:** `true` or `false`
 - **Default Value:** `false`
@@ -169,8 +172,8 @@ along with the current path.
 
 ### `TAGS_LINK`
 
-Whether or not to show the "Tags" navigation link when there are multiple unique
-post tags.
+Whether or not to show the "Tags" navigation link (and enable the `/tags`
+page).
 
 - **Possible Values:** `true` or `false`
 - **Default Value:** `true`
@@ -205,7 +208,7 @@ values.
 
 The app cache lifetime (in seconds). If set to `0`, cache indefinitely.
 
-- **Possible Values:** Any positive integer
+- **Possible Values:** Any non-negative integer
 - **Default Value:** `0`
 
 ### `CACHE_LOTTERY`

@@ -14,14 +14,13 @@ as a quick and easy way of getting up and running with a pre-configured
 1. Clone the repository to a location of your choosing
 
     ```console
-    cd /your/chosen/path/
-    git clone https://github.com/PHLAK/plume-compose.git
+    git clone https://github.com/PHLAK/plume-compose.git /path/to/plume
     ```
 
-2. Switch to the `plume-compose` directory and initialize the configuration files
+2. Switch to your installation directory and initialize the configuration files
 
     ```console
-    cd plume-compose
+    cd /path/to/plume
     make init
     ```
 

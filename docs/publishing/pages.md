@@ -12,8 +12,8 @@
 
 ## Front Matter
 
-Pages, like posts, _must_ contain some metadata like a title and the link text.
-This metadata is defined as "front matter", that is, some YAML set between
+Pages, like posts, _must_ contain some metadata such as a title. This metadata
+is defined as "front matter", that is, some YAML set between
 triple-dashes (i.e. `---`) and must be the first thing in the file.
 
 ::: code-group

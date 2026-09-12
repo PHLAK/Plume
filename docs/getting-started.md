@@ -17,6 +17,11 @@ named `hello-world.md` in that directory.
 └── docker-compose.yaml
 ```
 
+> [!IMPORTANT]
+> The name of the file (not including the `.md` extension) becomes the post
+> "slug", which shows up in the URL. For example, `hello-world.md` will be
+> accessible at `example.com/post/hello-world`.
+
 Open `hello-world.md` in your favorite text editor and add some content.
 
 ::: code-group
@@ -39,11 +44,6 @@ Happy publishing!
 ```
 :::
 
-> [!IMPORTANT]
-> The name of the file (not including the `.md` extension) becomes the post
-> "slug", which shows up in the URL. For example, `hello-world.md` will be
-> accessible at `example.com/post/hello-world`.
-
 ### Publishing Your Post
 
 After saving your post, you must publish it so Plume can render the Markdown
@@ -55,7 +55,7 @@ docker compose run --rm plume publish:posts
 ```
 
 ```console [Docker Compose]
-docker compose run --rm plume php plume publish:posts
+docker compose exec plume php plume publish:posts
 ```
 :::
 

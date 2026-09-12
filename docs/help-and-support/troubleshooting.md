@@ -43,7 +43,8 @@ support tags or dates.
 
 ### Can I use HTML in my posts and pages?
 
-Yes. Plume supports raw HTML alongside Markdown in your content.
+Yes. Plume supports raw HTML alongside Markdown in your content. Note that
+`<script>` tags are stripped from rendered content for security reasons.
 
 ### How do I unpublish or delete a post?
 
