@@ -28,7 +28,26 @@ class RegisterGlobalsMiddleware
 
         $twigEnvironment->addGlobal('authors_enabled', $this->authorsEnabled);
         $twigEnvironment->addGlobal('tags_enabled', $this->tagsEnabled);
+        $twigEnvironment->addGlobal('current_url', $this->currentUrl($request));
 
         return $handler->handle($request);
+    }
+
+    private function currentUrl(Request $request): string
+    {
+        $uri = $request->getUri();
+
+        if (empty($host = $uri->getHost())) {
+            return $uri->getPath();
+        }
+
+        $port = $uri->getPort();
+        $scheme = $uri->getScheme();
+
+        if ($port === null || ($port === 80 && $scheme === 'http') || ($port === 443 && $scheme === 'https')) {
+            return sprintf('%s://%s%s', $scheme, $host, $uri->getPath());
+        }
+
+        return sprintf('%s://%s:%s%s', $scheme, $host, $port, $uri->getPath());
     }
 }

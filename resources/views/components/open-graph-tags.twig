@@ -1,0 +1,20 @@
+<meta property="og:site_name" content="{{ config('site_title') }}">
+<meta property="og:title" content="{% if title %}{{ title }}{% else %}{{ config('site_title') }}{% endif %}">
+<meta property="og:url" content="{{ current_url }}">
+
+{%~ if post is defined ~%}
+    {#--#} <meta property="og:type" content="article">
+    {#--#} <meta property="og:description" content="{{ post.excerpt | markdown | striptags | trim }}">
+    {#--#} <meta property="article:published_time" content="{{ post.published | date('c') }}">
+
+    {%~ if post.image ~%}
+        {#--#} <meta property="og:image" content="{{ post.image.url }}">
+
+        {%~ if post.image.caption ~%}
+            {#--#} <meta property="og:image:alt" content="{{ post.image.caption | markdown | striptags | trim }}">
+        {%~ endif ~%}
+    {%- endif ~%}
+{%~ else ~%}
+    {#--#} <meta property="og:type" content="website">
+    {#--#} <meta property="og:description" content="{{ config('meta_description') }}">
+{%~ endif ~%}
