@@ -23,10 +23,12 @@ final class Post
         public bool $draft = false,
     ) {}
 
-    public static function fromRenderedContent(RenderedContentWithFrontMatter $content): self
+    public static function fromRenderedContent(RenderedContentWithFrontMatter $content, ?string $baseUrl = null): self
     {
         /** @var array{title:string, published:string|int, author?:string, tags?: list<string>, canonical?: string, draft?: bool} $frontMatter */
         $frontMatter = $content->getFrontMatter();
+
+        $postImage = ($frontMatter['image'] ?? false) ? new PostImage(...$frontMatter['image']) : null;
 
         return new self(
             title: $frontMatter['title'],
@@ -34,7 +36,7 @@ final class Post
             published: Carbon::parse($frontMatter['published']),
             author:  $frontMatter['author'] ?? null,
             tags: $frontMatter['tags'] ?? [],
-            image: ($frontMatter['image'] ?? false) ? new PostImage(...$frontMatter['image']) : null,
+            image: $postImage && $baseUrl ? $postImage->forBaseUrl($baseUrl) : $postImage,
             canonical: $frontMatter['canonical'] ?? null,
             draft: (bool) ($frontMatter['draft'] ?? false),
         );

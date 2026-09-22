@@ -8,6 +8,7 @@ use App\Data\Post;
 use App\Data\PostImage;
 use Carbon\Carbon;
 use League\CommonMark\ConverterInterface;
+use League\CommonMark\Extension\FrontMatter\Output\RenderedContentWithFrontMatter;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -86,5 +87,30 @@ class PostTest extends TestCase
         );
 
         $this->assertSame('Hello world! This is a test post', $post->bodyForIndex());
+    }
+
+    #[Test]
+    public function it_can_construct_a_post_from_rendered_content_with_an_absolute_image_url(): void
+    {
+        $input = <<<MARKDOWN
+        ---
+        title: Test Post; Please Ignore
+        published: 1986-05-20 12:34:56
+        image:
+          url: /images/test.png
+          caption: Test caption; please ignore
+        ---
+
+        This is a test post.
+        MARKDOWN;
+
+        /** @var RenderedContentWithFrontMatter $renderedContent */
+        $renderedContent = $this->container->call([ConverterInterface::class, 'convert'], ['input' => $input]);
+
+        $post = Post::fromRenderedContent($renderedContent, 'https://example.com');
+
+        $this->assertInstanceOf(PostImage::class, $post->image);
+        $this->assertSame('https://example.com/images/test.png', $post->image->url);
+        $this->assertSame('Test caption; please ignore', $post->image->caption);
     }
 }

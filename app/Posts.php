@@ -17,6 +17,9 @@ class Posts
     #[Inject('posts_path')]
     private string $postsPath;
 
+    #[Inject('base_url')]
+    private ?string $baseUrl;
+
     #[Inject(ConverterInterface::class)]
     private ConverterInterface $converter;
 
@@ -33,7 +36,7 @@ class Posts
             throw new NotFoundException;
         }
 
-        return Post::fromRenderedContent($this->converter->convert($contents));
+        return Post::fromRenderedContent($this->converter->convert($contents), $this->baseUrl);
     }
 
     /** @return LazyCollection<string, Post> */
