@@ -105,7 +105,7 @@ Renders the RSS feed of published posts.
 - `posts`: A list of [`Post`](https://github.com/PHLAK/Plume/blob/master/app/Data/Post.php)
   objects with the same properties as those listed for `posts.twig` below
 
-#### `page.twig` <badge type="info" text="/pages/{slug}" />
+#### `page.twig` <badge type="info" text="/page/{slug}" />
 
 Displays a user-generated page.
 

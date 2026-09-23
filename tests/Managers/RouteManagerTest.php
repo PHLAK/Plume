@@ -20,7 +20,7 @@ class RouteManagerTest extends TestCase
     private const array ROUTES = [
         ['posts', '/[{page:[0-9]+}]', Controllers\PostsController::class],
         ['post', '/post/{slug}', Controllers\PostController::class],
-        ['page', '/pages/{slug}', Controllers\PageController::class],
+        ['page', '/page/{slug}', Controllers\PageController::class],
         ['author', '/author/{author}[/{page:[0-9]+}]', Controllers\AuthorController::class],
         ['tag', '/tag/{tag}[/{page:[0-9]+}]', Controllers\TagController::class],
         ['search', '/search', Controllers\SearchController::class],
@@ -32,7 +32,7 @@ class RouteManagerTest extends TestCase
     ];
 
     private const array REDIRECTS = [
-        ['/pages/an-old-page', '/pages/a-new-page', 301],
+        ['/page/an-old-page', '/page/a-new-page', 301],
         ['/post/an-old-post', '/post/a-new-post', 301],
     ];
 
@@ -107,7 +107,7 @@ class RouteManagerTest extends TestCase
         /** @var App<Container>&MockObject $app */
         $app = $this->mock(App::class);
 
-        $app->expects($this->once())->method('redirect')->with('/pages/an-old-page', '/pages/a-new-page', 301);
+        $app->expects($this->once())->method('redirect')->with('/page/an-old-page', '/page/a-new-page', 301);
 
         $this->container->call(RouteManager::class);
     }

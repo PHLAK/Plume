@@ -36,7 +36,7 @@ class RouteManager
     public function __invoke(): void
     {
         foreach ($this->redirects['pages'] as $old => $new) {
-            $this->app->redirect(sprintf('/pages/%s', $old), sprintf('/pages/%s', $new), 301);
+            $this->app->redirect(sprintf('/page/%s', $old), sprintf('/page/%s', $new), 301);
         }
 
         foreach ($this->redirects['posts'] as $old => $new) {
@@ -45,7 +45,7 @@ class RouteManager
 
         $this->app->get('/[{page:[0-9]+}]', Controllers\PostsController::class)->setName('posts');
         $this->app->get('/post/{slug}', Controllers\PostController::class)->setName('post');
-        $this->app->get('/pages/{slug}', Controllers\PageController::class)->setName('page');
+        $this->app->get('/page/{slug}', Controllers\PageController::class)->setName('page');
         $this->app->get('/author/{author}[/{page:[0-9]+}]', Controllers\AuthorController::class)->setName('author');
         $this->app->get('/tag/{tag}[/{page:[0-9]+}]', Controllers\TagController::class)->setName('tag');
         $this->app->get('/search', Controllers\SearchController::class)->setName('search');
