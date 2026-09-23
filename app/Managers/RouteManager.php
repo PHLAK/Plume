@@ -29,7 +29,10 @@ class RouteManager
         #[Inject('redirects_file')] string $redirectsFile
     ) {
         if (file_exists($redirectsFile)) {
-            $this->redirects = [...$this->redirects, ...Yaml::parseFile($redirectsFile)];
+            /** @var array{pages?: array<string,string>, posts?: array<string,string>} $redirects */
+            $redirects = Yaml::parseFile($redirectsFile);
+
+            $this->redirects = [...$this->redirects, ...$redirects];
         }
     }
 
