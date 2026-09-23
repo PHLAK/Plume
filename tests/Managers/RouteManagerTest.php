@@ -6,6 +6,7 @@ namespace Tests\Managers;
 
 use App\Controllers;
 use App\Managers\RouteManager;
+use DI\Container;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -30,13 +31,19 @@ class RouteManagerTest extends TestCase
         ['theme.js', '/theme/js/{script}', Controllers\Themes\JsController::class],
     ];
 
+    private const array REDIRECTS = [
+        ['/pages/an-old-page', '/pages/a-new-page', 301],
+        ['/post/an-old-post', '/post/a-new-post', 301],
+    ];
+
     #[Test]
     public function it_registers_all_application_routes(): void
     {
         $this->container->set('authors_enabled', true);
         $this->container->set('tags_enabled', true);
+        $this->container->set('redirects_file', 'NONEXISTENT_FILE');
 
-        /** @var App&MockObject $app */
+        /** @var App<Container>&MockObject $app */
         $app = $this->mock(App::class);
 
         $app->expects($matcher = $this->atLeast(1))->method('get')->willReturnCallback(
@@ -52,6 +59,55 @@ class RouteManagerTest extends TestCase
                 return $routeMock;
             }
         );
+
+        $this->container->call(RouteManager::class);
+    }
+
+    #[Test]
+    public function it_registers_redirects_from_the_redirects_file(): void
+    {
+        $this->container->set('redirects_file', $this->filePath('data/redirects.yaml'));
+
+        /** @var App<Container>&MockObject $app */
+        $app = $this->mock(App::class);
+
+        $app->expects($matcher = $this->atLeast(1))->method('redirect')->willReturnCallback(
+            function (string $from, string $to, int $status) use ($matcher): RouteInterface {
+                [$expectedFrom, $expectedTo, $expectedStatus] = self::REDIRECTS[$matcher->numberOfInvocations() - 1];
+
+                $this->assertSame($expectedFrom, $from);
+                $this->assertSame($expectedTo, $to);
+                $this->assertSame($expectedStatus, $status);
+
+                return $this->createStub(RouteInterface::class);
+            }
+        );
+
+        $this->container->call(RouteManager::class);
+    }
+
+    #[Test]
+    public function it_does_not_register_redirects_when_the_redirects_file_does_not_exist(): void
+    {
+        $this->container->set('redirects_file', 'NONEXISTENT_FILE');
+
+        /** @var App<Container>&MockObject $app */
+        $app = $this->mock(App::class);
+
+        $app->expects($this->never())->method('redirect');
+
+        $this->container->call(RouteManager::class);
+    }
+
+    #[Test]
+    public function it_ignores_missing_redirect_sections(): void
+    {
+        $this->container->set('redirects_file', $this->filePath('data/redirects-partial.yaml'));
+
+        /** @var App<Container>&MockObject $app */
+        $app = $this->mock(App::class);
+
+        $app->expects($this->once())->method('redirect')->with('/pages/an-old-page', '/pages/a-new-page', 301);
 
         $this->container->call(RouteManager::class);
     }

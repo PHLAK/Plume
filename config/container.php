@@ -49,6 +49,7 @@ return [
     'pages_path' => string('{data_path}/pages'),
     'themes_path' => string('{base_path}/themes'),
     'customizations_file' => string('{data_path}/customizations.html'),
+    'redirects_file' => string('{data_path}/redirects.yaml'),
 
     // -------------------------------------------------------------------------
     // Application commands

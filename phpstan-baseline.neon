@@ -307,12 +307,6 @@ parameters:
 			path: tests/Factories/CacheFactoryTest.php
 
 		-
-			message: '#^PHPDoc tag @var for variable \$app contains generic class Slim\\App but does not specify its types\: TContainerInterface$#'
-			identifier: missingType.generics
-			count: 1
-			path: tests/Managers/RouteManagerTest.php
-
-		-
 			message: '#^Method Tests\\Middlewares\\PruneCacheMiddlewareTest\:\:nonPruneableCacheAdapters\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1

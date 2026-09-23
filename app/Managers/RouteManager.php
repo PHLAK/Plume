@@ -8,6 +8,7 @@ use App\Controllers;
 use DI\Attribute\Inject;
 use DI\Container;
 use Slim\App;
+use Symfony\Component\Yaml\Yaml;
 
 class RouteManager
 {
@@ -21,8 +22,27 @@ class RouteManager
     #[Inject('tags_enabled')]
     private bool $tagsEnabled;
 
+    /** @var array{pages: array<string,string>, posts: array<string,string>} */
+    private array $redirects = ['pages' => [], 'posts' => []];
+
+    public function __construct(
+        #[Inject('redirects_file')] string $redirectsFile
+    ) {
+        if (file_exists($redirectsFile)) {
+            $this->redirects = [...$this->redirects, ...Yaml::parseFile($redirectsFile)];
+        }
+    }
+
     public function __invoke(): void
     {
+        foreach ($this->redirects['pages'] as $old => $new) {
+            $this->app->redirect(sprintf('/pages/%s', $old), sprintf('/pages/%s', $new), 301);
+        }
+
+        foreach ($this->redirects['posts'] as $old => $new) {
+            $this->app->redirect(sprintf('/post/%s', $old), sprintf('/post/%s', $new), 301);
+        }
+
         $this->app->get('/[{page:[0-9]+}]', Controllers\PostsController::class)->setName('posts');
         $this->app->get('/post/{slug}', Controllers\PostController::class)->setName('post');
         $this->app->get('/pages/{slug}', Controllers\PageController::class)->setName('page');
