@@ -1,6 +1,6 @@
 services:
 
-  app:
+  plume:
     build:
       context: .
       target: dev
@@ -31,6 +31,7 @@ services:
       context: .
       target: dev
     image: phlak/plume:dev
+    entrypoint: []
     command: npm run dev
     ports:
       - ${NPM_PORT:-5173}:5173
