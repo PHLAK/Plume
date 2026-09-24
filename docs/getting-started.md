@@ -50,12 +50,8 @@ After saving your post, you must publish it so Plume can render the Markdown
 and update the site cache.
 
 ::: code-group
-```console [Plume Compose]
+```console [Docker]
 docker compose run --rm plume publish:posts
-```
-
-```console [Docker Compose]
-docker compose exec plume php plume publish:posts
 ```
 
 ```console [Manual]
