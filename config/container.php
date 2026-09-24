@@ -9,8 +9,6 @@ use App\Filters;
 use App\Functions;
 use App\Managers;
 use App\Middlewares;
-use DI\Container;
-use Symfony\Component\Yaml\Yaml;
 
 use function DI\create;
 use function DI\factory;
@@ -123,35 +121,6 @@ return [
     'search_config' => [
         'storage' => ['path' => string('{app_cache}/search.db')],
     ],
-
-    // -------------------------------------------------------------------------
-    // Dynamic bindings
-    // -------------------------------------------------------------------------
-
-    'tags_enabled' => function (Container $container): bool {
-        return (bool) filter_var($container->get('tags_link'), FILTER_VALIDATE_BOOLEAN);
-    },
-
-    'authors_enabled' => function (Container $container): bool {
-        return (bool) filter_var($container->get('authors_link'), FILTER_VALIDATE_BOOLEAN);
-    },
-
-    'theme_path' => function (Container $container): string {
-        /** @var string|null $theme */
-        $theme = $container->get('theme');
-
-        return $theme ? sprintf('%s/%s', $container->get('themes_path'), $theme) : $container->get('resources_path');
-    },
-
-    'redirects' => function (Container $container): array {
-        /** @var string $redirectsFile */
-        $redirectsFile = $container->get('redirects_file');
-
-        /** @var array{pages?: array<string,string>, posts?: array<string,string>} $redirects */
-        $redirects = file_exists($redirectsFile) ? Yaml::parseFile($redirectsFile) : [];
-
-        return ['pages' => [], 'posts' => [], ...$redirects];
-    },
 
     // -------------------------------------------------------------------------
     // App factories and decorators
