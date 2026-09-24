@@ -13,6 +13,6 @@ eslint.config.mjs
 LICENSE
 phpstan-baseline.neon
 phpstan.neon.dist
-phpunt.xml
+phpunit.xml
 README.md
 screenshot.png
