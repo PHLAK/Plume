@@ -52,7 +52,7 @@ class BaseCommand extends Command
 
     protected function error(string $message): void
     {
-        $this->output->writeln(sprintf(' <fg=red>●</> %s', $message));
+        $this->output->writeln(sprintf(' <fg=red>■</> %s', $message));
     }
 
     protected function newLine(): void
