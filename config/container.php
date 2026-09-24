@@ -10,6 +10,7 @@ use App\Functions;
 use App\Managers;
 use App\Middlewares;
 use DI\Container;
+use Symfony\Component\Yaml\Yaml;
 
 use function DI\create;
 use function DI\factory;
@@ -140,6 +141,16 @@ return [
         $theme = $container->get('theme');
 
         return $theme ? sprintf('%s/%s', $container->get('themes_path'), $theme) : $container->get('resources_path');
+    },
+
+    'redirects' => function (Container $container): array {
+        /** @var string $redirectsFile */
+        $redirectsFile = $container->get('redirects_file');
+
+        /** @var array{pages?: array<string,string>, posts?: array<string,string>} $redirects */
+        $redirects = file_exists($redirectsFile) ? Yaml::parseFile($redirectsFile) : [];
+
+        return ['pages' => [], 'posts' => [], ...$redirects];
     },
 
     // -------------------------------------------------------------------------

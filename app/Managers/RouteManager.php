@@ -8,7 +8,6 @@ use App\Controllers;
 use DI\Attribute\Inject;
 use DI\Container;
 use Slim\App;
-use Symfony\Component\Yaml\Yaml;
 
 class RouteManager
 {
@@ -23,18 +22,8 @@ class RouteManager
     private bool $tagsEnabled;
 
     /** @var array{pages: array<string,string>, posts: array<string,string>} */
-    private array $redirects = ['pages' => [], 'posts' => []];
-
-    public function __construct(
-        #[Inject('redirects_file')] string $redirectsFile
-    ) {
-        if (file_exists($redirectsFile)) {
-            /** @var array{pages?: array<string,string>, posts?: array<string,string>} $redirects */
-            $redirects = Yaml::parseFile($redirectsFile);
-
-            $this->redirects = [...$this->redirects, ...$redirects];
-        }
-    }
+    #[Inject('redirects')]
+    private array $redirects;
 
     public function __invoke(): void
     {
