@@ -57,6 +57,10 @@ docker compose run --rm plume publish:posts
 ```console [Docker Compose]
 docker compose exec plume php plume publish:posts
 ```
+
+```console [Manual]
+php plume publish:posts
+```
 :::
 
 You should see output indicating that your post has been published successfully.

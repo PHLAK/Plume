@@ -101,6 +101,10 @@ docker compose run --rm plume publish:posts
 ```console [Docker Compose]
 docker compose exec plume php plume publish:posts
 ```
+
+```console [Manual]
+php plume publish:posts
+```
 :::
 
 ### Updating a Post
@@ -116,5 +120,9 @@ docker compose run --rm plume publish:post <slug>
 
 ```console [Docker Compose]
 docker compose exec plume php plume publish:post <slug>
+```
+
+```console [Manual]
+php plume publish:post <slug>
 ```
 :::

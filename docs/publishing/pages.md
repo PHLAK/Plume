@@ -63,6 +63,10 @@ docker compose run --rm plume publish:pages
 ```console [Docker Compose]
 docker compose exec plume php plume publish:pages
 ```
+
+```console [Manual]
+php plume publish:pages
+```
 :::
 
 ### Updating a Page
@@ -78,5 +82,9 @@ docker compose run --rm plume publish:page <slug>
 
 ```console [Docker Compose]
 docker compose exec plume php plume publish:page <slug>
+```
+
+```console [Manual]
+php plume publish:page <slug>
 ```
 :::

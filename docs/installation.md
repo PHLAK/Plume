@@ -105,6 +105,68 @@ docker run --detach --publish <host_port>:80 \
 > [!TIP]
 > You may pass multiple environment variables by repeating the `--env` flag.
 
+## Manual
+
+> [!IMPORTANT] Requirements
+> - [PHP](https://www.php.net)
+> - [Composer](https://getcomposer.org)
+> - [Node.js](https://nodejs.org) and npm
+
+If you prefer to run Plume without Docker you may install it manually from
+source.
+
+1. Clone the repository to a location of your choosing
+
+    ```console
+    git clone https://github.com/PHLAK/Plume.git /path/to/plume
+    ```
+
+2. Switch to your installation directory and install the PHP dependencies
+
+    ```console
+    cd /path/to/plume
+    composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+    ```
+
+3. Install the front-end dependencies and build the assets
+
+    ```console
+    npm install --no-audit --no-fund
+    npm run build
+    ```
+
+4. Copy the example `.env` file and modify the environment variables for your
+   installation
+
+    ```console
+    cp .env.example .env
+    ```
+
+    > [!TIP]
+    > See [Environment Variables](configuration/environment-variables.md) for a
+    > full list of the available environment variables.
+
+
+5. Ensure the `data` and `cache` directories are writable by your web server
+
+    ```console
+    chown --recursive www-data:www-data data cache
+    ```
+
+    > [!IMPORTANT]
+    > The web server user varies by platform (e.g. `www-data` on Debian/Ubuntu,
+    > `apache` on Fedora/RHEL). Replace it in the example above accordingly.
+
+Once configured you may test your installation by serving the application with
+PHP's built-in web server. Run `composer serve` from your installation
+directory, then browse to `http://localhost:8080`.
+
+
+> [!TIP]
+> Posts and pages must be published from the command line by running
+> `php plume publish` from your installation directory. See
+> [Getting Started](getting-started.md) for more information.
+
 ## Reverse Proxy
 
 It's recommended to run Plume behind a reverse proxy. The following examples
