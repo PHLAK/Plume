@@ -88,3 +88,47 @@ To inject your customization into your page, create a file named
 <!-- Put your custom code here -->
 ```
 :::
+
+## Redirects
+
+Sometimes you may need to change the slug of a page or post after it has
+already been published. Doing so would break existing links pointing to the old
+URL. Therefore, Plume allows you to define permanent redirects from old slugs to
+new ones with the `data/redirects.yaml` file.
+
+```text{4}
+/path/to/plume
+├── data
+│   ├── [other files and folders]
+│   └── redirects.yaml
+└── docker-compose.yaml
+```
+
+Redirects are defined as `old-slug: new-slug` pairs under the `pages` and/or
+`posts` keys. Only the slug itself needed. The `/page/` or `/post/` prefixes are
+added automatically.
+
+::: code-group
+```yaml [redirects.yaml]
+pages:
+  old-page-slug: new-page-slug
+
+posts:
+  old-post-slug: new-post-slug
+```
+:::
+
+In the example above, requests for `/page/an-old-page-slug` would be redirected
+to `/page/a-new-page-slug`, and requests for `/post/an-old-post-slug` would be
+redirected to `/post/a-new-post-slug`.
+
+> [!NOTE]
+>  Redirects are issued with a `301` (permanent) status code.
+
+The `pages` and `posts` keys are each optional, so you may define redirects for
+one or the other, or both. Likewise, the `redirects.yaml` file itself is
+optional and may be omitted entirely if you have no redirects.
+
+> [!NOTE]
+> Changes to your redirects take effect immediately, there is no need to restart
+> your containers.
