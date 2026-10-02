@@ -18,6 +18,7 @@ export default defineConfig({
         logo: '/images/plume.svg',
 
         nav: [
+            { text: 'Help & Support', link: 'https://github.com/PHLAK/Plume/discussions' },
             { text: 'Changelog', link: 'https://github.com/PHLAK/Plume/releases' },
         ],
 

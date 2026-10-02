@@ -105,7 +105,7 @@ docker run --detach --publish <host_port>:80 \
 > [!TIP]
 > You may pass multiple environment variables by repeating the `--env` flag.
 
-## Manual
+## Manual Installation
 
 > [!IMPORTANT] Requirements
 > - [PHP](https://www.php.net)
